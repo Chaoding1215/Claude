@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — The Security Domains: The Market Map</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .domain-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      background: white;
+    }
+    .domain-card h3 {
+      margin-top: 0;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .domain-card .products {
+      font-size: 0.82rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.5rem;
+    }
+    .domain-card .products strong { color: var(--ink); }
+    .tag {
+      display: inline-block;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: var(--accent);
+      color: white;
+      margin-left: auto;
+    }
+    .tag.detect { background: #7c3aed; }
+    .tag.protect { background: var(--success); }
+    .tag.respond { background: var(--highlight); }
+    .tag.govern { background: var(--warning); color: white; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 03</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Foundation
+</div>
+
+<h1>The Security Domains:<br>The Market Map</h1>
+
+<p>The cybersecurity market generates over $200 billion per year and contains thousands of vendors. Without a mental map, it's impossible to navigate. This lesson gives you that map — six domains, each solving a different part of the security problem.</p>
+
+<div class="callout">
+  <div class="callout-title">How to use this lesson</div>
+  When you encounter any security product or vendor — now or in the future — ask: <em>which domain does this live in, what problem does it solve, and where does it sit in the Kill Chain?</em> These three questions will let you place anything.
+</div>
+
+<h2>The Six Domains</h2>
+
+<div class="domain-card">
+  <h3>🖥️ Endpoint Security <span class="tag protect">Protect</span></h3>
+  <p>Secures the devices where people work: laptops, desktops, servers, mobile phones. The endpoint is where most attacks ultimately execute — malware runs on a device, ransomware encrypts a device's files, credentials are stolen from a device's memory.</p>
+  <p><strong>Evolution:</strong> AV (1980s) → signature-based detection of known malware → <strong>EDR</strong> (Endpoint Detection &amp; Response, 2010s) → behavioral detection, threat hunting, rollback → <strong>XDR</strong> (Extended Detection &amp; Response, 2020s) → correlates endpoint + network + cloud + identity data.</p>
+  <p><strong>Key problem it solves:</strong> Attackers living on endpoints, malware execution, ransomware, credential theft.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> CrowdStrike, SentinelOne, Microsoft Defender, Palo Alto Cortex XDR, Trend Micro
+  </div>
+</div>
+
+<div class="domain-card">
+  <h3>🌐 Network Security <span class="tag protect">Protect</span></h3>
+  <p>Secures the movement of data between systems. In the Kill Chain, network security tools intercept threats at the Delivery stage (blocking malicious traffic before it reaches endpoints) and the C2 stage (detecting compromised machines calling home).</p>
+  <p><strong>Key technologies:</strong></p>
+  <ul style="padding-left:1.5rem; margin-bottom:0.75rem;">
+    <li style="margin-bottom:0.3rem;"><strong>Firewall / NGFW</strong> — filters traffic by rules; Next-Gen Firewalls add application awareness and IPS.</li>
+    <li style="margin-bottom:0.3rem;"><strong>IDS/IPS</strong> — Intrusion Detection/Prevention Systems; inspects traffic for known attack signatures.</li>
+    <li style="margin-bottom:0.3rem;"><strong>NDR</strong> — Network Detection &amp; Response; uses behavioral analysis to catch threats that bypass signature detection.</li>
+    <li style="margin-bottom:0.3rem;"><strong>DDoS Protection</strong> — absorbs volumetric attack traffic to maintain availability.</li>
+    <li style="margin-bottom:0.3rem;"><strong>DNS Security</strong> — blocks connections to malicious domains; catches C2 traffic early.</li>
+  </ul>
+  <p><strong>Key problem it solves:</strong> Malicious traffic, C2 communication, lateral movement between systems, DDoS.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> Palo Alto Networks, Cisco, Fortinet, Check Point, Zscaler, Cloudflare
+  </div>
+</div>
+
+<div class="domain-card">
+  <h3>☁️ Cloud Security <span class="tag protect">Protect</span></h3>
+  <p>The cloud introduced a fundamentally new attack surface: misconfigured storage buckets, over-privileged service accounts, and unsecured APIs. Cloud security tools monitor and protect cloud infrastructure, workloads, and data.</p>
+  <p><strong>Key technologies:</strong></p>
+  <ul style="padding-left:1.5rem; margin-bottom:0.75rem;">
+    <li style="margin-bottom:0.3rem;"><strong>CSPM</strong> — Cloud Security Posture Management; finds misconfigurations (e.g., public S3 bucket with customer data).</li>
+    <li style="margin-bottom:0.3rem;"><strong>CWPP</strong> — Cloud Workload Protection Platform; secures VMs, containers, and serverless functions.</li>
+    <li style="margin-bottom:0.3rem;"><strong>CASB</strong> — Cloud Access Security Broker; enforces policy on SaaS app usage (e.g., blocking upload of sensitive files to personal Dropbox).</li>
+    <li style="margin-bottom:0.3rem;"><strong>CNAPP</strong> — Cloud-Native Application Protection Platform; combines CSPM + CWPP + more into one platform.</li>
+  </ul>
+  <p><strong>Key problem it solves:</strong> Cloud misconfigurations, over-privileged identities, unsecured workloads, shadow IT.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> Wiz, Palo Alto Prisma Cloud, CrowdStrike Falcon Cloud, Orca Security, Microsoft Defender for Cloud
+  </div>
+</div>
+
+<div class="domain-card">
+  <h3>🪪 Identity &amp; Access Management (IAM) <span class="tag protect">Protect</span></h3>
+  <p>"Identity is the new perimeter." When the network perimeter dissolved, controlling <em>who</em> can access <em>what</em> became the primary defense. Over 80% of breaches involve compromised credentials — making identity the most attacked surface today.</p>
+  <p><strong>Key technologies:</strong></p>
+  <ul style="padding-left:1.5rem; margin-bottom:0.75rem;">
+    <li style="margin-bottom:0.3rem;"><strong>IAM</strong> — manages user identities, authentication, and authorization at scale.</li>
+    <li style="margin-bottom:0.3rem;"><strong>MFA</strong> — Multi-Factor Authentication; requires a second proof of identity beyond password.</li>
+    <li style="margin-bottom:0.3rem;"><strong>PAM</strong> — Privileged Access Management; controls access to high-value accounts (admin, root, service accounts).</li>
+    <li style="margin-bottom:0.3rem;"><strong>SSO</strong> — Single Sign-On; one login for all apps, reducing password sprawl.</li>
+    <li style="margin-bottom:0.3rem;"><strong>Zero Trust</strong> — architectural principle: never trust, always verify. Every access request is authenticated and authorized, regardless of network location.</li>
+  </ul>
+  <p><strong>Key problem it solves:</strong> Stolen credentials, privilege escalation, lateral movement, insider threats.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> Okta, Microsoft Entra ID, CyberArk, BeyondTrust, Ping Identity
+  </div>
+</div>
+
+<div class="domain-card">
+  <h3>🛡️ Application Security (AppSec) <span class="tag protect">Protect</span></h3>
+  <p>Secures the software organizations build and use. The OWASP Top 10 — a canonical list of the most critical web application vulnerabilities (SQL injection, XSS, broken authentication, etc.) — defines the core threat model.</p>
+  <p><strong>Key technologies:</strong></p>
+  <ul style="padding-left:1.5rem; margin-bottom:0.75rem;">
+    <li style="margin-bottom:0.3rem;"><strong>SAST</strong> — Static Application Security Testing; scans source code for vulnerabilities before deployment.</li>
+    <li style="margin-bottom:0.3rem;"><strong>DAST</strong> — Dynamic Application Security Testing; attacks a running application to find exploitable issues.</li>
+    <li style="margin-bottom:0.3rem;"><strong>WAF</strong> — Web Application Firewall; sits in front of web apps and blocks malicious HTTP requests.</li>
+    <li style="margin-bottom:0.3rem;"><strong>API Security</strong> — discovers and protects APIs, which have become the dominant attack surface in modern applications.</li>
+    <li style="margin-bottom:0.3rem;"><strong>SCA</strong> — Software Composition Analysis; identifies vulnerabilities in open-source dependencies.</li>
+  </ul>
+  <p><strong>Key problem it solves:</strong> Vulnerable code shipped to production, injection attacks, API abuse, supply chain vulnerabilities in dependencies.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> Veracode, Snyk, Checkmarx, Akamai (WAF), Imperva, Salt Security
+  </div>
+</div>
+
+<div class="domain-card">
+  <h3>🔍 SOC / SIEM / SOAR <span class="tag detect">Detect</span><span class="tag respond" style="margin-left:0.3rem">Respond</span></h3>
+  <p>The Security Operations Center (SOC) is where defenders monitor, detect, and respond to threats across all other domains. It assumes that some attackers will get through prevention — and focuses on finding them fast and responding before damage is done.</p>
+  <p><strong>Key technologies:</strong></p>
+  <ul style="padding-left:1.5rem; margin-bottom:0.75rem;">
+    <li style="margin-bottom:0.3rem;"><strong>SIEM</strong> — Security Information &amp; Event Management; aggregates logs from across the environment, correlates events, and generates alerts. The brain of the SOC.</li>
+    <li style="margin-bottom:0.3rem;"><strong>SOAR</strong> — Security Orchestration, Automation &amp; Response; automates repetitive SOC tasks and orchestrates response playbooks.</li>
+    <li style="margin-bottom:0.3rem;"><strong>Threat Intelligence Platform (TIP)</strong> — ingests and manages threat feeds; enriches alerts with attacker context.</li>
+    <li style="margin-bottom:0.3rem;"><strong>Threat Hunting</strong> — proactive search for hidden attackers who have evaded automated detection.</li>
+  </ul>
+  <p><strong>Key metrics customers care about:</strong> MTTD (Mean Time to Detect), MTTR (Mean Time to Respond). Every SOC vendor promises to reduce both.</p>
+  <p><strong>Key problem it solves:</strong> Alert fatigue, slow detection, manual response bottlenecks, lack of visibility across the environment.</p>
+  <div class="products">
+    <strong>Example vendors:</strong> Splunk, Microsoft Sentinel, IBM QRadar, Palo Alto XSIAM, Google Chronicle, Elastic Security
+  </div>
+</div>
+
+<h2>The Big Picture: How Domains Connect</h2>
+
+<p>No domain works in isolation. The modern security architecture connects all six:</p>
+
+<div class="callout">
+  <div class="callout-title">The platform vs. best-of-breed debate</div>
+  One of the most common customer conversations in security presales. <strong>Best-of-breed</strong>: pick the top vendor in each domain — maximum capability per category, but harder to integrate. <strong>Platform</strong>: one vendor covers multiple domains — easier to manage, shared telemetry, but potential capability gaps. Major platforms: Microsoft, Palo Alto, CrowdStrike, Fortinet. Knowing this debate is essential.
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A customer says: "We found that an attacker had misconfigured one of our AWS S3 buckets as public, exposing 2 million customer records." Which security domain most directly addresses this failure?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">Endpoint Security — the attacker accessed data from a device</button></li>
+    <li><button onclick="a1(this,false)">Network Security — the data left via the network</button></li>
+    <li><button onclick="a1(this,true)">Cloud Security — a misconfigured cloud resource exposed the data</button></li>
+    <li><button onclick="a1(this,false)">Application Security — the app failed to protect user data</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">A CISO says: "Our MTTD is 200 days — attackers are living in our network for months before we catch them." Which security domain and technology most directly targets this problem?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">Cloud Security / CSPM — monitors cloud posture continuously</button></li>
+    <li><button onclick="a2(this,false)">Application Security / WAF — blocks attacks at the web layer</button></li>
+    <li><button onclick="a2(this,true)">SOC / SIEM — aggregates logs and detects threats across the environment</button></li>
+    <li><button onclick="a2(this,false)">Identity / PAM — controls privileged account access</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">A developer wants to catch SQL injection vulnerabilities in code before it ships to production. Which AppSec technology applies here?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">WAF — blocks injection attacks on running applications</button></li>
+    <li><button onclick="a3(this,true)">SAST — scans source code for vulnerabilities before deployment</button></li>
+    <li><button onclick="a3(this,false)">DAST — tests a running application by simulating attacks</button></li>
+    <li><button onclick="a3(this,false)">SCA — identifies vulnerabilities in open-source libraries</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="quiz" id="q4">
+  <div class="quiz-question">A prospect says their biggest pain point is stolen employee passwords being used to access company systems from overseas at 3am. Which domain and technology is the primary solution?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a4(this,false)">Endpoint Security / EDR — detects malware on the employee's device</button></li>
+    <li><button onclick="a4(this,true)">Identity / MFA + Zero Trust — verifies every access request, catches anomalous logins</button></li>
+    <li><button onclick="a4(this,false)">Network Security / Firewall — blocks traffic from foreign IPs</button></li>
+    <li><button onclick="a4(this,false)">Application Security / WAF — filters malicious web requests</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q4-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://www.nist.gov/cyberframework" target="_blank">NIST Cybersecurity Framework 2.0</a> — The six domains here map onto NIST's Govern / Identify / Protect / Detect / Respond / Recover functions. Understanding both frameworks together gives you the complete picture.</p>
+
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0002-threat-landscape.html">Lesson 2 — Threat Landscape</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0004-zero-trust.html">Lesson 4 — Zero Trust: The Architecture That Replaced the Perimeter</a>
+  </p>
+
+  <div class="lesson-nav">
+    <a href="../reference/">📚 Reference docs</a>
+    <a href="../RESOURCES.md">📖 Resources</a>
+  </div>
+
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to go deeper on any domain? Curious how two domains connect? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    quiz.querySelectorAll('button').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+    });
+  }
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','CSPM (Cloud Security Posture Management) exists specifically to catch misconfigured cloud resources — public buckets, open storage, over-permissive policies. This is one of the most common real-world breach causes.');}
+function a2(b,c){mark(b,c,'q2-f','MTTD (Mean Time to Detect) is the core metric SIEM/SOC vendors compete on. A SIEM aggregates logs from every domain, correlates events, and surfaces threats that would otherwise hide in the noise for months.');}
+function a3(b,c){mark(b,c,'q3-f','SAST (Static Application Security Testing) scans source code before the app runs — catching vulnerabilities at the earliest possible moment, before they ever reach production. DAST would catch it later, in a running app.');}
+function a4(b,c){mark(b,c,'q4-f','Stolen passwords + anomalous login location/time = an identity problem. MFA would have stopped the attacker even with valid credentials. Zero Trust would have flagged the unusual access pattern for additional verification.');}
+</script>
+
+</body>
+</html>
