@@ -1,0 +1,153 @@
+/* Cybersecurity Learning Workspace — shared stylesheet */
+
+:root {
+  --ink: #1a1a2e;
+  --paper: #f8f8f5;
+  --accent: #0f3460;
+  --highlight: #e94560;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --success: #059669;
+  --warning: #d97706;
+  --code-bg: #1e1e2e;
+  --code-fg: #cdd6f4;
+  font-size: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+
+/* Typography */
+h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; color: var(--accent); }
+h2 { font-size: 1.4rem; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.25rem; }
+h3 { font-size: 1.1rem; margin-top: 1.75rem; margin-bottom: 0.5rem; color: var(--ink); }
+p { margin-bottom: 1rem; }
+strong { color: var(--accent); }
+em { font-style: italic; }
+a { color: var(--highlight); text-decoration: underline; }
+a:hover { opacity: 0.75; }
+
+/* Meta / lesson header */
+.lesson-meta {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.lesson-meta .lesson-number { font-weight: bold; color: var(--highlight); }
+
+/* Callout boxes */
+.callout {
+  border-left: 4px solid var(--accent);
+  background: white;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.callout.warning { border-color: var(--warning); }
+.callout.success { border-color: var(--success); }
+.callout-title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+/* Timeline */
+.timeline { list-style: none; border-left: 2px solid var(--border); padding-left: 1.5rem; margin: 1.5rem 0; }
+.timeline li { position: relative; margin-bottom: 1.25rem; }
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -1.65rem;
+  top: 0.45rem;
+  width: 10px; height: 10px;
+  background: var(--highlight);
+  border-radius: 50%;
+  border: 2px solid var(--paper);
+}
+.timeline .year {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--highlight);
+  display: block;
+}
+
+/* Quiz widget */
+.quiz {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+.quiz h3 { margin-top: 0; font-size: 1rem; }
+.quiz-question { margin-bottom: 1rem; font-weight: bold; }
+.quiz-options { list-style: none; display: grid; gap: 0.5rem; }
+.quiz-options li button {
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.quiz-options li button:hover { background: #f0f4ff; border-color: var(--accent); }
+.quiz-options li button.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+.quiz-options li button.wrong { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+.quiz-feedback { margin-top: 1rem; font-size: 0.9rem; min-height: 1.5rem; }
+
+/* Key concept cards */
+.concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+@media (max-width: 500px) { .concept-grid { grid-template-columns: 1fr; } }
+.concept-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.concept-card h4 { margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--accent); }
+.concept-card p { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+
+/* Footer */
+.lesson-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.lesson-footer a { color: var(--accent); }
+
+/* Nav links */
+.lesson-nav { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+.lesson-nav a {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.82rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.lesson-nav a:hover { background: var(--accent); color: white; }
