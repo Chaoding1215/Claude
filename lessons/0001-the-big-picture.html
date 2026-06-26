@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — The Big Picture: What Cybersecurity Is and Why It Exists</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 01</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Foundation
+</div>
+
+<h1>The Big Picture:<br>What Cybersecurity Is and Why It Exists</h1>
+
+<p>Every credible presales conversation starts here. Before products, before features, before vendors — there is the <em>problem</em>. This lesson gives you the mental model that everything else hangs from.</p>
+
+<h2>The Core Problem: Adversarial Environments</h2>
+
+<p>Most engineering disciplines assume cooperative environments — bridges don't try to collapse themselves, databases don't try to corrupt their own data. Cybersecurity is different. Its defining characteristic is that <strong>the environment is adversarial</strong>: there are intelligent, motivated humans actively trying to make systems fail in ways that benefit them.</p>
+
+<p>This changes everything about how you design, operate, and sell security. It means:</p>
+<ul style="margin-bottom:1rem; padding-left:1.5rem;">
+  <li style="margin-bottom:0.4rem;">A system that works perfectly under normal conditions can still be completely insecure.</li>
+  <li style="margin-bottom:0.4rem;">Security cannot be tested the same way as reliability — you must think like an attacker.</li>
+  <li style="margin-bottom:0.4rem;">There is no "done" — attackers adapt, so defenders must too.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-title">Presales framing</div>
+  When a customer asks "is your product secure?", the right answer is never "yes." The right answer is: "Here's what threat model it addresses, and here's how it reduces attacker advantage." Security is always relative to a threat model.
+</div>
+
+<h2>The CIA Triad — The Three Goals of Security</h2>
+
+<p>Every security product, policy, and control ultimately protects one or more of three properties. This triad is the universal vocabulary of the field — you will hear it in every serious security conversation.</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>🔒 Confidentiality</h4>
+    <p>Information is accessible only to those authorized to see it. Encryption, access controls, and data loss prevention (DLP) tools protect confidentiality.</p>
+    <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Example breach: stolen credentials expose customer PII.</p>
+  </div>
+  <div class="concept-card">
+    <h4>✅ Integrity</h4>
+    <p>Information is accurate and has not been tampered with. Hashing, digital signatures, and audit logs protect integrity.</p>
+    <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Example breach: an attacker modifies a financial transaction in transit.</p>
+  </div>
+  <div class="concept-card">
+    <h4>⏱️ Availability</h4>
+    <p>Systems are accessible when needed. Redundancy, DDoS protection, and incident response protect availability.</p>
+    <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Example breach: ransomware encrypts hospital systems during surgery.</p>
+  </div>
+  <div class="concept-card">
+    <h4>+1: Non-repudiation</h4>
+    <p>Actions can be attributed and proven. Digital signatures and audit trails ensure that a party cannot deny having performed an action.</p>
+    <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Often added to CIA to make "CIAN" or bundled under integrity.</p>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">Presales framing</div>
+  When a customer describes a breach or risk, classify it immediately: was it a confidentiality failure (data stolen), integrity failure (data altered), or availability failure (systems down)? This signals expertise and helps you position the right solution.
+</div>
+
+<h2>A Brief History: How We Got Here</h2>
+
+<p>Cybersecurity did not emerge fully formed. It evolved in response to successive waves of technology — and each wave introduced a new class of threats that demanded new defenses.</p>
+
+<ul class="timeline">
+  <li>
+    <span class="year">1960s–70s — Mainframes & ARPANET</span>
+    The first networked computers were designed for trust and openness among academics. The concept of a "computer security" field barely existed. The <strong>Anderson Report (1972)</strong> — a US Air Force study — is the first formal document to describe the threat model of an adversary attacking a computer system.
+  </li>
+  <li>
+    <span class="year">1980s — The PC and the first viruses</span>
+    Personal computers proliferated without security design. The <strong>Morris Worm (1988)</strong> — the first major internet worm — infected ~6,000 machines (then 10% of the internet) and caused millions in damages. It led directly to the creation of the first <strong>CERT</strong> (Computer Emergency Response Team) at Carnegie Mellon.
+  </li>
+  <li>
+    <span class="year">1990s — The web and e-commerce</span>
+    The World Wide Web created a massive new attack surface. Credit cards and personal data moved online. <strong>SSL/TLS</strong> was invented to protect web transactions. The first commercial firewalls appeared. Cybercrime became financially motivated — not just curiosity or vandalism.
+  </li>
+  <li>
+    <span class="year">2000s — Nation-states and organized crime</span>
+    Attacks grew dramatically in sophistication. <strong>Stuxnet (2010)</strong> — a joint US/Israel operation — destroyed Iranian centrifuges using a software worm, proving cyberweapons could cause physical destruction. The term <strong>APT</strong> (Advanced Persistent Threat) emerged to describe state-sponsored attackers who live in networks for months or years undetected.
+  </li>
+  <li>
+    <span class="year">2010s — Mega-breaches and ransomware</span>
+    Breaches reached unprecedented scale: Yahoo (3 billion accounts), Equifax (147 million records), OPM (21 million government personnel files). <strong>Ransomware</strong> became a billion-dollar criminal industry. <strong>WannaCry (2017)</strong> shut down NHS hospitals across the UK. The "castle-and-moat" perimeter security model collapsed — attackers were routinely inside.
+  </li>
+  <li>
+    <span class="year">2020s — Cloud, supply chain, and AI</span>
+    The <strong>SolarWinds attack (2020)</strong> compromised 18,000 organizations through a single software update — redefining the supply chain threat. Cloud and remote work dissolved the network perimeter entirely. <strong>Zero Trust</strong> emerged as the new architectural paradigm. Generative AI began accelerating both attacks (phishing, malware generation) and defenses (automated threat detection, AI-assisted SOC).
+  </li>
+</ul>
+
+<h2>The Defender's Dilemma</h2>
+
+<p>One asymmetry defines all of cybersecurity: <strong>attackers need to succeed once; defenders must succeed every time.</strong></p>
+
+<p>This is called the <em>defender's dilemma</em>. It explains why:</p>
+<ul style="padding-left:1.5rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.4rem;"><strong>No product eliminates risk</strong> — it only shifts where the attacker needs to look.</li>
+  <li style="margin-bottom:0.4rem;"><strong>Layered defense (defense in depth)</strong> is the dominant strategy — no single control is relied upon alone.</li>
+  <li style="margin-bottom:0.4rem;"><strong>Detection matters as much as prevention</strong> — since some attackers will always get in, you need to find them fast.</li>
+</ul>
+
+<div class="callout warning">
+  <div class="callout-title">Common customer misconception</div>
+  "We have a firewall, so we're protected." This is perimeter thinking from the 1990s. Modern attacks routinely bypass perimeters via phishing, insider threats, compromised vendors, and cloud misconfigurations. The firewall is one layer — not the answer.
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A ransomware attack encrypts all files on a hospital's servers, making patient records inaccessible for 48 hours. Which property of the CIA triad is primarily violated?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer(this, false)">Confidentiality — patient data was exposed to attackers</button></li>
+    <li><button onclick="answer(this, true)">Availability — authorized users cannot access data they need</button></li>
+    <li><button onclick="answer(this, false)">Integrity — the data was modified without authorization</button></li>
+    <li><button onclick="answer(this, false)">Non-repudiation — the attacker cannot be identified</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-feedback"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">An attacker intercepts a wire transfer and changes the destination bank account number before it arrives at the bank. Which CIA property is violated?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer2(this, false)">Availability — the transfer was delayed in transit</button></li>
+    <li><button onclick="answer2(this, false)">Confidentiality — the transfer amount was seen by attacker</button></li>
+    <li><button onclick="answer2(this, true)">Integrity — the data was altered without authorization</button></li>
+    <li><button onclick="answer2(this, false)">Non-repudiation — the sender denied sending the transfer</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-feedback"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">The Morris Worm of 1988 is historically significant because it led to the creation of which institution?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer3(this, false)">NIST — National Institute of Standards and Technology</button></li>
+    <li><button onclick="answer3(this, false)">NSA — National Security Agency's cyber division</button></li>
+    <li><button onclick="answer3(this, true)">CERT — the first Computer Emergency Response Team</button></li>
+    <li><button onclick="answer3(this, false)">CISA — Cybersecurity and Infrastructure Security Agency</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-feedback"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source for this lesson:</strong> <a href="https://www.cl.cam.ac.uk/~rja14/book.html" target="_blank">Security Engineering (3rd ed.) by Ross Anderson</a> — Chapter 1: What is Security Engineering? Free to read online. The single most authoritative text on this topic.</p>
+
+  <p style="margin-top:0.75rem;"><strong>Next:</strong> <a href="0002-threat-landscape.html">Lesson 2 — The Threat Landscape: Who Attacks and Why</a></p>
+
+  <div class="lesson-nav">
+    <a href="../reference/">📚 Reference docs</a>
+    <a href="../RESOURCES.md">📖 Resources</a>
+  </div>
+
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> If anything in this lesson is unclear, or you want to go deeper on any point, ask Claude directly in your session. That's what the teacher is for.
+  </p>
+</div>
+
+<script>
+function markAnswer(btn, correct, feedbackId, explanation) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (correct) {
+    const buttons = [...quiz.querySelectorAll('button')];
+    buttons.forEach(b => { if (b === btn) b.classList.add('correct'); });
+  } else {
+    btn.classList.add('wrong');
+    quiz.querySelectorAll('button').forEach(b => {
+      if (b.onclick.toString().includes('true')) b.classList.add('correct');
+    });
+  }
+  document.getElementById(feedbackId).innerHTML =
+    correct
+      ? `<span style="color:#059669">✓ Correct. ${explanation}</span>`
+      : `<span style="color:#dc2626">✗ Not quite. ${explanation}</span>`;
+}
+
+function answer(btn, correct) {
+  markAnswer(btn, correct, 'q1-feedback',
+    'Ransomware denies access to data — that is an availability attack. Confidentiality would require data to leave the organization; integrity would require data to be silently altered.');
+}
+function answer2(btn, correct) {
+  markAnswer(btn, correct, 'q2-feedback',
+    'Altering data in transit is a classic integrity attack. A "man-in-the-middle" intercepts and modifies data before forwarding it. TLS/digital signatures defend against this.');
+}
+function answer3(btn, correct) {
+  markAnswer(btn, correct, 'q3-feedback',
+    'The Morris Worm caused such widespread disruption that DARPA funded the creation of CERT/CC at Carnegie Mellon in 1988 — the world\'s first computer security incident response team. The model spread globally.');
+}
+</script>
+
+</body>
+</html>

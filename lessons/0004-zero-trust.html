@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 — Zero Trust: The Architecture That Replaced the Perimeter</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .vs-card {
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    .vs-card.old {
+      background: #fff1f2;
+      border: 1px solid #fca5a5;
+    }
+    .vs-card.new {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+    }
+    .vs-card h4 {
+      margin: 0 0 0.6rem;
+      font-size: 0.9rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .vs-card.old h4 { color: #b91c1c; }
+    .vs-card.new h4 { color: #15803d; }
+    .vs-card ul { padding-left: 1.2rem; font-size: 0.88rem; margin: 0; }
+    .vs-card ul li { margin-bottom: 0.35rem; }
+    .pillar {
+      border-left: 4px solid var(--accent);
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.85rem;
+      background: white;
+      border-radius: 0 6px 6px 0;
+    }
+    .pillar h4 { margin: 0 0 0.3rem; color: var(--accent); font-size: 1rem; }
+    .pillar p { margin: 0; font-size: 0.88rem; }
+    @media (max-width: 500px) { .vs-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 04</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Architecture
+</div>
+
+<h1>Zero Trust:<br>The Architecture That Replaced the Perimeter</h1>
+
+<p>"Zero Trust" is the most referenced architectural concept in enterprise security today. Every major vendor claims to support it. Every CISO has an opinion about it. This lesson gives you a precise, authoritative understanding — so you can speak about it credibly, not just repeat the buzzword.</p>
+
+<h2>The Problem: The Perimeter Model Failed</h2>
+
+<p>From the 1990s through the 2010s, enterprise security operated on one core assumption: <strong>inside the network is trusted; outside is not.</strong> The firewall was the wall. If you were inside it, you were given broad access to internal systems.</p>
+
+<p>Three shifts destroyed this model:</p>
+
+<div class="vs-grid">
+  <div class="vs-card old">
+    <h4>❌ Old world (perimeter model)</h4>
+    <ul>
+      <li>All users work from the office on corporate networks</li>
+      <li>Applications run in on-premises data centers</li>
+      <li>The firewall separates "trusted inside" from "untrusted outside"</li>
+      <li>Once inside, users have broad access</li>
+    </ul>
+  </div>
+  <div class="vs-card new">
+    <h4>✅ New world (Zero Trust era)</h4>
+    <ul>
+      <li>Users work from home, cafes, airports — anywhere</li>
+      <li>Apps live in AWS, Azure, SaaS — outside the perimeter</li>
+      <li>Attackers routinely get inside via phishing, supply chain, insider threats</li>
+      <li>Being "on the network" proves nothing about trustworthiness</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">The breach that proved perimeters were dead</div>
+  In the <strong>SolarWinds attack (2020)</strong>, attackers compromised a software update — meaning they entered thousands of networks through a trusted, legitimate channel. Once inside those networks, the perimeter model gave them free movement. Organizations with Zero Trust architectures could contain lateral movement; those without couldn't. This attack accelerated Zero Trust adoption faster than any vendor presentation ever could.
+</div>
+
+<h2>What Zero Trust Actually Means</h2>
+
+<p>Zero Trust was coined by analyst John Kindervag at Forrester Research in 2010. It is often summarized as:</p>
+
+<blockquote style="border-left:4px solid var(--highlight); padding:0.75rem 1.25rem; margin:1.5rem 0; background:white; font-size:1.05rem; font-style:italic;">
+  "Never trust, always verify."
+</blockquote>
+
+<p>More precisely, Zero Trust is built on three principles:</p>
+
+<div class="pillar">
+  <h4>1. Verify explicitly</h4>
+  <p>Always authenticate and authorize based on all available data points: identity, location, device health, service or workload, data classification, and anomalies. Never grant access based on network location alone.</p>
+</div>
+
+<div class="pillar">
+  <h4>2. Use least-privilege access</h4>
+  <p>Limit user access with just-in-time (JIT) and just-enough-access (JEA). Give the minimum permissions needed for the task, for the minimum time needed. Reduce blast radius if credentials are compromised.</p>
+</div>
+
+<div class="pillar">
+  <h4>3. Assume breach</h4>
+  <p>Design as if the attacker is already inside. Minimize blast radius, segment access, encrypt all traffic end-to-end, use analytics to detect anomalies. This shifts focus from prevention-only to containment and rapid detection.</p>
+</div>
+
+<h2>The Five Pillars of Zero Trust</h2>
+
+<p>CISA (the US Cybersecurity Agency) defines Zero Trust across five pillars. Every vendor's product maps to one or more of these:</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; margin:1.5rem 0;">
+  <div class="concept-card">
+    <h4>🪪 Identity</h4>
+    <p>Every user, device, and service must authenticate strongly before accessing anything. MFA, SSO, and continuous authentication. <em>Vendors: Okta, Microsoft Entra, Ping.</em></p>
+  </div>
+  <div class="concept-card">
+    <h4>💻 Devices</h4>
+    <p>Only healthy, compliant devices get access. Device posture is checked continuously — not just at login. <em>Vendors: CrowdStrike, Intune, Jamf.</em></p>
+  </div>
+  <div class="concept-card">
+    <h4>🌐 Networks</h4>
+    <p>Micro-segmentation replaces flat networks. Traffic is inspected and encrypted even inside the perimeter. <em>Vendors: Zscaler, Palo Alto, Illumio.</em></p>
+  </div>
+  <div class="concept-card">
+    <h4>🖥️ Applications</h4>
+    <p>Apps are never publicly exposed by default. Access is brokered through an identity-aware proxy. <em>Vendors: Zscaler ZPA, Cloudflare Access, Google BeyondCorp.</em></p>
+  </div>
+  <div class="concept-card" style="grid-column: span 2;">
+    <h4>📦 Data</h4>
+    <p>Data is classified, labeled, and protected regardless of where it lives — cloud, endpoint, email. Access is granted based on data sensitivity, not location. <em>Vendors: Microsoft Purview, Varonis, Forcepoint.</em></p>
+  </div>
+</div>
+
+<h2>ZTNA — The Zero Trust Product Category</h2>
+
+<p><strong>Zero Trust Network Access (ZTNA)</strong> is the product that most directly replaces the VPN. Instead of giving users access to "the network," ZTNA gives access only to specific applications — after verifying identity and device health.</p>
+
+<div class="vs-grid">
+  <div class="vs-card old">
+    <h4>❌ VPN (legacy)</h4>
+    <ul>
+      <li>User connects → gains access to the whole network</li>
+      <li>One compromised credential = broad lateral movement</li>
+      <li>Slow, poor user experience for cloud apps</li>
+      <li>All traffic backhauled through HQ</li>
+    </ul>
+  </div>
+  <div class="vs-card new">
+    <h4>✅ ZTNA (Zero Trust)</h4>
+    <ul>
+      <li>User connects → gains access only to specific apps they're authorized for</li>
+      <li>Compromised credential = limited blast radius</li>
+      <li>Fast, direct connection to cloud apps</li>
+      <li>Device posture and identity checked continuously</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">Presales conversation — Zero Trust maturity</div>
+  Most enterprises are on a Zero Trust <em>journey</em>, not at the destination. A great discovery question: <em>"Where are you on the Zero Trust maturity curve — have you started with identity, or are you also looking at network segmentation and device trust?"</em> This positions you as a guide, not just a vendor. It also surfaces which pillars are unaddressed — and which products to recommend.
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A remote employee connects via VPN and gains access to all internal servers, including finance systems they don't need. Which Zero Trust principle is being violated?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">Verify explicitly — the employee's identity was not authenticated</button></li>
+    <li><button onclick="a1(this,true)">Least-privilege access — the employee has more access than their role requires</button></li>
+    <li><button onclick="a1(this,false)">Assume breach — the network is not segmented to contain threats</button></li>
+    <li><button onclick="a1(this,false)">Device trust — the device health was not verified before connecting</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">A customer says: "We moved all our apps to SaaS and our users work remotely — but we still rely on a VPN to control access." What is the core architectural risk?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">The VPN encrypts traffic, exposing data to interception by vendors</button></li>
+    <li><button onclick="a2(this,true)">The VPN grants network-level access; compromised credentials give an attacker broad movement with no application-level controls</button></li>
+    <li><button onclick="a2(this,false)">SaaS apps are incompatible with VPN authentication protocols</button></li>
+    <li><button onclick="a2(this,false)">The VPN doesn't support MFA, so users aren't verified</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">John Kindervag coined the term "Zero Trust" in 2010 while working at which firm?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">Gartner — the research firm that defines most security market categories</button></li>
+    <li><button onclick="a3(this,false)">NIST — the US standards body that published the Zero Trust framework</button></li>
+    <li><button onclick="a3(this,true)">Forrester — the analyst firm where Kindervag published his original research</button></li>
+    <li><button onclick="a3(this,false)">Google — whose BeyondCorp project was the first implementation</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="quiz" id="q4">
+  <div class="quiz-question">A security architect says their organization has implemented "micro-segmentation." Which Zero Trust pillar are they addressing?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a4(this,false)">Identity — verifying users before granting application access</button></li>
+    <li><button onclick="a4(this,false)">Data — classifying and protecting sensitive information at rest</button></li>
+    <li><button onclick="a4(this,true)">Networks — dividing the network so attackers can't move laterally between segments</button></li>
+    <li><button onclick="a4(this,false)">Devices — checking device health and compliance before access</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q4-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://www.nist.gov/publications/zero-trust-architecture" target="_blank">NIST SP 800-207: Zero Trust Architecture</a> — The authoritative US government definition. Free to download. Reference this document in any enterprise or government presales conversation to signal credibility.</p>
+
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0003-security-domains.html">Lesson 3 — Security Domains</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0005-cutting-edge.html">Lesson 5 — Cutting-Edge Research & Open Challenges</a>
+  </p>
+
+  <div class="lesson-nav">
+    <a href="../reference/">📚 Reference docs</a>
+    <a href="../RESOURCES.md">📖 Resources</a>
+  </div>
+
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to know how to handle a customer who says "we already do Zero Trust"? Or how Zero Trust relates to SASE? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    quiz.querySelectorAll('button').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+    });
+  }
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','VPN grants access to the whole network — violating least-privilege. Zero Trust would restrict the employee to only the specific apps their role requires, nothing more.');}
+function a2(b,c){mark(b,c,'q2-f','VPN = network access. One stolen password gives an attacker the same broad access as the legitimate user, with no app-level controls to limit movement. ZTNA replaces this with per-app access control, verified continuously.');}
+function a3(b,c){mark(b,c,'q3-f','Kindervag published his Zero Trust research at Forrester in 2010. Google later implemented the first large-scale real-world version (BeyondCorp, 2014). NIST formalized it in SP 800-207 (2020). Gartner coined the related term "SASE" in 2019.');}
+function a4(b,c){mark(b,c,'q4-f','Micro-segmentation divides the network into small zones so that even if an attacker gets into one segment, they can\'t freely move to others. It directly addresses the "flat network" problem that made the SolarWinds attack so damaging.');}
+</script>
+
+</body>
+</html>

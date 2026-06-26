@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 — MDR: Managed Detection and Response</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .service-tier {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .tier-header {
+      padding: 0.65rem 1.1rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tier-body { padding: 0.85rem 1.1rem; font-size: 0.88rem; background: white; }
+    .tier-body p { margin-bottom: 0.5rem; }
+    .tier-body p:last-child { margin-bottom: 0; }
+    .segment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    @media (max-width: 560px) { .segment-grid { grid-template-columns: 1fr; } }
+    .segment-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      background: white;
+      font-size: 0.85rem;
+    }
+    .segment-card h4 { margin: 0 0 0.4rem; font-size: 0.9rem; color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 08</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Managed Services
+</div>
+
+<h1>MDR:<br>Managed Detection and Response</h1>
+
+<p>The competitive analysis you reviewed identified MDR as the most suitable solution for SME customers — "lightweight, low barrier to entry." This lesson explains exactly what MDR is, why it exists, how it differs from older managed security services, and how to sell it.</p>
+
+<h2>The Problem: Most Organizations Can't Run a SOC</h2>
+
+<p>A mature internal SOC requires:</p>
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.3rem;">24/7/365 analyst coverage (minimum 6–8 FTEs to cover shifts)</li>
+  <li style="margin-bottom:0.3rem;">SIEM licensing ($500K–$2M/year for enterprise)</li>
+  <li style="margin-bottom:0.3rem;">Threat intelligence subscriptions</li>
+  <li style="margin-bottom:0.3rem;">Specialized threat hunting expertise</li>
+  <li style="margin-bottom:0.3rem;">Incident response capability</li>
+</ul>
+
+<p>Total cost: <strong>$3–8M per year</strong> for a credible internal SOC. This is out of reach for the vast majority of organizations — mid-market, SME, and even many enterprises.</p>
+
+<p>Meanwhile, attackers don't discriminate by company size. Ransomware groups specifically target mid-market organizations because they have money but lack defenses.</p>
+
+<div class="callout">
+  <div class="callout-title">The talent crisis compounds the problem</div>
+  There is a global shortage of approximately 3.5 million cybersecurity professionals (ISC² 2023). Even organizations that can afford SOC staff struggle to hire and retain them. MDR transfers this burden to a specialized provider that can attract talent at scale.
+</div>
+
+<h2>What MDR Is</h2>
+
+<p><strong>MDR (Managed Detection and Response)</strong> is a security service where a vendor provides 24/7 threat monitoring, detection, and active response on behalf of the customer — using the vendor's own technology, analysts, and threat intelligence.</p>
+
+<p>The critical word is <strong>response</strong>. MDR is not just monitoring and alerting — the provider takes action to contain threats. This distinguishes it from older managed security services.</p>
+
+<h2>The Managed Security Services Family</h2>
+
+<div class="service-tier">
+  <div class="tier-header" style="background:#f3f4f6; color:#374151;">
+    📡 MSSP (Managed Security Service Provider) — <em>Legacy</em>
+  </div>
+  <div class="tier-body">
+    <p><strong>What they do:</strong> Monitor your security tools (firewall, SIEM) and send you alerts.</p>
+    <p><strong>What they don't do:</strong> Investigate alerts in depth, hunt for hidden threats, or take action to stop attacks.</p>
+    <p><strong>The problem:</strong> You still need internal staff to triage and respond to every alert. You've outsourced monitoring, not outcomes. Alert fatigue follows you into the managed service.</p>
+  </div>
+</div>
+
+<div class="service-tier">
+  <div class="tier-header" style="background:#f0fdf4; color:#166534;">
+    🔍 MDR (Managed Detection and Response) — <em>Current standard</em>
+  </div>
+  <div class="tier-body">
+    <p><strong>What they do:</strong> Provide their own EDR/XDR technology, deploy it in your environment, run 24/7 monitoring with human analysts, investigate every alert, hunt for threats proactively, and <em>take containment actions</em> (isolating an endpoint, blocking a connection) with your approval or autonomously per agreed playbook.</p>
+    <p><strong>What you get:</strong> A measurable MTTD and MTTR SLA. Outcomes, not just alerts.</p>
+    <p><strong>Key differentiator:</strong> Analysts are specialists — they see threats across hundreds of customer environments. Pattern recognition that no single customer's team can match.</p>
+  </div>
+</div>
+
+<div class="service-tier">
+  <div class="tier-header" style="background:#ede9fe; color:#5b21b6;">
+    🤖 MXDR (Managed XDR) — <em>Emerging</em>
+  </div>
+  <div class="tier-body">
+    <p><strong>What it adds:</strong> Extends MDR across all telemetry sources — endpoint, network, cloud, identity, email — into a unified managed service. Aligns with the XDR platform trend.</p>
+    <p>Major vendors (Microsoft, CrowdStrike, Palo Alto) now offer MXDR alongside their platforms.</p>
+  </div>
+</div>
+
+<h2>How MDR Works — The Delivery Model</h2>
+
+<p>MDR providers typically operate on one of two models:</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>Technology-led MDR</h4>
+    <p>Provider deploys their own EDR/XDR agent in the customer environment. All telemetry flows to the provider's platform. Examples: CrowdStrike Falcon Complete, SentinelOne Vigilance.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Agnostic MDR</h4>
+    <p>Provider works with the customer's existing security tools. Ingests data from whatever SIEM/EDR is already deployed. More flexible; typically higher integration cost. Examples: Arctic Wolf, Rapid7 MDR.</p>
+  </div>
+</div>
+
+<h2>Market Segmentation — Who Buys MDR</h2>
+
+<div class="segment-grid">
+  <div class="segment-card">
+    <h4>🏢 SME (50–500 employees)</h4>
+    <p>No security team. MDR is their entire security operations function. Price sensitivity is high — look for lightweight, standardized offerings. <strong>Highest growth segment.</strong></p>
+  </div>
+  <div class="segment-card">
+    <h4>🏬 Mid-market (500–5,000)</h4>
+    <p>Small internal security team, overwhelmed by alerts. MDR augments them — handles nights and weekends, provides expertise the team lacks. Co-managed model.</p>
+  </div>
+  <div class="segment-card">
+    <h4>🏦 Enterprise (5,000+)</h4>
+    <p>Has a SOC but wants specialized threat hunting, faster response, or coverage during staff transitions. MDR supplements internal capability for specific use cases.</p>
+  </div>
+</div>
+
+<h2>Key MDR Vendors & the OCD Angle</h2>
+
+<p>The competitive analysis you reviewed calls out <strong>OCD (Orange CyberDefense)</strong> as the model to study. OCD's strength is exactly the MDR and managed services layer — they integrate products from Palo Alto, Fortinet, and others, add their own SOC analysts and threat intelligence, and deliver an E2E managed security service.</p>
+
+<p>This is the <strong>integrator advantage</strong>: OCD doesn't win on products — they win because no single product vendor can deliver the full service layer that customers actually need.</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem; margin:1.25rem 0; font-size:0.88rem;">
+  <div style="display:grid; grid-template-columns:140px 1fr; gap:0.5rem 1rem; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">CrowdStrike<br>Falcon Complete</strong>
+    <div>Technology-led MDR using CrowdStrike's own EDR. Fast response SLAs. Strong threat hunting. Enterprise-focused pricing. Often considered the gold standard.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:140px 1fr; gap:0.5rem 1rem; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">Arctic Wolf</strong>
+    <div>Agnostic MDR focused on mid-market. Works with existing tools. Strong SME positioning; straightforward pricing. One of the fastest-growing MDR providers.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:140px 1fr; gap:0.5rem 1rem; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">Microsoft MXDR</strong>
+    <div>Leverages Microsoft 365 Defender telemetry. Extremely strong for Microsoft-heavy environments. Broad reach via existing enterprise agreements.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:140px 1fr; gap:0.5rem 1rem; padding:0.6rem 0;">
+    <strong style="color:var(--accent);">OCD (Orange)</strong>
+    <div>Telecom-backed managed security. Strong European presence. Integrates multi-vendor; not tied to one product stack. MDR + broader E2E security services. The integrator model.</div>
+  </div>
+</div>
+
+<h2>Key Metrics to Know — SLA Language</h2>
+
+<p>MDR contracts are defined by SLAs. Know these terms for any commercial conversation:</p>
+
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem;"><strong>MTTD SLA</strong> — e.g., "we detect threats within 1 hour of activity." Premium MDR providers offer sub-hour MTTD.</li>
+  <li style="margin-bottom:0.5rem;"><strong>MTTR SLA</strong> — e.g., "we contain threats within 4 hours of detection." Response speed is the primary differentiator.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Co-managed vs. fully managed</strong> — co-managed means the provider acts with the customer's approval; fully managed means autonomous containment per agreed playbook.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Coverage scope</strong> — which telemetry sources are included: endpoint only? Network? Cloud? Identity? Email? Scope defines price and coverage.</li>
+</ul>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A 200-person manufacturing company has no security team and just suffered a ransomware attack. They want to ensure it never happens again but cannot afford a full SOC. What is the most appropriate recommendation?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">SIEM — deploy a security information and event management system internally</button></li>
+    <li><button onclick="a1(this,false)">MSSP — outsource monitoring of their existing firewall and antivirus</button></li>
+    <li><button onclick="a1(this,true)">MDR — outsource 24/7 detection and active response to a managed provider</button></li>
+    <li><button onclick="a1(this,false)">Threat intelligence — subscribe to IOC feeds to block known malicious IPs</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">What is the critical difference between an MSSP and an MDR provider?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">MSSPs are cloud-based; MDR runs on-premises in the customer environment</button></li>
+    <li><button onclick="a2(this,false)">MSSPs focus on compliance reporting; MDR focuses on threat hunting only</button></li>
+    <li><button onclick="a2(this,true)">MSSPs monitor and alert; MDR providers actively investigate and take containment actions to stop threats</button></li>
+    <li><button onclick="a2(this,false)">MSSPs cover network security only; MDR covers endpoints only</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">OCD (Orange CyberDefense) is described as having higher E2E security solution capability than pure security vendors like Palo Alto or Fortinet. What is their core strategic advantage?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">Superior product technology — OCD's security tools outperform Palo Alto in each category</button></li>
+    <li><button onclick="a3(this,false)">Lower pricing — OCD undercuts product vendors on every line item</button></li>
+    <li><button onclick="a3(this,true)">Integrator model — OCD combines best-of-breed products with managed services, delivering outcomes no single product vendor can match alone</button></li>
+    <li><button onclick="a3(this,false)">Regulatory advantage — OCD holds certifications that product vendors cannot obtain</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://www.gartner.com/reviews/market/managed-detection-and-response-services" target="_blank">Gartner Market Guide for MDR Services</a> — the authoritative analyst view on MDR vendors and buyer criteria. Reference this with enterprise customers evaluating MDR providers.</p>
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0007-devsecops.html">Lesson 7 — DevSecOps</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0009-presales-conversations.html">Lesson 9 — Presales Conversation Patterns</a>
+  </p>
+  <div class="lesson-nav">
+    <a href="../reference/glossary.html">📖 Glossary</a>
+    <a href="../reference/">📚 Reference docs</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to know how to handle a customer comparing MDR providers? Or how to position MDR vs. building an internal SOC? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) quiz.querySelectorAll('button').forEach(b => {
+    if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+  });
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','MDR is the right answer for an SME without internal security staff. The competitive analysis you reviewed explicitly calls this out: "for SME basic security needs, MDR is the most suitable solution — lightweight, low barrier to entry." An MSSP would still require someone internal to triage alerts; a SIEM requires analysts to run it; threat intel alone doesn\'t stop attacks.');}
+function a2(b,c){mark(b,c,'q2-f','The defining difference is response. MSSPs send you alerts and leave remediation to your team. MDR providers investigate every alert, hunt for threats you didn\'t detect, and take containment actions (isolate endpoint, block connection) — delivering outcomes, not just data. This is why MDR is replacing MSSP as the standard.');}
+function a3(b,c){mark(b,c,'q3-f','OCD\'s advantage is the integrator model: they are not competing on product features, they are competing on end-to-end outcomes. They combine Palo Alto, Fortinet, and other vendors\' products with their own SOC analysts, threat intelligence, and managed services layer. No single product vendor can match a full-service managed security provider that also resells the best products.');}
+</script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Glossary — Presales Reference</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    @media print {
+      body { max-width: 100%; padding: 1rem 2rem; font-size: 10pt; }
+      .no-print { display: none; }
+      h2 { page-break-before: always; }
+      h2:first-of-type { page-break-before: avoid; }
+      .term-block { page-break-inside: avoid; }
+    }
+
+    .ref-meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-intro {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .term-block {
+      margin-bottom: 1.1rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .term-block:last-child { border-bottom: none; }
+
+    .term {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .term-abbr {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-left: 0.4rem;
+    }
+    .term-def {
+      margin: 0.3rem 0 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .term-avoid {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--highlight);
+      margin-top: 0.2rem;
+    }
+    .term-lesson {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      color: var(--muted);
+      float: right;
+      margin-top: 0.1rem;
+    }
+
+    .index-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 2rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+    .index-bar a {
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .index-bar a:hover { background: var(--accent); color: white; }
+
+    .two-col {
+      columns: 2;
+      column-gap: 2.5rem;
+    }
+    @media (max-width: 560px) { .two-col { columns: 1; } }
+  </style>
+</head>
+<body>
+
+<div class="ref-meta">
+  <strong>Cybersecurity Glossary</strong> &nbsp;·&nbsp; Presales Reference &nbsp;·&nbsp; Updated after Lesson 5
+  &nbsp;·&nbsp; <a href="../lessons/0001-the-big-picture.html" class="no-print">← Back to lessons</a>
+</div>
+
+<h1>Cybersecurity Glossary</h1>
+<p>Canonical vocabulary for presales conversations. Terms are organized by domain. When a term appears in a lesson, the lesson number is noted. <strong>Print this for desk reference.</strong></p>
+
+<div class="index-bar no-print">
+  <a href="#foundations">Foundations</a>
+  <a href="#threat-actors">Threat Actors</a>
+  <a href="#attack-techniques">Attack Techniques</a>
+  <a href="#endpoint">Endpoint</a>
+  <a href="#network">Network</a>
+  <a href="#cloud">Cloud</a>
+  <a href="#identity">Identity</a>
+  <a href="#appsec">AppSec</a>
+  <a href="#soc">SOC / SIEM</a>
+  <a href="#zero-trust">Zero Trust</a>
+  <a href="#advanced">Advanced Topics</a>
+</div>
+
+<!-- FOUNDATIONS -->
+<h2 id="foundations">Foundations</h2>
+<p class="section-intro">The universal vocabulary every security conversation assumes.</p>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">CIA Triad</div>
+    <p class="term-def">The three core security properties: <strong>Confidentiality</strong> (only authorized parties can read data), <strong>Integrity</strong> (data has not been tampered with), <strong>Availability</strong> (systems are accessible when needed). Every security control protects one or more of these.</p>
+    <div class="term-avoid">Avoid: "the three pillars" — use "the CIA triad" or name the properties explicitly.</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Confidentiality</div>
+    <p class="term-def">Information is accessible only to those authorized to see it. Protected by encryption, access controls, and DLP.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Integrity</div>
+    <p class="term-def">Information is accurate and has not been altered by unauthorized parties. Protected by hashing, digital signatures, and audit logs.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Availability</div>
+    <p class="term-def">Systems and data are accessible when needed by authorized users. Protected by redundancy, DDoS mitigation, and incident response.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Non-repudiation</div>
+    <p class="term-def">An action can be definitively attributed to a party who cannot deny it. Achieved through digital signatures and audit trails. Often bundled under Integrity.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Threat model</div>
+    <p class="term-def">A structured analysis of which adversaries are relevant, what assets they would target, and how they might attack. Security is always relative to a threat model — there is no absolute security.</p>
+    <div class="term-avoid">Avoid: saying something "is secure" without naming the threat model.</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Defense in depth</div>
+    <p class="term-def">Layered security controls so that no single failure leaves the organization unprotected. If one layer is bypassed, another catches the attacker. The dominant defensive strategy.</p>
+    <div class="term-avoid">Avoid: "security in depth" — the correct term is "defense in depth."</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Defender's dilemma</div>
+    <p class="term-def">The asymmetry where attackers need to succeed once, while defenders must succeed every time. Explains why detection and response matter as much as prevention.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Attack surface</div>
+    <p class="term-def">The total set of points where an attacker could attempt to enter or extract data from a system. Reducing attack surface is a primary security objective.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Vulnerability</div>
+    <p class="term-def">A weakness in a system that could be exploited by an attacker. Vulnerabilities are assigned CVE identifiers and CVSS severity scores.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Exploit</div>
+    <p class="term-def">Code or a technique that takes advantage of a vulnerability to cause unintended behavior in a system.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">CVE <span class="term-abbr">Common Vulnerabilities and Exposures</span></div>
+    <p class="term-def">A standardized identifier for publicly known security vulnerabilities (e.g., CVE-2021-44228 = Log4Shell). Published by MITRE, maintained in the NVD.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">CVSS <span class="term-abbr">Common Vulnerability Scoring System</span></div>
+    <p class="term-def">A 0–10 numerical score measuring the severity of a vulnerability. 9.0–10.0 = Critical. Used to prioritize patching.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L1</span>
+    <div class="term">Patch</div>
+    <p class="term-def">A software update that fixes a vulnerability. The time between patch release and deployment is a major risk window — most exploits target known, unpatched vulnerabilities.</p>
+  </div>
+
+</div>
+
+<!-- THREAT ACTORS -->
+<h2 id="threat-actors">Threat Actors</h2>
+<p class="section-intro">Who attacks, and why.</p>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Nation-state actor</div>
+    <p class="term-def">A government-sponsored threat actor with significant resources, custom tooling, and long-term patience. Motivations: espionage, sabotage, influence operations. Examples: APT29 (Russia), APT41 (China), Lazarus Group (North Korea).</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">APT <span class="term-abbr">Advanced Persistent Threat</span></div>
+    <p class="term-def">A sophisticated, long-running attack campaign — typically state-sponsored or organized crime — that remains hidden in a target network for months or years. "Persistent" is the defining characteristic.</p>
+    <div class="term-avoid">Avoid: using "APT" as a synonym for any attack — it specifically implies advanced capability and long dwell time.</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Organized cybercrime</div>
+    <p class="term-def">Professional criminal groups motivated by financial gain. Operate structured businesses including HR, affiliate programs, and victim support desks. Primary operators of ransomware-as-a-service platforms.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Hacktivist</div>
+    <p class="term-def">An attacker motivated by ideology or political goals rather than financial gain. Typical methods: DDoS, website defacement, data leaks. Example: Anonymous.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Insider threat</div>
+    <p class="term-def">A threat originating from within the organization — employees, contractors, or partners with legitimate access. Can be malicious (revenge, financial) or negligent (accidental data exposure).</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Script kiddie</div>
+    <p class="term-def">A low-skill attacker who uses pre-built tools and exploits without understanding them. Opportunistic — targets the easiest unpatched systems. Volume is high; sophistication is low.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Threat actor</div>
+    <p class="term-def">Any individual, group, or organization that poses a threat to systems or data. The umbrella term covering all attacker categories.</p>
+  </div>
+
+</div>
+
+<!-- ATTACK TECHNIQUES -->
+<h2 id="attack-techniques">Attack Techniques & Concepts</h2>
+<p class="section-intro">How attacks work — vocabulary for describing attacker behavior.</p>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">TTPs <span class="term-abbr">Tactics, Techniques, and Procedures</span></div>
+    <p class="term-def">The specific behaviors and methods a threat actor uses to carry out attacks. Tactics = goals; Techniques = methods; Procedures = specific implementations. Catalogued in MITRE ATT&CK.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">IOC <span class="term-abbr">Indicator of Compromise</span></div>
+    <p class="term-def">Forensic artifacts that indicate an attack has occurred: malicious IP addresses, file hashes, suspicious domains, registry keys. Shared via threat intelligence feeds for blocking and detection.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Zero-day</div>
+    <p class="term-def">A vulnerability unknown to the vendor and without a patch. Highly valuable — nation-states stockpile them. Named for the zero days of defense available when first exploited.</p>
+    <div class="term-avoid">Avoid: using "zero-day" to describe any new attack — it specifically means the vendor is unaware and no patch exists.</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Cyber Kill Chain</div>
+    <p class="term-def">Lockheed Martin's 7-stage model of a targeted attack: Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command &amp; Control → Actions on Objectives. Security products intervene at specific stages.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">MITRE ATT&amp;CK</div>
+    <p class="term-def">The industry-standard knowledge base of adversary tactics and techniques, organized as a matrix. Every serious SOC and security vendor maps their capabilities to ATT&amp;CK. 14 enterprise tactics, hundreds of techniques.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Phishing</div>
+    <p class="term-def">Deceptive communications (usually email) designed to trick recipients into revealing credentials, clicking malicious links, or opening infected attachments. The most common initial access technique.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Spear phishing</div>
+    <p class="term-def">Targeted phishing tailored to a specific individual using personal details to increase credibility. Far more effective than generic phishing; used by APTs and organized crime.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Lateral movement</div>
+    <p class="term-def">The attacker's progression from an initial foothold to other systems within the network. Micro-segmentation and Zero Trust limit lateral movement by restricting inter-system access.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Ransomware</div>
+    <p class="term-def">Malware that encrypts victim files and demands payment for the decryption key. Modern ransomware groups also exfiltrate data and threaten to publish it ("double extortion").</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2, L5</span>
+    <div class="term">RaaS <span class="term-abbr">Ransomware-as-a-Service</span></div>
+    <p class="term-def">A criminal business model where ransomware developers license their tools to affiliates on a revenue-share basis. Lowers the skill barrier dramatically — affiliates deploy, developers take 20–30% of ransoms.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">DDoS <span class="term-abbr">Distributed Denial of Service</span></div>
+    <p class="term-def">Flooding a system with traffic from many sources simultaneously to exhaust resources and make it unavailable. An availability attack. Mitigated by scrubbing centers and anycast networks.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Social engineering</div>
+    <p class="term-def">Manipulating people into revealing information or taking actions that compromise security. Exploits psychology rather than technology. Phishing is the most common form.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Deepfake</div>
+    <p class="term-def">AI-generated synthetic audio or video that impersonates a real person. Increasingly used in social engineering — notably to impersonate executives in fraudulent wire transfer requests.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Blast radius</div>
+    <p class="term-def">The scope of damage that results when an attacker achieves their objective. Least-privilege access and micro-segmentation are designed to minimize blast radius.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Dwell time</div>
+    <p class="term-def">The time between an attacker gaining initial access and being detected. Industry average has historically been 200+ days. Reducing dwell time is a primary SOC objective.</p>
+  </div>
+
+</div>
+
+<!-- ENDPOINT -->
+<h2 id="endpoint">Endpoint Security</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <div class="term">AV <span class="term-abbr">Antivirus</span></div>
+    <p class="term-def">Legacy endpoint protection that detects known malware using signature databases. Ineffective against novel or obfuscated malware. Superseded by EDR for serious enterprise use.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">EDR <span class="term-abbr">Endpoint Detection and Response</span></div>
+    <p class="term-def">Endpoint security that records and analyzes system behavior, enabling detection of novel attacks (not just known signatures), threat hunting, and rollback of ransomware. The current enterprise standard.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">XDR <span class="term-abbr">Extended Detection and Response</span></div>
+    <p class="term-def">Extends EDR by correlating telemetry across endpoints, network, cloud, identity, and email into a unified detection and response platform. Reduces siloed visibility across domains.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Malware</div>
+    <p class="term-def">Malicious software designed to damage, disrupt, or gain unauthorized access to systems. Includes viruses, worms, trojans, ransomware, spyware, and rootkits.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Threat hunting</div>
+    <p class="term-def">Proactive human-led search for hidden threats that have evaded automated detection. Analysts form hypotheses and investigate the environment looking for attacker TTPs. Requires EDR telemetry.</p>
+  </div>
+
+</div>
+
+<!-- NETWORK -->
+<h2 id="network">Network Security</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">Firewall / NGFW <span class="term-abbr">Next-Generation Firewall</span></div>
+    <p class="term-def">Filters network traffic by rules. NGFWs add application-layer awareness, SSL inspection, and integrated IPS — going beyond traditional port/protocol rules.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">IDS / IPS <span class="term-abbr">Intrusion Detection / Prevention System</span></div>
+    <p class="term-def">Inspects network traffic for known attack signatures. IDS alerts; IPS actively blocks. Now typically integrated into NGFWs rather than deployed as standalone appliances.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">NDR <span class="term-abbr">Network Detection and Response</span></div>
+    <p class="term-def">Uses behavioral analysis (not just signatures) to detect anomalous network traffic — lateral movement, C2 communication, data exfiltration. The network equivalent of EDR.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">DNS Security</div>
+    <p class="term-def">Blocks connections to malicious domains at the DNS resolution level. Catches C2 traffic early in the Kill Chain — before malware can phone home. Often the first layer of network defense.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">Micro-segmentation</div>
+    <p class="term-def">Dividing a network into small, isolated zones with individual access policies, so lateral movement between zones is blocked even for authenticated users. Implements "assume breach" at the network layer.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">VPN <span class="term-abbr">Virtual Private Network</span></div>
+    <p class="term-def">Creates an encrypted tunnel between a remote user and the corporate network, granting broad network-level access. Being replaced by ZTNA in Zero Trust architectures due to over-privileged access.</p>
+    <div class="term-avoid">Avoid: recommending VPN as a Zero Trust solution — it is the legacy approach ZTNA replaces.</div>
+  </div>
+
+  <div class="term-block">
+    <div class="term">C2 <span class="term-abbr">Command and Control</span></div>
+    <p class="term-def">The channel through which an attacker remotely controls compromised systems. Malware calls home to C2 infrastructure to receive instructions and exfiltrate data. Stage 6 of the Kill Chain.</p>
+  </div>
+
+</div>
+
+<!-- CLOUD -->
+<h2 id="cloud">Cloud Security</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">CSPM <span class="term-abbr">Cloud Security Posture Management</span></div>
+    <p class="term-def">Continuously monitors cloud environments for misconfigurations — public S3 buckets, open databases, overly permissive IAM roles. The most common cause of cloud breaches is misconfiguration, not sophisticated attacks.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">CWPP <span class="term-abbr">Cloud Workload Protection Platform</span></div>
+    <p class="term-def">Secures cloud workloads: virtual machines, containers, and serverless functions. Runtime protection against attacks on running workloads.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">CASB <span class="term-abbr">Cloud Access Security Broker</span></div>
+    <p class="term-def">Sits between users and SaaS applications, enforcing security policies — blocking upload of sensitive data to unauthorized apps, controlling access to shadow IT.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">CNAPP <span class="term-abbr">Cloud-Native Application Protection Platform</span></div>
+    <p class="term-def">Combines CSPM + CWPP (and often more) into a unified platform for securing cloud-native environments. The consolidation trend in cloud security.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Shared responsibility model</div>
+    <p class="term-def">In cloud computing, security is divided between the cloud provider (infrastructure) and the customer (data, access, configuration). Most breaches occur in the customer's responsibility zone — misconfigured settings, not compromised AWS infrastructure.</p>
+  </div>
+
+</div>
+
+<!-- IDENTITY -->
+<h2 id="identity">Identity &amp; Access Management</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">IAM <span class="term-abbr">Identity and Access Management</span></div>
+    <p class="term-def">Manages digital identities and controls what resources each identity can access. The foundation of modern security — "identity is the new perimeter."</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">MFA <span class="term-abbr">Multi-Factor Authentication</span></div>
+    <p class="term-def">Requires two or more proofs of identity: something you know (password), something you have (phone/token), something you are (biometric). Blocks the majority of credential-based attacks.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">PAM <span class="term-abbr">Privileged Access Management</span></div>
+    <p class="term-def">Controls, monitors, and audits access to high-privilege accounts: admin, root, service accounts. A top priority because privileged accounts are attackers' primary target for lateral movement and persistence.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SSO <span class="term-abbr">Single Sign-On</span></div>
+    <p class="term-def">One authentication event grants access to multiple applications. Reduces password sprawl and enables centralized access control — revoking access in one place revokes it everywhere.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Least privilege</div>
+    <p class="term-def">Users and systems receive the minimum access permissions needed to perform their function — no more. A core Zero Trust principle. Limits blast radius if an account is compromised.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">JIT / JEA <span class="term-abbr">Just-in-Time / Just-Enough-Access</span></div>
+    <p class="term-def">Privileges are granted only when needed and for the minimum time required, then automatically revoked. Reduces the window of opportunity for attackers who compromise a privileged account.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Credential stuffing</div>
+    <p class="term-def">Automated use of stolen username/password combinations from one breach to attack other services — exploiting password reuse. Mitigated by MFA and password managers.</p>
+  </div>
+
+</div>
+
+<!-- APPSEC -->
+<h2 id="appsec">Application Security</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">OWASP Top 10</div>
+    <p class="term-def">The Open Worldwide Application Security Project's canonical list of the most critical web application vulnerabilities. Updated periodically. Includes SQL injection, broken authentication, XSS, insecure deserialization. The reference standard for AppSec conversations.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SAST <span class="term-abbr">Static Application Security Testing</span></div>
+    <p class="term-def">Scans source code for vulnerabilities before the application runs — "shift left" security. Catches issues at the earliest and cheapest point to fix them.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">DAST <span class="term-abbr">Dynamic Application Security Testing</span></div>
+    <p class="term-def">Tests a running application by simulating real attacks from the outside. Finds issues that only appear at runtime — logic flaws, authentication weaknesses, server misconfigurations.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">WAF <span class="term-abbr">Web Application Firewall</span></div>
+    <p class="term-def">Sits in front of web applications and filters malicious HTTP requests — SQL injection, XSS, bot traffic. Deployed as a cloud service or appliance. A runtime defense; does not fix the underlying vulnerability.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SCA <span class="term-abbr">Software Composition Analysis</span></div>
+    <p class="term-def">Identifies known vulnerabilities in open-source libraries and dependencies used by an application. Critical given that modern apps are 80–90% open-source code by volume.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">SBOM <span class="term-abbr">Software Bill of Materials</span></div>
+    <p class="term-def">A machine-readable inventory of every component, library, and dependency in a software product. Now required by the US government for federal software vendors. Enables rapid impact assessment when a new CVE is published.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">SQL injection</div>
+    <p class="term-def">An attacker inserts malicious SQL code into an input field to manipulate the database — reading, modifying, or deleting data. One of the oldest and most common web vulnerabilities. Prevented by parameterized queries.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">XSS <span class="term-abbr">Cross-Site Scripting</span></div>
+    <p class="term-def">Attacker injects malicious JavaScript into a web page viewed by other users, enabling session hijacking, credential theft, or malicious redirects.</p>
+  </div>
+
+</div>
+
+<!-- SOC / SIEM -->
+<h2 id="soc">SOC / SIEM / SOAR</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SOC <span class="term-abbr">Security Operations Center</span></div>
+    <p class="term-def">The team and facility responsible for monitoring, detecting, and responding to security events 24/7. May be internal or outsourced (MSSP). The human side of detection and response.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SIEM <span class="term-abbr">Security Information and Event Management</span></div>
+    <p class="term-def">Aggregates and correlates logs from across the environment — endpoints, firewalls, cloud, identity — to detect threats and generate alerts. The brain of the SOC. Key vendors: Splunk, Microsoft Sentinel, IBM QRadar.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">SOAR <span class="term-abbr">Security Orchestration, Automation and Response</span></div>
+    <p class="term-def">Automates repetitive SOC tasks (enriching alerts, blocking IPs, isolating endpoints) and orchestrates multi-step response playbooks. Addresses analyst alert fatigue by eliminating manual busywork.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">MTTD <span class="term-abbr">Mean Time to Detect</span></div>
+    <p class="term-def">The average time between an attacker gaining access and the defender detecting them. Industry average historically 200+ days. Every SIEM/SOC vendor competes on reducing this number.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L3</span>
+    <div class="term">MTTR <span class="term-abbr">Mean Time to Respond</span></div>
+    <p class="term-def">The average time between detecting an incident and containing/remediating it. SOAR and automation directly reduce MTTR. Both MTTD and MTTR are the primary SOC metrics in any vendor conversation.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Alert fatigue</div>
+    <p class="term-def">Analysts becoming desensitized to alerts due to overwhelming volume and high false positive rates. Leads to missed real threats. A primary driver of AI adoption and SOAR investment in security operations.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L2</span>
+    <div class="term">Threat intelligence</div>
+    <p class="term-def">Curated, contextualized data about current threats: attacker TTPs, active campaigns, IOCs, and vulnerability exploitability. Fed into SIEM rules, firewall blocklists, and analyst enrichment workflows.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">IR <span class="term-abbr">Incident Response</span></div>
+    <p class="term-def">The structured process for detecting, containing, eradicating, and recovering from a security incident. Most enterprises retain an IR firm on retainer before they need one.</p>
+  </div>
+
+</div>
+
+<!-- ZERO TRUST -->
+<h2 id="zero-trust">Zero Trust</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">Zero Trust</div>
+    <p class="term-def">A security architecture based on "never trust, always verify." Every access request is authenticated and authorized regardless of network location. Assumes breach rather than perimeter integrity. Coined by John Kindervag at Forrester (2010).</p>
+    <div class="term-avoid">Avoid: treating Zero Trust as a product — it is an architecture. No single product "does" Zero Trust.</div>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">ZTNA <span class="term-abbr">Zero Trust Network Access</span></div>
+    <p class="term-def">Grants access to specific applications — not the whole network — after verifying identity and device health. The primary replacement for VPN in Zero Trust architectures.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">Least privilege</div>
+    <p class="term-def">Grant the minimum permissions needed for a task, for the minimum time needed. A core Zero Trust principle. Reduces blast radius when credentials are compromised.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">Assume breach</div>
+    <p class="term-def">Design as if attackers are already inside. Focus on containment, rapid detection, and minimizing lateral movement — not just preventing initial entry.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L4</span>
+    <div class="term">Perimeter model</div>
+    <p class="term-def">The legacy "castle and moat" approach where the firewall defines a trusted interior. Obsolete in the cloud and remote-work era — attackers routinely enter through phishing, supply chain, and insider access.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">SASE <span class="term-abbr">Secure Access Service Edge</span></div>
+    <p class="term-def">A Gartner-coined architecture that converges networking (SD-WAN) and security (ZTNA, CASB, FWaaS, SWG) into a cloud-delivered service. Enables Zero Trust for distributed workforces without on-premises appliances.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Device posture</div>
+    <p class="term-def">The security health status of a device at a given moment — patch level, EDR installed, disk encryption on. Zero Trust gates access on device posture, not just user identity.</p>
+  </div>
+
+</div>
+
+<!-- ADVANCED -->
+<h2 id="advanced">Advanced Topics</h2>
+<div class="two-col">
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Post-quantum cryptography (PQC)</div>
+    <p class="term-def">Cryptographic algorithms designed to resist attacks from quantum computers. NIST standardized ML-KEM and ML-DSA in 2024, both based on lattice mathematics. Required because Shor's algorithm breaks RSA and elliptic curve on sufficiently powerful quantum computers.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Harvest now, decrypt later (HNDL)</div>
+    <p class="term-def">Nation-states collect encrypted communications today and store them, planning to decrypt when quantum computers mature. Makes PQC migration urgent even before quantum computers exist at scale.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Crypto-agility</div>
+    <p class="term-def">The ability to swap cryptographic algorithms across a system without major re-architecture. Essential for PQC migration — organizations that built crypto-agile systems can update faster.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Supply chain attack</div>
+    <p class="term-def">Compromising a target indirectly by attacking a trusted vendor, software component, or service they rely on. SolarWinds (2020) and XZ Utils (2024) are landmark examples.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">Adversarial ML</div>
+    <p class="term-def">Crafting inputs specifically designed to fool machine learning models — causing a security ML model to misclassify malicious content as benign. An emerging attack category targeting AI-powered security tools.</p>
+  </div>
+
+  <div class="term-block">
+    <span class="term-lesson">L5</span>
+    <div class="term">SLSA <span class="term-abbr">Supply chain Levels for Software Artifacts</span></div>
+    <p class="term-def">A Google-originated framework for hardening software build pipelines against tampering. Defines four levels of supply chain security maturity.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Cyber risk quantification (CRQ)</div>
+    <p class="term-def">Expressing cybersecurity risk in financial terms (expected loss, probability of breach) rather than qualitative scores. Enables board-level risk conversations. An active and unresolved research area.</p>
+  </div>
+
+  <div class="term-block">
+    <div class="term">Threat intelligence platform (TIP)</div>
+    <p class="term-def">Aggregates, normalizes, and manages threat intelligence from multiple feeds. Enriches SIEM alerts with attacker context and distributes IOCs for blocking across security tools.</p>
+  </div>
+
+</div>
+
+<div class="lesson-footer no-print">
+  <p>This glossary consolidates vocabulary from Lessons 1–5. It will be updated as new lessons are added.</p>
+  <div class="lesson-nav">
+    <a href="../lessons/0001-the-big-picture.html">Lesson 1</a>
+    <a href="../lessons/0002-threat-landscape.html">Lesson 2</a>
+    <a href="../lessons/0003-security-domains.html">Lesson 3</a>
+    <a href="../lessons/0004-zero-trust.html">Lesson 4</a>
+    <a href="../lessons/0005-cutting-edge.html">Lesson 5</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want a term clarified, or need to know how to use it in a customer conversation? Ask Claude.
+  </p>
+</div>
+
+</body>
+</html>

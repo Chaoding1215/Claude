@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 5 — Cutting-Edge Research & Open Challenges</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .research-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+    }
+    .research-card-header {
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+    .research-card-body { padding: 1.1rem 1.25rem; }
+    .research-card-body p { margin-bottom: 0.75rem; }
+    .research-card-body p:last-child { margin-bottom: 0; }
+    .challenge-badge {
+      display: inline-block;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+    .badge-unsolved { background: #fef3c7; color: #92400e; }
+    .badge-emerging { background: #ede9fe; color: #5b21b6; }
+    .badge-active { background: #dcfce7; color: #166534; }
+    .presales-tip {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.85rem;
+      font-size: 0.85rem;
+    }
+    .presales-tip strong { color: #0369a1; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 05</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Advanced
+</div>
+
+<h1>Cutting-Edge Research<br>&amp; Open Challenges</h1>
+
+<p>This lesson separates you from most presales professionals. Understanding where the field is going — and what it hasn't solved — signals genuine expertise to technical buyers and CISOs. These are the topics shaping research conferences, vendor roadmaps, and government policy right now.</p>
+
+<h2>1. AI in Cybersecurity — Both Sides of the Arms Race</h2>
+
+<div class="research-card">
+  <div class="research-card-header">
+    🤖 AI &amp; Machine Learning in Security
+    <span class="challenge-badge badge-active" style="margin-left:auto;">Active research</span>
+  </div>
+  <div class="research-card-body">
+    <p>AI is simultaneously the most powerful new tool for defenders <em>and</em> the most dangerous new capability for attackers. Understanding both sides is essential.</p>
+
+    <p><strong>Attackers using AI:</strong></p>
+    <ul style="padding-left:1.4rem; margin-bottom:0.85rem;">
+      <li style="margin-bottom:0.4rem;"><strong>AI-generated phishing</strong> — LLMs write flawless, personalized spear-phishing emails at scale. Previously, grammar errors were a detection signal. No longer.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Deepfake social engineering</strong> — Voice and video cloning to impersonate executives. In 2024, a finance employee in Hong Kong was tricked into transferring $25M via a deepfake video call of their CFO.</li>
+      <li style="margin-bottom:0.4rem;"><strong>AI-assisted malware</strong> — LLMs help attackers write exploit code faster and obfuscate malware to evade signature detection.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Automated vulnerability discovery</strong> — AI tools scan codebases for exploitable patterns faster than human researchers.</li>
+    </ul>
+
+    <p><strong>Defenders using AI:</strong></p>
+    <ul style="padding-left:1.4rem; margin-bottom:0.85rem;">
+      <li style="margin-bottom:0.4rem;"><strong>Behavioral anomaly detection</strong> — ML models learn normal behavior baselines and flag deviations (unusual login times, abnormal data access patterns).</li>
+      <li style="margin-bottom:0.4rem;"><strong>Alert triage</strong> — AI reduces alert fatigue by automatically classifying and prioritizing the thousands of alerts a SOC generates daily.</li>
+      <li style="margin-bottom:0.4rem;"><strong>AI security assistants</strong> — Microsoft Copilot for Security, Google Gemini in Chronicle — LLMs that help analysts investigate incidents in natural language.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Automated threat hunting</strong> — AI proactively searches for hidden threats instead of waiting for alerts.</li>
+    </ul>
+
+    <p><strong>Open challenge:</strong> AI models themselves are a new attack surface. <em>Adversarial ML</em> — crafting inputs that fool AI detectors — is an active research area. A spam filter powered by ML can be bypassed by carefully crafting emails that the model misclassifies.</p>
+
+    <div class="presales-tip">
+      <strong>Presales angle:</strong> "AI-powered" is now on every vendor's slide. The differentiating question to ask (and teach customers to ask): <em>"What specific behavior does your AI detect that rule-based systems miss, and how do you validate it doesn't generate excessive false positives?"</em>
+    </div>
+  </div>
+</div>
+
+<h2>2. Post-Quantum Cryptography — The Coming Cryptopocalypse</h2>
+
+<div class="research-card">
+  <div class="research-card-header">
+    ⚛️ Post-Quantum Cryptography (PQC)
+    <span class="challenge-badge badge-unsolved" style="margin-left:auto;">Unsolved at scale</span>
+  </div>
+  <div class="research-card-body">
+    <p>Almost all encryption protecting the internet today — TLS, RSA, elliptic curve cryptography — relies on mathematical problems that classical computers cannot solve in reasonable time. <strong>Quantum computers can.</strong></p>
+
+    <p>Shor's algorithm, run on a sufficiently powerful quantum computer, breaks RSA and elliptic curve encryption in polynomial time — making today's encrypted communications trivially decryptable.</p>
+
+    <p><strong>"Harvest now, decrypt later" (HNDL):</strong> Nation-state adversaries are already collecting encrypted traffic today, storing it, and waiting for quantum computers powerful enough to decrypt it. Classified government communications intercepted in 2024 could be read in 2034. This makes the threat urgent even before quantum computers exist at scale.</p>
+
+    <p><strong>The response — NIST PQC standardization:</strong> In 2024, NIST finalized the first post-quantum cryptographic standards: <strong>ML-KEM</strong> (CRYSTALS-Kyber) for key exchange and <strong>ML-DSA</strong> (CRYSTALS-Dilithium) for digital signatures. These are based on lattice math problems that quantum computers cannot efficiently solve.</p>
+
+    <p><strong>Open challenge:</strong> Migrating the entire internet's cryptographic infrastructure is a decades-long project. Most organizations don't even know where all their RSA certificates are. <em>Crypto-agility</em> — the ability to swap cryptographic algorithms without re-architecting systems — is a key research and engineering goal.</p>
+
+    <div class="presales-tip">
+      <strong>Presales angle:</strong> PQC is increasingly relevant in government, defense, finance, and healthcare sales. The question that opens doors: <em>"Do you know where all your RSA-based encryption lives, and do you have a plan to migrate before quantum computers break it?"</em> Most CISOs don't have an answer — which creates a planning and discovery opportunity.
+    </div>
+  </div>
+</div>
+
+<h2>3. Supply Chain Security — The Attack That Changed Everything</h2>
+
+<div class="research-card">
+  <div class="research-card-header">
+    🔗 Software Supply Chain Security
+    <span class="challenge-badge badge-active" style="margin-left:auto;">Active research</span>
+  </div>
+  <div class="research-card-body">
+    <p>SolarWinds (2020) proved that compromising one trusted vendor can give attackers access to thousands of downstream organizations simultaneously. The software supply chain — the code, tools, and dependencies that go into building software — became a primary attack surface.</p>
+
+    <p><strong>Three supply chain attack vectors:</strong></p>
+    <ul style="padding-left:1.4rem; margin-bottom:0.85rem;">
+      <li style="margin-bottom:0.4rem;"><strong>Compromised build pipeline</strong> (SolarWinds model) — attacker injects malicious code into the software build process; all customers receive the backdoor via legitimate update.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Malicious open-source packages</strong> — attacker publishes a package with a name similar to a popular library (typosquatting) or takes over a maintainer's account and adds malicious code. The XZ Utils backdoor (2024) was discovered just before it would have affected most Linux distributions.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Compromised third-party services</strong> — any SaaS tool with access to your environment (CI/CD, monitoring, HR systems) is a potential entry point.</li>
+    </ul>
+
+    <p><strong>Key responses:</strong></p>
+    <ul style="padding-left:1.4rem; margin-bottom:0.85rem;">
+      <li style="margin-bottom:0.4rem;"><strong>SBOM (Software Bill of Materials)</strong> — a machine-readable inventory of every component in a software product. The US government now requires SBOMs for software sold to federal agencies.</li>
+      <li style="margin-bottom:0.4rem;"><strong>SLSA framework</strong> (Supply chain Levels for Software Artifacts) — a Google-originated framework for hardening build pipelines.</li>
+      <li style="margin-bottom:0.4rem;"><strong>Sigstore</strong> — open-source tooling for cryptographically signing software artifacts, proving they haven't been tampered with.</li>
+    </ul>
+
+    <p><strong>Open challenge:</strong> The average enterprise uses thousands of open-source dependencies, which themselves have dependencies. Fully auditing and trusting this graph is an unsolved problem at scale.</p>
+
+    <div class="presales-tip">
+      <strong>Presales angle:</strong> Any customer that builds software or uses SaaS tools (all of them) has supply chain exposure. <em>"Do you have visibility into the open-source components in your applications, and do you know when a CVE is published against one of your dependencies?"</em> This positions SCA tools and SBOM solutions.
+    </div>
+  </div>
+</div>
+
+<h2>4. Ransomware Economics — An Unsolved Societal Problem</h2>
+
+<div class="research-card">
+  <div class="research-card-header">
+    💰 Ransomware &amp; Cybercrime Economics
+    <span class="challenge-badge badge-unsolved" style="margin-left:auto;">Unsolved</span>
+  </div>
+  <div class="research-card-body">
+    <p>Ransomware is not primarily a technical problem — it's an economic one. Criminal groups operate as structured businesses with HR, customer support for victims, and affiliate revenue-sharing models. Technical defenses have improved; the ransomware industry has grown anyway.</p>
+
+    <p><strong>Why it persists despite better defenses:</strong></p>
+    <ul style="padding-left:1.4rem; margin-bottom:0.85rem;">
+      <li style="margin-bottom:0.4rem;">Cryptocurrency enables pseudonymous, cross-border payments that are difficult to seize.</li>
+      <li style="margin-bottom:0.4rem;">RaaS (Ransomware-as-a-Service) lowers the skill barrier — affiliates need minimal technical knowledge.</li>
+      <li style="margin-bottom:0.4rem;">Many victims pay ransoms (averaging $1–2M in 2024), making the economics profitable.</li>
+      <li style="margin-bottom:0.4rem;">Criminal groups operate from jurisdictions that don't extradite to the West.</li>
+    </ul>
+
+    <p><strong>Research focus areas:</strong> Cryptocurrency tracing (Chainalysis tracks ransomware payments on-chain), international law enforcement coordination (Operation Cronos took down LockBit in 2024), and legal frameworks around ransom payment prohibition.</p>
+
+    <p><strong>Open challenge:</strong> Even when law enforcement disrupts a ransomware group (REvil, Conti, LockBit), the operators reconstitute under a new name within months. There is no technical solution to the underlying criminal ecosystem.</p>
+
+    <div class="presales-tip">
+      <strong>Presales angle:</strong> Ransomware is the #1 concern for most CISOs. The conversation should cover three angles: prevention (EDR, email security, MFA), detection speed (SIEM/MTTD), and recovery (backup strategy, IR retainer). Selling only prevention is leaving the conversation half-finished.
+    </div>
+  </div>
+</div>
+
+<h2>5. The Open Challenges — What Security Hasn't Solved</h2>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>🔐 The Identity Problem</h4>
+    <p>Passwords are insecure; MFA adds friction; passwordless authentication is promising but adoption is slow. The majority of breaches still begin with stolen credentials — a problem identified in the 1980s.</p>
+  </div>
+  <div class="concept-card">
+    <h4>😴 Alert Fatigue</h4>
+    <p>SOC analysts face thousands of alerts per day. Studies show analysts miss critical alerts in the noise, or burn out and leave the profession. AI helps but hasn't solved it — false positive rates remain high.</p>
+  </div>
+  <div class="concept-card">
+    <h4>🧑‍💼 The Human Factor</h4>
+    <p>Phishing, social engineering, and insider threats exploit human psychology, not technology. Security awareness training has limited efficacy. No product eliminates the human attack surface.</p>
+  </div>
+  <div class="concept-card">
+    <h4>📏 Measuring Security</h4>
+    <p>How secure is "secure enough"? The industry lacks agreed-upon metrics. CISOs struggle to quantify risk to boards in financial terms. Cyber risk quantification (CRQ) is an active and unresolved research area.</p>
+  </div>
+  <div class="concept-card">
+    <h4>🌍 Attribution</h4>
+    <p>Definitively attributing an attack to a specific nation-state or actor is extremely difficult. Attackers use false flags and shared tooling. Intelligence agencies disagree. This complicates deterrence and retaliation.</p>
+  </div>
+  <div class="concept-card">
+    <h4>🔄 Patch Lag</h4>
+    <p>Critical vulnerabilities are routinely exploited weeks after patches are available, because organizations can't patch fast enough. The gap between disclosure and exploitation is shrinking — sometimes hours. Automated patching at scale remains unsolved.</p>
+  </div>
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">"Harvest now, decrypt later" is a threat associated with which emerging technology challenge?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">AI in security — attackers harvest training data to fool ML models</button></li>
+    <li><button onclick="a1(this,false)">Supply chain attacks — harvesting credentials from build pipelines</button></li>
+    <li><button onclick="a1(this,true)">Post-quantum cryptography — storing encrypted data today to decrypt when quantum computers mature</button></li>
+    <li><button onclick="a1(this,false)">Ransomware economics — harvesting ransom payments before law enforcement acts</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">The XZ Utils backdoor (2024) and the SolarWinds attack (2020) are both examples of which attack category?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">Zero-day exploitation — previously unknown vulnerabilities were targeted</button></li>
+    <li><button onclick="a2(this,false)">Ransomware — systems were encrypted for financial gain</button></li>
+    <li><button onclick="a2(this,true)">Software supply chain attacks — malicious code inserted into trusted software distributed to many victims</button></li>
+    <li><button onclick="a2(this,false)">Credential theft — attacker compromised developer login accounts</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">A customer building software for the US federal government asks about SBOM requirements. What is an SBOM?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">A security benchmark used to assess cloud infrastructure configurations</button></li>
+    <li><button onclick="a3(this,true)">A machine-readable inventory of every software component and dependency in a product</button></li>
+    <li><button onclick="a3(this,false)">A standardized breach notification format required by federal law</button></li>
+    <li><button onclick="a3(this,false)">A scoring model for measuring software vulnerability severity</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="quiz" id="q4">
+  <div class="quiz-question">In 2024, NIST finalized the first post-quantum cryptographic standards. Which mathematical foundation do they rely on — and why?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a4(this,false)">RSA integer factorization — larger key sizes resist quantum attacks</button></li>
+    <li><button onclick="a4(this,false)">Elliptic curve discrete logarithms — more efficient than RSA at equivalent security</button></li>
+    <li><button onclick="a4(this,true)">Lattice-based mathematics — problems quantum computers cannot efficiently solve</button></li>
+    <li><button onclick="a4(this,false)">Symmetric encryption — AES-256 is already quantum-resistant at current key sizes</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q4-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary sources:</strong></p>
+  <ul style="font-size:0.85rem; padding-left:1.2rem; margin-top:0.4rem;">
+    <li><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank">NIST Post-Quantum Cryptography Project</a> — authoritative reference for PQC standards</li>
+    <li><a href="https://attack.mitre.org/groups/" target="_blank">MITRE ATT&CK Groups</a> — named threat actor profiles with TTPs</li>
+    <li><a href="https://www.cisa.gov/sbom" target="_blank">CISA SBOM resources</a> — US government guidance on software bills of materials</li>
+    <li>USENIX Security and IEEE S&P conference proceedings — where cutting-edge research is published first</li>
+  </ul>
+
+  <p style="margin-top:1rem;">
+    <strong>Previous:</strong> <a href="0004-zero-trust.html">Lesson 4 — Zero Trust</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0006-glossary-reference.html">Reference — Cybersecurity Glossary</a>
+  </p>
+
+  <div class="lesson-nav">
+    <a href="../reference/">📚 Reference docs</a>
+    <a href="../RESOURCES.md">📖 Resources</a>
+  </div>
+
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to go deeper on quantum computing, AI security research, or how to handle a customer conversation about any of these topics? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    quiz.querySelectorAll('button').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+    });
+  }
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','HNDL is specific to post-quantum cryptography. Nation-states collect encrypted traffic today — government comms, financial transactions, IP — storing it until quantum computers can break the RSA/ECC encryption that protects it. The threat is real now, even though the decryption happens later.');}
+function a2(b,c){mark(b,c,'q2-f','Both attacks compromised trusted software distributed to many victims simultaneously — the defining characteristic of supply chain attacks. SolarWinds injected a backdoor into a security software update; XZ Utils inserted a backdoor into a widely-used Linux compression library during the open-source contribution process.');}
+function a3(b,c){mark(b,c,'q3-f','An SBOM (Software Bill of Materials) is a complete inventory of every component, library, and dependency in a software product — like a nutrition label for code. The US government now mandates SBOMs for federal software vendors so they can quickly identify exposure when a new CVE is published.');}
+function a4(b,c){mark(b,c,'q4-f','NIST\'s PQC standards (ML-KEM / CRYSTALS-Kyber and ML-DSA / CRYSTALS-Dilithium) are based on lattice problems — specifically the "Learning With Errors" problem — which no known quantum algorithm can solve efficiently. RSA and elliptic curve are broken by Shor\'s algorithm on a sufficiently powerful quantum computer.');}
+</script>
+
+</body>
+</html>

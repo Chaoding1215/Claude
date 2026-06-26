@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 7 — DevSecOps: Security in the Development Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stage {
+      flex: 1;
+      min-width: 80px;
+      padding: 0.8rem 0.5rem;
+      text-align: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .stage:last-child { border-right: none; }
+    .stage-name { font-weight: bold; color: var(--accent); display: block; margin-bottom: 0.3rem; }
+    .stage-tool { color: var(--highlight); font-size: 0.68rem; }
+    .stage.highlight { background: #f0fdf4; }
+    .cost-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    .cost-bar .phase { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.82rem; font-weight: bold; min-width: 90px; }
+    .cost-bar .bar { height: 18px; background: var(--accent); border-radius: 3px; }
+    .cost-bar .label { font-size: 0.78rem; color: var(--muted); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 07</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Application Security
+</div>
+
+<h1>DevSecOps:<br>Security in the Development Pipeline</h1>
+
+<p>DevSecOps is the practice of embedding security automatically throughout the software development and delivery process — rather than checking for it at the end. It's one of the fastest-growing security categories, and a significant gap for vendors that built their portfolios around network security.</p>
+
+<h2>Why "Security at the End" Fails</h2>
+
+<p>The traditional model: developers build software → security team reviews it before release → security finds problems → developers go back and fix them → delay, cost, frustration.</p>
+
+<p>This was already slow when software shipped quarterly. Modern engineering teams ship to production <strong>dozens of times per day</strong>. A security review that takes two weeks cannot fit in a two-hour deployment cycle.</p>
+
+<p>The cost asymmetry makes this even more urgent:</p>
+
+<div style="margin:1.5rem 0;">
+  <div class="cost-bar"><div class="phase">Design</div><div class="bar" style="width:40px"></div><div class="label">$1 to fix</div></div>
+  <div class="cost-bar"><div class="phase">Development</div><div class="bar" style="width:100px"></div><div class="label">~$6 to fix</div></div>
+  <div class="cost-bar"><div class="phase">Testing</div><div class="bar" style="width:200px"></div><div class="label">~$15 to fix</div></div>
+  <div class="cost-bar"><div class="phase">Production</div><div class="bar" style="width:400px; background:var(--highlight)"></div><div class="label">$100+ to fix (+ breach risk)</div></div>
+</div>
+
+<p>Finding a SQL injection in design costs $1 to fix. Finding it after a breach costs $100+ — plus regulatory fines, reputational damage, and incident response. DevSecOps moves the finding as far left as possible.</p>
+
+<h2>The CI/CD Pipeline — Where Security Gets Embedded</h2>
+
+<p>Modern software delivery runs through a <strong>CI/CD pipeline</strong> (Continuous Integration / Continuous Delivery) — an automated chain of steps that takes code from a developer's laptop to production. DevSecOps embeds security gates at each stage:</p>
+
+<div class="pipeline">
+  <div class="stage">
+    <span class="stage-name">Code</span>
+    <span class="stage-tool">IDE plugins, pre-commit hooks</span>
+  </div>
+  <div class="stage highlight">
+    <span class="stage-name">Build</span>
+    <span class="stage-tool">SAST, SCA</span>
+  </div>
+  <div class="stage highlight">
+    <span class="stage-name">Test</span>
+    <span class="stage-tool">DAST, IAST</span>
+  </div>
+  <div class="stage highlight">
+    <span class="stage-name">Package</span>
+    <span class="stage-tool">Container scanning, SBOM</span>
+  </div>
+  <div class="stage highlight">
+    <span class="stage-name">Deploy</span>
+    <span class="stage-tool">IaC scanning, secrets detection</span>
+  </div>
+  <div class="stage">
+    <span class="stage-name">Operate</span>
+    <span class="stage-tool">CSPM, WAF, RASP</span>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">The shift-left principle</div>
+  "Shifting left" means moving security earlier in the pipeline — toward the developer, away from production. Every gate that catches a vulnerability before it ships reduces cost and risk by an order of magnitude.
+</div>
+
+<h2>The DevSecOps Toolchain</h2>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>SAST</h4>
+    <p><em>Static Application Security Testing.</em> Scans source code during the build stage without running it. Catches SQL injection, hardcoded secrets, insecure functions. Fast; runs in seconds in the pipeline.</p>
+  </div>
+  <div class="concept-card">
+    <h4>SCA</h4>
+    <p><em>Software Composition Analysis.</em> Identifies known CVEs in open-source libraries. Critical: 80–90% of modern code is open-source dependencies. A single vulnerable library (Log4Shell) affected millions of apps.</p>
+  </div>
+  <div class="concept-card">
+    <h4>DAST</h4>
+    <p><em>Dynamic Application Security Testing.</em> Attacks a running application from the outside to find exploitable issues. Catches logic flaws and runtime vulnerabilities SAST cannot see.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Secrets detection</h4>
+    <p>Scans code and commit history for accidentally committed credentials — API keys, database passwords, private certificates. A shockingly common breach cause: developers committing secrets to public GitHub repos.</p>
+  </div>
+  <div class="concept-card">
+    <h4>IaC scanning</h4>
+    <p><em>Infrastructure-as-Code scanning.</em> Checks Terraform, CloudFormation, and Kubernetes manifests for misconfigurations before they're deployed. Catches the cloud misconfiguration problems CSPM finds post-deployment — but earlier.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Container scanning</h4>
+    <p>Scans Docker container images for known CVEs in the OS and packages before deployment. Essential for Kubernetes environments where hundreds of containers run in production.</p>
+  </div>
+</div>
+
+<h2>The "Security as Code" Principle</h2>
+
+<p>The deepest shift in DevSecOps is treating security policy the same way developers treat application code: version-controlled, tested, automated, and reviewed via pull requests.</p>
+
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem;"><strong>Policy as code</strong> — firewall rules, IAM permissions, and compliance checks are written in code, not GUI configurations. Stored in Git. Reviewed and tested before deployment.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Compliance as code</strong> — regulatory requirements (PCI-DSS, HIPAA, SOC 2) are encoded as automated checks that run every time code is deployed.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Security gates</strong> — the pipeline fails automatically if a critical vulnerability is found, preventing insecure code from reaching production without human review.</li>
+</ul>
+
+<h2>The Competitive Landscape</h2>
+
+<p>DevSecOps is a significant gap for traditional network-security vendors. It requires deep integration into developer tooling — GitHub, GitLab, Jenkins, Jira — not firewalls and endpoints.</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem; margin:1.25rem 0; font-size:0.88rem;">
+  <div style="display:grid; grid-template-columns:120px 1fr; gap:0.5rem 1rem; align-items:start; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">Snyk</strong>
+    <div>Developer-first security — SCA, SAST, container scanning, IaC. Deeply integrated into VS Code, GitHub, GitLab. The dominant developer-facing tool.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:120px 1fr; gap:0.5rem 1rem; align-items:start; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">Veracode / Checkmarx</strong>
+    <div>Enterprise AppSec platforms — broader SAST/DAST/SCA with compliance reporting. Traditional enterprise security buyers.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:120px 1fr; gap:0.5rem 1rem; align-items:start; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">GitHub Advanced Security</strong>
+    <div>Native SAST, secrets detection, and dependency scanning built into GitHub. Rapidly adopted; removes friction by being where developers already work.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:120px 1fr; gap:0.5rem 1rem; align-items:start; padding:0.6rem 0; border-bottom:1px solid var(--border);">
+    <strong style="color:var(--accent);">Palo Alto (Prisma Cloud)</strong>
+    <div>Strong IaC scanning, container security, and cloud-native DevSecOps. Bridges the gap between security teams and DevOps. Better than most network-security vendors here.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:120px 1fr; gap:0.5rem 1rem; align-items:start; padding:0.6rem 0;">
+    <strong style="color:var(--accent);">Huawei / Fortinet</strong>
+    <div>Significant gaps. Network security heritage doesn't translate to CI/CD pipeline integration. Typically addressed via partnerships rather than native capability.</div>
+  </div>
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A developer accidentally commits an AWS access key to a public GitHub repository. Which DevSecOps tool would have caught this before it was pushed?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">SAST — static analysis of source code for security vulnerabilities</button></li>
+    <li><button onclick="a1(this,false)">DAST — dynamic testing of a running application</button></li>
+    <li><button onclick="a1(this,true)">Secrets detection — scans code and commits for credentials before they reach the repo</button></li>
+    <li><button onclick="a1(this,false)">SCA — identifies CVEs in open-source libraries</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">An engineering team deploys their Terraform infrastructure-as-code files that accidentally create a publicly accessible database. Which tool would catch this before deployment?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">DAST — tests the running application for exploitable vulnerabilities</button></li>
+    <li><button onclick="a2(this,false)">CSPM — detects cloud misconfigurations after deployment</button></li>
+    <li><button onclick="a2(this,true)">IaC scanning — checks infrastructure configuration files for misconfigurations before deployment</button></li>
+    <li><button onclick="a2(this,false)">Container scanning — identifies CVEs in Docker images</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">Why does finding a vulnerability in production cost roughly 100x more than finding it at the design stage?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">Production systems require more expensive security tooling to scan</button></li>
+    <li><button onclick="a3(this,false)">Regulatory fines apply only when vulnerabilities are found in production</button></li>
+    <li><button onclick="a3(this,true)">Production fixes require re-testing, redeployment, possible incident response, and carry breach risk — versus a simple code change at design</button></li>
+    <li><button onclick="a3(this,false)">Production code has more dependencies, making vulnerability analysis slower</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://owasp.org/www-project-devsecops-guideline/" target="_blank">OWASP DevSecOps Guideline</a> — the most authoritative free reference for DevSecOps practices and toolchain guidance.</p>
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0006-sase.html">Lesson 6 — SASE</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0008-mdr.html">Lesson 8 — MDR: Managed Detection and Response</a>
+  </p>
+  <div class="lesson-nav">
+    <a href="../reference/glossary.html">📖 Glossary</a>
+    <a href="../reference/">📚 Reference docs</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Unclear on the difference between SAST and DAST? Want to know how to position DevSecOps to a CISO vs. a CTO? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) quiz.querySelectorAll('button').forEach(b => {
+    if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+  });
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','Secrets detection tools (e.g., GitGuardian, TruffleHog, GitHub Secret Scanning) run as pre-commit hooks or in the CI pipeline to catch credentials before they reach the repository. Once a secret is committed and pushed — especially to a public repo — it must be treated as fully compromised immediately.');}
+function a2(b,c){mark(b,c,'q2-f','IaC scanning (tools like Checkov, Terrascan, KICS) analyze Terraform, CloudFormation, and Kubernetes files before they\'re applied — catching the misconfiguration at the source. CSPM would catch it after deployment, which is too late. Shift left means catching it before the mistake reaches production.');}
+function a3(b,c){mark(b,c,'q3-f','The cost difference (the IBM/NIST "cost of a data breach" research) comes from compounding factors: re-engineering finished code, re-running QA cycles, emergency deployment, potential customer notification, regulatory investigation, incident response retainer, and reputational damage. A five-line fix at design becomes a six-figure incident in production.');}
+</script>
+</body>
+</html>
