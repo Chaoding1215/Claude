@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>经典配置模型 — 财富课程 #03</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* ── Portfolio Cards ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .portfolio-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: box-shadow 0.15s;
+    }
+    .portfolio-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .portfolio-card .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .pie {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pie-6040 {
+      background: conic-gradient(
+        #0f3460 0deg 216deg,
+        #059669 216deg 360deg
+      );
+    }
+    .pie-allweather {
+      background: conic-gradient(
+        #0f3460 0deg 108deg,
+        #059669 108deg 252deg,
+        #22c55e 252deg 306deg,
+        #f59e0b 306deg 333deg,
+        #d97706 333deg 360deg
+      );
+    }
+    .pie-permanent {
+      background: conic-gradient(
+        #0f3460 0deg 90deg,
+        #059669 90deg 180deg,
+        #f59e0b 180deg 270deg,
+        #9ca3af 270deg 360deg
+      );
+    }
+    .card-title { }
+    .card-title h3 { margin: 0 0 0.15rem; font-size: 1.1rem; color: var(--accent); }
+    .card-title .creator {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .card-title .philosophy {
+      font-style: italic;
+      font-size: 0.85rem;
+      margin-top: 0.35rem;
+      color: #374151;
+    }
+    .alloc-bars { margin-top: 0.75rem; }
+    .alloc-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+    .alloc-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .alloc-label { width: 130px; flex-shrink: 0; color: #374151; }
+    .alloc-track {
+      flex: 1;
+      height: 8px;
+      background: #f3f4f6;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .alloc-fill { height: 100%; border-radius: 99px; }
+    .alloc-pct { min-width: 2.5rem; text-align: right; color: var(--muted); font-weight: bold; }
+
+    /* ── Four Seasons Matrix ── */
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+    .seasons-grid .sh { background: var(--accent); color: white; padding: 0.6rem 0.75rem; font-weight: bold; text-align: center; }
+    .seasons-grid .sl { background: #f3f4f6; padding: 0.6rem 0.75rem; font-weight: bold; color: var(--muted); display: flex; align-items: center; justify-content: flex-end; }
+    .seasons-grid .sc {
+      background: white;
+      padding: 0.75rem;
+      line-height: 1.5;
+    }
+    .seasons-grid .sc strong { display: block; margin-bottom: 0.2rem; color: var(--accent); }
+    .seasons-grid .corner { background: var(--accent); }
+
+    /* ── Performance Table ── */
+    .perf-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1.5rem 0;
+    }
+    .perf-table th {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: white;
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+    }
+    .perf-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .perf-table tr:nth-child(even) td { background: white; }
+    .perf-table tr:first-child td { background: #eff6ff; }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 99px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .badge-green  { background: #d1fae5; color: #065f46; }
+    .badge-yellow { background: #fef3c7; color: #78350f; }
+    .badge-red    { background: #fee2e2; color: #7f1d1d; }
+    .badge-blue   { background: #dbeafe; color: #1e3a8a; }
+
+    /* ── Profile Selector ── */
+    .profiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 500px) { .profiles { grid-template-columns: 1fr; } }
+    .profile-card {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .profile-card:hover { border-color: var(--accent); background: #f0f4ff; }
+    .profile-card.selected { border-color: var(--accent); background: #eff6ff; }
+    .profile-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: var(--accent); }
+    .profile-card p { margin: 0; font-size: 0.8rem; color: #374151; line-height: 1.4; }
+    .profile-result {
+      display: none;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .profile-result.visible { display: block; }
+    .profile-result h4 { margin: 0 0 0.4rem; color: var(--accent); }
+    .profile-result p { margin: 0; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #03</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 实战模型
+    &nbsp;·&nbsp; <a href="finance-0002-modern-portfolio-theory.html">← 上一课</a>
+  </div>
+
+  <h1>三大经典配置模型</h1>
+  <p style="font-size:1.1rem; color:var(--muted); margin-bottom:2rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+    60/40、全天候、永久投资组合——理论如何落地为可执行的真实方案
+  </p>
+
+  <p>上一课我们学了有效边界——理论上存在无数个"最优组合"。现实的问题是：<strong>哪一个适合你？</strong></p>
+
+  <p>几十年来，少数几个经典配置模型经过历史检验，在简洁性和有效性之间取得了公认的平衡。本课逐一拆解三个最具代表性的模型，然后帮你找到最适合自己情况的起点。</p>
+
+  <h2>三个模型一览</h2>
+
+  <div class="portfolio-grid">
+
+    <!-- 60/40 -->
+    <div class="portfolio-card">
+      <div class="card-header">
+        <div class="pie pie-6040"></div>
+        <div class="card-title">
+          <h3>经典 60/40 平衡组合</h3>
+          <div class="creator">起源于 20 世纪中叶机构投资实践</div>
+          <div class="philosophy">"在增长与稳定之间取得平衡"</div>
+        </div>
+      </div>
+      <div class="alloc-bars">
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#0f3460"></div>
+          <span class="alloc-label">全球股票指数</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:60%;background:#0f3460"></div></div>
+          <span class="alloc-pct">60%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#059669"></div>
+          <span class="alloc-label">投资级债券</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:40%;background:#059669"></div></div>
+          <span class="alloc-pct">40%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Weather -->
+    <div class="portfolio-card">
+      <div class="card-header">
+        <div class="pie pie-allweather"></div>
+        <div class="card-title">
+          <h3>全天候组合（All Weather）</h3>
+          <div class="creator">Ray Dalio / 桥水基金，1996年</div>
+          <div class="philosophy">"无论哪种经济天气，都能正常运转"</div>
+        </div>
+      </div>
+      <div class="alloc-bars">
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#0f3460"></div>
+          <span class="alloc-label">股票</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:30%;background:#0f3460"></div></div>
+          <span class="alloc-pct">30%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#059669"></div>
+          <span class="alloc-label">长期国债（20年+）</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:40%;background:#059669"></div></div>
+          <span class="alloc-pct">40%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#22c55e"></div>
+          <span class="alloc-label">中期国债（7–10年）</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:15%;background:#22c55e"></div></div>
+          <span class="alloc-pct">15%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#f59e0b"></div>
+          <span class="alloc-label">黄金</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:7.5%;background:#f59e0b"></div></div>
+          <span class="alloc-pct">7.5%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#d97706"></div>
+          <span class="alloc-label">大宗商品</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:7.5%;background:#d97706"></div></div>
+          <span class="alloc-pct">7.5%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Permanent Portfolio -->
+    <div class="portfolio-card">
+      <div class="card-header">
+        <div class="pie pie-permanent"></div>
+        <div class="card-title">
+          <h3>永久投资组合（Permanent Portfolio）</h3>
+          <div class="creator">Harry Browne，1981年</div>
+          <div class="philosophy">"四个季节，每季都有护盾"</div>
+        </div>
+      </div>
+      <div class="alloc-bars">
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#0f3460"></div>
+          <span class="alloc-label">股票</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:25%;background:#0f3460"></div></div>
+          <span class="alloc-pct">25%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#059669"></div>
+          <span class="alloc-label">长期国债</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:25%;background:#059669"></div></div>
+          <span class="alloc-pct">25%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#f59e0b"></div>
+          <span class="alloc-label">黄金</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:25%;background:#f59e0b"></div></div>
+          <span class="alloc-pct">25%</span>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-dot" style="background:#9ca3af"></div>
+          <span class="alloc-label">现金</span>
+          <div class="alloc-track"><div class="alloc-fill" style="width:25%;background:#9ca3af"></div></div>
+          <span class="alloc-pct">25%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>全天候的底层逻辑：四种经济天气</h2>
+
+  <p>Dalio 的核心洞见是：<strong>任何资产都只在特定经济环境中表现优秀</strong>。如果你的组合能在四种天气下都有"护盾"，就不需要预测经济会走向何方。</p>
+
+  <div class="seasons-grid">
+    <div class="corner sh" style="font-size:0.75rem;display:flex;align-items:center;justify-content:center;">经济增长<br>↕<br>通货膨胀</div>
+    <div class="sh">通胀上升</div>
+    <div class="sh">通胀下降</div>
+    <div class="sl">增长上升</div>
+    <div class="sc">
+      <strong>🌤 滞胀繁荣</strong>
+      黄金、大宗商品、通胀保护债券<br>
+      <span style="color:var(--muted);font-size:0.78rem;">股票表现一般，债券受压</span>
+    </div>
+    <div class="sc">
+      <strong>☀️ 黄金岁月</strong>
+      股票<br>
+      <span style="color:var(--muted);font-size:0.78rem;">经济增长 + 通胀温和，股票最佳</span>
+    </div>
+    <div class="sl">增长下降</div>
+    <div class="sc">
+      <strong>🌧 滞胀衰退</strong>
+      黄金、大宗商品<br>
+      <span style="color:var(--muted);font-size:0.78rem;">最难熬的环境（1970s）</span>
+    </div>
+    <div class="sc">
+      <strong>❄️ 通缩衰退</strong>
+      长期国债、现金<br>
+      <span style="color:var(--muted);font-size:0.78rem;">债券随利率下行而上涨（2008年）</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">为什么全天候的股票只有 30%？</div>
+    在 60/40 里，股票占了 60% 的<em>资金</em>，但因为股票波动率远高于债券，股票实际贡献了组合中 90%+ 的<strong>风险</strong>。全天候的目标是让四种经济环境各贡献约 25% 的风险——即"风险均衡"，而非资金均衡。
+  </div>
+
+  <h2>历史表现对比</h2>
+
+  <p>下表基于 1970–2023 年美国市场回测数据（近似值，以美元计）：</p>
+
+  <table class="perf-table">
+    <thead>
+      <tr>
+        <th>组合</th>
+        <th>年化回报</th>
+        <th>年化波动率</th>
+        <th>最大回撤</th>
+        <th>夏普比率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>100% 全球股票</strong><br><span style="font-size:0.78rem;color:var(--muted);">参照基准</span></td>
+        <td><span class="badge badge-green">≈ 10.5%</span></td>
+        <td><span class="badge badge-red">≈ 16%</span></td>
+        <td><span class="badge badge-red">−55%</span></td>
+        <td>≈ 0.47</td>
+      </tr>
+      <tr>
+        <td><strong>60/40 平衡组合</strong></td>
+        <td><span class="badge badge-green">≈ 9.0%</span></td>
+        <td><span class="badge badge-yellow">≈ 11%</span></td>
+        <td><span class="badge badge-yellow">−35%</span></td>
+        <td>≈ 0.55</td>
+      </tr>
+      <tr>
+        <td><strong>全天候组合</strong></td>
+        <td><span class="badge badge-yellow">≈ 7.5%</span></td>
+        <td><span class="badge badge-green">≈ 7.5%</span></td>
+        <td><span class="badge badge-green">−20%</span></td>
+        <td>≈ 0.62</td>
+      </tr>
+      <tr>
+        <td><strong>永久投资组合</strong></td>
+        <td><span class="badge badge-yellow">≈ 6.5%</span></td>
+        <td><span class="badge badge-green">≈ 7%</span></td>
+        <td><span class="badge badge-green">−20%</span></td>
+        <td>≈ 0.54</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:0.8rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;">
+    数据来源综合：Portfolio Visualizer, Portfoliocharts.com。夏普比率越高，每承担1单位风险所获得的超额回报越多。历史数据不保证未来表现。
+  </p>
+
+  <div class="callout warning">
+    <div class="callout-title">2022年的警示</div>
+    60/40 在 2022 年下跌约 16%——这是几十年来罕见的股债双杀。原因是美联储加息同时压低了股票和债券价格。这提醒我们：<strong>历史相关系数不是常数</strong>。全天候和永久组合在 2022 年的表现明显优于 60/40，正是因为它们持有黄金等额外对冲资产。
+  </div>
+
+  <h2>互动：哪个模型适合你？</h2>
+
+  <p>点击最符合你当前情况的描述：</p>
+
+  <div class="profiles">
+    <div class="profile-card" onclick="showProfile('p1', this)">
+      <h4>🎯 长期增长优先</h4>
+      <p>投资期 20 年以上，能承受短期 30–40% 的大幅下跌，不会在低谷恐慌卖出。</p>
+    </div>
+    <div class="profile-card" onclick="showProfile('p2', this)">
+      <h4>⚖️ 增长与稳定兼顾</h4>
+      <p>投资期 10–20 年，希望在增长的同时控制回撤，能接受 20–25% 的短期下跌。</p>
+    </div>
+    <div class="profile-card" onclick="showProfile('p3', this)">
+      <h4>🛡️ 低波动为主</h4>
+      <p>最担心大跌，希望在任何市场环境下都能"睡得着觉"。回报低一些也可以接受。</p>
+    </div>
+    <div class="profile-card" onclick="showProfile('p4', this)">
+      <h4>🌍 对未来高度不确定</h4>
+      <p>对通胀、利率、地缘局势高度不安，不想押注任何单一经济场景。</p>
+    </div>
+  </div>
+
+  <div class="profile-result" id="p1">
+    <h4>推荐起点：60/40（偏股版）或 80/20</h4>
+    <p>你的时间视野和风险承受能力足够支撑更高的股票比例。可以考虑 60–80% 全球股票 + 20–40% 债券。长期来看，这条路历史回报最高，但你需要接受市场大跌时不动摇的纪律。</p>
+  </div>
+  <div class="profile-result" id="p2">
+    <h4>推荐起点：经典 60/40</h4>
+    <p>60/40 是最经过检验的平衡方案。100 年的历史数据证明它在大多数市场环境下表现稳健。建议用全球股票指数（而非单一国家）+ 中期政府债券 ETF 实现。</p>
+  </div>
+  <div class="profile-result" id="p3">
+    <h4>推荐起点：永久投资组合</h4>
+    <p>四等份的极简设计让你在四种经济环境下都有护盾，历史最大回撤约 -20%，远低于纯股组合。代价是长期回报偏低。适合已积累了一定财富、保值优先于增值的阶段。</p>
+  </div>
+  <div class="profile-result" id="p4">
+    <h4>推荐起点：全天候组合</h4>
+    <p>Dalio 专门为"不知道未来经济走向"的投资者设计。55% 债券 + 15% 黄金/大宗商品的设计让它在通胀、衰退、增长期均能稳健运行。历史夏普比率高于 60/40，牺牲的是绝对回报水平。</p>
+  </div>
+
+  <h2>练习：检验你的理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">1. 全天候组合股票占比仅 30%，低于 60/40 的 60%。这是因为？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q1',false)">Dalio 认为股票长期表现不如债券</button></li>
+      <li><button onclick="answer(this,'q1',false)">股票在全球化时代已不再是好资产</button></li>
+      <li><button onclick="answer(this,'q1',true)">股票波动率远高于债券，30%股票已贡献了组合中绝大部分的风险</button></li>
+      <li><button onclick="answer(this,'q1',false)">法规要求机构投资者持有更多债券</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">2. 2022年股债双杀中，哪类资产帮助全天候和永久组合抵御了冲击？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q2',false)">高息存款和货币基金</button></li>
+      <li><button onclick="answer(this,'q2',false)">新兴市场股票</button></li>
+      <li><button onclick="answer(this,'q2',true)">黄金（和大宗商品）</button></li>
+      <li><button onclick="answer(this,'q2',false)">公司债券</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">3. 一位投资者选择了全天候组合，但朋友说："你应该全买股票，长期回报更高。"最有力的反驳是？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q3',false)">Dalio 是世界上最成功的投资者，应该听他的</button></li>
+      <li><button onclick="answer(this,'q3',true)">全天候的夏普比率更高——每单位风险的回报更优；且若持有人在大跌时恐慌卖出，"更高回报"将永远无法兑现</button></li>
+      <li><button onclick="answer(this,'q3',false)">股票现在估值太高，未来回报会下降</button></li>
+      <li><button onclick="answer(this,'q3',false)">全球股票指数和全天候的长期回报其实差不多</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <h2>推荐资料</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <a href="https://www.portfoliovisualizer.com/backtest-portfolio" target="_blank">Portfolio Visualizer — 回测工具（免费）</a>
+      — 自行输入以上任意组合，查看历史真实表现；强烈建议亲手对比三个模型
+    </li>
+    <li style="margin-bottom:0.75rem;">
+      <a href="https://www.amazon.com/dp/0071436928" target="_blank">Harry Browne,《永久投资组合》</a>
+      — 永久组合的原著，简洁有力，哲学与实践并重
+    </li>
+    <li>
+      Tony Robbins,《钱：7步创造终身收入》第五章 — 通俗介绍 All Weather，含 Dalio 亲自访谈，适合入门
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">下一课预告</div>
+    <strong>财富课程 #04：再平衡的艺术</strong> — 为什么不再平衡的组合会"漂移"偏离你的意图，以及最省钱省力的再平衡策略。<br><br>
+    有任何疑问，随时提问——我是你的老师，可以帮你深入探讨任何不清楚的地方。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0002-modern-portfolio-theory.html">← 上一课</a>
+      <a href="finance-0004-rebalancing.html">下一课 →</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #03 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    function showProfile(id, card) {
+      document.querySelectorAll('.profile-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.profile-result').forEach(r => r.classList.remove('visible'));
+      card.classList.add('selected');
+      document.getElementById(id).classList.add('visible');
+    }
+
+    const feedback = {
+      q1: {
+        correct: '✓ 正确！这是"风险均衡"的核心思想。股票的波动率约为债券的 3 倍，所以即使只配置 30% 的资金在股票上，股票对组合风险的贡献依然接近 50%。这与 60/40 中股票贡献 90%+ 风险形成了根本对比。',
+        wrong:   '✗ 再想想。全天候减少股票配置，不是因为看空股票，而是因为在等权配置下，股票的高波动率会让整个组合的风险高度集中。关键词是：风险配置，而非资金配置。'
+      },
+      q2: {
+        correct: '✓ 正确！2022 年美联储激进加息，同时打压了股票（估值下降）和债券（价格与利率反向）。黄金在这种高通胀环境下提供了缓冲，这正是全天候和永久组合设计中"通胀护盾"的价值所在。',
+        wrong:   '✗ 回顾四种经济天气矩阵：2022 年是高通胀 + 增长放缓的环境，哪类资产是这种场景下的护盾？'
+      },
+      q3: {
+        correct: '✓ 正确！这是关键的行为金融洞见。"理论上更高的回报"只有在投资者坚持到底时才能兑现。如果投资者在 2008 年跌 55% 时恐慌出逃，他永远无法拿到那个"更高回报"。全天候通过降低波动率，帮助投资者在心理上坚持策略——这才是真正重要的。',
+        wrong:   '✗ 再想想。反驳"去追求更高绝对回报"的最有力论点，不在于谁说的对，也不在于对未来的预测，而在于：投资者能否在极端波动中坚持策略？'
+      }
+    };
+
+    function answer(btn, qid, correct) {
+      document.getElementById(qid).querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(qid + '-fb');
+      fb.textContent = feedback[qid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>
