@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实战落地 — 财富课程 #06</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* ── Access Channels ── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 560px) { .channel-grid { grid-template-columns: 1fr; } }
+    .channel-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .channel-card h4 { margin: 0 0 0.4rem; font-size: 0.9rem; color: var(--accent); }
+    .channel-card .tag {
+      display: inline-block;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.1rem 0.45rem;
+      border-radius: 99px;
+      margin-bottom: 0.5rem;
+    }
+    .tag-easy   { background: #d1fae5; color: #065f46; }
+    .tag-medium { background: #fef3c7; color: #78350f; }
+    .tag-hard   { background: #fee2e2; color: #7f1d1d; }
+    .channel-card ul { list-style: none; margin: 0; padding: 0; font-size: 0.82rem; line-height: 1.7; color: #374151; }
+
+    /* ── Instrument Table ── */
+    .inst-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1.5rem 0;
+    }
+    .inst-table th {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+    .inst-table td {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .inst-table tr:nth-child(even) td { background: white; }
+    .inst-table .section-row td {
+      background: #eff6ff;
+      font-weight: bold;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.7rem;
+      border-bottom: none;
+    }
+    .ticker {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+      background: #f3f4f6;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .fee-chip {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 99px;
+    }
+    .fee-low  { background: #d1fae5; color: #065f46; }
+    .fee-mid  { background: #fef3c7; color: #78350f; }
+    .fee-high { background: #fee2e2; color: #7f1d1d; }
+
+    /* ── Portfolio Builder ── */
+    .builder-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .model-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .model-tab {
+      padding: 0.45rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--paper);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.83rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--muted);
+    }
+    .model-tab.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+    .model-panel { display: none; }
+    .model-panel.active { display: block; }
+    .build-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+    }
+    .build-pct {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: bold;
+      color: var(--accent);
+      min-width: 3rem;
+      font-size: 0.95rem;
+    }
+    .build-asset { min-width: 110px; color: #374151; }
+    .build-track {
+      flex: 1;
+      height: 10px;
+      background: #f3f4f6;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .build-fill { height: 100%; border-radius: 99px; }
+    .build-fund {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      min-width: 160px;
+      text-align: right;
+    }
+    .total-fee {
+      margin-top: 1rem;
+      padding: 0.7rem 1rem;
+      background: #eff6ff;
+      border-radius: 8px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    /* ── Steps ── */
+    .steps { counter-reset: step; margin: 1.5rem 0; }
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      counter-increment: step;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .step-body h4 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+    .step-body p  { margin: 0; font-size: 0.88rem; color: #374151; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #06</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 实战落地
+    &nbsp;·&nbsp; <a href="finance-0005-behavioral-traps.html">← 上一课</a>
+  </div>
+
+  <h1>从理论到账户</h1>
+  <p style="font-size:1.1rem;color:var(--muted);margin-bottom:2rem;font-family:'Helvetica Neue',Arial,sans-serif;">
+    中国投资者如何用真实可买的工具构建配置组合
+  </p>
+
+  <p>前五课建立了完整的理论框架。本课只做一件事：<strong>把理论翻译成你明天就能操作的具体步骤</strong>——选哪些基金、在哪里买、费率多少、如何定投。</p>
+
+  <div class="callout warning">
+    <div class="callout-title">免责声明</div>
+    本课内容为教育目的，不构成投资建议。基金代码、费率及申购状态可能随时变化，请在实际操作前通过天天基金、Choice 或各基金公司官网核实最新信息。
+  </div>
+
+  <h2>第一步：确认你的市场访问渠道</h2>
+
+  <div class="channel-grid">
+    <div class="channel-card">
+      <h4>A 股 + 债券 ETF</h4>
+      <span class="tag tag-easy">最容易</span>
+      <ul>
+        <li>国内券商账户即可</li>
+        <li>覆盖 A 股、国债、黄金 ETF</li>
+        <li>无额度限制</li>
+        <li>推荐：华泰证券、招商证券</li>
+      </ul>
+    </div>
+    <div class="channel-card">
+      <h4>QDII 基金</h4>
+      <span class="tag tag-medium">中等</span>
+      <ul>
+        <li>国内基金平台（天天基金、支付宝）即可申购</li>
+        <li>覆盖美股、纳指、标普500</li>
+        <li>⚠ 常有额度限制，需关注暂停申购状态</li>
+        <li>汇率风险由基金内部承担</li>
+      </ul>
+    </div>
+    <div class="channel-card">
+      <h4>境外账户</h4>
+      <span class="tag tag-hard">需开户</span>
+      <ul>
+        <li>富途证券、老虎证券、盈透证券</li>
+        <li>可直接买 Vanguard/iShares ETF</li>
+        <li>费率最低，品种最全</li>
+        <li>需外汇换汇（每年 5 万美元额度）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>各资产类别可用工具</h2>
+
+  <p>下表列出国内投资者可便捷使用的主流工具，按资产类别分组（费率为管理费，不含托管费）：</p>
+
+  <table class="inst-table">
+    <thead>
+      <tr>
+        <th>基金名称</th>
+        <th>代码</th>
+        <th>跟踪标的</th>
+        <th>管理费</th>
+        <th>渠道</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-row"><td colspan="5">🇨🇳 A 股宽基</td></tr>
+      <tr>
+        <td>华泰柏瑞沪深300 ETF</td>
+        <td><span class="ticker">510300</span></td>
+        <td>沪深 300 指数</td>
+        <td><span class="fee-chip fee-low">0.15%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>易方达中证全A ETF</td>
+        <td><span class="ticker">515210</span></td>
+        <td>中证全A（A股全市场）</td>
+        <td><span class="fee-chip fee-low">0.15%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>南方中证 500 ETF</td>
+        <td><span class="ticker">510500</span></td>
+        <td>中证 500（中小盘）</td>
+        <td><span class="fee-chip fee-low">0.20%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr class="section-row"><td colspan="5">🌍 全球股票（QDII）</td></tr>
+      <tr>
+        <td>华夏纳斯达克 100 ETF(QDII)</td>
+        <td><span class="ticker">513100</span></td>
+        <td>纳斯达克 100</td>
+        <td><span class="fee-chip fee-mid">0.40%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>易方达标普 500 ETF(QDII)</td>
+        <td><span class="ticker">513500</span></td>
+        <td>标普 500</td>
+        <td><span class="fee-chip fee-mid">0.40%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>华夏全球科技先驱(QDII)（基金）</td>
+        <td><span class="ticker">000834</span></td>
+        <td>全球科技股</td>
+        <td><span class="fee-chip fee-high">1.20%</span></td>
+        <td>天天基金</td>
+      </tr>
+      <tr>
+        <td>Vanguard 全市场 ETF（境外）</td>
+        <td><span class="ticker">VTI</span></td>
+        <td>美国全市场</td>
+        <td><span class="fee-chip fee-low">0.03%</span></td>
+        <td>境外账户</td>
+      </tr>
+      <tr>
+        <td>Vanguard 全球（除美）ETF（境外）</td>
+        <td><span class="ticker">VXUS</span></td>
+        <td>美国以外全球</td>
+        <td><span class="fee-chip fee-low">0.07%</span></td>
+        <td>境外账户</td>
+      </tr>
+      <tr class="section-row"><td colspan="5">🏦 国内债券</td></tr>
+      <tr>
+        <td>富国中债 7–10 年国债 ETF</td>
+        <td><span class="ticker">511020</span></td>
+        <td>7–10年期国债</td>
+        <td><span class="fee-chip fee-low">0.15%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>博时上证 10 年期国债 ETF</td>
+        <td><span class="ticker">511010</span></td>
+        <td>10年期国债</td>
+        <td><span class="fee-chip fee-low">0.15%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>Vanguard 长期国债 ETF（境外）</td>
+        <td><span class="ticker">VGLT</span></td>
+        <td>美国长期国债</td>
+        <td><span class="fee-chip fee-low">0.04%</span></td>
+        <td>境外账户</td>
+      </tr>
+      <tr class="section-row"><td colspan="5">🥇 黄金</td></tr>
+      <tr>
+        <td>华安黄金 ETF</td>
+        <td><span class="ticker">518880</span></td>
+        <td>Au(T+D) 上海金</td>
+        <td><span class="fee-chip fee-mid">0.50%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>博时黄金 ETF</td>
+        <td><span class="ticker">159937</span></td>
+        <td>Au(T+D) 上海金</td>
+        <td><span class="fee-chip fee-mid">0.50%</span></td>
+        <td>券商</td>
+      </tr>
+      <tr>
+        <td>iShares 黄金 ETF（境外）</td>
+        <td><span class="ticker">IAU</span></td>
+        <td>伦敦金现货</td>
+        <td><span class="fee-chip fee-low">0.25%</span></td>
+        <td>境外账户</td>
+      </tr>
+      <tr class="section-row"><td colspan="5">💵 现金 / 货币</td></tr>
+      <tr>
+        <td>天弘余额宝（货币基金）</td>
+        <td><span class="ticker">000198</span></td>
+        <td>货币市场</td>
+        <td><span class="fee-chip fee-low">0.30%</span></td>
+        <td>支付宝</td>
+      </tr>
+      <tr>
+        <td>华宝现金添益 E（T+0 货基）</td>
+        <td><span class="ticker">511990</span></td>
+        <td>货币市场（ETF）</td>
+        <td><span class="fee-chip fee-low">0.20%</span></td>
+        <td>券商</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>互动：选择你的模型，查看具体配置</h2>
+
+  <div class="builder-wrap">
+    <div class="model-tabs">
+      <button class="model-tab active" onclick="switchModel('m6040', this)">60/40 平衡</button>
+      <button class="model-tab" onclick="switchModel('maw', this)">全天候</button>
+      <button class="model-tab" onclick="switchModel('mpp', this)">永久组合</button>
+    </div>
+
+    <!-- 60/40 -->
+    <div class="model-panel active" id="m6040">
+      <div class="build-row">
+        <span class="build-pct">30%</span>
+        <span class="build-asset">A股宽基</span>
+        <div class="build-track"><div class="build-fill" style="width:30%;background:#0f3460"></div></div>
+        <span class="build-fund">510300 沪深300 ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">30%</span>
+        <span class="build-asset">全球股票</span>
+        <div class="build-track"><div class="build-fill" style="width:30%;background:#1e88e5"></div></div>
+        <span class="build-fund">513500 标普500 ETF(QDII)</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">40%</span>
+        <span class="build-asset">中长期国债</span>
+        <div class="build-track"><div class="build-fill" style="width:40%;background:#059669"></div></div>
+        <span class="build-fund">511020 中债7-10年国债ETF</span>
+      </div>
+      <div class="total-fee">
+        💡 加权综合管理费约 <strong>0.26% / 年</strong>（远低于主动基金平均 1.2–1.5%）
+      </div>
+    </div>
+
+    <!-- All Weather -->
+    <div class="model-panel" id="maw">
+      <div class="build-row">
+        <span class="build-pct">15%</span>
+        <span class="build-asset">A股宽基</span>
+        <div class="build-track"><div class="build-fill" style="width:15%;background:#0f3460"></div></div>
+        <span class="build-fund">510300 沪深300 ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">15%</span>
+        <span class="build-asset">全球股票</span>
+        <div class="build-track"><div class="build-fill" style="width:15%;background:#1e88e5"></div></div>
+        <span class="build-fund">513500 标普500 ETF(QDII)</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">40%</span>
+        <span class="build-asset">长期国债</span>
+        <div class="build-track"><div class="build-fill" style="width:40%;background:#059669"></div></div>
+        <span class="build-fund">511010 上证10年国债ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">15%</span>
+        <span class="build-asset">中期国债</span>
+        <div class="build-track"><div class="build-fill" style="width:15%;background:#22c55e"></div></div>
+        <span class="build-fund">511020 中债7-10年国债ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">7.5%</span>
+        <span class="build-asset">黄金</span>
+        <div class="build-track"><div class="build-fill" style="width:7.5%;background:#f59e0b"></div></div>
+        <span class="build-fund">518880 华安黄金ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">7.5%</span>
+        <span class="build-asset">大宗商品*</span>
+        <div class="build-track"><div class="build-fill" style="width:7.5%;background:#d97706"></div></div>
+        <span class="build-fund">*可用黄金ETF替代或省略</span>
+      </div>
+      <div class="total-fee">
+        💡 加权综合管理费约 <strong>0.24% / 年</strong>。大宗商品 ETF 国内可选品种有限，可将 7.5% 加入黄金或暂省略。
+      </div>
+    </div>
+
+    <!-- Permanent Portfolio -->
+    <div class="model-panel" id="mpp">
+      <div class="build-row">
+        <span class="build-pct">25%</span>
+        <span class="build-asset">A股宽基</span>
+        <div class="build-track"><div class="build-fill" style="width:25%;background:#0f3460"></div></div>
+        <span class="build-fund">510300 沪深300 ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">25%</span>
+        <span class="build-asset">长期国债</span>
+        <div class="build-track"><div class="build-fill" style="width:25%;background:#059669"></div></div>
+        <span class="build-fund">511010 上证10年国债ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">25%</span>
+        <span class="build-asset">黄金</span>
+        <div class="build-track"><div class="build-fill" style="width:25%;background:#f59e0b"></div></div>
+        <span class="build-fund">518880 华安黄金ETF</span>
+      </div>
+      <div class="build-row">
+        <span class="build-pct">25%</span>
+        <span class="build-asset">现金/货基</span>
+        <div class="build-track"><div class="build-fill" style="width:25%;background:#9ca3af"></div></div>
+        <span class="build-fund">511990 华宝添益 / 余额宝</span>
+      </div>
+      <div class="total-fee">
+        💡 加权综合管理费约 <strong>0.29% / 年</strong>。四类资产国内均可低成本实现，操作最为简单。
+      </div>
+    </div>
+  </div>
+
+  <h2>五步构建你的第一个真实组合</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>确定目标配置比例</h4>
+        <p>参考第三课的模型和你的投资者类型，写下每类资产的目标比例，存入你的 IPS 文件。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>开户并转入初始资金</h4>
+        <p>股票/ETF → 券商账户（华泰、招商等）；QDII/主动基金 → 天天基金或支付宝；如有条件，开设一个境外账户（富途/老虎）用于购买低费率国际 ETF。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>按比例一次性买入</h4>
+        <p>用初始资金按目标比例分配购买各 ETF。不要试图择时——研究显示一次性投入长期优于分批等待（因为资金等待期间的机会成本是真实的）。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>设置每月自动定投</h4>
+        <p>在基金平台开启定投计划，每月固定日期按比例分配新增资金。这是对抗近期偏差的最有效单一工具——用规则替代每月的情绪判断。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>设置年度再平衡提醒</h4>
+        <p>在手机日历设置每年1月1日的提醒："检查配置比例，偏离超过±5%则再平衡"。把定投新资金优先导向欠配资产，尽量避免卖出触发税务事件。</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>练习：检验你的理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">1. 你想在国内买入标普 500 指数的敞口，但不想开境外账户。最合适的工具是？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q1',false)">在券商直接搜索"SPY"买入</button></li>
+      <li><button onclick="answer(this,'q1',true)">购买 513500 等标普 500 QDII ETF</button></li>
+      <li><button onclick="answer(this,'q1',false)">购买沪深 300 ETF，两者走势接近</button></li>
+      <li><button onclick="answer(this,'q1',false)">无法实现，必须开境外账户</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">2. 同样追踪沪深 300 指数，一只 ETF 年管理费 0.15%，另一只主动基金年管理费 1.5%。30年后，仅费率差异对 10 万元本金的影响约为？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q2',false)">几乎没有影响，1.35% 的差距很小</button></li>
+      <li><button onclick="answer(this,'q2',false)">约 4 万元的差距</button></li>
+      <li><button onclick="answer(this,'q2',true)">约 15–20 万元的差距（复利放大了费率差）</button></li>
+      <li><button onclick="answer(this,'q2',false)">超过 50 万元，费率是最重要的因素</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">3. 每月定投最重要的好处（相较于自己判断每月买入时机）是？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q3',false)">能精确抓住每月最低点买入</button></li>
+      <li><button onclick="answer(this,'q3',false)">能享受平台的定投手续费优惠</button></li>
+      <li><button onclick="answer(this,'q3',true)">用规则替代每月的情绪判断，系统性对抗近期偏差</button></li>
+      <li><button onclick="answer(this,'q3',false)">定投的长期回报一定高于一次性投入</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <h2>推荐工具</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <a href="https://www.portfoliovisualizer.com" target="_blank">Portfolio Visualizer</a>
+      — 输入你选择的组合，查看历史回测表现（使用美国ETF代码）
+    </li>
+    <li style="margin-bottom:0.75rem;">
+      <a href="https://www.etf.com" target="_blank">ETF.com</a>
+      — 境外 ETF 数据库，比较费率、持仓、规模
+    </li>
+    <li>
+      <strong>天天基金网</strong>（eastmoney.com/fund）— 国内基金申购、定投设置、历史净值查询最方便的平台
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">系列收尾</div>
+    恭喜完成六课核心学习！你现在掌握了：资产配置的底层逻辑（课01）→ MPT数学（课02）→ 三大经典模型（课03）→ 再平衡策略（课04）→ 行为防线（课05）→ 实战工具（课06）。<br><br>
+    <strong>下一步建议</strong>：写下你自己的投资政策声明（IPS），选定一个模型，开设账户，本月完成第一笔买入。行动是最好的学习。<br><br>
+    随时提问——我是你的老师，可以帮你深入探讨任何具体问题。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0005-behavioral-traps.html">← 上一课</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #06 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    function switchModel(id, tab) {
+      document.querySelectorAll('.model-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.model-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    }
+
+    const feedback = {
+      q1: {
+        correct: '✓ 正确！QDII ETF（如 513500）是境内投资者获取标普500敞口的标准方式。它在 A 股市场交易，但底层资产是美国股票，汇率换算由基金公司处理。注意：有时会因外汇额度限制暂停申购，需关注状态。',
+        wrong:   '✗ 再想想。国内券商账户无法直接购买美国上市的 SPY；沪深 300 追踪的是 A 股，与美股相关性约 0.5，不是替代品；而 QDII 产品正是为了解决境内配置境外资产的需求而设计的。'
+      },
+      q2: {
+        correct: '✓ 正确！这是复利的惊人力量。假设年化回报 8%，30年后：费率 0.15% → 10万元变约 92 万元；费率 1.5% → 10万元变约 75 万元。差距约 17 万元。费率差距在短期看似微小，30年后被指数级放大。这是选择低费率指数 ETF 而非高费率主动基金的核心理由。',
+        wrong:   '✗ 用复利计算检验一下。8% 年化回报下，0.15% 和 1.5% 费率30年后分别是多少？复利让1.35%的年化费率差距变得远比直觉预期大得多。'
+      },
+      q3: {
+        correct: '✓ 正确！定投的核心价值不是"买在最低点"（没有人能持续做到），也不一定保证比一次性投入回报更高。它的真正价值是：把投资决策变成自动执行的规则，消除每月"现在该买吗"的情绪判断——这正是对抗近期偏差最有效的单一工具。',
+        wrong:   '✗ 再想想。研究显示定投并不能稳定抓到最低点（价格仍是随机的），长期来看一次性投入甚至略优于分批（因为资金等待期间有机会成本）。定投的真正价值在别处——是什么让每月自动化买入如此有价值？'
+      }
+    };
+
+    function answer(btn, qid, correct) {
+      document.getElementById(qid).querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(qid + '-fb');
+      fb.textContent = feedback[qid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>
