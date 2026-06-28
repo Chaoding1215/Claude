@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — The Threat Landscape: Who Attacks and Why</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 02</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Foundation
+</div>
+
+<h1>The Threat Landscape:<br>Who Attacks and Why</h1>
+
+<p>In presales, you will regularly face one question in different forms: <em>"Who is trying to attack us, and what do they want?"</em> This lesson gives you a precise, credible answer — and the vocabulary to prove it.</p>
+
+<div class="callout">
+  <div class="callout-title">Why this matters for presales</div>
+  Customers who don't feel threatened don't buy security. Your job is to help them see their real threat profile — not generically, but specifically. "Nation-state actors are unlikely to target you, but ransomware groups explicitly target your industry" is far more persuasive than "cyberattacks are increasing."
+</div>
+
+<h2>Threat Actors — The Five Categories</h2>
+
+<p>Every attacker fits into one of five categories. Each has different <strong>motivations</strong>, <strong>capabilities</strong>, and <strong>targets</strong>. Knowing which category applies to a customer's situation shapes the entire solution conversation.</p>
+
+<div style="overflow-x:auto; margin: 1.5rem 0;">
+  <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+    <thead>
+      <tr style="background:var(--accent); color:white; text-align:left;">
+        <th style="padding:0.6rem 0.8rem;">Actor</th>
+        <th style="padding:0.6rem 0.8rem;">Motivation</th>
+        <th style="padding:0.6rem 0.8rem;">Capability</th>
+        <th style="padding:0.6rem 0.8rem;">Typical targets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:0.6rem 0.8rem;"><strong>Nation-states</strong></td>
+        <td style="padding:0.6rem 0.8rem;">Espionage, sabotage, influence</td>
+        <td style="padding:0.6rem 0.8rem;">Highest — unlimited resources, custom tools, years of patience</td>
+        <td style="padding:0.6rem 0.8rem;">Governments, defense, critical infrastructure, tech firms</td>
+      </tr>
+      <tr style="background:#fafafa; border-bottom:1px solid var(--border);">
+        <td style="padding:0.6rem 0.8rem;"><strong>Organized crime</strong></td>
+        <td style="padding:0.6rem 0.8rem;">Financial gain</td>
+        <td style="padding:0.6rem 0.8rem;">High — professional operations, ransomware-as-a-service</td>
+        <td style="padding:0.6rem 0.8rem;">Any organization that can pay — healthcare, finance, manufacturing</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:0.6rem 0.8rem;"><strong>Hacktivists</strong></td>
+        <td style="padding:0.6rem 0.8rem;">Ideology, publicity, disruption</td>
+        <td style="padding:0.6rem 0.8rem;">Medium — DDoS, defacement, data leaks</td>
+        <td style="padding:0.6rem 0.8rem;">Organizations aligned with a political cause they oppose</td>
+      </tr>
+      <tr style="background:#fafafa; border-bottom:1px solid var(--border);">
+        <td style="padding:0.6rem 0.8rem;"><strong>Insider threats</strong></td>
+        <td style="padding:0.6rem 0.8rem;">Revenge, financial, ideology, negligence</td>
+        <td style="padding:0.6rem 0.8rem;">Variable — high access, low technical skill needed</td>
+        <td style="padding:0.6rem 0.8rem;">Employer's systems, data, IP</td>
+      </tr>
+      <tr>
+        <td style="padding:0.6rem 0.8rem;"><strong>Script kiddies</strong></td>
+        <td style="padding:0.6rem 0.8rem;">Curiosity, notoriety, low-level crime</td>
+        <td style="padding:0.6rem 0.8rem;">Low — use existing tools, opportunistic</td>
+        <td style="padding:0.6rem 0.8rem;">Anyone with unpatched systems or weak credentials</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <div class="callout-title">Presales framing — threat profiling</div>
+  Ask the customer: "What industry are you in, and do you handle regulated data or IP worth stealing?" Their answers immediately narrow which threat actors are relevant. A mid-size retailer faces organized crime and opportunists — not nation-states. A defense contractor faces all five.
+</div>
+
+<h2>The MITRE ATT&CK Framework</h2>
+
+<p><strong>MITRE ATT&CK</strong> is the industry's shared language for describing <em>how</em> attackers operate. Every serious security vendor references it; every SOC team uses it. You must know what it is and why it matters.</p>
+
+<p>ATT&CK organizes attacker behavior into a matrix of <strong>Tactics</strong> and <strong>Techniques</strong>:</p>
+
+<ul style="padding-left:1.5rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.4rem;"><strong>Tactics</strong> — the <em>goal</em> of an action (e.g., Initial Access, Persistence, Lateral Movement, Exfiltration). There are 14 enterprise tactics.</li>
+  <li style="margin-bottom:0.4rem;"><strong>Techniques</strong> — the <em>method</em> used to achieve a tactic (e.g., Phishing, Pass-the-Hash, Living off the Land). There are hundreds of techniques and sub-techniques.</li>
+  <li style="margin-bottom:0.4rem;"><strong>Groups</strong> — named threat actor groups (e.g., APT29/Cozy Bear = Russia's SVR) with their known TTPs mapped.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-title">Why ATT&CK matters in a sales conversation</div>
+  When a vendor says "we detect 95% of MITRE ATT&CK techniques," that's a measurable claim about coverage. When a customer's CISO asks "how does your product map to ATT&CK?", they're asking: which attack methods do you actually stop? Being fluent here signals you're talking to them in their language.
+</div>
+
+<h2>The Cyber Kill Chain</h2>
+
+<p>Developed by Lockheed Martin in 2011, the <strong>Kill Chain</strong> model describes the stages every targeted attack moves through. It's slightly older than ATT&CK but remains widely used — especially in enterprise and government conversations.</p>
+
+<div style="margin: 1.5rem 0;">
+  <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:0.3rem; text-align:center; font-size:0.72rem;">
+    <div style="background:var(--accent);color:white;padding:0.5rem 0.3rem;border-radius:4px 0 0 4px;"><strong>1</strong><br>Recon</div>
+    <div style="background:#1a5276;color:white;padding:0.5rem 0.3rem;"><strong>2</strong><br>Weaponize</div>
+    <div style="background:#1f618d;color:white;padding:0.5rem 0.3rem;"><strong>3</strong><br>Deliver</div>
+    <div style="background:#2471a3;color:white;padding:0.5rem 0.3rem;"><strong>4</strong><br>Exploit</div>
+    <div style="background:#2e86c1;color:white;padding:0.5rem 0.3rem;"><strong>5</strong><br>Install</div>
+    <div style="background:#3498db;color:white;padding:0.5rem 0.3rem;"><strong>6</strong><br>C2</div>
+    <div style="background:var(--highlight);color:white;padding:0.5rem 0.3rem;border-radius:0 4px 4px 0;"><strong>7</strong><br>Act</div>
+  </div>
+</div>
+
+<ol style="padding-left:1.5rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem;"><strong>Reconnaissance</strong> — Attacker researches the target: LinkedIn, job postings, DNS records, exposed services.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Weaponization</strong> — Creates a deliverable payload: malicious document, exploit kit, infected USB.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Delivery</strong> — Sends the weapon to the victim: phishing email, watering hole website, compromised software update.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Exploitation</strong> — The payload executes and exploits a vulnerability.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Installation</strong> — Malware is installed; the attacker establishes a foothold.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Command & Control (C2)</strong> — Malware phones home; attacker remotely controls the compromised system.</li>
+  <li style="margin-bottom:0.5rem;"><strong>Actions on Objectives</strong> — The attacker does what they came to do: steal data, encrypt files, destroy systems.</li>
+</ol>
+
+<div class="callout">
+  <div class="callout-title">Presales framing — where does your product stop the chain?</div>
+  Every security product intervenes at one or more stages of the kill chain. Email security stops Delivery. EDR catches Exploitation and Installation. NDR detects C2 traffic. SIEM correlates across all stages. Use this to position multiple products in a platform conversation — "defense in depth across the kill chain."
+</div>
+
+<h2>Essential Vocabulary</h2>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>APT</h4>
+    <p><em>Advanced Persistent Threat.</em> A sophisticated, long-running attack — typically nation-state or organized crime — that stays hidden in a network for months or years. "Persistent" is the key word: they're patient.</p>
+  </div>
+  <div class="concept-card">
+    <h4>TTPs</h4>
+    <p><em>Tactics, Techniques, and Procedures.</em> The specific behaviors and methods an attacker uses. Defenders share TTPs to recognize the same actor across different victims. MITRE ATT&CK catalogs TTPs.</p>
+  </div>
+  <div class="concept-card">
+    <h4>IOC</h4>
+    <p><em>Indicator of Compromise.</em> Forensic evidence that an attack occurred: a malicious IP address, a hash of a known malware file, a suspicious domain. Threat intel feeds distribute IOCs for blocking.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Zero-day</h4>
+    <p>A vulnerability that is unknown to the software vendor and has no patch. Extremely valuable — nation-states stockpile them. Once disclosed, the "zero days" of exposure before a patch drops is zero.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Ransomware-as-a-Service</h4>
+    <p>Criminal groups sell ransomware toolkits to affiliates on a revenue-share model. This lowers the skill barrier dramatically — even low-skilled attackers can deploy sophisticated ransomware.</p>
+  </div>
+  <div class="concept-card">
+    <h4>Threat Intelligence</h4>
+    <p>Curated, contextualized information about current threats: active campaigns, attacker TTPs, IOCs, and vulnerability exploitability. Feeds into SIEM, SOAR, and firewall blocking rules.</p>
+  </div>
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A hospital is hit by ransomware that was deployed by a criminal group operating a "ransomware-as-a-service" platform. Which threat actor category best describes the group running the platform?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer1(this, false)">Nation-state — governments deploy ransomware for disruption</button></li>
+    <li><button onclick="answer1(this, true)">Organized crime — financially motivated, professional operations</button></li>
+    <li><button onclick="answer1(this, false)">Hacktivist — ideologically motivated, targets political opponents</button></li>
+    <li><button onclick="answer1(this, false)">Script kiddie — low-skill, uses pre-built tools opportunistically</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-feedback"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">An attacker sends a targeted phishing email containing a malicious Word document to a CFO. In the Kill Chain, which stage does this email represent?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer2(this, false)">Exploitation — the vulnerability is triggered at this stage</button></li>
+    <li><button onclick="answer2(this, false)">Weaponization — the malicious document is being created</button></li>
+    <li><button onclick="answer2(this, true)">Delivery — the weapon is being sent to the target</button></li>
+    <li><button onclick="answer2(this, false)">Installation — malware is establishing a foothold</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-feedback"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">A customer's CISO mentions "TTPs" when evaluating your threat detection product. What are they asking about?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer3(this, false)">The technical testing procedures used to validate the product</button></li>
+    <li><button onclick="answer3(this, false)">The time-to-patch metrics for known vulnerabilities in the product</button></li>
+    <li><button onclick="answer3(this, true)">The specific attacker behaviors and methods the product detects</button></li>
+    <li><button onclick="answer3(this, false)">The threat telemetry protocols the product uses to share data</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-feedback"></div>
+</div>
+
+<div class="quiz" id="q4">
+  <div class="quiz-question">A security vendor claims their product detects "Command and Control traffic." At which Kill Chain stage does their product intervene?</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer4(this, false)">Stage 3 — Delivery, stopping the initial payload from arriving</button></li>
+    <li><button onclick="answer4(this, false)">Stage 4 — Exploitation, catching the vulnerability being triggered</button></li>
+    <li><button onclick="answer4(this, false)">Stage 5 — Installation, detecting malware being written to disk</button></li>
+    <li><button onclick="answer4(this, true)">Stage 6 — C2, detecting compromised systems calling home</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q4-feedback"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://attack.mitre.org" target="_blank">MITRE ATT&CK</a> — Browse the Enterprise matrix to see the full list of tactics and techniques, and explore named threat actor groups. This is the single most useful reference in any SOC/SIEM presales conversation.</p>
+
+  <p style="margin-top:0.75rem;"><strong>Also read:</strong> <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" target="_blank">Lockheed Martin — Cyber Kill Chain</a> — the original paper that defined the model.</p>
+
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0001-the-big-picture.html">Lesson 1 — The Big Picture</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0003-security-domains.html">Lesson 3 — The Security Domains: The Market Map</a>
+  </p>
+
+  <div class="lesson-nav">
+    <a href="../reference/">📚 Reference docs</a>
+    <a href="../RESOURCES.md">📖 Resources</a>
+  </div>
+
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Unclear on how to use this in a real customer conversation? Want to go deeper on any threat actor or concept? Ask Claude.
+  </p>
+</div>
+
+<script>
+function markAnswer(btn, correct, feedbackId, explanation) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    quiz.querySelectorAll('button').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+    });
+  }
+  document.getElementById(feedbackId).innerHTML =
+    correct
+      ? `<span style="color:#059669">✓ Correct. ${explanation}</span>`
+      : `<span style="color:#dc2626">✗ Not quite. ${explanation}</span>`;
+}
+
+function answer1(btn, correct) {
+  markAnswer(btn, correct, 'q1-feedback',
+    'RaaS platforms are run by organized crime — professional criminal enterprises motivated by profit. The affiliates who deploy the ransomware may be less skilled, but the platform operators are not.');
+}
+function answer2(btn, correct) {
+  markAnswer(btn, correct, 'q2-feedback',
+    'The phishing email is the delivery mechanism — it carries the weapon (the malicious document) to the target. Weaponization already happened when the attacker created the document; exploitation happens when the CFO opens it.');
+}
+function answer3(btn, correct) {
+  markAnswer(btn, correct, 'q3-feedback',
+    'TTPs — Tactics, Techniques, and Procedures — describe how attackers behave. A CISO asking about TTPs wants to know which specific attack behaviors your product detects, not just which CVEs it patches or how fast it responds.');
+}
+function answer4(btn, correct) {
+  markAnswer(btn, correct, 'q4-feedback',
+    'C2 (Command and Control) is stage 6 of the kill chain. After malware installs itself, it contacts the attacker\'s server to receive instructions. Network detection tools that spot this traffic (e.g., NDR, DNS security) intervene at this stage — after the attacker is already inside.');
+}
+</script>
+
+</body>
+</html>

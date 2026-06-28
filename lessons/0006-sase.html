@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6 — SASE: When Networking and Security Merged</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .arch-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+    .arch-box h4 { margin: 0 0 0.35rem; color: var(--accent); font-size: 0.95rem; }
+    .arch-box p { margin: 0; font-size: 0.88rem; }
+    .vendor-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0.5rem 1rem;
+      align-items: start;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .vendor-row:last-child { border-bottom: none; }
+    .vendor-name { font-weight: bold; color: var(--accent); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 06</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Architecture
+</div>
+
+<h1>SASE:<br>When Networking and Security Merged</h1>
+
+<p>SASE (pronounced "sassy") is one of the most important architectural shifts in enterprise IT of the last decade. It's also the category where Palo Alto, Fortinet, and Zscaler fight their most intense competitive battles — and where Huawei has significant ground to cover. Understanding it deeply separates credible presales from buzzword-repeaters.</p>
+
+<h2>The Problem SASE Solves</h2>
+
+<p>For decades, enterprises ran two separate stacks:</p>
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.4rem;"><strong>Networking</strong> — MPLS circuits and SD-WAN routing traffic between offices, data centers, and cloud.</li>
+  <li style="margin-bottom:0.4rem;"><strong>Security</strong> — Firewalls, proxies, and VPNs, typically sitting at headquarters or data centers.</li>
+</ul>
+
+<p>The model assumed: <em>users are in offices, apps are in data centers.</em> Security appliances at the perimeter inspect traffic before it reaches the internet.</p>
+
+<p>Cloud and remote work destroyed this assumption. When a Tokyo employee opens Salesforce from a café, traffic flows:</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:1rem 1.25rem; margin:1.25rem 0; font-family:monospace; font-size:0.82rem; line-height:2;">
+  Employee laptop → <span style="color:#e94560">[VPN tunnel to HQ]</span> → HQ firewall → Internet → Salesforce
+</div>
+
+<p>This "hairpinning" — backhauling all traffic through headquarters — creates latency, bandwidth costs, and a single point of failure. And the security stack at HQ was never designed to inspect encrypted SaaS traffic at scale.</p>
+
+<div class="callout">
+  <div class="callout-title">Why this matters competitively</div>
+  When a customer says "our remote users have terrible performance" or "our MPLS costs are out of control," that's a SASE conversation. Networking pain and security gaps appear together — because they share the same broken architecture.
+</div>
+
+<h2>What SASE Is</h2>
+
+<p>Gartner coined <strong>SASE (Secure Access Service Edge)</strong> in 2019. The definition: converge wide-area networking and security into a single cloud-delivered service, delivered from Points of Presence (PoPs) close to users everywhere.</p>
+
+<p>Instead of routing traffic to a central security stack, SASE inspects it at the network edge — close to the user, wherever they are.</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:1rem 1.25rem; margin:1.25rem 0; font-family:monospace; font-size:0.82rem; line-height:2;">
+  Employee laptop → <span style="color:#059669">[SASE PoP — nearest city]</span> → Security inspection → Salesforce
+</div>
+
+<h2>The Five Components of SASE</h2>
+
+<p>SASE bundles five capabilities into one cloud service. Knowing each is essential for feature-level conversations:</p>
+
+<div class="arch-box">
+  <h4>1. SD-WAN (Software-Defined Wide Area Network)</h4>
+  <p>Replaces expensive MPLS circuits with intelligent routing over any connection (broadband, LTE, MPLS). Routes traffic dynamically based on application type and link quality. The <strong>networking</strong> half of SASE.</p>
+</div>
+
+<div class="arch-box">
+  <h4>2. ZTNA (Zero Trust Network Access)</h4>
+  <p>Replaces VPN. Users get access only to specific authorized applications — not the whole network — after identity and device verification. Covered in Lesson 4.</p>
+</div>
+
+<div class="arch-box">
+  <h4>3. CASB (Cloud Access Security Broker)</h4>
+  <p>Enforces security policy on SaaS usage: blocks upload of sensitive data to unauthorized apps, discovers shadow IT, controls which cloud services employees can use.</p>
+</div>
+
+<div class="arch-box">
+  <h4>4. FWaaS (Firewall-as-a-Service)</h4>
+  <p>A full next-generation firewall delivered from the cloud — no on-premises appliance. Inspects all traffic including encrypted connections (SSL inspection) at the PoP.</p>
+</div>
+
+<div class="arch-box">
+  <h4>5. SWG (Secure Web Gateway)</h4>
+  <p>Filters web traffic: blocks malicious URLs, enforces acceptable use policy, prevents data exfiltration via web uploads. The replacement for on-premises web proxies.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-title">SSE — SASE's security-only cousin</div>
+  <strong>SSE (Security Service Edge)</strong> is SASE minus the SD-WAN — just the security components (ZTNA + CASB + FWaaS + SWG). Organizations that already have SD-WAN, or just want to fix security without changing networking, buy SSE. Zscaler leads here; Palo Alto and Fortinet offer both.
+</div>
+
+<h2>The Competitive Landscape</h2>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 1.25rem; margin:1.5rem 0;">
+  <div class="vendor-row">
+    <div class="vendor-name">Zscaler</div>
+    <div>Pure-cloud SSE leader. Built cloud-native from day one — no legacy appliance code. Strongest in large enterprises transitioning away from VPN. Weakness: no SD-WAN (partners for that).</div>
+  </div>
+  <div class="vendor-row">
+    <div class="vendor-name">Palo Alto<br><small style="font-weight:normal;color:var(--muted);">Prisma SASE</small></div>
+    <div>Strong integrated platform — SD-WAN (via Prisma SD-WAN acquisition) plus best-in-class SSE. Also leads in AI-powered threat detection. Premium pricing. Platform buyer's choice.</div>
+  </div>
+  <div class="vendor-row">
+    <div class="vendor-name">Fortinet<br><small style="font-weight:normal;color:var(--muted);">FortiSASE</small></div>
+    <div>Strong SD-WAN (market leader by units). SASE story is more recent; SSE components less mature than Zscaler/Palo Alto. Strongest with existing Fortinet network customers.</div>
+  </div>
+  <div class="vendor-row">
+    <div class="vendor-name">Cisco<br><small style="font-weight:normal;color:var(--muted);">Umbrella + Meraki</small></div>
+    <div>Strong enterprise relationships, Umbrella for DNS/SWG/CASB, Meraki for SD-WAN. Integration story still maturing post-acquisitions.</div>
+  </div>
+  <div class="vendor-row">
+    <div class="vendor-name">Huawei</div>
+    <div>Strong in SD-WAN (core networking heritage). Security components of SASE (ZTNA, CASB, FWaaS) are significant gaps — noted explicitly in competitive analysis as areas requiring development.</div>
+  </div>
+</div>
+
+<h2>Key Buying Signals in Customer Conversations</h2>
+
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem;">"Our remote users are complaining about VPN performance" → ZTNA/SASE opportunity</li>
+  <li style="margin-bottom:0.5rem;">"We're spending too much on MPLS" → SD-WAN + SASE conversation</li>
+  <li style="margin-bottom:0.5rem;">"We have no visibility into what SaaS apps our employees are using" → CASB/SASE</li>
+  <li style="margin-bottom:0.5rem;">"We need to secure branch offices without putting appliances in each one" → FWaaS/SASE</li>
+  <li style="margin-bottom:0.5rem;">"We're moving everything to cloud and our perimeter firewall doesn't make sense anymore" → Full SASE transformation</li>
+</ul>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A customer has 50 branch offices, each with its own firewall appliance that routes all internet traffic back to headquarters for inspection. They complain about latency and high MPLS costs. Which architectural problem are they describing?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">Flat network — insufficient segmentation between offices</button></li>
+    <li><button onclick="a1(this,true)">Traffic hairpinning — all traffic backhauled through HQ rather than inspected locally</button></li>
+    <li><button onclick="a1(this,false)">Alert fatigue — too many security events from branch offices</button></li>
+    <li><button onclick="a1(this,false)">Credential sprawl — separate logins required for each branch system</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">What is the difference between SASE and SSE?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">SSE is the enterprise version of SASE; SASE is for SMBs with simpler requirements</button></li>
+    <li><button onclick="a2(this,false)">SASE is cloud-delivered; SSE runs on-premises appliances</button></li>
+    <li><button onclick="a2(this,true)">SASE includes SD-WAN (networking) plus security; SSE is the security components only, without SD-WAN</button></li>
+    <li><button onclick="a2(this,false)">SSE adds AI-powered threat detection; SASE uses only rule-based security</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">A CISO says: "We discovered our employees are uploading sensitive contracts to their personal Dropbox accounts." Which SASE component most directly addresses this?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">ZTNA — restricts which applications users can access based on identity</button></li>
+    <li><button onclick="a3(this,false)">FWaaS — inspects all traffic at the network edge for threats</button></li>
+    <li><button onclick="a3(this,true)">CASB — enforces policy on cloud application usage, blocking unauthorized data uploads</button></li>
+    <li><button onclick="a3(this,false)">SD-WAN — controls how traffic is routed across network connections</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Primary source:</strong> <a href="https://www.gartner.com/en/information-technology/insights/sase" target="_blank">Gartner — The Future of Network Security Is in the Cloud (2019)</a> — the paper that coined SASE. Reference it to signal you know the origin, not just the buzzword.</p>
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0005-cutting-edge.html">Lesson 5 — Cutting-Edge Research</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0007-devsecops.html">Lesson 7 — DevSecOps: Security in the Development Pipeline</a>
+  </p>
+  <div class="lesson-nav">
+    <a href="../reference/glossary.html">📖 Glossary</a>
+    <a href="../reference/">📚 Reference docs</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to know how to handle a Zscaler vs. Palo Alto competitive situation? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) quiz.querySelectorAll('button').forEach(b => {
+    if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+  });
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','Traffic hairpinning is the exact problem SASE solves. All internet traffic forced through a central location adds latency and MPLS bandwidth costs. SASE places inspection at cloud PoPs near users — traffic goes direct to the internet after local inspection.');}
+function a2(b,c){mark(b,c,'q2-f','SASE = SD-WAN + SSE. SSE is the security-only subset: ZTNA + CASB + FWaaS + SWG. Organizations that already have SD-WAN, or want to separate networking and security procurement, buy SSE standalone. Zscaler is the SSE pure-play leader.');}
+function a3(b,c){mark(b,c,'q3-f','CASB (Cloud Access Security Broker) is precisely designed for this: visibility and control over SaaS usage. It can block uploads to unauthorized cloud storage, enforce DLP policies on cloud traffic, and discover shadow IT apps employees are using without IT approval.');}
+</script>
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>现代投资组合理论 — 财富课程 #02</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .slider-demo {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .slider-demo label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .rho-track {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .rho-track input[type=range] {
+      flex: 1;
+      accent-color: var(--accent);
+      height: 6px;
+      cursor: pointer;
+    }
+    .rho-display {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      min-width: 3.5rem;
+      text-align: right;
+      color: var(--accent);
+    }
+    .rho-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .risk-result {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .risk-box {
+      text-align: center;
+      padding: 0.85rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .risk-box.actual { background: #f0fdf4; border-color: #a7f3d0; }
+    .risk-box.naive  { background: #fff7ed; border-color: #fed7aa; }
+    .risk-box .num {
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .risk-box.actual .num { color: var(--success); }
+    .risk-box.naive  .num { color: var(--warning); }
+    .risk-box .desc {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .benefit-bar-wrap {
+      margin-top: 1rem;
+    }
+    .benefit-bar-wrap .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .benefit-track {
+      height: 14px;
+      background: #fed7aa;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .benefit-fill {
+      height: 100%;
+      background: var(--success);
+      border-radius: 99px;
+      transition: width 0.25s ease;
+    }
+    .corr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1.5rem 0;
+    }
+    .corr-table th {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: white;
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+    }
+    .corr-table td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .corr-table tr:nth-child(even) td { background: white; }
+    .corr-pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 99px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+    }
+    .corr-neg  { background: #d1fae5; color: #065f46; }
+    .corr-low  { background: #dbeafe; color: #1e3a8a; }
+    .corr-mid  { background: #fef3c7; color: #78350f; }
+    .corr-high { background: #fee2e2; color: #7f1d1d; }
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+    .canvas-caption {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    blockquote {
+      border-left: 4px solid var(--highlight);
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    blockquote cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #02</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论
+    &nbsp;·&nbsp; <a href="finance-0001-why-allocation-beats-selection.html">← 上一课</a>
+  </div>
+
+  <h1>分散化：投资中唯一的免费午餐</h1>
+  <p style="font-size:1.1rem; color:var(--muted); margin-bottom:2rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+    马科维茨如何用数学证明，混合资产可以在不减少回报的前提下降低风险
+  </p>
+
+  <blockquote>
+    "分散化是投资世界中唯一的免费午餐。"
+    <cite>— Harry Markowitz，诺贝尔经济学奖得主（1990），现代投资组合理论创始人</cite>
+  </blockquote>
+
+  <p>1952年，Harry Markowitz 在《投资组合选择》中给出了一个看似简单却震撼整个金融世界的证明：<strong>把两种不完全同向波动的资产混合，组合的风险会低于你直觉预期的加权平均值。</strong></p>
+
+  <p>这不是模糊的建议，而是严格的数学。理解它，你就理解了资产配置的底层逻辑。</p>
+
+  <h2>关键变量：相关系数（ρ）</h2>
+
+  <p>两种资产是否"同向波动"，由<strong>相关系数 ρ（rho）</strong>决定：</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <h4>ρ = +1：完全正相关</h4>
+      <p>两种资产总是同涨同跌，幅度成比例。混合持有没有任何分散化收益。</p>
+    </div>
+    <div class="concept-card">
+      <h4>ρ = 0：零相关</h4>
+      <p>两种资产独立波动，互不影响。混合后风险显著降低。</p>
+    </div>
+    <div class="concept-card">
+      <h4>ρ = −1：完全负相关</h4>
+      <p>一种资产涨时另一种必定跌，幅度成比例。理论上可以完全对冲风险（现实中极罕见）。</p>
+    </div>
+    <div class="concept-card">
+      <h4>现实世界</h4>
+      <p>大多数资产对的相关系数在 0 到 +0.8 之间。完全负相关几乎不存在于公开市场。</p>
+    </div>
+  </div>
+
+  <h2>互动演示：拖动看分散化收益</h2>
+
+  <p>假设你持有 <strong>50% 股票（σ = 20%）+ 50% 债券（σ = 8%）</strong>。拖动滑块，观察相关系数如何影响组合实际风险：</p>
+
+  <div class="slider-demo">
+    <label>相关系数 ρ</label>
+    <div class="rho-track">
+      <input type="range" id="rho-slider" min="-100" max="100" value="10" step="1"
+             oninput="updateRho(this.value / 100)">
+      <span class="rho-display" id="rho-display">+0.10</span>
+    </div>
+    <div class="rho-labels">
+      <span>−1 完全负相关</span>
+      <span>0 独立</span>
+      <span>+1 完全正相关</span>
+    </div>
+
+    <div class="risk-result">
+      <div class="risk-box actual">
+        <div class="num" id="actual-sigma">10.8%</div>
+        <div class="desc">组合实际波动率</div>
+      </div>
+      <div class="risk-box naive">
+        <div class="num">14.0%</div>
+        <div class="desc">你以为会有的波动率<br>（简单加权平均）</div>
+      </div>
+    </div>
+
+    <div class="benefit-bar-wrap">
+      <div class="bar-label">
+        <span>分散化节省的风险</span>
+        <span id="benefit-label">3.2%</span>
+      </div>
+      <div class="benefit-track">
+        <div class="benefit-fill" id="benefit-fill" style="width:23%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">核心洞见</div>
+    只要两种资产的相关系数 <strong>小于 1</strong>，混合持有的组合风险就会低于加权平均——这个差值就是"免费午餐"：<strong>你在不牺牲回报的情况下，凭空降低了风险</strong>。
+  </div>
+
+  <h2>有效边界：最优投资组合的集合</h2>
+
+  <p>把两类资产按不同比例混合，可以得到一系列投资组合。在"风险—回报"图上，这些组合描绘出一条弧线，称为<strong>有效边界（Efficient Frontier）</strong>：</p>
+
+  <canvas id="frontier-canvas" width="680" height="360"></canvas>
+  <p class="canvas-caption">两资产有效边界示意图（股票 vs 债券，ρ ≈ 0.10）</p>
+
+  <ul style="list-style:disc;padding-left:1.5rem;margin-top:1.25rem;">
+    <li style="margin-bottom:0.5rem;"><strong>有效边界上方</strong>：不可能到达（现实中无法获得）</li>
+    <li style="margin-bottom:0.5rem;"><strong>有效边界上</strong>：给定风险水平下，回报已无法再提高——这是最优点</li>
+    <li><strong>有效边界下方</strong>：次优组合，存在"浪费的风险"——可以通过调整配置比例提高回报</li>
+  </ul>
+
+  <div class="callout warning">
+    <div class="callout-title">注意</div>
+    <strong>最小方差组合</strong>（弧线最左端）并非一定是最优选择——它的回报也是最低的。你的目标是找到符合自己<em>时间视野和风险承受能力</em>的有效边界上的点，而非一律追求最低风险。
+  </div>
+
+  <h2>现实中的相关系数</h2>
+
+  <p>以下是主要资产类别之间的历史相关系数（近20年近似值，因时期不同会有变化）：</p>
+
+  <table class="corr-table">
+    <thead>
+      <tr>
+        <th>资产对</th>
+        <th>相关系数 ρ</th>
+        <th>分散化效果</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>美国股票 × 美国国债</td>
+        <td><span class="corr-pill corr-neg">−0.2 ~ 0.0</span></td>
+        <td>极强 — 债券是股票的天然对冲</td>
+      </tr>
+      <tr>
+        <td>美国股票 × 黄金</td>
+        <td><span class="corr-pill corr-low">0.0 ~ 0.1</span></td>
+        <td>很强 — 黄金在危机期间表现优异</td>
+      </tr>
+      <tr>
+        <td>美国股票 × 大宗商品</td>
+        <td><span class="corr-pill corr-low">0.1 ~ 0.3</span></td>
+        <td>较强</td>
+      </tr>
+      <tr>
+        <td>美国股票 × 房地产（REITs）</td>
+        <td><span class="corr-pill corr-mid">0.5 ~ 0.7</span></td>
+        <td>中等</td>
+      </tr>
+      <tr>
+        <td>美国股票 × 国际发达市场股票</td>
+        <td><span class="corr-pill corr-high">0.7 ~ 0.85</span></td>
+        <td>有限 — 全球化使各国股市联动增强</td>
+      </tr>
+      <tr>
+        <td>美国股票 × 新兴市场股票</td>
+        <td><span class="corr-pill corr-mid">0.5 ~ 0.7</span></td>
+        <td>中等 — 仍有一定分散效果</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">实践结论</div>
+    股票 + 债券 + 黄金 的经典组合，正是因为三者之间的低相关性（甚至负相关），被历史数据反复验证为高效的多资产配置框架。这是第三课经典配置模型的理论基础。
+  </div>
+
+  <h2>练习：检验你的理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">1. 当两种资产的相关系数 ρ = 1 时，50/50 混合持有能获得分散化收益吗？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q1',false)">能，只要持有两种不同资产就有收益</button></li>
+      <li><button onclick="answer(this,'q1',true)">不能，组合风险等于加权平均，与单持无异</button></li>
+      <li><button onclick="answer(this,'q1',false)">能，但收益微乎其微</button></li>
+      <li><button onclick="answer(this,'q1',false)">取决于两种资产各自的波动率大小</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">2. 有效边界上的所有组合，共同特点是什么？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q2',false)">它们的预期回报完全相同</button></li>
+      <li><button onclick="answer(this,'q2',false)">它们的风险（波动率）都为零</button></li>
+      <li><button onclick="answer(this,'q2',true)">在相同风险水平下，它们的预期回报无法通过调整配置进一步提高</button></li>
+      <li><button onclick="answer(this,'q2',false)">它们都包含至少三种以上的资产类别</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">3. 为什么说"股票 + 美国国债"的组合特别高效？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q3',false)">因为债券的预期回报比股票高</button></li>
+      <li><button onclick="answer(this,'q3',true)">因为两者历史上呈负相关或零相关，组合风险远低于加权平均</button></li>
+      <li><button onclick="answer(this,'q3',false)">因为国债是政府背书的，完全没有风险</button></li>
+      <li><button onclick="answer(this,'q3',false)">因为两者的相关系数接近 +1，走势稳定</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <h2>推荐阅读</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <strong>首要推荐（原始论文）：</strong>
+      <a href="https://www.jstor.org/stable/2975974" target="_blank">Harry Markowitz — "Portfolio Selection" (1952), Journal of Finance</a>
+      — 这篇8页的论文改变了整个投资世界，可阅读引言部分感受原著风格
+    </li>
+    <li style="margin-bottom:0.75rem;">
+      William Bernstein,《聪明的资产配置者》第2章 — 用通俗语言解释MPT和有效边界，是最好的入门材料
+    </li>
+    <li>
+      <a href="https://www.portfoliovisualizer.com/efficient-frontier" target="_blank">Portfolio Visualizer — Efficient Frontier（在线工具）</a>
+      — 可以用真实历史数据，自行调整资产类别和权重，实时看到有效边界变化
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">下一课预告</div>
+    <strong>财富课程 #03：经典配置模型解析</strong> — 60/40、全天候投资组合、永久投资组合，真实历史表现对比。理论落地为可操作的具体方案。<br><br>
+    有任何疑问，随时提问——我是你的老师，可以帮你深入解答任何不清楚的地方。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0001-why-allocation-beats-selection.html">← 上一课</a>
+      <a href="finance-0003-classic-portfolio-models.html">下一课 →</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #02 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    /* ── Correlation Slider ── */
+    function updateRho(rho) {
+      const ss = 20, sb = 8;
+      const variance = 0.25*ss*ss + 0.25*sb*sb + 2*0.25*rho*ss*sb;
+      const sigma = Math.sqrt(variance);
+      const naive = 0.5*ss + 0.5*sb;          // 14%
+      const benefit = naive - sigma;
+
+      document.getElementById('rho-display').textContent =
+        (rho >= 0 ? '+' : '') + rho.toFixed(2);
+      document.getElementById('actual-sigma').textContent = sigma.toFixed(1) + '%';
+      document.getElementById('benefit-label').textContent = benefit.toFixed(1) + '%';
+
+      const pct = Math.max(0, benefit / naive * 100);
+      document.getElementById('benefit-fill').style.width = pct + '%';
+
+      const fill = document.getElementById('benefit-fill');
+      if (rho > 0.5)       fill.style.background = '#f59e0b';
+      else if (rho > 0)    fill.style.background = '#059669';
+      else                 fill.style.background = '#0f3460';
+    }
+
+    document.getElementById('rho-slider').addEventListener('input', function() {
+      updateRho(this.value / 100);
+    });
+    updateRho(0.10);
+
+    /* ── Efficient Frontier Canvas ── */
+    (function drawFrontier() {
+      const canvas = document.getElementById('frontier-canvas');
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.offsetWidth || 680;
+      const H = 360;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const rs = 10, rb = 4;
+      const ss = 20, sb = 8;
+      const rho = 0.10;
+
+      const pad = { top: 36, right: 40, bottom: 52, left: 52 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      // Compute all portfolio points (w = stock weight, 0→1)
+      const pts = [];
+      for (let w = 0; w <= 1; w += 0.005) {
+        const ret = rb + w*(rs-rb);
+        const v = w*w*ss*ss + (1-w)*(1-w)*sb*sb + 2*w*(1-w)*rho*ss*sb;
+        pts.push({ w, ret, sigma: Math.sqrt(v) });
+      }
+
+      const sigMin = Math.min(...pts.map(p => p.sigma));
+      const sigMax = ss * 1.08;
+      const retMin = rb * 0.75;
+      const retMax = rs * 1.12;
+
+      const xs = s => pad.left + (s - sigMin) / (sigMax - sigMin) * plotW;
+      const ys = r => pad.top + (1 - (r - retMin) / (retMax - retMin)) * plotH;
+
+      // Grid lines (light)
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      for (let r = Math.ceil(retMin); r <= retMax; r += 2) {
+        ctx.beginPath(); ctx.moveTo(pad.left, ys(r)); ctx.lineTo(pad.left+plotW, ys(r)); ctx.stroke();
+      }
+      for (let s = Math.ceil(sigMin); s <= sigMax; s += 2) {
+        ctx.beginPath(); ctx.moveTo(xs(s), pad.top); ctx.lineTo(xs(s), pad.top+plotH); ctx.stroke();
+      }
+
+      // Axes
+      ctx.strokeStyle = '#9ca3af';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top+plotH); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pad.left, pad.top+plotH); ctx.lineTo(pad.left+plotW, pad.top+plotH); ctx.stroke();
+
+      // Feasible region fill
+      ctx.beginPath();
+      ctx.moveTo(xs(pts[0].sigma), ys(pts[0].ret));
+      for (const p of pts) ctx.lineTo(xs(p.sigma), ys(p.ret));
+      ctx.lineTo(xs(pts[pts.length-1].sigma), ys(retMin));
+      ctx.lineTo(xs(pts[0].sigma), ys(retMin));
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(15,52,96,0.06)';
+      ctx.fill();
+
+      // Frontier curve
+      ctx.beginPath();
+      ctx.moveTo(xs(pts[0].sigma), ys(pts[0].ret));
+      for (const p of pts) ctx.lineTo(xs(p.sigma), ys(p.ret));
+      ctx.strokeStyle = '#0f3460';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Find minimum variance portfolio
+      const mvp = pts.reduce((a, b) => a.sigma < b.sigma ? a : b);
+
+      // Dashed line to MVP
+      ctx.setLineDash([4,4]);
+      ctx.strokeStyle = '#d1d5db';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(xs(mvp.sigma), ys(retMin+0.05)); ctx.lineTo(xs(mvp.sigma), ys(mvp.ret)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(xs(sigMin), ys(mvp.ret)); ctx.lineTo(xs(mvp.sigma), ys(mvp.ret)); ctx.stroke();
+      ctx.setLineDash([]);
+
+      function dot(x, y, color, r=6) {
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = color; ctx.fill();
+        ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke();
+      }
+
+      // 100% bonds
+      dot(xs(pts[0].sigma), ys(pts[0].ret), '#059669');
+      // MVP
+      dot(xs(mvp.sigma), ys(mvp.ret), '#e94560');
+      // 100% stocks
+      dot(xs(pts[pts.length-1].sigma), ys(pts[pts.length-1].ret), '#1e88e5');
+
+      // Labels
+      ctx.font = '600 12px Helvetica Neue, Arial, sans-serif';
+      ctx.fillStyle = '#059669';
+      ctx.fillText('100% 债券', xs(pts[0].sigma)+9, ys(pts[0].ret)+4);
+
+      ctx.fillStyle = '#e94560';
+      ctx.fillText('最小方差组合', xs(mvp.sigma)-4, ys(mvp.ret)-12);
+
+      ctx.fillStyle = '#1e88e5';
+      ctx.fillText('100% 股票', xs(pts[pts.length-1].sigma)-75, ys(pts[pts.length-1].ret)-10);
+
+      // Efficient frontier label
+      ctx.font = 'italic 12px Georgia, serif';
+      ctx.fillStyle = '#0f3460';
+      ctx.fillText('有效边界', xs(sigMin + (sigMax-sigMin)*0.45), ys(rb + (rs-rb)*0.62));
+
+      // Axis labels
+      ctx.font = '12px Helvetica Neue, Arial, sans-serif';
+      ctx.fillStyle = '#6b7280';
+      ctx.textAlign = 'center';
+      ctx.fillText('风险（波动率 σ）', pad.left + plotW/2, H - 8);
+
+      ctx.save();
+      ctx.translate(13, pad.top + plotH/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.fillText('预期年化回报', 0, 0);
+      ctx.restore();
+      ctx.textAlign = 'left';
+
+      // X ticks
+      for (let s = Math.round(sigMin+1); s <= sigMax; s += 2) {
+        ctx.fillStyle = '#6b7280';
+        ctx.font = '10px Helvetica Neue, Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(s + '%', xs(s), pad.top+plotH+18);
+      }
+
+      // Y ticks
+      for (let r = Math.ceil(retMin); r <= retMax; r += 2) {
+        ctx.textAlign = 'right';
+        ctx.fillText(r + '%', pad.left - 6, ys(r) + 4);
+      }
+      ctx.textAlign = 'left';
+    })();
+
+    /* ── Quiz ── */
+    const feedback = {
+      q1: {
+        correct: '✓ 正确！当 ρ = 1 时，公式 σ_p = w₁σ₁ + w₂σ₂，组合风险恰好等于加权平均——分散化收益为零。只有 ρ < 1 才能产生免费午餐。',
+        wrong:   '✗ 再想想。滑块拖到 ρ = 1 时，"实际波动率"和"加权平均"是一样的——为什么？因为 ρ = 1 意味着两种资产完全同步，没有对冲效果。'
+      },
+      q2: {
+        correct: '✓ 正确！"有效"的定义就是：在相同风险下不可能找到回报更高的组合。有效边界上的点都满足这个条件，边界下方的点则是"被浪费了风险"的次优选择。',
+        wrong:   '✗ 再想想。"有效边界"的"有效"含义是什么？它不是关于回报相同、风险为零或资产数量的——它是一个在风险-回报空间里的"无法改进"的集合。'
+      },
+      q3: {
+        correct: '✓ 正确！美国股票与国债在近几十年的历史相关系数约为 -0.2 ~ 0。当股市大跌时，投资者往往涌入国债避险（"飞向安全"），使两者反向运动。这种负相关性让两者的组合比任何单一资产都更高效。',
+        wrong:   '✗ 再看看相关系数表格。股票和国债之间的 ρ 是多少？它是正的还是负的？这对组合风险有什么含义？'
+      }
+    };
+
+    function answer(btn, qid, correct) {
+      document.getElementById(qid).querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(qid + '-fb');
+      fb.textContent = feedback[qid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>
