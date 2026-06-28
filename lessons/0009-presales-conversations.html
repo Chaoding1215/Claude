@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 — Presales Conversation Patterns</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .persona-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .persona-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .persona-title {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 0.92rem;
+      color: var(--accent);
+    }
+    .persona-tag {
+      font-size: 0.72rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f3f4f6;
+      color: var(--muted);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+    }
+    .persona-card p { font-size: 0.87rem; margin-bottom: 0.4rem; }
+    .persona-card p:last-child { margin-bottom: 0; }
+    .dialogue-block {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.87rem;
+    }
+    .speaker {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.2rem;
+    }
+    .speaker.buyer { color: var(--muted); }
+    .speaker.you { color: var(--accent); }
+    .line { margin-bottom: 0.85rem; }
+    .line:last-child { margin-bottom: 0; }
+    .objection-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    @media (max-width: 560px) { .objection-row { grid-template-columns: 1fr; } }
+    .obj-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      padding: 0.9rem 1rem;
+      font-size: 0.85rem;
+    }
+    .obj-box .obj-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.4rem;
+    }
+    .obj-box.objection .obj-label { color: var(--highlight); }
+    .obj-box.response .obj-label { color: var(--success); }
+    .discovery-q {
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.5rem;
+      background: white;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+    .discovery-q .q-note {
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin-top: 0.2rem;
+    }
+    .playbook-step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      min-width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .step-body { font-size: 0.88rem; }
+    .step-body strong { display: block; margin-bottom: 0.2rem; }
+    .quiz {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    .quiz-question { font-size: 0.95rem; margin-bottom: 1rem; font-weight: bold; }
+    .quiz-options { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .quiz-options button {
+      width: 100%; text-align: left; padding: 0.65rem 1rem;
+      border: 1px solid var(--border); border-radius: 6px; background: white;
+      cursor: pointer; font-size: 0.87rem; line-height: 1.4; transition: background 0.15s;
+    }
+    .quiz-options button:hover:not(:disabled) { background: #f3f4f6; }
+    .quiz-options button.correct { background: #f0fdf4; border-color: #16a34a; color: #14532d; font-weight: bold; }
+    .quiz-options button.wrong { background: #fef2f2; border-color: #dc2626; color: #7f1d1d; }
+    .quiz-feedback { margin-top: 0.75rem; font-size: 0.87rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 09</span> &nbsp;·&nbsp; Cybersecurity for Presales &nbsp;·&nbsp; Conversation Skills
+</div>
+
+<h1>Presales Conversation<br>Patterns</h1>
+
+<p>Knowing cybersecurity is necessary but not sufficient for presales. You also need to know <em>how to talk about it</em> — with the right person, at the right level, in a way that moves a deal forward. This lesson covers the core conversation patterns you'll use in every customer engagement.</p>
+
+<h2>Who You're Talking To: The Buyer Personas</h2>
+
+<p>Every security conversation is shaped by who's in the room. Read the persona before you open your mouth.</p>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <span class="persona-title">CISO / VP of Security</span>
+    <span class="persona-tag">Strategic</span>
+    <span class="persona-tag">Risk-language</span>
+  </div>
+  <p><strong>What they care about:</strong> Board reporting, regulatory compliance, reducing enterprise risk, justifying security budget, avoiding becoming the next headline breach.</p>
+  <p><strong>What they don't want:</strong> Feature lists. Technical acronyms without business translation. A demo of dashboards before they've explained their environment.</p>
+  <p><strong>How to speak their language:</strong> "This reduces your attack surface across the entire application estate" not "this tool does SAST in the CI pipeline."</p>
+</div>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <span class="persona-title">Security Architect / Lead Engineer</span>
+    <span class="persona-tag">Technical</span>
+    <span class="persona-tag">Integration-focused</span>
+  </div>
+  <p><strong>What they care about:</strong> How it integrates with existing tools, false positive rates, API availability, deployment complexity, whether it actually detects what it claims.</p>
+  <p><strong>What they don't want:</strong> Marketing language. Vague claims about "AI-powered" detection with no explanation of how it works.</p>
+  <p><strong>How to speak their language:</strong> Be specific. "The agent deploys via your existing Ansible playbooks and supports syslog forwarding to your SIEM" lands better than "easy deployment."</p>
+</div>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <span class="persona-title">IT Manager / Infrastructure Lead</span>
+    <span class="persona-tag">Operational</span>
+    <span class="persona-tag">Burden-sensitive</span>
+  </div>
+  <p><strong>What they care about:</strong> How much work this creates for their team, whether it breaks existing systems, support quality, licensing clarity.</p>
+  <p><strong>What they don't want:</strong> Products that generate more tickets than they solve. "Managed" products that still require hours of tuning.</p>
+  <p><strong>How to speak their language:</strong> Focus on operational load reduction. "Our MDR team handles triage — your team only gets escalations that require action" is a relief message for this persona.</p>
+</div>
+
+<div class="persona-card">
+  <div class="persona-header">
+    <span class="persona-title">CFO / Procurement</span>
+    <span class="persona-tag">Financial</span>
+    <span class="persona-tag">ROI-focused</span>
+  </div>
+  <p><strong>What they care about:</strong> Total cost of ownership, contract terms, what happens if they need to exit, how this compares to competitors on price.</p>
+  <p><strong>What they don't want:</strong> Security FUD (fear, uncertainty, doubt) without quantified risk numbers. Open-ended commitments.</p>
+  <p><strong>How to speak their language:</strong> Translate security cost to business cost. "A ransomware incident costs a mid-market company an average of $1.8M. This service costs $X and includes incident response."</p>
+</div>
+
+<h2>Discovery: The Questions That Open Everything</h2>
+
+<p>Discovery is not a box-ticking exercise before the demo. It's the most important part of the conversation. The goal is to understand their environment, their pain, and their priorities — so you can position accurately, not generically.</p>
+
+<p>Never lead with a product. Lead with questions.</p>
+
+<div class="discovery-q">
+  "Walk me through how your security operations work today — what does your team look like, and what does a typical week look like when something alerts?"
+  <div class="q-note">Reveals: SOC maturity, headcount, SIEM/EDR stack, response capability, alert fatigue level</div>
+</div>
+
+<div class="discovery-q">
+  "What was the last security incident or near-miss that kept someone awake at night? What triggered it, and how was it resolved?"
+  <div class="q-note">Reveals: actual pain (not theoretical), where the gaps are, who owns response, whether they have a mature post-incident process</div>
+</div>
+
+<div class="discovery-q">
+  "What's driving the urgency for this conversation — is there a specific event, a compliance requirement, or has a business initiative changed your risk profile?"
+  <div class="q-note">Reveals: the real trigger (regulatory, incident, digital transformation), timeline pressure, budget availability</div>
+</div>
+
+<div class="discovery-q">
+  "If you had one security problem solved in the next 90 days, what would it be?"
+  <div class="q-note">Reveals: their real priority. The answer is almost never what they said in the initial brief. This is the question that resets the agenda.</div>
+</div>
+
+<div class="discovery-q">
+  "How do you currently measure your security posture — what metrics or reports go to the board or executive team?"
+  <div class="q-note">Reveals: maturity of their security program, whether they have a CISO who reports to the board, what success looks like for them</div>
+</div>
+
+<div class="callout">
+  <div class="callout-title">The 80/20 rule of discovery</div>
+  The customer should be talking 80% of the time during discovery. If you're talking more than 20%, you're not in discovery mode — you're in pitch mode. Pitching before you understand their environment is guessing, not selling.
+</div>
+
+<h2>Objection Handling</h2>
+
+<p>Every objection is either a request for more information or an unresolved concern about risk. Neither is a "no." Here are the six most common objections in security presales and how to handle them.</p>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "We already have [incumbent vendor]. We're happy with them."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    Acknowledge, then probe: "That's great to hear. What do you use them for specifically?" Then: "Are there any gaps that solution doesn't cover today?" The goal is to find the uncovered ground, not to attack their current vendor.
+  </div>
+</div>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "Security isn't our priority right now — we're focused on digital transformation."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    Reframe security as a transformation enabler, not a cost center: "Digital transformation expands your attack surface — cloud workloads, APIs, remote access. The organizations that get hit hardest are the ones who transformed fast without securing the new surface. What does your cloud strategy look like?"
+  </div>
+</div>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "Your solution is more expensive than [competitor X]."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    Reframe to TCO and scope: "I'd want to make sure we're comparing the same thing. Does their price include 24/7 analyst coverage and incident response, or just the platform license? The cost of a single incident handled externally typically exceeds the annual service cost."
+  </div>
+</div>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "We're a small company — we're not a target."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    Use data: "Ransomware groups specifically target mid-market organizations because they have sufficient assets to pay ransoms but typically lack the defenses of large enterprises. In 2023, 43% of cyberattacks targeted small businesses. Size doesn't protect you — it often does the opposite."
+  </div>
+</div>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "We need to build this internally — we don't want to outsource security."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    Validate the instinct, address the reality: "That's a sound principle. The challenge is that building 24/7 SOC coverage internally requires 6–8 FTEs minimum, plus tooling at $500K–2M/year, plus continuous threat intelligence. What's the timeline for that build? And what covers you in the interim?"
+  </div>
+</div>
+
+<div class="objection-row">
+  <div class="obj-box objection">
+    <div class="obj-label">Objection</div>
+    "We had a bad experience with a security vendor — they oversold and underdelivered."
+  </div>
+  <div class="obj-box response">
+    <div class="obj-label">Response Pattern</div>
+    This is a trust objection, not a product objection. Respond to the emotion first: "That's a fair concern — and frankly, a common one in this market. What happened?" Let them tell the story. Then: "Here's how we structure our commitments differently" — and be specific about SLAs, escalation paths, and proof points like references.
+  </div>
+</div>
+
+<h2>Competitive Positioning Playbook</h2>
+
+<p>You will be compared. Prepare for the three most common competitive scenarios.</p>
+
+<h3>Scenario 1: You vs. a Pure-Play Product Vendor (Palo Alto, CrowdStrike, Fortinet)</h3>
+
+<p>Their strength: best-in-class product in a specific domain. Their gap: product alone doesn't deliver outcomes. Services, integration, and ongoing management fall on the customer.</p>
+
+<div class="playbook-step">
+  <div class="step-num">1</div>
+  <div class="step-body"><strong>Establish the service gap</strong> "Does CrowdStrike include 24/7 analyst triage, or does that require additional Professional Services or MSSP overlay?"</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">2</div>
+  <div class="step-body"><strong>Quantify the management burden</strong> "Who on your team would manage the platform, tune detection rules, and handle escalations? What's the hourly cost of that time?"</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">3</div>
+  <div class="step-body"><strong>Reframe the comparison</strong> "The comparison isn't license vs license. It's total cost of a managed outcome — technology + people + process — versus platform license plus the people cost you haven't yet added."</div>
+</div>
+
+<h3>Scenario 2: You vs. a Competing MDR/MSSP</h3>
+
+<p>Here differentiation must be specific: response SLAs, threat intelligence quality, technology coverage scope, and proof points from similar customers.</p>
+
+<div class="playbook-step">
+  <div class="step-num">1</div>
+  <div class="step-body"><strong>Lead with SLA specifics</strong> "What is their contractual MTTD and MTTR? Are those measured from alert generation or from analyst acknowledgement? The difference matters."</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">2</div>
+  <div class="step-body"><strong>Coverage scope</strong> "Does their coverage include cloud workloads and identity, or endpoint only? You mentioned AWS is central to your environment — make sure that's explicitly in scope."</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">3</div>
+  <div class="step-body"><strong>Reference customers in their sector</strong> If you have customers in their vertical, name them (with permission). Sector-specific threat knowledge is a meaningful differentiator — a manufacturing MDR reference matters to a manufacturing buyer.</div>
+</div>
+
+<h3>Scenario 3: "We'll Do It Ourselves" (Build vs. Buy)</h3>
+
+<p>This is the most common competitive situation in security. The competitor is not another vendor — it's the customer's internal plan.</p>
+
+<div class="playbook-step">
+  <div class="step-num">1</div>
+  <div class="step-body"><strong>Make the build cost visible</strong> "Walk me through what the internal build looks like. Headcount, tooling, training?" Then do the math with them. Internal SOC: 6–8 FTEs at $100–150K loaded cost = $600K–$1.2M/year before tooling.</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">2</div>
+  <div class="step-body"><strong>Address the talent risk</strong> "There's a global shortage of 3.5M cybersecurity professionals. Even if you can budget for the headcount, what's your hiring timeline, and what's your retention plan in a market where experienced analysts receive offers continuously?"</div>
+</div>
+<div class="playbook-step">
+  <div class="step-num">3</div>
+  <div class="step-body"><strong>Offer a bridge</strong> "Some of our customers run a hybrid model: they use our service for 24/7 coverage and tier-1 triage, while building their internal team in parallel. That reduces the gap risk while the capability matures."</div>
+</div>
+
+<h2>The Presales Conversation Arc</h2>
+
+<p>Every customer engagement has a natural arc. Knowing where you are in it prevents common mistakes — like demoing before you've earned the right to.</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; overflow:hidden; margin:1.5rem 0; font-size:0.85rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="display:grid; grid-template-columns:110px 1fr; gap:0; border-bottom:1px solid var(--border); align-items:stretch;">
+    <div style="background:#f3f4f6; padding:0.7rem 1rem; font-weight:bold; color:var(--accent); border-right:1px solid var(--border);">Qualify</div>
+    <div style="padding:0.7rem 1rem;">Is there a real problem, a real budget, and a real decision-maker? If not, don't invest presales time. Ask: "Who will be the key decision-maker on this? What's the timeline you're working to?"</div>
+  </div>
+  <div style="display:grid; grid-template-columns:110px 1fr; gap:0; border-bottom:1px solid var(--border); align-items:stretch;">
+    <div style="background:#f3f4f6; padding:0.7rem 1rem; font-weight:bold; color:var(--accent); border-right:1px solid var(--border);">Discover</div>
+    <div style="padding:0.7rem 1rem;">Ask the discovery questions. Listen. Map their environment, pain, and success criteria. Never skip this — the demo without discovery is a generic demo that doesn't convert.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:110px 1fr; gap:0; border-bottom:1px solid var(--border); align-items:stretch;">
+    <div style="background:#f3f4f6; padding:0.7rem 1rem; font-weight:bold; color:var(--accent); border-right:1px solid var(--border);">Position</div>
+    <div style="padding:0.7rem 1rem;">Connect what you heard in discovery to what you offer. "Based on what you described — no internal SOC, AWS environment, and a recent near-miss — here's how I'd suggest we approach this."</div>
+  </div>
+  <div style="display:grid; grid-template-columns:110px 1fr; gap:0; border-bottom:1px solid var(--border); align-items:stretch;">
+    <div style="background:#f3f4f6; padding:0.7rem 1rem; font-weight:bold; color:var(--accent); border-right:1px solid var(--border);">Demonstrate</div>
+    <div style="padding:0.7rem 1rem;">Show only what's relevant to their situation. A demo of features they don't need wastes time and dilutes the message. Customize to the discovery output.</div>
+  </div>
+  <div style="display:grid; grid-template-columns:110px 1fr; gap:0; align-items:stretch;">
+    <div style="background:#f3f4f6; padding:0.7rem 1rem; font-weight:bold; color:var(--accent); border-right:1px solid var(--border);">Advance</div>
+    <div style="padding:0.7rem 1rem;">Every meeting should end with a clear next step. "Can we schedule a technical deep dive with your security architect next week?" Not "I'll send you some information." Information doesn't move deals; commitments do.</div>
+  </div>
+</div>
+
+<h2>Knowledge Check</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">A CISO opens the meeting by saying: "We're evaluating MDR providers. Tell me about your solution." What is the best presales response?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a1(this,false)">Launch into a capabilities overview — the CISO has signaled they want to hear about the solution</button></li>
+    <li><button onclick="a1(this,false)">Send the RFP response doc and ask them to review it before going further</button></li>
+    <li><button onclick="a1(this,true)">Ask discovery questions first: "Before I do that — can you help me understand what's driving this evaluation and what your current environment looks like? I want to make sure what I show you is relevant to your situation."</button></li>
+    <li><button onclick="a1(this,false)">Ask for the IT Manager to join the call so you can cover technical details immediately</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-f"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">A prospect says: "CrowdStrike is offering us Falcon Complete for less than your MDR proposal." How should you respond?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a2(this,false)">Offer a discount to match the CrowdStrike price</button></li>
+    <li><button onclick="a2(this,false)">Explain that CrowdStrike has more false positives than your solution</button></li>
+    <li><button onclick="a2(this,true)">Reframe the comparison around total cost of ownership: clarify what's included in CrowdStrike's price vs. yours, particularly the analyst coverage and incident response elements, and make the management burden cost visible</button></li>
+    <li><button onclick="a2(this,false)">Ask the prospect to share the CrowdStrike proposal so you can identify pricing errors</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-f"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">A mid-market IT Manager says: "We're going to handle security internally — we're hiring a security analyst next quarter." What is the most effective response?</div>
+  <ul class="quiz-options">
+    <li><button onclick="a3(this,false)">Congratulate them on the hiring decision and offer to come back once the analyst is in place</button></li>
+    <li><button onclick="a3(this,false)">Explain that a single analyst cannot possibly cover all security domains</button></li>
+    <li><button onclick="a3(this,true)">Acknowledge the plan, make the build cost and risk visible (coverage gap during hiring, retention risk, 24/7 coverage from one person), and propose a hybrid model that bridges the gap while the internal capability matures</button></li>
+    <li><button onclick="a3(this,false)">Present the Gartner MDR market guide to demonstrate why internal SOCs are declining</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-f"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>Key principle:</strong> Discovery before positioning. Positioning before demonstration. Every step earns the right to the next one. The most common presales failure is pitching before listening.</p>
+  <p style="margin-top:0.75rem;">
+    <strong>Previous:</strong> <a href="0008-mdr.html">Lesson 8 — MDR</a> &nbsp;·&nbsp;
+    <strong>Next:</strong> <a href="0010-data-security.html">Lesson 10 — Data Security (DLP &amp; DSPM)</a>
+  </p>
+  <div class="lesson-nav">
+    <a href="../reference/glossary.html">📖 Glossary</a>
+    <a href="../reference/">📚 Reference docs</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>Ask your teacher anything.</strong> Want to practice a specific objection scenario? Or how to handle a competitive bake-off against a specific vendor? Ask Claude.
+  </p>
+</div>
+
+<script>
+function mark(btn, correct, fid, msg) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) quiz.querySelectorAll('button').forEach(b => {
+    if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+  });
+  document.getElementById(fid).innerHTML = correct
+    ? `<span style="color:#059669">✓ Correct. ${msg}</span>`
+    : `<span style="color:#dc2626">✗ Not quite. ${msg}</span>`;
+}
+function a1(b,c){mark(b,c,'q1-f','Requesting discovery before pitching is always the right move — even when the buyer signals they want to hear the solution. A CISO who says "tell me about your solution" without context will get a generic pitch that doesn\'t resonate. One minute of discovery reframes the conversation: "I want to make sure what I show you is actually relevant to your situation" signals respect and professionalism, not evasion. The CISOs who test you with this opening are specifically watching whether you pitch or listen.');}
+function a2(b,c){mark(b,c,'q2-f','Price comparisons in security are almost never apples-to-apples. CrowdStrike Falcon Complete is a technology-led MDR product — excellent EDR with analyst overlay. The critical questions are: what does "Falcon Complete" include in terms of analyst hours, MTTR SLA, and incident response scope? Does that price include the management overhead the customer\'s team will carry? Reframing to total cost of ownership — technology + people + process — shifts the conversation from list price to value. Never match price before clarifying scope.');}
+function a3(b,c){mark(b,c,'q3-f','The "we\'re hiring internally" objection is a timing and risk objection, not a permanent no. The right response: validate the direction, then make three risks visible — (1) what covers them during the hiring process, which typically takes 3–6 months; (2) a single analyst cannot provide 24/7 coverage; (3) cybersecurity talent is among the highest-turnover in tech. The bridge offer — "our service covers you while you build, and can scale back as your team matures" — respects their goal while solving the near-term gap. This often converts to a co-managed model deal.');}
+</script>
+</body>
+</html>
