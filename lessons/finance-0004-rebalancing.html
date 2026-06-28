@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>再平衡的艺术 — 财富课程 #04</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* ── Drift Simulator ── */
+    .sim-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .sim-wrap label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .year-track {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .year-track input[type=range] {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .year-display {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      min-width: 4rem;
+      text-align: right;
+      color: var(--accent);
+    }
+    .compare-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .compare-col { }
+    .compare-col h4 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 0.75rem;
+    }
+    .compare-col h4.label-good { color: var(--success); }
+    .compare-col h4.label-warn { color: var(--warning); }
+    .stacked-bar {
+      height: 180px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .bar-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: bold;
+      color: white;
+      transition: height 0.35s ease;
+      position: relative;
+    }
+    .seg-stock { background: #0f3460; }
+    .seg-bond  { background: #059669; }
+    .seg-label {
+      position: absolute;
+      right: 8px;
+      font-size: 0.78rem;
+    }
+
+    .crash-box {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.88rem;
+    }
+    .crash-box .crash-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .crash-val {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .crash-val.less { color: var(--success); }
+    .crash-val.more { color: var(--highlight); }
+
+    /* ── Rebalancing Band ── */
+    .band-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .band-track {
+      height: 32px;
+      background: #f3f4f6;
+      border-radius: 6px;
+      position: relative;
+      margin: 1rem 0 0.4rem;
+    }
+    .band-zone {
+      position: absolute;
+      top: 0; bottom: 0;
+      background: #d1fae5;
+      border-radius: 6px;
+    }
+    .band-marker {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      transition: left 0.35s ease;
+    }
+    .band-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .drift-status {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 99px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .drift-ok   { background: #d1fae5; color: #065f46; }
+    .drift-warn { background: #fee2e2; color: #7f1d1d; }
+
+    /* ── Strategy Cards ── */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 500px) { .strategy-grid { grid-template-columns: 1fr; } }
+    .strategy-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      background: white;
+    }
+    .strategy-card h4 { margin: 0 0 0.5rem; color: var(--accent); font-size: 0.95rem; }
+    .strategy-card .pros, .strategy-card .cons {
+      font-size: 0.82rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .strategy-card .pros { color: #065f46; }
+    .strategy-card .cons { color: #991b1b; margin-top: 0.4rem; }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #04</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 执行与维护
+    &nbsp;·&nbsp; <a href="finance-0003-classic-portfolio-models.html">← 上一课</a>
+  </div>
+
+  <h1>再平衡：让组合忠于你的意图</h1>
+  <p style="font-size:1.1rem; color:var(--muted); margin-bottom:2rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+    为什么不操作的组合会悄悄背叛你，以及最省力的纠正方法
+  </p>
+
+  <p>你精心设计了一个 60/40 组合，然后……什么都没做。10 年后，它还是 60/40 吗？</p>
+
+  <p><strong>不是。</strong>由于股票长期回报高于债券，股票那一半会越长越大，悄悄把你的"平衡型"投资者变成了"进取型"投资者——而你毫不知情，直到下一次市场大跌。</p>
+
+  <h2>互动演示：不再平衡会怎样？</h2>
+
+  <p>假设股票年化回报 10%，债券年化回报 4%，从 60/40 出发，拖动滑块看看漂移有多严重：</p>
+
+  <div class="sim-wrap">
+    <label>不再平衡的年数</label>
+    <div class="year-track">
+      <input type="range" id="year-slider" min="0" max="20" value="0" step="1"
+             oninput="updateSim(+this.value)">
+      <span class="year-display" id="year-display">0 年</span>
+    </div>
+
+    <div class="compare-cols">
+      <div class="compare-col">
+        <h4 class="label-good">✓ 坚持再平衡</h4>
+        <div class="stacked-bar">
+          <div class="bar-segment seg-stock" style="height:60%">
+            <span class="seg-label" id="rebal-stock-label">60%</span>
+          </div>
+          <div class="bar-segment seg-bond" style="height:40%">
+            <span class="seg-label" id="rebal-bond-label">40%</span>
+          </div>
+        </div>
+        <div class="crash-box" style="background:#f0fdf4;border-color:#a7f3d0">
+          <div class="crash-title">若股市现在跌 40%</div>
+          <div class="crash-val less" id="rebal-crash">−20.0%</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem;">组合总跌幅</div>
+        </div>
+      </div>
+
+      <div class="compare-col">
+        <h4 class="label-warn" id="drift-header">⚠ 从不再平衡（0年）</h4>
+        <div class="stacked-bar">
+          <div class="bar-segment seg-stock" id="drift-stock-bar" style="height:60%">
+            <span class="seg-label" id="drift-stock-label">60%</span>
+          </div>
+          <div class="bar-segment seg-bond" id="drift-bond-bar" style="height:40%">
+            <span class="seg-label" id="drift-bond-label">40%</span>
+          </div>
+        </div>
+        <div class="crash-box" style="background:#fff7ed;border-color:#fed7aa">
+          <div class="crash-title">若股市现在跌 40%</div>
+          <div class="crash-val more" id="drift-crash">−20.0%</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem;">组合总跌幅</div>
+        </div>
+      </div>
+    </div>
+
+    <p id="sim-summary" style="margin-top:1.25rem;margin-bottom:0;font-size:0.88rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;"></p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">核心洞见</div>
+    再平衡的首要目标不是提高回报，而是<strong>确保组合的实际风险与你的意图一致</strong>。当你设定 60/40 时，你是在为自己能承受的最大跌幅划定边界——再平衡让这条边界保持有效。
+  </div>
+
+  <h2>何时再平衡？阈值 vs 日历</h2>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>📅 日历再平衡</h4>
+      <div>每年（或每季度）固定时间重新检查并调整到目标比例。</div>
+      <div class="pros">+ 简单，不需要持续监控<br>+ 适合不想"看盘"的投资者</div>
+      <div class="cons">− 可能在不必要时触发（小幅漂移也调整）<br>− 可能产生更多交易成本和税务事件</div>
+    </div>
+    <div class="strategy-card">
+      <h4>📊 阈值再平衡</h4>
+      <div>只有当某资产偏离目标超过设定阈值（如 ±5%）时才调整。</div>
+      <div class="pros">+ 减少不必要交易，降低成本<br>+ 税务效率更高（避免频繁卖出）</div>
+      <div class="cons">− 需要定期检查（建议每季度查看一次）<br>− 在快速单边市场中，可能调整不及时</div>
+    </div>
+  </div>
+
+  <h3>再平衡触发带（阈值法示意）</h3>
+
+  <div class="band-wrap">
+    <p style="font-size:0.88rem;margin-bottom:0.25rem;">股票目标比例 60%，容忍区间 ±5%（即 55%–65%）。绿色区域内：无需操作。</p>
+    <div class="band-track">
+      <div class="band-zone" id="band-zone" style="left:50%;width:10%"></div>
+      <div class="band-marker" id="band-marker" style="left:57.1%"></div>
+    </div>
+    <div class="band-label-row">
+      <span>0%</span>
+      <span style="color:var(--success)">55% 下限 → 买股票</span>
+      <span style="font-weight:bold;color:var(--accent)">目标 60%</span>
+      <span style="color:var(--success)">← 65% 上限 卖股票</span>
+      <span>100%</span>
+    </div>
+    <div style="margin-top:0.6rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.85rem;">
+      5年漂移后股票占 <strong id="band-stock-pct">66.5%</strong>
+      <span class="drift-status drift-warn" id="band-status">已超出上限 — 需要再平衡</span>
+    </div>
+  </div>
+
+  <h2>再平衡的隐藏礼物：系统性低买高卖</h2>
+
+  <p>再平衡的操作本质是：<strong>卖出涨多的，买入涨少的</strong>。这在机械上实现了"低买高卖"——无需预测市场。</p>
+
+  <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
+    <li style="margin-bottom:0.5rem;">股票大涨后 → 卖出部分股票，买入债券（"高卖"）</li>
+    <li style="margin-bottom:0.5rem;">股市大跌后 → 卖出债券，补仓股票（"低买"）</li>
+    <li>这正是巴菲特"别人恐惧时我贪婪"的系统化版本</li>
+  </ul>
+
+  <div class="callout warning">
+    <div class="callout-title">代价：税务与交易成本</div>
+    每次再平衡的"卖出"动作，在应税账户中可能触发资本利得税。<strong>优先在免税账户（养老金账户等）内再平衡</strong>，而在应税账户中尽量用新增资金来补足欠配的部分，而不是卖出超配的部分。
+  </div>
+
+  <h2>最省力的再平衡策略</h2>
+
+  <ol style="padding-left:1.5rem;margin-bottom:1rem;">
+    <li style="margin-bottom:0.75rem;"><strong>先用新增资金再平衡</strong>：每次定投时，把新资金全部投入欠配的资产类别。很多时候，这一步就够了，完全不需要卖出任何东西。</li>
+    <li style="margin-bottom:0.75rem;"><strong>用股息和利息收入再平衡</strong>：把债券利息和股票分红引导到欠配资产，而非自动再投入原来的资产。</li>
+    <li style="margin-bottom:0.75rem;"><strong>优先在养老金/退休账户内操作</strong>：这类账户内的买卖不触发当期税务事件，是再平衡的理想场所。</li>
+    <li><strong>容忍适度漂移</strong>：研究显示，±5%～10% 的漂移对长期结果影响有限。不必追求完美，过于频繁的再平衡会产生不必要的成本。</li>
+  </ol>
+
+  <h2>练习：检验你的理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">1. 一位投资者 10 年前设定了 60/40 组合，从未再平衡，现在股票已占到 72%。下一次股市大跌时，他会比预期承受？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q1',false)">更小的损失，因为股票比例高，弹性更强</button></li>
+      <li><button onclick="answer(this,'q1',true)">更大的损失，因为实际持股比例远超他最初的风险意图</button></li>
+      <li><button onclick="answer(this,'q1',false)">相同的损失，因为资产总值更高了</button></li>
+      <li><button onclick="answer(this,'q1',false)">无法判断，需要看具体股票是哪些</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">2. 再平衡的操作本质，可以被描述为？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q2',false)">预测市场走势，提前布局</button></li>
+      <li><button onclick="answer(this,'q2',false)">追涨杀跌，顺应市场动能</button></li>
+      <li><button onclick="answer(this,'q2',true)">系统性地卖出涨多的资产，买入涨少的资产</button></li>
+      <li><button onclick="answer(this,'q2',false)">将所有资产转为现金，等待更好时机</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">3. 你在应税账户中有一个 60/40 组合，股票已涨至 68%。最省税的再平衡方式是？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q3',false)">立即卖出 8% 的股票，买入债券</button></li>
+      <li><button onclick="answer(this,'q3',false)">等到年底再一次性卖出调整</button></li>
+      <li><button onclick="answer(this,'q3',true)">将下次定投资金全部买入债券，减少卖出的需要</button></li>
+      <li><button onclick="answer(this,'q3',false)">忽略漂移，只有超过 20% 才需要处理</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <h2>推荐阅读</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <a href="https://corporate.vanguard.com/content/dam/corp/research/pdf/best_practices_for_portfolio_rebalancing.pdf" target="_blank">Vanguard — "Best Practices for Portfolio Rebalancing"（免费PDF）</a>
+      — 系统分析了不同再平衡频率和阈值的历史效果，结论清晰实用
+    </li>
+    <li>
+      William Bernstein,《聪明的资产配置者》第8章 — 再平衡的实操细节，包括跨账户协调策略
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">下一课预告</div>
+    <strong>财富课程 #05：行为金融陷阱</strong> — 为什么投资者的实际回报系统性低于他们持有的基金回报？损失厌恶、处置效应、近期偏差——了解这些偏差，是资产配置的最后一道防线。<br><br>
+    有任何疑问，随时提问——我是你的老师。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0003-classic-portfolio-models.html">← 上一课</a>
+      <a href="finance-0005-behavioral-traps.html">下一课 →</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #04 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    /* ── Drift Simulator ── */
+    function computeDrift(years) {
+      const s0 = 60, b0 = 40;
+      let s = s0, b = b0;
+      for (let i = 0; i < years; i++) {
+        s *= 1.10;
+        b *= 1.04;
+      }
+      const total = s + b;
+      return { sp: s / total * 100, bp: b / total * 100 };
+    }
+
+    function crashLoss(sp) {
+      // stocks -40%, bonds +10% (typical recession)
+      const after = sp * 0.60 + (100 - sp) * 1.10;
+      return ((after - 100) / 100 * 100).toFixed(1);
+    }
+
+    function updateSim(years) {
+      document.getElementById('year-display').textContent = years + ' 年';
+      document.getElementById('drift-header').textContent =
+        years === 0 ? '（初始状态）' : `⚠ 从不再平衡（${years}年后）`;
+
+      const { sp, bp } = computeDrift(years);
+      const spR = 60, bpR = 40;
+
+      // Rebalanced bars
+      document.getElementById('rebal-stock-label').textContent = spR.toFixed(0) + '%';
+      document.getElementById('rebal-bond-label').textContent  = bpR.toFixed(0) + '%';
+
+      // Drifted bars
+      document.getElementById('drift-stock-bar').style.height = sp.toFixed(1) + '%';
+      document.getElementById('drift-bond-bar').style.height  = bp.toFixed(1) + '%';
+      document.getElementById('drift-stock-label').textContent = sp.toFixed(1) + '%';
+      document.getElementById('drift-bond-label').textContent  = bp.toFixed(1) + '%';
+
+      // Crash impact
+      const rebalLoss = crashLoss(spR);
+      const driftLoss = crashLoss(sp);
+      document.getElementById('rebal-crash').textContent = rebalLoss + '%';
+      document.getElementById('drift-crash').textContent = driftLoss + '%';
+
+      // Band marker (0%=left, 100%=right)
+      const markerLeft = sp / 100 * 100;
+      document.getElementById('band-marker').style.left = markerLeft + '%';
+      document.getElementById('band-stock-pct').textContent = sp.toFixed(1) + '%';
+
+      const status = document.getElementById('band-status');
+      if (sp > 65) {
+        status.textContent = '已超出上限 — 需要再平衡';
+        status.className = 'drift-status drift-warn';
+      } else if (sp < 55) {
+        status.textContent = '已低于下限 — 需要再平衡';
+        status.className = 'drift-status drift-warn';
+      } else {
+        status.textContent = '在目标区间内 — 无需操作';
+        status.className = 'drift-status drift-ok';
+      }
+
+      // Band zone: 55%–65% → left 55%, width 10%
+      document.getElementById('band-zone').style.left  = '55%';
+      document.getElementById('band-zone').style.width = '10%';
+
+      // Summary text
+      const diff = sp - 60;
+      const extra = Math.abs(driftLoss) - Math.abs(rebalLoss);
+      const summary = years === 0
+        ? '调整年数看看组合如何随时间漂移。'
+        : `${years}年不再平衡后，股票占比从 60% 漂移至 ${sp.toFixed(1)}%（+${diff.toFixed(1)}%）。` +
+          `若股市此时下跌 40%，漂移组合将多损失约 ${extra.toFixed(1)} 个百分点。`;
+      document.getElementById('sim-summary').textContent = summary;
+    }
+
+    document.getElementById('year-slider').addEventListener('input', function() {
+      updateSim(+this.value);
+    });
+    updateSim(5); // Default to 5 years for a meaningful demo
+    document.getElementById('year-slider').value = 5;
+
+    /* ── Quiz ── */
+    const feedback = {
+      q1: {
+        correct: '✓ 正确！从 60% 漂移到 72% 的股票仓位，意味着下跌时的实际损失会比你设计的更大。这正是再平衡的核心意义：让组合的实际风险和你的原始意图保持一致，而不是任由市场"重新设计"你的风险敞口。',
+        wrong:   '✗ 再想想。72% 股票 vs 60% 股票，在同样的市场下跌中，哪个亏得更多？用模拟器把年数拉到10年，再看看两侧的跌幅对比。'
+      },
+      q2: {
+        correct: '✓ 正确！再平衡强制你"卖贵买便宜"——不是基于预测，而是基于规则。当股市连涨后你卖出股票买入债券，这在事后往往被证明是明智的"高卖"；当股市大跌后你卖出债券买股票，这是纪律性的"低买"。',
+        wrong:   '✗ 再想想。再平衡的操作方向是什么？当股票从 60% 涨到 70%，再平衡要求你做什么？'
+      },
+      q3: {
+        correct: '✓ 正确！将新增资金买入欠配的债券，可以在不触发卖出的情况下逐步纠正偏差——完全避免了资本利得税。这是"用现金流再平衡"策略，在应税账户中税务效率最高。',
+        wrong:   '✗ 再想想。应税账户中的卖出会触发资本利得税。有没有一种方式可以改变配置比例，但完全不需要卖出任何东西？'
+      }
+    };
+
+    function answer(btn, qid, correct) {
+      document.getElementById(qid).querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(qid + '-fb');
+      fb.textContent = feedback[qid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>

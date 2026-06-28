@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行为金融陷阱 — 财富课程 #05</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* ── Behavior Gap Chart ── */
+    .gap-chart {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .gap-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+    .gap-row:last-child { margin-bottom: 0; }
+    .gap-row .glabel {
+      width: 140px;
+      flex-shrink: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      color: #374151;
+    }
+    .gap-track {
+      flex: 1;
+      height: 28px;
+      background: #f3f4f6;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .gap-fill {
+      height: 100%;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.6rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* ── Bias Cards ── */
+    .bias-card {
+      background: white;
+      border-left: 5px solid var(--highlight);
+      border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .bias-card.blue  { border-left-color: var(--accent); }
+    .bias-card.gold  { border-left-color: #f59e0b; }
+    .bias-card.green { border-left-color: var(--success); }
+    .bias-card h3    { margin: 0 0 0.3rem; font-size: 1rem; }
+    .bias-card .source {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .bias-card p { margin: 0 0 0.6rem; font-size: 0.9rem; }
+    .bias-card .antidote {
+      background: #f0fdf4;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.83rem;
+      color: #065f46;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .bias-card .antidote strong { color: #065f46; }
+
+    /* ── Loss Aversion Scale ── */
+    .la-demo {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .scale-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 1rem 0;
+      position: relative;
+    }
+    .scale-half {
+      flex: 1;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: white;
+      position: relative;
+    }
+    .scale-gain { background: linear-gradient(to right, #059669, #34d399); border-radius: 6px 0 0 6px; }
+    .scale-loss { background: linear-gradient(to right, #f87171, #dc2626); border-radius: 0 6px 6px 0; }
+    .scale-divider {
+      width: 2px;
+      height: 56px;
+      background: var(--ink);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .scale-label {
+      text-align: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .la-slider-wrap {
+      margin-top: 1rem;
+    }
+    .la-slider-wrap label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .la-result {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .la-result.rational { background: #d1fae5; color: #065f46; }
+    .la-result.irrational { background: #fee2e2; color: #7f1d1d; }
+
+    /* ── Scenario Quiz ── */
+    .scenario {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .scenario-num {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+    }
+    .scenario-q {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .scenario-opts { list-style: none; display: grid; gap: 0.5rem; }
+    .scenario-opts li button {
+      width: 100%;
+      text-align: left;
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--paper);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .scenario-opts li button:hover { background: #f0f4ff; border-color: var(--accent); }
+    .scenario-opts li button.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+    .scenario-opts li button.wrong   { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    .scenario-feedback {
+      margin-top: 0.85rem;
+      font-size: 0.88rem;
+      min-height: 1rem;
+      line-height: 1.5;
+    }
+    .bias-tag {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 99px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: bold;
+      background: #fef3c7;
+      color: #78350f;
+      margin-right: 0.4rem;
+    }
+
+    /* ── IPS Box ── */
+    .ips-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+    .ips-box h3 { margin: 0 0 0.6rem; color: var(--accent); font-size: 1rem; }
+    .ips-box ol { padding-left: 1.25rem; margin: 0; }
+    .ips-box li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #05</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 执行与维护
+    &nbsp;·&nbsp; <a href="finance-0004-rebalancing.html">← 上一课</a>
+  </div>
+
+  <h1>行为金融陷阱</h1>
+  <p style="font-size:1.1rem;color:var(--muted);margin-bottom:2rem;font-family:'Helvetica Neue',Arial,sans-serif;">
+    为什么投资者的实际回报，系统性低于他们持有的基金回报？
+  </p>
+
+  <p>你精心选好了组合、理解了分散化、设定了再平衡规则。然而有一个最后的敌人藏在你的大脑里——它比市场更危险，因为你没法逃开它。</p>
+
+  <h2>行为缺口：数据说话</h2>
+
+  <p><a href="https://www.dalbar.com/QAIB/Index" target="_blank">DALBAR 年度投资者行为量化分析</a>是全球最权威的投资者行为研究，持续追踪美国基金投资者的实际回报。2023 年报告（2003–2022 年，20年）：</p>
+
+  <div class="gap-chart">
+    <div class="gap-row">
+      <span class="glabel">标普 500 指数</span>
+      <div class="gap-track">
+        <div class="gap-fill" style="width:82%;background:#0f3460;">9.8% / 年</div>
+      </div>
+    </div>
+    <div class="gap-row">
+      <span class="glabel">平均股票基金</span>
+      <div class="gap-track">
+        <div class="gap-fill" style="width:66%;background:#1e88e5;">7.7% / 年</div>
+      </div>
+    </div>
+    <div class="gap-row">
+      <span class="glabel">平均股票基金投资者</span>
+      <div class="gap-track">
+        <div class="gap-fill" style="width:50%;background:#e94560;">6.0% / 年</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;margin:0.75rem 0 0;">
+      来源：DALBAR QAIB 2023。差值来自投资者在错误时机买入和卖出。
+    </p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">惊人的复利代价</div>
+    每年 3.8% 的行为缺口，20 年后意味着什么？投资 10 万元：
+    跟随指数 → <strong>约 66 万元</strong>；普通投资者行为 → <strong>约 32 万元</strong>。
+    行为偏差让你失去了一半的财富——不是市场，是你自己。
+  </div>
+
+  <h2>三大行为陷阱</h2>
+
+  <!-- Loss Aversion -->
+  <div class="bias-card">
+    <h3>① 损失厌恶（Loss Aversion）</h3>
+    <div class="source">Daniel Kahneman &amp; Amos Tversky，1979 年，前景理论 — 诺贝尔经济学奖基础</div>
+    <p>亏损 1 万元的痛苦，大约等于盈利 <strong>2.25 万元</strong>的喜悦。这是进化留给我们的本能——在原始环境中，损失资源往往意味着死亡。但在投资中，它让你在市场底部（最不该卖出的时候）恐慌卖出。</p>
+    <div class="antidote"><strong>对抗方案：</strong>制定书面的投资政策声明（IPS），在市场正常时预设"市场跌 30% 我会做什么"——并承诺遵守它，而不是临场决定。</div>
+  </div>
+
+  <!-- Disposition Effect -->
+  <div class="bias-card blue">
+    <h3>② 处置效应（Disposition Effect）</h3>
+    <div class="source">Hersh Shefrin &amp; Meir Statman，1985；Terrance Odean，1998</div>
+    <p>投资者倾向于<strong>过早卖出盈利的资产</strong>（锁定利润的快感），同时<strong>过久持有亏损的资产</strong>（回避"实现亏损"的痛苦）。Odean 的研究显示，投资者卖出赢家的概率比卖出输家高 50%。结果：留下最差的，卖出最好的。</p>
+    <div class="antidote"><strong>对抗方案：</strong>做投资决策时问自己："如果我今天手里全是现金，我会选择买入这个资产吗？"——而不是问"它亏了多少"或"我赚了多少"。</div>
+  </div>
+
+  <!-- Recency Bias -->
+  <div class="bias-card gold">
+    <h3>③ 近期偏差（Recency Bias）</h3>
+    <div class="source">行为金融学经典偏差，广泛被 Kahneman《思考，快与慢》记录</div>
+    <p>大脑默认用最近发生的事来预测未来。市场连涨三年后，你认为它还会涨；大跌后，你认为还会跌。DALBAR 数据显示，资金净流入在市场高点最大，在低点最小——投资者集体地<strong>追涨杀跌</strong>。</p>
+    <div class="antidote"><strong>对抗方案：</strong>自动化定投（不论涨跌每月固定买入），用规则替代判断。不看短期新闻，以年为单位评估组合。</div>
+  </div>
+
+  <h2>互动：损失厌恶有多强？</h2>
+
+  <p>你需要赢多少才愿意接受以下赌局？（理性的人应该只需要 > 1000 元）</p>
+
+  <div class="la-demo">
+    <div class="scale-wrap">
+      <div class="scale-half scale-gain">可能赢<br><span id="gain-amt">2000 元</span></div>
+      <div class="scale-divider"></div>
+      <div class="scale-half scale-loss">可能输<br>1000 元</div>
+    </div>
+    <div class="scale-label">50/50 概率的赌局——你愿意参与吗？</div>
+
+    <div class="la-slider-wrap">
+      <label>我需要赢 <strong id="gain-label">2000</strong> 元才愿意参与这个赌局</label>
+      <input type="range" id="la-slider" min="1000" max="5000" value="2000" step="100"
+             style="width:100%;accent-color:var(--accent);cursor:pointer;"
+             oninput="updateLA(+this.value)">
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);font-family:sans-serif;margin-top:0.2rem;">
+        <span>1000（理性底线）</span><span>5000</span>
+      </div>
+    </div>
+    <div class="la-result" id="la-result"></div>
+  </div>
+
+  <h2>场景练习：识别你的偏差</h2>
+
+  <p>以下三个场景中，找出最理性的反应——并注意自己本能上想做什么。</p>
+
+  <!-- Scenario 1 -->
+  <div class="scenario" id="s1">
+    <div class="scenario-num">场景 01 · 损失厌恶</div>
+    <div class="scenario-q">市场三个月内暴跌 35%，你的组合缩水了 21 万元。打开 App 时手会发抖。此时你最应该做的是？</div>
+    <ul class="scenario-opts">
+      <li><button onclick="scen(this,'s1',false)">立刻卖出大部分仓位，等市场企稳再说</button></li>
+      <li><button onclick="scen(this,'s1',false)">每天查看行情，等待最佳时机补仓</button></li>
+      <li><button onclick="scen(this,'s1',true)">关掉 App，按照事先写好的应对计划执行</button></li>
+      <li><button onclick="scen(this,'s1',false)">把所有人都在看跌的文章发给家人讨论</button></li>
+    </ul>
+    <div class="scenario-feedback" id="s1-fb"></div>
+  </div>
+
+  <!-- Scenario 2 -->
+  <div class="scenario" id="s2">
+    <div class="scenario-num">场景 02 · 处置效应</div>
+    <div class="scenario-q">你持有两只基金：A 基金盈利 30%，B 基金亏损 20%。你急需一笔钱，必须卖出其中一只。理性上应该卖哪只？</div>
+    <ul class="scenario-opts">
+      <li><button onclick="scen(this,'s2',false)">卖 A，落袋为安，别让利润跑掉</button></li>
+      <li><button onclick="scen(this,'s2',true)">卖估值更高、未来预期回报更低的那只——与盈亏无关</button></li>
+      <li><button onclick="scen(this,'s2',false)">卖 B，割掉亏损，留下好的</button></li>
+      <li><button onclick="scen(this,'s2',false)">两只各卖一半，平衡风险</button></li>
+    </ul>
+    <div class="scenario-feedback" id="s2-fb"></div>
+  </div>
+
+  <!-- Scenario 3 -->
+  <div class="scenario" id="s3">
+    <div class="scenario-num">场景 03 · 近期偏差</div>
+    <div class="scenario-q">朋友去年靠买某行业基金赚了 60%，全社交媒体都在讨论这个主题。你的感觉是：错过了，我也应该买一些。正确的做法是？</div>
+    <ul class="scenario-opts">
+      <li><button onclick="scen(this,'s3',false)">把 10% 资金调仓进去，不买会后悔</button></li>
+      <li><button onclick="scen(this,'s3',false)">先研究这个行业，搞清楚后再决定</button></li>
+      <li><button onclick="scen(this,'s3',true)">回看自己的投资政策声明，检查这个决定是否符合原有计划</button></li>
+      <li><button onclick="scen(this,'s3',false)">问朋友具体买了哪只，跟着买</button></li>
+    </ul>
+    <div class="scenario-feedback" id="s3-fb"></div>
+  </div>
+
+  <h2>你的终极防线：投资政策声明（IPS）</h2>
+
+  <p>IPS 是一份你在<strong>冷静时写给恐慌中的自己</strong>的文件。它的存在让你在市场极端时刻有规则可循，而不是凭情绪决策。</p>
+
+  <div class="ips-box">
+    <h3>一份简单 IPS 应包含的内容</h3>
+    <ol>
+      <li><strong>目标</strong>：这笔钱是为了什么？（退休、子女教育、财务自由……）</li>
+      <li><strong>时间视野</strong>：多少年后开始使用？</li>
+      <li><strong>目标配置</strong>：股票 X%、债券 X%、黄金 X%……</li>
+      <li><strong>再平衡规则</strong>：每年一次 / 漂移超过 ±5% 时触发</li>
+      <li><strong>市场大跌应对计划</strong>："若股市下跌超过 30%，我将……（坚持、补仓 / 不卖出）"</li>
+      <li><strong>禁止清单</strong>："我承诺不做以下事情：追热门板块、基于新闻调仓、借钱投资……"</li>
+    </ol>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-title">认知 ≠ 免疫</div>
+    知道这三种偏差的存在，并不能让你完全免疫。Kahneman 本人曾说，即便他完全理解损失厌恶，他仍然会感受到它。<strong>对抗偏差的方法是系统，而不是意志力</strong>——自动化、规则化、写下来，让流程做决策，而不是情绪。
+  </div>
+
+  <h2>推荐阅读</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <strong>首要推荐：</strong>Daniel Kahneman,《<a href="https://www.amazon.com/dp/0374533555" target="_blank">思考，快与慢</a>》
+      — 行为经济学最权威的大众读本，第3–5部分直接讲前景理论和投资决策
+    </li>
+    <li style="margin-bottom:0.75rem;">
+      Carl Richards,《<a href="https://behaviorgap.com" target="_blank">The Behavior Gap</a>》
+      — 用简洁图示解释行为缺口，薄薄一本，直击核心
+    </li>
+    <li>
+      <a href="https://www.dalbar.com/QAIB/Index" target="_blank">DALBAR QAIB 年度报告</a>
+      — 每年更新的投资者行为数据，原始数据可信度高
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">下一课预告</div>
+    <strong>财富课程 #06：实战落地</strong> — 作为中国投资者，如何用真实可买的 ETF 和基金构建你的配置组合？A 股、港股、美股、黄金的具体工具选择，以及跨境资产配置的注意事项。<br><br>
+    有任何疑问，随时提问——我是你的老师。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0004-rebalancing.html">← 上一课</a>
+      <a href="finance-0006-implementation-china.html">下一课 →</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #05 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    /* ── Loss Aversion Demo ── */
+    function updateLA(val) {
+      document.getElementById('gain-label').textContent = val.toLocaleString();
+      document.getElementById('gain-amt').textContent = val.toLocaleString() + ' 元';
+      const ratio = val / 1000;
+      const res = document.getElementById('la-result');
+      if (ratio <= 1.5) {
+        res.className = 'la-result rational';
+        res.textContent = `你的损失厌恶系数约为 ${ratio.toFixed(1)}x — 接近理性水平（期望值为正即可）。非常少见，多数人需要 2x 以上。`;
+      } else if (ratio <= 2.5) {
+        res.className = 'la-result irrational';
+        res.textContent = `你的损失厌恶系数约为 ${ratio.toFixed(1)}x — 接近 Kahneman 实验的典型值（2.25x）。这意味着在市场大跌时，你感受到的痛苦是理性水平的 ${ratio.toFixed(1)} 倍——这正是投资者在底部恐慌卖出的原因。`;
+      } else {
+        res.className = 'la-result irrational';
+        res.textContent = `你的损失厌恶系数约为 ${ratio.toFixed(1)}x — 高于典型水平。这意味着你在面对亏损时会承受极大的情绪压力，需要格外重视书面的应对计划（IPS）和自动化投资机制。`;
+      }
+    }
+    updateLA(2000);
+
+    /* ── Scenario Answers ── */
+    const scenFeedback = {
+      s1: {
+        correct: '✓ 正确。恐慌卖出是损失厌恶最典型的表现——在最不应该卖出的时候卖出。预先写好的应对计划（IPS）的价值，正是在这个时刻：它是冷静时的你给恐慌中的你的指令。历史上所有市场最终都从大跌中恢复，但在底部出逃的投资者无法参与反弹。',
+        wrong: '✗ 这是损失厌恶驱动的本能反应。注意：市场下跌时感觉最差的决策，往往在事后看是最错误的决策。最危险的两个词是"等等看"——因为等你觉得"安全"了，市场已经涨回来了。'
+      },
+      s2: {
+        correct: '✓ 正确。卖出决策应该基于"哪个资产未来预期回报更好"，而不是"哪个我赚了/亏了"。盈亏是历史，不影响未来回报。处置效应让你反直觉地留下表现差的、卖出表现好的。正确问题是：今天重新选择，我应该持有哪只？',
+        wrong: '✗ 这是处置效应的典型表现。"落袋为安"和"割亏留盈"都是基于历史盈亏做决策——但过去的盈亏与未来回报无关。正确的问题不是"它亏了多少"，而是"它未来的预期回报如何"。'
+      },
+      s3: {
+        correct: '✓ 正确！IPS 是你对抗近期偏差的护盾。如果你的投资政策声明里没有"追踪热门行业"这一条，那这个冲动就不应该执行。朋友去年的 60% 回报，是近期偏差最容易触发的时刻——恰恰在这个资产可能已经高估、未来回报下降的时候，资金流入最大。',
+        wrong: '✗ 这是近期偏差的经典触发场景。大家都在谈论、媒体大量报道的时候，往往是价格已经充分上涨甚至高估的时候。FOMO（错过恐惧）是行为缺口最大的来源之一。你的 IPS 是防止这种冲动的护盾。'
+      }
+    };
+
+    function scen(btn, sid, correct) {
+      document.getElementById(sid).querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(sid + '-fb');
+      fb.innerHTML = scenFeedback[sid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>
