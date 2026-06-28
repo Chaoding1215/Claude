@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>财富课 05 — 行为金融学：为什么你比基金亏得更多</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .bias-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .bias-card h4 {
+      color: var(--highlight);
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+    .bias-card .mechanism {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .bias-card p { font-size: 0.88rem; margin-bottom: 0; }
+    .gap-visual {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    .gap-col {
+      flex: 1;
+      padding: 1rem;
+      text-align: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .gap-col.fund { background: #f0fdf4; }
+    .gap-col.investor { background: #fef2f2; }
+    .gap-col .big-num {
+      font-size: 2.2rem;
+      font-weight: bold;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .gap-col.fund .big-num { color: #16a34a; }
+    .gap-col.investor .big-num { color: #dc2626; }
+    .gap-col .label { font-size: 0.8rem; color: var(--muted); }
+    .gap-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      background: #fafafa;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--highlight);
+      font-weight: bold;
+      text-align: center;
+    }
+    .fix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    @media (max-width: 560px) { .fix-grid { grid-template-columns: 1fr; } }
+    .fix-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      background: white;
+      font-size: 0.85rem;
+    }
+    .fix-card h4 { font-size: 0.88rem; color: var(--accent); margin-bottom: 0.35rem; }
+    .emotion-meter {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .meter-label { min-width: 100px; font-size: 0.8rem; }
+    .meter-bar { height: 16px; border-radius: 4px; }
+    .quiz {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    .quiz-question { font-size: 0.95rem; margin-bottom: 1rem; font-weight: bold; }
+    .quiz-options { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .quiz-options button {
+      width: 100%; text-align: left; padding: 0.65rem 1rem;
+      border: 1px solid var(--border); border-radius: 6px; background: white;
+      cursor: pointer; font-size: 0.87rem; line-height: 1.4; transition: background 0.15s;
+    }
+    .quiz-options button:hover:not(:disabled) { background: #f3f4f6; }
+    .quiz-options button.correct { background: #f0fdf4; border-color: #16a34a; color: #14532d; font-weight: bold; }
+    .quiz-options button.wrong { background: #fef2f2; border-color: #dc2626; color: #7f1d1d; }
+    .quiz-feedback { margin-top: 0.75rem; font-size: 0.87rem; line-height: 1.5; }
+    .lesson-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--border); font-size: 0.88rem; }
+    .lesson-nav { display: flex; gap: 1rem; margin-top: 0.75rem; flex-wrap: wrap; }
+    .lesson-nav a { font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">财富课 05</span> &nbsp;·&nbsp; 资产配置 &nbsp;·&nbsp; 行为金融学
+</div>
+
+<h1>行为金融学：<br>为什么你比基金亏得更多</h1>
+
+<p>有一个令人不安的数字：美国最大共同基金的<strong>长期年化回报</strong>，平均比<strong>持有这些基金的投资者的实际回报</strong>高出约 1.5–2 个百分点。</p>
+
+<p>基金没有欺骗你。差距来自你自己的行为——在错误的时间买入，在更糟糕的时间卖出。这门课解释为什么，以及如何系统性地修复它。</p>
+
+<h2>数据：行为差距（Behavior Gap）</h2>
+
+<div class="gap-visual">
+  <div class="gap-col fund">
+    <div class="big-num">+8.4%</div>
+    <div class="label">基金公布的<br>年化回报<br>（20年）</div>
+  </div>
+  <div class="gap-arrow">
+    差距<br>≈ 1.7%<br>↓<br>每年
+  </div>
+  <div class="gap-col investor">
+    <div class="big-num">+6.7%</div>
+    <div class="label">同期持有者<br>实际获得的<br>年化回报</div>
+  </div>
+</div>
+
+<p style="font-size:0.83rem; color:var(--muted); margin-top:-0.5rem;">数据来源：Morningstar "Mind the Gap" 年度报告（2023年）。基金回报是时间加权的；投资者实际回报是资金加权的（考虑了申购赎回时机）。</p>
+
+<div class="callout">
+  <div class="callout-title">复利视角下的 1.7% 差距</div>
+  在 20 年、初始 100 万人民币的场景下：<br>
+  · 跟上基金回报（8.4%）→ 最终约 <strong>494 万</strong><br>
+  · 实际投资者回报（6.7%）→ 最终约 <strong>363 万</strong><br>
+  行为差距的代价：<strong>131 万</strong>——几乎等于再投一套首付。
+</div>
+
+<h2>六大行为偏差</h2>
+
+<div class="bias-card">
+  <h4>1. 损失厌恶（Loss Aversion）</h4>
+  <div class="mechanism">Kahneman & Tversky 前景理论 · 亏损的痛苦约是收益快乐的 2 倍</div>
+  <p>你的大脑对"亏 1 万"的感受，比对"赚 1 万"的感受强烈得多。这导致你在市场下跌时痛苦到难以承受，最终在低点"止损"——恰好是应该持有或加仓的时候。</p>
+</div>
+
+<div class="bias-card">
+  <h4>2. 近因偏差（Recency Bias）</h4>
+  <div class="mechanism">过度权重近期信息 · 外推最近的趋势</div>
+  <p>牛市三年后你相信"股市只涨不跌"，于是在高点重仓买入；熊市一年后你相信"市场永远不会好转"，于是在低点割肉离场。你把最近发生的事情当成了永恒规律。</p>
+</div>
+
+<div class="bias-card">
+  <h4>3. 处置效应（Disposition Effect）</h4>
+  <div class="mechanism">过早卖出盈利头寸 · 死持亏损头寸</div>
+  <p>"赚了就跑，亏了就捂"——这与理性投资恰好相反。你卖掉了那些还在上升趋势中的好资产，却一直持有已经基本面恶化的坏资产，因为"只要不卖就没有真正亏损"。</p>
+</div>
+
+<div class="bias-card">
+  <h4>4. 过度自信（Overconfidence）</h4>
+  <div class="mechanism">高估自己的判断力 · 低估市场的不确定性</div>
+  <p>研究显示，大多数人认为自己的投资能力高于平均水平——这在数学上不可能全部成立。过度自信导致过于频繁的交易（交易成本侵蚀收益）和过于集中的持仓。</p>
+</div>
+
+<div class="bias-card">
+  <h4>5. 锚定效应（Anchoring）</h4>
+  <div class="mechanism">过度依赖最初获得的参考点</div>
+  <p>你在 100 元买入的股票跌到 70 元，你的心理"锚"是 100 元，所以你觉得"等涨回 100 元再卖"。但市场不知道你的买入价。锚定效应让你用过去的价格而不是未来的基本面来做决策。</p>
+</div>
+
+<div class="bias-card">
+  <h4>6. 羊群效应（Herding）</h4>
+  <div class="mechanism">将他人行为作为信息来源 · 社会认同感需求</div>
+  <p>"我的同事都在买茅台" / "全网都在说这次不一样"。当每个人都在谈论某个投资机会时，往往意味着它已经被充分定价甚至高估了。羊群效应在市场顶部和底部都会被放大。</p>
+</div>
+
+<h2>情绪与市场周期的叠加</h2>
+
+<p>以下是典型牛熊周期中，散户情绪的演变轨迹——以及最具破坏性的两个节点：</p>
+
+<div style="background:white; border:1px solid var(--border); border-radius:8px; padding:1.25rem; margin:1.5rem 0; font-size:0.85rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="display:grid; gap:0.4rem;">
+    <div class="emotion-meter"><span class="meter-label">乐观 📈</span><div class="meter-bar" style="width:120px; background:#86efac;"></div><span style="color:var(--muted)">早期上涨，谨慎入场</span></div>
+    <div class="emotion-meter"><span class="meter-label">兴奋 🚀</span><div class="meter-bar" style="width:220px; background:#4ade80;"></div><span style="color:var(--muted)">持续上涨，加速买入</span></div>
+    <div class="emotion-meter"><span class="meter-label">欣喜 🎉</span><div class="meter-bar" style="width:340px; background:#22c55e;"></div><span style="color:var(--accent); font-weight:bold">⬅ 多数散户在此重仓买入（市场顶部）</span></div>
+    <div class="emotion-meter"><span class="meter-label">焦虑 😰</span><div class="meter-bar" style="width:280px; background:#facc15;"></div><span style="color:var(--muted)">开始下跌，"等等看"</span></div>
+    <div class="emotion-meter"><span class="meter-label">恐惧 😱</span><div class="meter-bar" style="width:180px; background:#fb923c;"></div><span style="color:var(--muted)">持续下跌，持仓痛苦</span></div>
+    <div class="emotion-meter"><span class="meter-label">绝望 💀</span><div class="meter-bar" style="width:80px; background:#ef4444;"></div><span style="color:var(--highlight); font-weight:bold">⬅ 多数散户在此割肉离场（市场底部）</span></div>
+    <div class="emotion-meter"><span class="meter-label">麻木 😶</span><div class="meter-bar" style="width:60px; background:#d1d5db;"></div><span style="color:var(--muted)">空仓观望，错过反弹</span></div>
+  </div>
+</div>
+
+<p>高买低卖不是因为投资者愚蠢，而是因为人类大脑在这种情绪压力下，本能地产生了这些反应。理解这个循环是抵御它的第一步。</p>
+
+<h2>系统性修复：对抗偏差的四个机制</h2>
+
+<div class="fix-grid">
+  <div class="fix-card">
+    <h4>📋 投资政策声明（IPS）</h4>
+    <p>在市场平静时，提前写下你的配置目标、再平衡规则、和"什么情况下我会改变计划"。当市场剧烈波动时，你遵循文件而不是当下的情绪。规则在恐慌之前制定，恐慌之中执行。</p>
+  </div>
+  <div class="fix-card">
+    <h4>🤖 自动化 + 定期定额</h4>
+    <p>将投资设置为每月自动扣款（定投）。你无法在恐慌时"忘记"执行——计划自动执行。定投天然实现了"跌了多买，涨了少买"的效果，无需任何判断。</p>
+  </div>
+  <div class="fix-card">
+    <h4>📵 降低信息噪音</h4>
+    <p>每天查看账户不能帮你做出更好的决策，却会显著放大短期波动带来的情绪痛苦。研究显示，检查频率越高，投资者就越倾向于过度交易。季度查看通常已足够。</p>
+  </div>
+  <div class="fix-card">
+    <h4>🔔 设定阈值再平衡规则</h4>
+    <p>提前写下："当股票仓位偏离目标超过 ±5%，我就再平衡一次。"这将再平衡从一个需要判断的决策，变成了一个纯机械的执行动作——完全绕过了情绪系统。</p>
+  </div>
+</div>
+
+<div class="callout warning">
+  <div class="callout-title">最危险的偏差组合</div>
+  近因偏差 + 羊群效应 + 过度自信，在牛市顶部叠加，会让理性的人做出毁灭性的集中押注。历史上每一次重大泡沫（2000年互联网、2007年美国房产、2015年A股），事后来看都有明确的信号——但当时几乎每个人都有充分的"理由"相信"这次不一样"。
+</div>
+
+<h2>一个实用框架：把决策权从情绪手中夺走</h2>
+
+<p>行为金融学的核心洞见不是"控制你的情绪"（几乎不可能），而是<strong>在平静时设计好规则，让规则在情绪激动时代替你决策</strong>。</p>
+
+<ul style="padding-left:1.4rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem;"><strong>事前</strong>：写下IPS，设定配置比例和再平衡阈值</li>
+  <li style="margin-bottom:0.5rem;"><strong>事中</strong>：自动化执行，减少主动干预机会</li>
+  <li style="margin-bottom:0.5rem;"><strong>事后</strong>：季度检查进度，年度检查配置是否仍匹配目标</li>
+</ul>
+
+<p>这不是投资的艺术，而是设计一个比你自己更能抵抗情绪的系统。</p>
+
+<h2>知识检验</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">Morningstar 的数据显示，投资者的实际回报比他们持有的基金公布回报低约 1.7% 每年。造成这个差距最主要的原因是什么？</div>
+  <ul class="quiz-options">
+    <li><button onclick="ans('q1',this,false)">基金经理收取了过高的管理费</button></li>
+    <li><button onclick="ans('q1',this,false)">基金公布的回报数据存在虚假</button></li>
+    <li><button onclick="ans('q1',this,true)">投资者倾向于在市场高点申购、低点赎回，导致实际获得的资金加权回报低于基金的时间加权回报</button></li>
+    <li><button onclick="ans('q1',this,false)">通货膨胀侵蚀了投资者的购买力</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-fb"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">你在 50 元买入一只基金，现在它涨到了 70 元。但另一只你没买的基金同期涨了 80%。你决定卖掉手中的基金去追买那只"更强"的。这主要体现了哪种偏差？</div>
+  <ul class="quiz-options">
+    <li><button onclick="ans('q2',this,false)">损失厌恶——你害怕已有的收益消失</button></li>
+    <li><button onclick="ans('q2',this,true)">近因偏差——你将最近的强劲表现外推为未来的持续趋势</button></li>
+    <li><button onclick="ans('q2',this,false)">锚定效应——你以买入价作为参考点</button></li>
+    <li><button onclick="ans('q2',this,false)">处置效应——你过早卖出了盈利头寸</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-fb"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">以下哪种做法能最有效地系统性对抗行为偏差，而无需依赖投资者在市场恐慌时保持情绪稳定？</div>
+  <ul class="quiz-options">
+    <li><button onclick="ans('q3',this,false)">每天阅读财经新闻，保持对市场的深入了解</button></li>
+    <li><button onclick="ans('q3',this,false)">只投资自己深入研究过的行业，避免投资陌生领域</button></li>
+    <li><button onclick="ans('q3',this,true)">在市场平静时提前写好投资政策声明，设定配置目标和再平衡规则，在波动时机械执行规则而非临时决策</button></li>
+    <li><button onclick="ans('q3',this,false)">在市场下跌超过 20% 时减仓，等反弹后再买回</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-fb"></div>
+</div>
+
+<div class="lesson-footer">
+  <p><strong>核心参考：</strong> Kahneman, D. (2011). <em>Thinking, Fast and Slow</em>（中文版：《思考，快与慢》）— 行为金融学最重要的底层理论著作，强烈推荐阅读。Morningstar "Mind the Gap" 年度报告 — 行为差距的年度实证数据。</p>
+  <p style="margin-top:0.75rem;">
+    <strong>上一课：</strong> <a href="finance-0004-rebalancing.html">第04课 — 再平衡</a> &nbsp;·&nbsp;
+    <strong>下一课：</strong> <a href="finance-0006-implementation.html">第06课 — 落地实施：中国投资者的具体工具选择</a>
+  </p>
+  <div class="lesson-nav">
+    <a href="../reference/glossary.html">📖 术语表</a>
+    <a href="../reference/">📚 参考文档</a>
+  </div>
+  <p style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem;">
+    💬 <strong>有问题随时问。</strong> 想知道如何向家人解释为什么不应该追涨杀跌？或者如何设计一个适合自己的投资政策声明？直接问。
+  </p>
+</div>
+
+<script>
+  const feedback = {
+    q1: {
+      t: '✓ 正确！这正是 Morningstar "Mind the Gap" 报告的核心发现。基金回报是时间加权的（假设完整持有期），而投资者实际回报是资金加权的（考虑了申购/赎回时机）。两者的差异完全来自投资者的择时行为——在高点追涨买入、在低点割肉卖出，导致资金在涨幅最大的阶段反而没有参与，在亏损最大的阶段反而满仓持有。',
+      f: '✗ 再想想。管理费是固定的，不会造成投资者之间的差异。基金回报的时间加权 vs 投资者回报的资金加权——差异来自于哪个节点有更多或更少的钱在市场里？'
+    },
+    q2: {
+      t: '✓ 正确！近因偏差（Recency Bias）是这里的核心：你看到那只基金最近涨了 80%，就认为它未来也会继续跑赢——把最近的业绩当成了未来的预测。事实上，"过去业绩不代表未来表现"是资产管理中最重要的警示，而近因偏差让我们本能地忽视它。注意：卖掉盈利的基金也有处置效应成分，但追买"近期强势"这个动机更核心地指向近因偏差。',
+      f: '✗ 再想想。你的行动的主要驱动是什么？是那只基金"最近涨了很多"这个信息。你在预测什么？你在假设近期趋势会继续——这是哪种偏差？'
+    },
+    q3: {
+      t: '✓ 正确！这就是"系统优于意志力"的核心思路。投资政策声明（IPS）+ 预设规则，将决策权从情绪激动时的"现在的你"转移到了市场平静时的"过去的你"。当市场恐慌时，你不需要判断该不该卖——规则已经替你决定了。这是行为金融学给出的最实用、最可靠的对抗偏差的系统性方法。',
+      f: '✗ 再想想。哪个选项能在你情绪最激动的时候，保证你不做出坏决策——即使你当时很恐惧、很贪婪？靠知识和自制力，还是靠提前设定的规则？'
+    }
+  };
+
+  function ans(qid, btn, correct) {
+    const quiz = document.getElementById(qid);
+    quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) {
+      quiz.querySelectorAll('button').forEach(b => {
+        if (b.getAttribute('onclick')?.includes('true')) b.classList.add('correct');
+      });
+    }
+    const fb = document.getElementById(qid + '-fb');
+    fb.textContent = feedback[qid][correct ? 't' : 'f'];
+    fb.style.color = correct ? '#065f46' : '#991b1b';
+  }
+</script>
+
+</body>
+</html>
