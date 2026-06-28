@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配置决定命运 — 财富课程 #01</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .asset-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      gap: 1rem;
+    }
+    .asset-bar .label {
+      width: 140px;
+      font-size: 0.85rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1;
+      background: var(--border);
+      border-radius: 4px;
+      height: 22px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+    .bar-return {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-width: 70px;
+      text-align: right;
+    }
+    .big-stat {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .big-stat .number {
+      font-size: 5rem;
+      font-weight: bold;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .big-stat .caption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .three-layers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .layer {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+    .layer.primary { border-color: var(--accent); border-width: 2px; }
+    .layer-rank {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--border);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1;
+      min-width: 2rem;
+    }
+    .layer.primary .layer-rank { color: var(--accent); }
+    .layer-content h4 { font-size: 0.95rem; margin: 0 0 0.3rem; color: var(--accent); }
+    .layer-content p { margin: 0; font-size: 0.85rem; color: #374151; line-height: 1.5; }
+    .horizon-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 1.5rem 0;
+    }
+    .horizon-table th {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.6rem 0.75rem;
+      background: var(--accent);
+      color: white;
+      text-align: left;
+    }
+    .horizon-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .horizon-table tr:nth-child(even) td { background: white; }
+    .risk-high { color: #dc2626; font-weight: bold; }
+    .risk-low  { color: var(--success); font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="lesson-meta">
+    <span class="lesson-number">财富课程 #01</span>
+    &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论
+  </div>
+
+  <h1>配置决定命运</h1>
+  <p style="font-size:1.1rem; color:var(--muted); margin-bottom:2rem; font-family:'Helvetica Neue',Arial,sans-serif;">
+    为什么你的分配决策比你选的股票更重要
+  </p>
+
+  <p>大多数投资者把90%的精力花在选股上——研究财报、追踪赛道、等待时机。然而，数十年的学术研究给出了一个反直觉的答案：</p>
+
+  <div class="big-stat">
+    <div class="number">~90%</div>
+    <div class="caption">
+      长期投资组合回报波动，由<strong style="color:var(--accent);">资产配置决策</strong>决定<br>
+      而非选股，也非择时<br>
+      <em style="font-size:0.8rem;">— Brinson, Hood &amp; Beebower, <a href="https://doi.org/10.2469/faj.v47.n3.38" target="_blank">Financial Analysts Journal, 1991</a></em>
+    </div>
+  </div>
+
+  <p>这不是说选股毫无意义。它的意思是：<strong>你把钱分配在哪几类大资产之间，是决定你财富长期轨迹的最关键一步</strong>——远比你选了哪只基金或哪支股票更重要。</p>
+
+  <h2>三个投资决策层次</h2>
+
+  <p>每个投资者都在做三类决策。研究表明，它们对最终结果的贡献差距悬殊：</p>
+
+  <div class="three-layers">
+    <div class="layer primary">
+      <div class="layer-rank">①</div>
+      <div class="layer-content">
+        <h4>资产配置 — 决定性因素</h4>
+        <p>决定把资金分配在哪几大类资产上（股票、债券、现金、房地产……）以及各占多少比例。这是长期回报的主要驱动器。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-rank">②</div>
+      <div class="layer-content">
+        <h4>证券/基金选择 — 影响有限</h4>
+        <p>在已定的资产类别内，选择具体的产品。研究显示，主动选股者长期跑赢指数的概率极低，且无法持续。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-rank">③</div>
+      <div class="layer-content">
+        <h4>市场择时 — 几乎无效</h4>
+        <p>试图判断市场涨跌时机，高卖低买。学术研究和基金业绩数据一致表明：没有人能长期做到。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">隐藏的第四因素</div>
+    <strong>成本控制</strong>往往被忽视。管理费、税费、买卖价差的复利效应，几十年后可以吞噬你数十万甚至数百万的财富。低成本是资产配置策略的必要条件。
+  </div>
+
+  <h2>六大资产类别</h2>
+
+  <p>资产配置的起点是理解各大类资产的<strong>风险-回报特征</strong>。下图显示美国市场历史长期数据（仅供参考，历史不代表未来）：</p>
+
+  <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin:1.5rem 0;">
+    <p style="font-size:0.8rem;color:var(--muted);font-family:sans-serif;margin-bottom:1.25rem;margin-top:0;">
+      历史长期年化回报（税前，名义值）→ 条形越长 = 回报越高，波动也越大
+    </p>
+
+    <div class="asset-bar">
+      <span class="label">新兴市场股票</span>
+      <div class="bar-track"><div class="bar-fill" style="width:92%;background:#e94560;"></div></div>
+      <span class="bar-return">≈ 10–12%</span>
+    </div>
+    <div class="asset-bar">
+      <span class="label">发达市场股票</span>
+      <div class="bar-track"><div class="bar-fill" style="width:80%;background:#0f3460;"></div></div>
+      <span class="bar-return">≈ 8–10%</span>
+    </div>
+    <div class="asset-bar">
+      <span class="label">房地产（REITs）</span>
+      <div class="bar-track"><div class="bar-fill" style="width:65%;background:#1e88e5;"></div></div>
+      <span class="bar-return">≈ 7–9%</span>
+    </div>
+    <div class="asset-bar">
+      <span class="label">大宗商品</span>
+      <div class="bar-track"><div class="bar-fill" style="width:38%;background:#f59e0b;"></div></div>
+      <span class="bar-return">≈ 3–5%</span>
+    </div>
+    <div class="asset-bar">
+      <span class="label">政府/投资级债券</span>
+      <div class="bar-track"><div class="bar-fill" style="width:28%;background:#059669;"></div></div>
+      <span class="bar-return">≈ 2–4%</span>
+    </div>
+    <div class="asset-bar">
+      <span class="label">现金/货币基金</span>
+      <div class="bar-track"><div class="bar-fill" style="width:12%;background:#9ca3af;"></div></div>
+      <span class="bar-return">≈ 0–2%</span>
+    </div>
+
+    <p style="font-size:0.75rem;color:var(--muted);font-family:sans-serif;margin-top:1rem;margin-bottom:0;">
+      来源综合：Vanguard, Morningstar, Damodaran NYU 历史数据。各类别波动率也随预期回报同向升高。
+    </p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">铁律</div>
+    <strong>更高的预期回报，必然对应更高的短期波动风险。</strong>没有"高回报低风险"的免费午餐。资产配置的核心艺术是：在你真正能够承受的风险范围内，争取尽可能高的长期回报。
+  </div>
+
+  <h2>时间视野：最被低估的变量</h2>
+
+  <p>同样是投资股票，持有1年和持有30年，"风险"是完全不同的概念：</p>
+
+  <table class="horizon-table">
+    <thead>
+      <tr>
+        <th>持有期</th>
+        <th>历史最大亏损（美股）</th>
+        <th>对长期目标的风险</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1 年</td>
+        <td class="risk-high">约 −52%（2008–09）</td>
+        <td class="risk-high">极高</td>
+      </tr>
+      <tr>
+        <td>5 年</td>
+        <td class="risk-high">约 −25%（滚动5年）</td>
+        <td>中等</td>
+      </tr>
+      <tr>
+        <td>10 年</td>
+        <td>约 −1%（极少见）</td>
+        <td>较低</td>
+      </tr>
+      <tr>
+        <td>20 年+</td>
+        <td class="risk-low">历史上从未亏损（全球指数）</td>
+        <td class="risk-low">极低</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>时间视野越长，股票相对债券的优势越清晰。这是为什么养老金基金和大学捐赠基金敢于持有大量股票——它们的负债期限非常长。</p>
+
+  <div class="callout warning">
+    <div class="callout-title">警示：流动性决定上限</div>
+    如果你<strong>3–5年内需要动用这笔资金</strong>，就不应该将其投入股票——无论理论上你多么相信股票长期胜出。你真正的风险承受能力，由你的流动性需求决定，而非你的心理预期。
+  </div>
+
+  <h2>练习：检验你的理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">1. 根据 Brinson、Hood 和 Beebower 的研究，长期投资组合回报波动的最大决定因素是？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q1',false)">选择了哪些具体股票或基金</button></li>
+      <li><button onclick="answer(this,'q1',true)">各大资产类别之间的配置比例</button></li>
+      <li><button onclick="answer(this,'q1',false)">判断进出市场的时机</button></li>
+      <li><button onclick="answer(this,'q1',false)">投资者的个人风险偏好</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">2. 一位35岁的投资者，计划30年后退休，今年股市下跌了25%。她最应该怎么做？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q2',false)">立即减仓，等市场企稳后再重新入场</button></li>
+      <li><button onclick="answer(this,'q2',false)">将全部资产转入债券，先保本再说</button></li>
+      <li><button onclick="answer(this,'q2',true)">将下跌视为正常波动，坚持既定的长期配置计划</button></li>
+      <li><button onclick="answer(this,'q2',false)">暂停定投，等市场给出更清晰的信号</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">3. 你打算3年后用这笔钱买房。以下哪种配置最合适？</div>
+    <ul class="quiz-options">
+      <li><button onclick="answer(this,'q3',false)">100% 投入股票指数基金，追求最高回报</button></li>
+      <li><button onclick="answer(this,'q3',false)">50% 股票 + 50% 债券，适度平衡</button></li>
+      <li><button onclick="answer(this,'q3',true)">以现金和短期债券为主，优先保障流动性</button></li>
+      <li><button onclick="answer(this,'q3',false)">投入黄金，对冲市场不确定性</button></li>
+    </ul>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+
+  <h2>推荐阅读</h2>
+
+  <ul style="list-style:disc;padding-left:1.5rem;">
+    <li style="margin-bottom:0.75rem;">
+      <strong>首要推荐：</strong>
+      <a href="https://www.vanguard.com/pdf/ISGGPEA.pdf" target="_blank">Vanguard《投资成功原则》（免费PDF）</a>
+      — 权威、简明，适合作为本系列的基础读物
+    </li>
+    <li style="margin-bottom:0.75rem;">
+      William Bernstein,《<strong>聪明的资产配置者</strong>》（The Intelligent Asset Allocator）
+      — 个人投资者必读，将理论转化为可执行方案
+    </li>
+    <li>
+      <a href="https://doi.org/10.2469/faj.v47.n3.38" target="_blank">Brinson, Hood &amp; Beebower (1991)</a>
+      — 原始研究论文，"90%"结论的一手来源
+    </li>
+  </ul>
+
+  <div class="callout success">
+    <div class="callout-title">下一课预告</div>
+    <strong>财富课程 #02</strong>：现代投资组合理论（MPT）——马科维茨如何用数学证明分散化的价值，以及"有效边界"到底是什么意思。<br><br>
+    有任何疑问或想深入探讨的地方，随时向我提问——我是你的老师，随时可以帮你答疑。
+  </div>
+
+  <div class="lesson-footer">
+    <div class="lesson-nav">
+      <a href="finance-0002-modern-portfolio-theory.html">下一课 →</a>
+      <a href="../reference/">参考文档</a>
+    </div>
+    <p style="margin-top:1rem;">财富课程 #01 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 核心理论与成功实践</p>
+  </div>
+
+  <script>
+    const feedback = {
+      q1: {
+        correct: '✓ 正确！Brinson 1991 年研究分析了91个大型养老金基金10年的数据，发现资产配置解释了约91.5%的投资组合回报波动。这是"配置优先"策略的核心学术依据。',
+        wrong:   '✗ 再想想。Brinson 的研究专门比较了这三个因素，结论出乎大多数人意料——是哪个因素贡献最大？'
+      },
+      q2: {
+        correct: '✓ 正确！30年的时间视野意味着今年的25%下跌在退休时几乎无关紧要。历史上，任何多元化股票组合持有20年以上均实现了正回报。恐慌性撤出才是真正的风险。',
+        wrong:   '✗ 这从情感上可以理解，但与时间视野原则相悖。对一位30年视野的投资者而言，短期下跌往往是机会，而非信号。你真正在规避的风险是什么？'
+      },
+      q3: {
+        correct: '✓ 正确！3年时间太短，股票在这个期限内可能不会完全恢复。买房是明确的流动性需求——这笔钱不应该承受高风险，现金和短期债券才是正确选择。',
+        wrong:   '✗ 再想想：这笔钱3年内就要用到，买房是一个确定的时间节点。如果市场在第2年下跌50%，你能等它回来再买房吗？'
+      }
+    };
+
+    function answer(btn, qid, correct) {
+      const quiz = document.getElementById(qid);
+      quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = document.getElementById(qid + '-fb');
+      fb.textContent = feedback[qid][correct ? 'correct' : 'wrong'];
+      fb.style.color = correct ? '#065f46' : '#991b1b';
+    }
+  </script>
+
+</body>
+</html>
