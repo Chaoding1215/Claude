@@ -39,3 +39,32 @@ if [ ! -f "$ENGINE" ]; then
 else
   echo "last30days engine already present."
 fi
+
+# Install the full ppt-master engine if the core script is missing
+PPT_ENGINE="$HOME/.claude/skills/ppt-master/scripts/project_manager.py"
+if [ ! -f "$PPT_ENGINE" ]; then
+  echo "ppt-master engine not found — downloading from GitHub..."
+  TMP_TAR=$(mktemp)
+  TMP_DIR=$(mktemp -d)
+  if curl -fsSL -o "$TMP_TAR" \
+      "https://codeload.github.com/hugohe3/ppt-master/tar.gz/refs/heads/main"; then
+    tar -xzf "$TMP_TAR" -C "$TMP_DIR" 2>/dev/null
+    EXTRACTED=$(find "$TMP_DIR" -maxdepth 1 -type d -name "ppt-master-*" | head -1)
+    if [ -n "$EXTRACTED" ]; then
+      for dir in scripts templates references workflows requirements.txt; do
+        if [ -e "$EXTRACTED/$dir" ]; then
+          cp -r "$EXTRACTED/$dir" "$HOME/.claude/skills/ppt-master/"
+        fi
+      done
+      echo "ppt-master engine installed successfully."
+    else
+      echo "WARNING: could not find ppt-master content in tarball — engine not installed."
+    fi
+  else
+    echo "WARNING: failed to download ppt-master engine."
+  fi
+  rm -f "$TMP_TAR"
+  rm -rf "$TMP_DIR"
+else
+  echo "ppt-master engine already present."
+fi
