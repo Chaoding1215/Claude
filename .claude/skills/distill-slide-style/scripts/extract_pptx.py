@@ -16,6 +16,9 @@ import sys
 from pathlib import Path
 
 from pptx import Presentation
+from pptx.enum.shapes import PP_PLACEHOLDER
+
+TITLE_PLACEHOLDER_TYPES = (PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE)
 
 LAYOUT_KEYWORDS = {
     "toc": ("agenda", "contents", "目录", "议程"),
@@ -49,10 +52,19 @@ def rgb_hex(color_format):
 def extract_slide(slide) -> dict:
     shapes = list(slide.shapes)
     colors, fonts, font_sizes, texts = [], [], [], []
+    sized_texts = []  # (size_pt, text) pairs — fallback title guess if there's no title placeholder
+    placeholder_title = None
     has_chart = has_table = has_picture = False
     chart_type = None
 
     for shape in shapes:
+        if (
+            placeholder_title is None
+            and getattr(shape, "is_placeholder", False)
+            and shape.placeholder_format.type in TITLE_PLACEHOLDER_TYPES
+            and getattr(shape, "has_text_frame", False)
+        ):
+            placeholder_title = shape.text_frame.text.strip()[:80]
         if getattr(shape, "has_chart", False):
             has_chart = True
             try:
@@ -67,7 +79,7 @@ def extract_slide(slide) -> dict:
             fill_color = rgb_hex(shape.fill.fore_color)
             if fill_color:
                 colors.append(fill_color)
-        except (AttributeError, ValueError):
+        except (AttributeError, TypeError, ValueError):
             pass
         if getattr(shape, "has_text_frame", False):
             for para in shape.text_frame.paragraphs:
@@ -81,8 +93,16 @@ def extract_slide(slide) -> dict:
                         colors.append(color)
                     if run.text:
                         texts.append(run.text)
+                        size_pt = run.font.size.pt if run.font.size else 0
+                        sized_texts.append((size_pt, run.text.strip()))
 
     text = " ".join(texts).strip()
+    if placeholder_title:
+        title_text = placeholder_title
+    elif sized_texts:
+        title_text = max(sized_texts, key=lambda st: st[0])[1][:80]
+    else:
+        title_text = ""
     return {
         "shape_count": len(shapes),
         "has_chart": has_chart,
@@ -93,6 +113,7 @@ def extract_slide(slide) -> dict:
         "fonts": fonts,
         "font_sizes": font_sizes,
         "word_count": len(text),
+        "title_text": title_text,
         "layout_type": classify_slide(len(shapes), text, has_chart, has_table),
     }
 
