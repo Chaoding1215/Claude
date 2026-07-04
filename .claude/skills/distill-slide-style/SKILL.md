@@ -2,7 +2,6 @@
 name: distill-slide-style
 version: "1.0.0"
 description: Distill a style specification from a corpus of PPT/PDF samples — layout patterns, color roles, typography, chart preferences, density limits, narrative flow. Use when the user wants to mine, extract, or update design norms from a batch of decks or documents.
-disable-model-invocation: true
 ---
 
 Mine a sample corpus into a versioned, evidence-cited style specification. Incremental and repeatable — re-running after new samples arrive should only touch what changed.
