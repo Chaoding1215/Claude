@@ -1,8 +1,4 @@
-# ppt-master engine is vendored (see .claude/skills/ppt-master/) except this
-# one 44MB folder of optional preview-comparison PNGs — a visual aid for
-# presenting image-rendering candidates, not required to run the pipeline.
-# Re-fetched on demand by session-start.sh's fallback download if ever needed.
-.claude/skills/ppt-master/references/ai-image-comparison/
+# ppt-master engine is fully vendored (see .claude/skills/ppt-master/)
 __pycache__/
 *.pyc
 .distill-cache/
