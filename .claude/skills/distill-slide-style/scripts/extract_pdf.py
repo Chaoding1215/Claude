@@ -8,7 +8,11 @@ Mirrors extract_pptx.py: same cache-by-hash behaviour, same raw JSON shape
 per page, so distill-slide-style step 2's profiling prompt can treat PPT
 and PDF sources uniformly. Chart-vs-picture cannot be distinguished from
 PDF structure alone — has_chart is always False here and gets flagged for
-manual review in the profile step if a page looks chart-like.
+manual review in the profile step if a page looks chart-like. has_table
+uses pdfplumber's default line-based detector, which is known to
+false-positive on pages with aligned text blocks that aren't real tables
+— treat table counts as a weaker signal than the pptx script's, which
+reads the actual shape type.
 """
 import argparse
 import hashlib
@@ -62,7 +66,7 @@ def extract_page(page) -> dict:
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
-        "word_count": len(text),
+        "char_count": len(text),
         "layout_type": classify_page(text, font_sizes, len(words)),
     }
 

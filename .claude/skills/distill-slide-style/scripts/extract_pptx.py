@@ -112,7 +112,7 @@ def extract_slide(slide) -> dict:
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
-        "word_count": len(text),
+        "char_count": len(text),
         "title_text": title_text,
         "layout_type": classify_slide(len(shapes), text, has_chart, has_table),
     }
