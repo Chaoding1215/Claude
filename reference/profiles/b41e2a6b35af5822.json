@@ -1,0 +1,33 @@
+{
+  "source": "华为BLM模型管理：从战略到执行落地-Template.pptx",
+  "layout_pattern": "24 slides: opens with a cover/context slide, then a long sequential walkthrough of the BLM (Business Leadership Model) framework stage by stage, closing with a discussion prompt. One slide (21, '业务设计是SP落脚点...') was flagged 'title' by the shape-count heuristic but is actually a section-divider mid-deck, not the deck title — the classifier's shape_count<=2/char_count<40 rule misfires on short-text content slides. Same headline-as-title convention as the other two samples.",
+  "color_role_mapping": {
+    "C00000": "accent/emphasis red, most frequent (47) — consistent with both other samples",
+    "0070C0": "secondary accent blue (36) — a blue not seen in the other two decks' top colors",
+    "002060": "dark navy, likely a heading or panel color",
+    "0A0B0B": "near-black body text",
+    "000000": "pure black, less frequent here than in the other decks",
+    "F0F8F9": "very light background tint"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 24.0, "usage": "headline/takeaway sentence, matches SD-WAN deck's title size" },
+    { "level": "sub-title", "size_pt": 20.0, "usage": "secondary heading" },
+    { "level": "body-emphasis", "size_pt": 16.0, "usage": "emphasized body/label text" },
+    { "level": "body-emphasis-2", "size_pt": 14.0, "usage": "most frequent size (55) — dominant label/body size, matches SD-WAN deck" },
+    { "level": "body", "size_pt": 12.0, "usage": "standard body text, second most frequent (36)" },
+    { "level": "body-fine", "size_pt": 12.75, "usage": "minor body variant" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": [],
+    "tables": "2 of 24 slides (8%) — rare",
+    "note": "almost entirely image-driven (20/24 slides have pictures) — diagrams and frameworks appear to be custom graphics/screenshots rather than native charts or tables, same pattern as the SD-WAN deck."
+  },
+  "text_density_rule": "21-505 characters per slide (mean ~168), with several very short slides (21, 24, 26, 57, 60-69 characters) interspersed among dense framework-explanation slides (300-500+ characters). No fixed cap; density spikes on slides introducing a new framework component.",
+  "logic_flow": "Same headline-as-conclusion title convention as the SD-WAN deck (e.g. '看行业：多年积累+随时刷新...'). Overall arc: strategic context -> BLM framework stages in sequence (战略洞察 -> 业务设计 -> 关键任务) -> closing discussion prompt on execution. A didactic, framework-teaching structure rather than a data-led argument.",
+  "image_treatment": "51 images across 24 slides (~2.1/slide), concentrated bottom-center (23) and middle-center (18) — images sit anchored to the lower/center of the slide beneath the argument text, essentially never full-bleed. 22 of 51 (43%) carry an adjacent label (e.g. brand-name lists like '星巴克 淘宝 携程 亚马逊' under a framework diagram) — used to annotate examples within a diagram, not as photo captions.",
+  "citation_style": "Zero citation markers detected. Framework content (BLM stages, brand examples) is presented without attributing any external source — consistent with this being internal management-training material rather than externally-sourced research.",
+  "argument_structure": "Strongly bimodal: most substantive slides carry just 2-4 content points (short framework-navigation slides), with a minority running 16-40 (dense explanation slides) — median 6, but the median understates the real structure, which alternates between terse and dense rather than clustering near the middle.",
+  "diagram_convention": "13 of 24 slides (54%) have ≥3 non-text diagram shapes forming a 2D grid, e.g. slide 19 ('创新领域...', 29 PICTURE shapes representing brand logos — 星巴克/淘宝/携程/亚马逊/迪斯尼/麦当劳/宜家 — arranged in a categorized logo wall, plus a handful of AUTO_SHAPE grouping boxes). No single-row/column sequence diagrams found. Every shape in this deck is named 'Google Shape' rather than a real PowerPoint name, confirming (via the new authoring_tool field) this file was exported from Google Slides, not authored natively in PowerPoint.",
+  "branding_footer": "One inline mention of '保密' (confidential) found mid-sentence in body text (slide 15, '...依据对手现状和SP确定竞争策略（保密）') — this is a content annotation about a competitive-analysis method, not a page-level footer/classification marker. No actual footer, page-number, or confidentiality marker convention found anywhere in this sample.",
+  "data_quality_caveats": "Same layout_type classifier limitation as the SD-WAN sample: it mislabels one mid-deck divider slide as 'title'. Rely on title_text and slide position, not the layout_type field, for structural claims in this deck."
+}

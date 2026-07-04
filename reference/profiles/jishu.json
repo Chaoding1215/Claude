@@ -1,0 +1,30 @@
+{
+  "source": "技术风格.pdf",
+  "layout_pattern": "17 pages, all classified as generic 'content' — no title, TOC, or closing detected. Likely a mid-document excerpt or a deck whose title/agenda pages didn't match the keyword classifier (or weren't included in the export).",
+  "color_role_mapping": {
+    "1D1D1A": "primary text color, dominant (7577) — matches 中基层交流风格.pdf and the pptx samples",
+    "C00000": "accent/emphasis red (2210) — consistent with 4 of the other 5 samples",
+    "1D1D1B": "near-duplicate of 1D1D1A, likely a rounding/rendering variant of the same near-black",
+    "FF0000": "pure red, distinct from C00000 accent — same secondary-red pattern as 中基层交流风格.pdf",
+    "498624": "green accent, not seen elsewhere in the corpus — possibly a status/success indicator specific to technical content"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 24.0, "usage": "page headline (568 occurrences — lower than other samples, consistent with fewer/no dedicated title pages)" },
+    { "level": "body-emphasis", "size_pt": 16.0, "usage": "emphasized subheading (1470)" },
+    { "level": "body", "size_pt": 12.0, "usage": "dominant body size (2942)" },
+    { "level": "body-secondary", "size_pt": 11.0, "usage": "secondary body text (1455)" },
+    { "level": "caption", "size_pt": 9.0, "usage": "captions (2284, second most frequent overall)" },
+    { "level": "micro", "size_pt": 8.0, "usage": "fine print/footnotes (1236)" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": [],
+    "tables": "5 of 17 pages (29%) — lower than the other two PDF samples, though still subject to the pdfplumber false-positive caveat",
+    "note": "no native charts; universal picture use (17/17) — the most image-reliant sample in the corpus, consistent with a technical deck relying on diagrams/screenshots over data tables."
+  },
+  "text_density_rule": "170-1677 characters per page (mean ~874), with two notably sparse pages (170, 306 chars) likely acting as section-break or diagram-only pages amid denser explanation pages.",
+  "logic_flow": "Cannot be reconstructed from title text (same PDF extraction gap as the other two PDF samples). No structural markers (title/TOC/closing) detected at all, unlike the other two PDFs — this may be a partial/excerpted document rather than a complete standalone deck.",
+  "image_treatment": "218 embedded raster objects across 17 pages (~13/page, same icon/texture-fragment caveat as the other PDFs). Zone distribution is the most even in the corpus (no single zone dominates), with middle-center as the largest single cluster (47). 129 of 218 (59%) fall within the caption margin — the highest captioned ratio in the corpus, e.g. 'HCS Installed', 'Guinée –B2B Cloud（HCS 8.2）' — short technical/deployment labels beneath diagrams, consistent with an engineering-reference genre.",
+  "citation_style": "Zero citation markers detected — technical specifications and deployment figures are presented as direct statements, uncited, matching the internal/technical-genre pattern seen in the other uncited samples (SD-WAN, BLM).",
+  "branding_footer": "'{page number} Huawei Confidential' appears on every one of 17 pages (e.g. '1 Huawei Confidential', '17 Huawei Confidential') — a clean, universal footer convention in this sample, and the strongest branding-footer signal in the whole corpus. Contrasts sharply with the other two PDF samples (same PowerPoint origin per file metadata), which carry no footer marker at all — this convention appears to be specific to this sample/genre, not corpus-wide.",
+  "data_quality_caveats": "Same PDF title-text gap as the other two PDF samples. The complete absence of any detected title/TOC/closing page is itself a flag — confirm with the user whether this PDF is a full deck or an excerpt before treating its layout_pattern (or lack thereof) as representative."
+}
