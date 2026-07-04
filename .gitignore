@@ -1,2 +1,5 @@
 # Third-party tool installs (large, regenerable from source) — not repo content
 .claude/skills/ppt-master/
+__pycache__/
+*.pyc
+.distill-cache/
