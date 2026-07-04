@@ -44,7 +44,7 @@ norms and output an executable style specification with these sections:
      supplementary material when the gap is proprietary or a judgment call
      only they can make. Never pad with filler just to hit a number.
 
-If a prior spec is provided below (`docs/style-spec-v{N-1}.md`), also output:
+If a prior spec version is provided below (e.g. `reference/style-spec-v{N-1}.md`), also output:
 
 6. **Changelog** — which rules flipped or gained a new exception versus the
    prior version, and which new sample caused the change. Flag every flip
