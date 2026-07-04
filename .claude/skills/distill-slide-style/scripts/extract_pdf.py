@@ -38,6 +38,10 @@ CITATION_KEYWORDS = (
     "source:", "source :",
 )
 
+BRANDING_KEYWORDS = (
+    "机密", "保密", "版权所有", "confidential", "copyright", "proprietary",
+)
+
 
 def classify_image_position(img, page_w, page_h) -> dict:
     coverage = (img["width"] * img["height"]) / (page_w * page_h)
@@ -64,10 +68,10 @@ def find_caption(img, words, page_h) -> str:
     return " ".join(w["text"] for w in below)[:80]
 
 
-def find_citations(text: str) -> list:
+def find_keyword_hits(text: str, keywords) -> list:
     lowered = text.lower()
     hits = []
-    for kw in CITATION_KEYWORDS:
+    for kw in keywords:
         idx = lowered.find(kw.lower())
         if idx != -1:
             hits.append({"keyword": kw, "snippet": text[max(0, idx - 10):idx + 90].strip()})
@@ -115,7 +119,8 @@ def extract_page(page) -> dict:
         "has_picture": len(images) > 0,
         "image_count": len(images),
         "images": image_details,
-        "citations": find_citations(text),
+        "citations": find_keyword_hits(text, CITATION_KEYWORDS),
+        "branding_markers": find_keyword_hits(text, BRANDING_KEYWORDS),
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
@@ -127,7 +132,8 @@ def extract_page(page) -> dict:
 def extract_profile(path: Path) -> dict:
     with pdfplumber.open(str(path)) as pdf:
         pages = [extract_page(p) for p in pdf.pages]
-    return {"source": path.name, "slide_count": len(pages), "slides": pages}
+        producer = pdf.metadata.get("Producer") or pdf.metadata.get("Creator") or "unknown"
+    return {"source": path.name, "authoring_tool": producer, "slide_count": len(pages), "slides": pages}
 
 
 def content_hash(path: Path) -> str:

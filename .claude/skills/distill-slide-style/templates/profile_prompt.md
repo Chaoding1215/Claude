@@ -30,6 +30,23 @@ the JSON — with exactly these fields:
   internal/proprietary figures are uncited" or "no citation markers found in
   this sample." Absence of citations is itself a finding — report it, don't
   skip the field.
+- `argument_structure` (pptx sources only — omit for PDF, don't guess): string.
+  The typical number of content points (`content_paragraph_count`) on a
+  substantive slide, and whether it's flat or bimodal (e.g. "median 18 points
+  per slide, fairly flat" vs "bimodal — most slides carry 2-3 navigation
+  points, a minority carry 20+ in a dense explanation slide").
+- `diagram_convention` (pptx sources only — omit for PDF): string. What
+  `diagram_geometry` reveals about non-text diagram shapes, interpreted using
+  the slide's title/text as context — e.g. "recurring 2D icon grids (4-8 rows
+  x 3-6 cols) used for capability/logo walls; no single-row or single-column
+  sequence diagrams found, so no evidence of funnel/timeline/process-arrow
+  conventions in this sample." The geometry alone can't distinguish a real
+  matrix from an unstructured scatter — use the nearby text to decide, and
+  say so if you can't tell.
+- `branding_footer`: string. Page-number/confidentiality/logo convention found
+  (`branding_markers`, `placeholders` of type `SLIDE_NUMBER`/`FOOTER`/`DATE`),
+  or its explicit absence — e.g. "'{page} Huawei Confidential' on every page"
+  or "no footer/branding marker found in this sample." Absence is a finding.
 
 Respond in the same language as the source deck's text. Ground every field in
 the extraction data — do not invent patterns the data doesn't support.

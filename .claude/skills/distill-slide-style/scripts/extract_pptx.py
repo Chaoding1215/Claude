@@ -13,10 +13,11 @@ import argparse
 import hashlib
 import json
 import sys
+import zipfile
 from pathlib import Path
 
 from pptx import Presentation
-from pptx.enum.shapes import PP_PLACEHOLDER
+from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 
 TITLE_PLACEHOLDER_TYPES = (PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE)
 
@@ -29,6 +30,65 @@ CITATION_KEYWORDS = (
     "数据来源", "资料来源", "图片来源", "来源：", "来源:", "引用自", "参考来源",
     "source:", "source :",
 )
+
+BRANDING_KEYWORDS = (
+    "机密", "保密", "版权所有", "confidential", "copyright", "proprietary",
+)
+
+DIAGRAM_SHAPE_TYPES = (
+    MSO_SHAPE_TYPE.AUTO_SHAPE, MSO_SHAPE_TYPE.PICTURE,
+    MSO_SHAPE_TYPE.FREEFORM, MSO_SHAPE_TYPE.GROUP,
+)
+
+
+def authoring_tool(path: Path) -> str:
+    """PowerPoint writes docProps/app.xml with an <Application> tag; exporters
+    from other tools (Google Slides, Keynote, ...) typically omit it and use
+    generic shape names instead -- both are useful, independent signals."""
+    with zipfile.ZipFile(path) as z:
+        if "docProps/app.xml" in z.namelist():
+            app_xml = z.read("docProps/app.xml").decode("utf-8", "ignore")
+            if "<Application>" in app_xml:
+                start = app_xml.index("<Application>") + len("<Application>")
+                end = app_xml.index("</Application>", start)
+                return app_xml[start:end]
+    return "unknown (no docProps/app.xml — likely exported from a non-PowerPoint tool)"
+
+
+def cluster(values: list, tolerance: float) -> list:
+    values = sorted(values)
+    clusters = []
+    for v in values:
+        if clusters and abs(v - clusters[-1][-1]) < tolerance:
+            clusters[-1].append(v)
+        else:
+            clusters.append([v])
+    return clusters
+
+
+def classify_diagram_geometry(shapes, slide_w, slide_h):
+    """Rough geometric descriptor for non-text decorative shapes (icons,
+    autoshapes, freeform diagram parts) -- reports row/column clustering,
+    not a semantic diagram type. Step 2 profiling should interpret this
+    alongside the slide's title/text to name the actual diagram convention
+    (matrix, process, pyramid, ...) -- this heuristic can't distinguish a
+    pyramid's tapering from a plain grid on its own."""
+    candidates = [s for s in shapes if s.shape_type in DIAGRAM_SHAPE_TYPES and s.left is not None]
+    if len(candidates) < 3:
+        return None
+    lefts = [s.left / slide_w for s in candidates]
+    tops = [s.top / slide_h for s in candidates]
+    n_cols = len(cluster(lefts, 0.05))
+    n_rows = len(cluster(tops, 0.05))
+    if n_rows == 1 and n_cols > 1:
+        arrangement = "horizontal-sequence"
+    elif n_cols == 1 and n_rows > 1:
+        arrangement = "vertical-stack"
+    elif n_rows > 1 and n_cols > 1:
+        arrangement = "grid"
+    else:
+        arrangement = "cluster"
+    return {"shape_count": len(candidates), "rows": n_rows, "cols": n_cols, "arrangement": arrangement}
 
 
 def classify_image_position(left, top, width, height, slide_w, slide_h) -> dict:
@@ -63,14 +123,14 @@ def find_caption(pic_shape, shapes, slide_h) -> str:
     return ""
 
 
-def find_citations(shapes) -> list:
+def find_keyword_hits(shapes, keywords) -> list:
     hits = []
     for shape in shapes:
         if not getattr(shape, "has_text_frame", False):
             continue
         text = shape.text_frame.text
         lowered = text.lower()
-        for kw in CITATION_KEYWORDS:
+        for kw in keywords:
             if kw.lower() in lowered:
                 hits.append({"keyword": kw, "snippet": text.strip()[:100]})
                 break
@@ -105,10 +165,12 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
     colors, fonts, font_sizes, texts = [], [], [], []
     sized_texts = []  # (size_pt, text) pairs — fallback title guess if there's no title placeholder
     placeholder_title = None
+    title_shape = None
     has_chart = has_table = has_picture = False
     chart_type = None
     images = []
     placeholders = []
+    content_paragraphs = 0
 
     for shape in shapes:
         if getattr(shape, "is_placeholder", False):
@@ -128,6 +190,7 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
             and getattr(shape, "has_text_frame", False)
         ):
             placeholder_title = shape.text_frame.text.strip()[:80]
+            title_shape = shape
         if getattr(shape, "has_chart", False):
             has_chart = True
             try:
@@ -154,6 +217,8 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
             pass
         if getattr(shape, "has_text_frame", False):
             for para in shape.text_frame.paragraphs:
+                if shape is not title_shape and para.text.strip():
+                    content_paragraphs += 1
                 for run in para.runs:
                     if run.font.size:
                         font_sizes.append(run.font.size.pt)
@@ -182,7 +247,10 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
         "has_picture": has_picture,
         "images": images,
         "placeholders": placeholders,
-        "citations": find_citations(shapes),
+        "citations": find_keyword_hits(shapes, CITATION_KEYWORDS),
+        "branding_markers": find_keyword_hits(shapes, BRANDING_KEYWORDS),
+        "content_paragraph_count": content_paragraphs,
+        "diagram_geometry": classify_diagram_geometry(shapes, slide_w, slide_h),
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
@@ -196,7 +264,12 @@ def extract_profile(path: Path) -> dict:
     prs = Presentation(str(path))
     slide_w, slide_h = prs.slide_width, prs.slide_height
     slides = [extract_slide(s, slide_w, slide_h) for s in prs.slides]
-    return {"source": path.name, "slide_count": len(slides), "slides": slides}
+    return {
+        "source": path.name,
+        "authoring_tool": authoring_tool(path),
+        "slide_count": len(slides),
+        "slides": slides,
+    }
 
 
 def content_hash(path: Path) -> str:
