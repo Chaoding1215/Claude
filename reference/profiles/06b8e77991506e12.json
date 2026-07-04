@@ -1,0 +1,33 @@
+{
+  "source": "华为SD-WAN高层主打胶片-Template.pptx",
+  "layout_pattern": "20 slides, all classified as generic 'content' (no distinct title/TOC/closing detected by shape-count heuristics) — but titles themselves reveal structure: opens with a cover slide, then a repeated section-divider title ('企业互联迈入5G+SD-WAN时代') recurs 3 times (slides 1, 5, 17), each time introducing a new sub-section. So the real pattern is: cover -> [divider + N content slides] x3 -> case study close. Section dividers are marked by a short repeated title phrase, not by a distinct layout.",
+  "color_role_mapping": {
+    "1D1D1A": "primary text color, most frequent (77) — near-black rather than pure black",
+    "000000": "secondary/pure black text (67), close second",
+    "C00000": "accent/emphasis red (57) — third most frequent, consistent with the other two samples",
+    "FFFFFF": "background or reversed text",
+    "666666": "muted secondary text",
+    "F2F2F2": "light panel/background fill"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 24.0, "usage": "slide headline/takeaway sentence" },
+    { "level": "sub-title", "size_pt": 16.0, "usage": "secondary headline or emphasized callout" },
+    { "level": "body-emphasis", "size_pt": 14.0, "usage": "most frequent size overall (65) — appears to be the dominant body/label size" },
+    { "level": "body", "size_pt": 12.0, "usage": "standard body text" },
+    { "level": "body-secondary", "size_pt": 11.0, "usage": "secondary body text" },
+    { "level": "caption", "size_pt": 10.0, "usage": "captions/fine print" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": [],
+    "tables": "none detected (0/20 slides)",
+    "note": "no native pptx charts or tables at all — heavy reliance on images (12/20 slides have pictures), meaning data visualization likely happens as embedded screenshots/graphics rather than editable chart objects. This is a meaningfully different pattern from the Telefonica deck (which used native tables heavily)."
+  },
+  "text_density_rule": "Wide variance: 14-370 characters per slide (mean ~163). Cover and section-divider slides are short (14-45 characters); content slides that carry a full argument run 150-370 characters. No fixed cap — density tracks whether a slide is a divider vs a substantive content slide.",
+  "logic_flow": "Headline-as-title throughout: nearly every slide's title is a full declarative sentence stating the slide's conclusion (e.g. '技术积累带来好的市场表现，良好市场表现反哺技术创新'), not a topic label. Overall arc: business/tech drivers -> Huawei's accumulated capability -> three technical highlights (with sub-proof points) -> customer case study close. This is the 'headline = conclusion' McKinsey-style pattern.",
+  "image_treatment": "44 images across 20 slides (~2.2/slide), spread across every zone with a heavy middle-center cluster (10) and secondary weight toward middle/bottom-right and bottom-left — consistent with a diagram-heavy deck where graphics sit beside or below argument text rather than as full-page hero shots (only 2 of 44 are full-bleed). 11 of 44 (25%) carry an adjacent label (e.g. '云化\\n2020年，85%企业业务上云' beneath an icon) — icon+short-label pairing, not editorial captions.",
+  "citation_style": "Zero citation markers detected anywhere in this deck. Every figure and claim (technical benchmarks, market stats) appears uncited — contrasts with the Telefonica deck, which cites at least its headline external figure.",
+  "argument_structure": "Substantive slides carry a median of 18 content points (range 4-30), fairly flat rather than bimodal — consistent with a pitch deck where each slide develops one point at similar depth, no sharp split between navigation and explanation slides the way the BLM deck shows.",
+  "diagram_convention": "16 of 20 slides (80% — the highest rate in the corpus) have ≥3 non-text diagram shapes forming a 2D grid arrangement, e.g. slide 2 ('商业驱动：更多的企业在转型过程中对网络提出更高诉求', 15 shapes, ~4x6) and slide 4 (17 shapes, ~6x5) — consistent with icon/capability walls illustrating market drivers. No single-row or single-column sequence diagrams found — no evidence of funnel/timeline-style conventions.",
+  "branding_footer": "No footer, page-number, or confidentiality marker found anywhere in this sample.",
+  "data_quality_caveats": "layout_type classifier produced only 'content' for every slide here — the shape-count/char-count heuristic doesn't distinguish cover/divider/case-study slides in this deck; title_text (from the actual title placeholder) is what actually reveals structure. Treat layout_pattern above as derived from title text, not from the layout_type field."
+}

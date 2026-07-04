@@ -1,0 +1,30 @@
+{
+  "source": "高层交流风格.pdf",
+  "layout_pattern": "24 pages: 1 title page, 3 TOC pages (unusual — a multi-page TOC, likely one per major section rather than a single agenda page), 20 content pages. This is the only sample so far with a detected TOC at all.",
+  "color_role_mapping": {
+    "FFC000": "primary accent — gold/amber, overwhelmingly dominant (2672 occurrences, ~4x the next color). Distinct from every other sample in this corpus, which favor C00000 (dark red).",
+    "FCC800": "secondary gold variant, likely gradient/hover shading of the primary accent",
+    "F3BE15": "tertiary gold variant",
+    "FFA700": "orange accent, adjacent to the gold family",
+    "D5EDFC": "light blue background tint",
+    "E7E6E6": "neutral gray background/divider"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 24.0, "usage": "page headline (1373 occurrences — very high for a title size, suggesting large headline text blocks, not just one-line titles)" },
+    { "level": "body-emphasis", "size_pt": 14.0, "usage": "emphasized body/subheading" },
+    { "level": "body", "size_pt": 12.0, "usage": "dominant body size (3227 — most frequent overall)" },
+    { "level": "body-secondary", "size_pt": 10.0, "usage": "secondary body text, close second (2492)" },
+    { "level": "caption", "size_pt": 9.0, "usage": "captions/footnotes" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": [],
+    "tables": "17 of 24 pages (71%) — the highest table-density sample in the corpus so far, though note the pdfplumber has_table detector can false-positive on aligned text blocks (see extract_pdf.py caveat) — this number is a weaker signal than the pptx-derived table counts.",
+    "note": "no native charts detected; heavy picture use (20/24) alongside heavy 'table' detection suggests dense data-grid layouts, consistent with a senior-leadership briefing that needs to pack comparative figures per page."
+  },
+  "text_density_rule": "95-1462 characters per page (the 3 TOC pages are the short outliers at 95 chars each). Content pages run consistently dense: 615-1462 characters, denser than either pptx deck in this corpus.",
+  "logic_flow": "Cannot be reconstructed from title text — the PDF extraction script doesn't capture a title-placeholder equivalent (no semantic title tagging in PDF structure), only font-size-based classification. Layout sequence (title -> TOC(x3) -> content) suggests a multi-section report structure, but the narrative arc within/across sections isn't recoverable from this extraction alone.",
+  "image_treatment": "477 embedded raster objects across 24 pages (~20/page) — but per the extraction script's caveat, pdfplumber counts every icon/logo/texture fragment individually, so this is not 20 real 'pictures' per page. Zone distribution is broad with a notable full-bleed cluster (20 occurrences) alongside heavy bottom-right/bottom-center weighting — reads as pages built on a full-page background graphic with smaller data-grid icons layered on top. 203 of 477 (43%) have adjacent text within the caption margin, but spot-checking the actual text ('-29% -30%', 'Enterprise business') shows these are data labels/callouts within infographics, not photo captions.",
+  "citation_style": "4 explicit citations found, all in the 'Source: X' format, all external market-research/financial sources: 'Source: Huawei financial report', 'Source: Roland Berger' (appears twice), 'Source: 2024 Omdia'. This is the strongest citation discipline in the corpus — every external competitive/market figure appears to carry a named source, consistent with a senior-leadership deck that needs its numbers to be defensible.",
+  "branding_footer": "No footer, page-number, or confidentiality marker found anywhere in this sample — notable contrast with 技术风格.pdf (same PowerPoint origin per file metadata), which carries 'Huawei Confidential' on every single page.",
+  "data_quality_caveats": "This is the only PDF sample profiled without a comparable title_text signal (a gap versus the pptx extraction script — worth closing before drawing firm conclusions about logic_flow for PDF sources). The gold/amber color scheme here is a striking outlier versus every other sample in the corpus — confirm this isn't a mis-extraction (e.g., a highlight/annotation layer) before treating it as a real 'senior-audience' convention; if confirmed, it may indicate the deck audience (高层 = senior leadership) drives a deliberately different palette from the C00000-based decks aimed at other audiences."
+}
