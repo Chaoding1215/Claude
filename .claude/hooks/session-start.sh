@@ -40,10 +40,14 @@ else
   echo "last30days engine already present."
 fi
 
-# Install the full ppt-master engine if the core script is missing
+# The ppt-master engine (scripts/templates/references/workflows, minus the
+# optional 44MB ai-image-comparison preview folder) is vendored in the repo
+# and already restored by the "Skills restored from repo" step above, so this
+# is now a fallback for the rare case that copy is somehow missing/partial —
+# not the primary install path.
 PPT_ENGINE="$HOME/.claude/skills/ppt-master/scripts/project_manager.py"
 if [ ! -f "$PPT_ENGINE" ]; then
-  echo "ppt-master engine not found — downloading from GitHub..."
+  echo "ppt-master engine not found in vendored copy — downloading from GitHub as a fallback..."
   TMP_DIR=$(mktemp -d)
   # codeload.github.com tarball downloads are blocked by egress policy for
   # repos outside this session's scope; a plain git clone over github.com
