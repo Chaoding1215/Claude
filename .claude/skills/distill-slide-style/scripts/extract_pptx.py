@@ -36,9 +36,50 @@ BRANDING_KEYWORDS = (
 )
 
 DIAGRAM_SHAPE_TYPES = (
-    MSO_SHAPE_TYPE.AUTO_SHAPE, MSO_SHAPE_TYPE.PICTURE,
-    MSO_SHAPE_TYPE.FREEFORM, MSO_SHAPE_TYPE.GROUP,
+    MSO_SHAPE_TYPE.AUTO_SHAPE, MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.FREEFORM,
 )
+# GROUP is deliberately excluded: flatten_shapes() already descends into a
+# group's children individually, so counting the group's own bounding box
+# too would double-count the same visual content at two granularities.
+
+
+def flatten_shapes(shapes, transform=None):
+    """Yield (shape, abs_left, abs_top, abs_width, abs_height) for every shape,
+    recursing into GROUP shapes.
+
+    A shape's own .left/.top/.width/.height are in its immediate parent's
+    coordinate space, not the slide's -- for a top-level shape that's the
+    same thing, but for a shape nested inside a GROUP it's relative to the
+    group's child coordinate space (<a:chOff>/<a:chExt>), which can be
+    offset and scaled arbitrarily relative to the group's own on-slide
+    position/size. Trusting a nested shape's raw .left/.top silently
+    misreports its real position (or, worse, silently drops all content
+    inside groups if callers only ever look at slide.shapes directly --
+    groups are common in decks with copy-pasted/precomposed graphics).
+    transform is (offset_x, offset_y, scale_x, scale_y) composed from all
+    enclosing groups; None means top-level (identity).
+    """
+    for shape in shapes:
+        if shape.left is None:
+            continue
+        if transform is None:
+            abs_left, abs_top, abs_width, abs_height = shape.left, shape.top, shape.width, shape.height
+        else:
+            off_x, off_y, sx, sy = transform
+            abs_left = off_x + shape.left * sx
+            abs_top = off_y + shape.top * sy
+            abs_width = shape.width * sx
+            abs_height = shape.height * sy
+        yield shape, abs_left, abs_top, abs_width, abs_height
+        if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+            xfrm = shape._element.grpSpPr.xfrm
+            ch_ext_cx = xfrm.chExt.cx or 1
+            ch_ext_cy = xfrm.chExt.cy or 1
+            child_scale_x = abs_width / ch_ext_cx
+            child_scale_y = abs_height / ch_ext_cy
+            child_offset_x = abs_left - xfrm.chOff.x * child_scale_x
+            child_offset_y = abs_top - xfrm.chOff.y * child_scale_y
+            yield from flatten_shapes(shape.shapes, (child_offset_x, child_offset_y, child_scale_x, child_scale_y))
 
 
 def authoring_tool(path: Path) -> str:
@@ -66,18 +107,19 @@ def cluster(values: list, tolerance: float) -> list:
     return clusters
 
 
-def classify_diagram_geometry(shapes, slide_w, slide_h):
+def classify_diagram_geometry(flat_shapes, slide_w, slide_h):
     """Rough geometric descriptor for non-text decorative shapes (icons,
     autoshapes, freeform diagram parts) -- reports row/column clustering,
     not a semantic diagram type. Step 2 profiling should interpret this
     alongside the slide's title/text to name the actual diagram convention
     (matrix, process, pyramid, ...) -- this heuristic can't distinguish a
-    pyramid's tapering from a plain grid on its own."""
-    candidates = [s for s in shapes if s.shape_type in DIAGRAM_SHAPE_TYPES and s.left is not None]
+    pyramid's tapering from a plain grid on its own. flat_shapes entries
+    are (shape, abs_left, abs_top, abs_width, abs_height)."""
+    candidates = [f for f in flat_shapes if f[0].shape_type in DIAGRAM_SHAPE_TYPES]
     if len(candidates) < 3:
         return None
-    lefts = [s.left / slide_w for s in candidates]
-    tops = [s.top / slide_h for s in candidates]
+    lefts = [left / slide_w for _, left, _, _, _ in candidates]
+    tops = [top / slide_h for _, _, top, _, _ in candidates]
     n_cols = len(cluster(lefts, 0.05))
     n_rows = len(cluster(tops, 0.05))
     if n_rows == 1 and n_cols > 1:
@@ -102,22 +144,18 @@ def classify_image_position(left, top, width, height, slide_w, slide_h) -> dict:
     return {"zone": f"{vert}-{horiz}", "coverage": round(coverage, 2)}
 
 
-def find_caption(pic_shape, shapes, slide_h) -> str:
+def find_caption(pic_left, pic_top, pic_width, pic_height, flat_shapes, slide_h) -> str:
     """A text shape directly beneath the picture, within a small margin, counts as a caption."""
-    try:
-        pic_left, pic_top = pic_shape.left, pic_shape.top
-        pic_right, pic_bottom = pic_left + pic_shape.width, pic_top + pic_shape.height
-    except TypeError:
-        return ""
+    pic_right, pic_bottom = pic_left + pic_width, pic_top + pic_height
     margin = slide_h * 0.05
-    for shape in shapes:
-        if shape is pic_shape or not getattr(shape, "has_text_frame", False):
+    for shape, left, top, width, height in flat_shapes:
+        if not getattr(shape, "has_text_frame", False):
             continue
         text = shape.text_frame.text.strip()
-        if not text or shape.left is None or shape.top is None:
+        if not text:
             continue
-        horiz_overlap = not (shape.left + shape.width < pic_left or shape.left > pic_right)
-        below_picture = pic_bottom <= shape.top <= pic_bottom + margin
+        horiz_overlap = not (left + width < pic_left or left > pic_right)
+        below_picture = pic_bottom <= top <= pic_bottom + margin
         if horiz_overlap and below_picture:
             return text[:80]
     return ""
@@ -161,18 +199,13 @@ def rgb_hex(color_format):
 
 
 def extract_slide(slide, slide_w, slide_h) -> dict:
-    shapes = list(slide.shapes)
-    colors, fonts, font_sizes, texts = [], [], [], []
-    sized_texts = []  # (size_pt, text) pairs — fallback title guess if there's no title placeholder
+    top_shapes = list(slide.shapes)
+    # Placeholders are only ever meaningful at the top level -- a shape
+    # nested inside a GROUP isn't part of the layout's placeholder scheme.
+    placeholders = []
     placeholder_title = None
     title_shape = None
-    has_chart = has_table = has_picture = False
-    chart_type = None
-    images = []
-    placeholders = []
-    content_paragraphs = 0
-
-    for shape in shapes:
+    for shape in top_shapes:
         if getattr(shape, "is_placeholder", False):
             entry = {"type": str(shape.placeholder_format.type)}
             if shape.left is not None:
@@ -183,14 +216,28 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
                     "height": round(shape.height / slide_h, 3),
                 }
             placeholders.append(entry)
-        if (
-            placeholder_title is None
-            and getattr(shape, "is_placeholder", False)
-            and shape.placeholder_format.type in TITLE_PLACEHOLDER_TYPES
-            and getattr(shape, "has_text_frame", False)
-        ):
-            placeholder_title = shape.text_frame.text.strip()[:80]
-            title_shape = shape
+            if (
+                placeholder_title is None
+                and shape.placeholder_format.type in TITLE_PLACEHOLDER_TYPES
+                and getattr(shape, "has_text_frame", False)
+            ):
+                placeholder_title = shape.text_frame.text.strip()[:80]
+                title_shape = shape
+
+    # Everything else (text, color, images, diagrams, citations) recurses
+    # into GROUP shapes -- a deck built from precomposed/copy-pasted
+    # graphics can have most or all of its real content nested inside
+    # groups, and a flat slide.shapes scan would silently see none of it.
+    flat = list(flatten_shapes(top_shapes))
+
+    colors, fonts, font_sizes, texts = [], [], [], []
+    sized_texts = []  # (size_pt, text) pairs — fallback title guess if there's no title placeholder
+    has_chart = has_table = has_picture = False
+    chart_type = None
+    images = []
+    content_paragraphs = 0
+
+    for shape, left, top, width, height in flat:
         if getattr(shape, "has_chart", False):
             has_chart = True
             try:
@@ -199,15 +246,10 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
                 pass
         if getattr(shape, "has_table", False):
             has_table = True
-        if shape.shape_type == 13:  # MSO_SHAPE_TYPE.PICTURE
+        if shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
             has_picture = True
-            try:
-                position = classify_image_position(
-                    shape.left, shape.top, shape.width, shape.height, slide_w, slide_h
-                )
-            except TypeError:
-                position = {"zone": "unknown", "coverage": None}
-            caption = find_caption(shape, shapes, slide_h)
+            position = classify_image_position(left, top, width, height, slide_w, slide_h)
+            caption = find_caption(left, top, width, height, flat, slide_h)
             images.append({**position, "captioned": bool(caption), "caption": caption})
         try:
             fill_color = rgb_hex(shape.fill.fore_color)
@@ -239,24 +281,25 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
         title_text = max(sized_texts, key=lambda st: st[0])[1][:80]
     else:
         title_text = ""
+    all_shapes = [f[0] for f in flat]
     return {
-        "shape_count": len(shapes),
+        "shape_count": len(flat),
         "has_chart": has_chart,
         "chart_type": chart_type,
         "has_table": has_table,
         "has_picture": has_picture,
         "images": images,
         "placeholders": placeholders,
-        "citations": find_keyword_hits(shapes, CITATION_KEYWORDS),
-        "branding_markers": find_keyword_hits(shapes, BRANDING_KEYWORDS),
+        "citations": find_keyword_hits(all_shapes, CITATION_KEYWORDS),
+        "branding_markers": find_keyword_hits(all_shapes, BRANDING_KEYWORDS),
         "content_paragraph_count": content_paragraphs,
-        "diagram_geometry": classify_diagram_geometry(shapes, slide_w, slide_h),
+        "diagram_geometry": classify_diagram_geometry(flat, slide_w, slide_h),
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
         "char_count": len(text),
         "title_text": title_text,
-        "layout_type": classify_slide(len(shapes), text, has_chart, has_table),
+        "layout_type": classify_slide(len(flat), text, has_chart, has_table),
     }
 
 
