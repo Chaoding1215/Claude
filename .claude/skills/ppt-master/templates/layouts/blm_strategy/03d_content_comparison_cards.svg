@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+  </g>
+
+  <g id="header">
+    <text x="64" y="70" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="30" font-weight="bold" fill="#0070C0">{{PAGE_TITLE}}</text>
+  </g>
+
+  <g id="content-card-1">
+    <rect x="64" y="110" width="214" height="500" fill="none" stroke="#BBE0E3" stroke-width="1.5" rx="6"/>
+    <rect x="64" y="110" width="214" height="56" fill="#0070C0" rx="6"/>
+    <rect x="64" y="140" width="214" height="26" fill="#0070C0"/>
+    <text x="171" y="145" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">{{CARD_1_HEADER}}</text>
+    <text x="88" y="210" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#000000">{{CARD_1_BODY}}</text>
+  </g>
+
+  <g id="content-card-2">
+    <rect x="298" y="110" width="214" height="500" fill="none" stroke="#BBE0E3" stroke-width="1.5" rx="6"/>
+    <rect x="298" y="110" width="214" height="56" fill="#0070C0" rx="6"/>
+    <rect x="298" y="140" width="214" height="26" fill="#0070C0"/>
+    <text x="405" y="145" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">{{CARD_2_HEADER}}</text>
+    <text x="322" y="210" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#000000">{{CARD_2_BODY}}</text>
+  </g>
+
+  <g id="content-card-3">
+    <rect x="532" y="110" width="214" height="500" fill="none" stroke="#C00000" stroke-width="2" rx="6"/>
+    <rect x="532" y="110" width="214" height="56" fill="#C00000" rx="6"/>
+    <rect x="532" y="140" width="214" height="26" fill="#C00000"/>
+    <text x="639" y="147" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">{{CARD_3_HEADER}}</text>
+    <text x="556" y="210" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#000000">{{CARD_3_BODY}}</text>
+  </g>
+
+  <g id="content-card-4">
+    <rect x="766" y="110" width="214" height="500" fill="none" stroke="#BBE0E3" stroke-width="1.5" rx="6"/>
+    <rect x="766" y="110" width="214" height="56" fill="#0070C0" rx="6"/>
+    <rect x="766" y="140" width="214" height="26" fill="#0070C0"/>
+    <text x="873" y="145" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">{{CARD_4_HEADER}}</text>
+    <text x="790" y="210" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#000000">{{CARD_4_BODY}}</text>
+  </g>
+
+  <g id="content-card-5">
+    <rect x="1000" y="110" width="214" height="500" fill="none" stroke="#BBE0E3" stroke-width="1.5" rx="6"/>
+    <rect x="1000" y="110" width="214" height="56" fill="#0070C0" rx="6"/>
+    <rect x="1000" y="140" width="214" height="26" fill="#0070C0"/>
+    <text x="1107" y="145" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">{{CARD_5_HEADER}}</text>
+    <text x="1024" y="210" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#000000">{{CARD_5_BODY}}</text>
+  </g>
+
+  <g id="footer">
+    <rect x="0" y="660" width="1280" height="48" fill="#0070C0"/>
+    <text x="640" y="690" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">{{KEY_MESSAGE}}</text>
+  </g>
+</svg>

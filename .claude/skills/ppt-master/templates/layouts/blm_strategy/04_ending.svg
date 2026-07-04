@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+  </g>
+
+  <g id="ending-wordmark">
+    <text x="640" y="380" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-style="italic" font-size="88" font-weight="bold"><tspan fill="#0070C0">{{THANK_YOU}}</tspan></text>
+    <text x="640" y="440" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="20" fill="#666666">{{CLOSING_MESSAGE}}</text>
+  </g>
+
+  <g id="decoration">
+    <rect x="0" y="660" width="1280" height="12" fill="#B7ECFF"/>
+  </g>
+</svg>

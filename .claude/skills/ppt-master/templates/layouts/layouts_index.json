@@ -24,6 +24,26 @@
       "reference_style"
     ]
   },
+  "blm_strategy": {
+    "summary": "BLM (Business Leadership Model) strategy-to-execution training/consulting deck structure — dense analytical diagrams, matrices, and text-heavy content pages",
+    "canvas_format": "ppt169",
+    "page_count": 13,
+    "page_types": [
+      "cover",
+      "chapter",
+      "content_text",
+      "content_text_sidebar",
+      "content_table",
+      "content_comparison_cards",
+      "content_numbered_list_image",
+      "content_process_horizontal",
+      "content_hierarchy_diagram",
+      "content_2x2_matrix",
+      "content_chart",
+      "content_icon_grid",
+      "ending"
+    ]
+  },
   "government_blue": {
     "summary": "Key project briefings, Five-Year Plan presentations, work summaries, investment promotion, policy interpretation.",
     "canvas_format": "ppt169",
