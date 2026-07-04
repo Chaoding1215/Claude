@@ -25,6 +25,57 @@ LAYOUT_KEYWORDS = {
     "closing": ("thank you", "谢谢", "q&a", "questions"),
 }
 
+CITATION_KEYWORDS = (
+    "数据来源", "资料来源", "图片来源", "来源：", "来源:", "引用自", "参考来源",
+    "source:", "source :",
+)
+
+
+def classify_image_position(left, top, width, height, slide_w, slide_h) -> dict:
+    coverage = (width * height) / (slide_w * slide_h)
+    if coverage > 0.8:
+        return {"zone": "full-bleed", "coverage": round(coverage, 2)}
+    cx = (left + width / 2) / slide_w
+    cy = (top + height / 2) / slide_h
+    horiz = "left" if cx < 0.33 else ("right" if cx > 0.67 else "center")
+    vert = "top" if cy < 0.33 else ("bottom" if cy > 0.67 else "middle")
+    return {"zone": f"{vert}-{horiz}", "coverage": round(coverage, 2)}
+
+
+def find_caption(pic_shape, shapes, slide_h) -> str:
+    """A text shape directly beneath the picture, within a small margin, counts as a caption."""
+    try:
+        pic_left, pic_top = pic_shape.left, pic_shape.top
+        pic_right, pic_bottom = pic_left + pic_shape.width, pic_top + pic_shape.height
+    except TypeError:
+        return ""
+    margin = slide_h * 0.05
+    for shape in shapes:
+        if shape is pic_shape or not getattr(shape, "has_text_frame", False):
+            continue
+        text = shape.text_frame.text.strip()
+        if not text or shape.left is None or shape.top is None:
+            continue
+        horiz_overlap = not (shape.left + shape.width < pic_left or shape.left > pic_right)
+        below_picture = pic_bottom <= shape.top <= pic_bottom + margin
+        if horiz_overlap and below_picture:
+            return text[:80]
+    return ""
+
+
+def find_citations(shapes) -> list:
+    hits = []
+    for shape in shapes:
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        text = shape.text_frame.text
+        lowered = text.lower()
+        for kw in CITATION_KEYWORDS:
+            if kw.lower() in lowered:
+                hits.append({"keyword": kw, "snippet": text.strip()[:100]})
+                break
+    return hits
+
 
 def classify_slide(shape_count: int, text: str, has_chart: bool, has_table: bool) -> str:
     if has_chart:
@@ -49,13 +100,14 @@ def rgb_hex(color_format):
     return None
 
 
-def extract_slide(slide) -> dict:
+def extract_slide(slide, slide_w, slide_h) -> dict:
     shapes = list(slide.shapes)
     colors, fonts, font_sizes, texts = [], [], [], []
     sized_texts = []  # (size_pt, text) pairs — fallback title guess if there's no title placeholder
     placeholder_title = None
     has_chart = has_table = has_picture = False
     chart_type = None
+    images = []
 
     for shape in shapes:
         if (
@@ -75,6 +127,14 @@ def extract_slide(slide) -> dict:
             has_table = True
         if shape.shape_type == 13:  # MSO_SHAPE_TYPE.PICTURE
             has_picture = True
+            try:
+                position = classify_image_position(
+                    shape.left, shape.top, shape.width, shape.height, slide_w, slide_h
+                )
+            except TypeError:
+                position = {"zone": "unknown", "coverage": None}
+            caption = find_caption(shape, shapes, slide_h)
+            images.append({**position, "captioned": bool(caption), "caption": caption})
         try:
             fill_color = rgb_hex(shape.fill.fore_color)
             if fill_color:
@@ -109,6 +169,8 @@ def extract_slide(slide) -> dict:
         "chart_type": chart_type,
         "has_table": has_table,
         "has_picture": has_picture,
+        "images": images,
+        "citations": find_citations(shapes),
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
@@ -120,7 +182,8 @@ def extract_slide(slide) -> dict:
 
 def extract_profile(path: Path) -> dict:
     prs = Presentation(str(path))
-    slides = [extract_slide(s) for s in prs.slides]
+    slide_w, slide_h = prs.slide_width, prs.slide_height
+    slides = [extract_slide(s, slide_w, slide_h) for s in prs.slides]
     return {"source": path.name, "slide_count": len(slides), "slides": slides}
 
 

@@ -12,7 +12,13 @@ manual review in the profile step if a page looks chart-like. has_table
 uses pdfplumber's default line-based detector, which is known to
 false-positive on pages with aligned text blocks that aren't real tables
 — treat table counts as a weaker signal than the pptx script's, which
-reads the actual shape type.
+reads the actual shape type. image_count/images can run 10-20x higher
+per page than the pptx script's picture counts for a visually similar
+deck — pdfplumber's page.images enumerates every embedded raster XObject
+(icons, logo fragments, background textures), not just user-placed
+photos/screenshots the way the pptx script's shape_type==13 check does.
+Don't compare raw image counts across formats; the position/caption
+breakdown is still meaningful within a single format.
 """
 import argparse
 import hashlib
@@ -26,6 +32,46 @@ LAYOUT_KEYWORDS = {
     "toc": ("agenda", "contents", "目录", "议程"),
     "closing": ("thank you", "谢谢", "q&a", "questions"),
 }
+
+CITATION_KEYWORDS = (
+    "数据来源", "资料来源", "图片来源", "来源：", "来源:", "引用自", "参考来源",
+    "source:", "source :",
+)
+
+
+def classify_image_position(img, page_w, page_h) -> dict:
+    coverage = (img["width"] * img["height"]) / (page_w * page_h)
+    if coverage > 0.8:
+        return {"zone": "full-bleed", "coverage": round(coverage, 2)}
+    cx = (img["x0"] + img["x1"]) / 2 / page_w
+    cy = (img["top"] + img["bottom"]) / 2 / page_h
+    horiz = "left" if cx < 0.33 else ("right" if cx > 0.67 else "center")
+    vert = "top" if cy < 0.33 else ("bottom" if cy > 0.67 else "middle")
+    return {"zone": f"{vert}-{horiz}", "coverage": round(coverage, 2)}
+
+
+def find_caption(img, words, page_h) -> str:
+    """Words directly beneath the image, within a small margin, count as a caption."""
+    margin = page_h * 0.05
+    below = [
+        w for w in words
+        if img["bottom"] <= w["top"] <= img["bottom"] + margin
+        and not (w["x1"] < img["x0"] or w["x0"] > img["x1"])
+    ]
+    if not below:
+        return ""
+    below.sort(key=lambda w: (w["top"], w["x0"]))
+    return " ".join(w["text"] for w in below)[:80]
+
+
+def find_citations(text: str) -> list:
+    lowered = text.lower()
+    hits = []
+    for kw in CITATION_KEYWORDS:
+        idx = lowered.find(kw.lower())
+        if idx != -1:
+            hits.append({"keyword": kw, "snippet": text[max(0, idx - 10):idx + 90].strip()})
+    return hits
 
 
 def classify_page(text: str, font_sizes: list, shape_count: int) -> str:
@@ -56,6 +102,11 @@ def extract_page(page) -> dict:
     text = page.extract_text() or ""
     images = page.images
     words = page.extract_words()
+    image_details = []
+    for img in images:
+        position = classify_image_position(img, page.width, page.height)
+        caption = find_caption(img, words, page.height)
+        image_details.append({**position, "captioned": bool(caption), "caption": caption})
 
     return {
         "shape_count": len(words),
@@ -63,6 +114,8 @@ def extract_page(page) -> dict:
         "has_table": bool(page.find_tables()),
         "has_picture": len(images) > 0,
         "image_count": len(images),
+        "images": image_details,
+        "citations": find_citations(text),
         "colors": colors,
         "fonts": fonts,
         "font_sizes": font_sizes,
