@@ -1,0 +1,28 @@
+{
+  "schema": "ppt-master.source_to_md.profile.v1",
+  "converter": "ppt_to_md.py",
+  "conversion_type": "pptx",
+  "source": {
+    "path": "PPT模板-浅色版16-9.pptx",
+    "name": "PPT模板-浅色版16-9.pptx",
+    "suffix": ".pptx",
+    "kind": "file",
+    "exists": true,
+    "size_bytes": 2387726
+  },
+  "outputs": {
+    "markdown": "PPT模板-浅色版16-9.md",
+    "asset_dir": "",
+    "image_manifest": "",
+    "image_count": 0
+  },
+  "markdown": {
+    "line_count": 47,
+    "char_count": 762,
+    "heading_count": 6,
+    "table_count": 2,
+    "image_ref_count": 0,
+    "link_count": 0
+  },
+  "warnings": []
+}
