@@ -45,8 +45,9 @@ the JSON — with exactly these fields:
   say so if you can't tell.
 - `branding_footer`: string. Page-number/confidentiality/logo convention found
   (`branding_markers`, `placeholders` of type `SLIDE_NUMBER`/`FOOTER`/`DATE`),
-  or its explicit absence — e.g. "'{page} Huawei Confidential' on every page"
-  or "no footer/branding marker found in this sample." Absence is a finding.
+  or its explicit absence — e.g. "'{page} [Org Name] Confidential' on every
+  page" or "no footer/branding marker found in this sample." Absence is a
+  finding.
 
 Respond in the same language as the source deck's text. Ground every field in
 the extraction data — do not invent patterns the data doesn't support.

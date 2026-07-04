@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 Mine a sample corpus into a versioned, evidence-cited style specification. Incremental and repeatable — re-running after new samples arrive should only touch what changed.
 
-Output docs are versioned per-corpus and live alongside the sample directory (e.g. `reference/style-spec-v{N}.md`, `reference/profiles/`), not inside this skill package — this package stays generic and reusable across different corpora; a specific corpus's findings and decisions don't belong here (see Settled conventions).
+Output docs are versioned per-corpus and live alongside the sample directory (e.g. `reference/style-spec-v{N}.md`, `reference/profiles/`), not inside this skill package — this package stays generic and reusable across different corpora; a specific corpus's findings and decisions don't belong here (see General methodology and "This corpus's specific findings" below).
 
 ## Steps
 
