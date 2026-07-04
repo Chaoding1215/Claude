@@ -18,9 +18,18 @@ the JSON — with exactly these fields:
 - `data_viz_preference`: object describing which chart/table types appear and
   in what scenarios (e.g. "bar charts for comparisons, line charts for trends
   over time").
-- `text_density_rule`: string. The apparent cap on words/bullets per slide.
+- `text_density_rule`: string. The apparent cap on characters/bullets per slide.
 - `logic_flow`: string. The narrative arc across slides (e.g. "problem → data
   → conclusion → action items").
+- `image_treatment`: object describing where images are placed (`zone`
+  distribution — full-bleed vs corner/edge vs centered), whether they're
+  usually captioned, and any size/coverage pattern (e.g. "full-bleed hero
+  images on section-opener slides, small captioned screenshots elsewhere").
+- `citation_style`: string. How the deck attributes data to its source, if at
+  all — e.g. "external market figures carry a small-font 'Source: X' footer;
+  internal/proprietary figures are uncited" or "no citation markers found in
+  this sample." Absence of citations is itself a finding — report it, don't
+  skip the field.
 
 Respond in the same language as the source deck's text. Ground every field in
 the extraction data — do not invent patterns the data doesn't support.
