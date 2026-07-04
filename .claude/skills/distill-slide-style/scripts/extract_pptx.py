@@ -108,8 +108,19 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
     has_chart = has_table = has_picture = False
     chart_type = None
     images = []
+    placeholders = []
 
     for shape in shapes:
+        if getattr(shape, "is_placeholder", False):
+            entry = {"type": str(shape.placeholder_format.type)}
+            if shape.left is not None:
+                entry["position"] = {
+                    "left": round(shape.left / slide_w, 3),
+                    "top": round(shape.top / slide_h, 3),
+                    "width": round(shape.width / slide_w, 3),
+                    "height": round(shape.height / slide_h, 3),
+                }
+            placeholders.append(entry)
         if (
             placeholder_title is None
             and getattr(shape, "is_placeholder", False)
@@ -170,6 +181,7 @@ def extract_slide(slide, slide_w, slide_h) -> dict:
         "has_table": has_table,
         "has_picture": has_picture,
         "images": images,
+        "placeholders": placeholders,
         "citations": find_citations(shapes),
         "colors": colors,
         "fonts": fonts,
