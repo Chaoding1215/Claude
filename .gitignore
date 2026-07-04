@@ -3,3 +3,7 @@
 __pycache__/
 *.pyc
 .distill-cache/
+
+# ppt-master scratch project workspaces (source svgs, backups, caches) —
+# final decks are committed to reference/ instead
+projects/
