@@ -1,0 +1,4258 @@
+{
+  "files": [
+    {
+      "source": "PPT模板-浅色版16-9.pptx",
+      "slide_dimensions": {
+        "width_in": 13.34,
+        "height_in": 7.5
+      },
+      "themes": {
+        "/ppt/theme/theme1.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial Black",
+              "hans": "微软雅黑"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "黑体"
+            }
+          }
+        },
+        "/ppt/theme/theme2.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "C8102E",
+            "accent3": "EA594F",
+            "accent4": "F8B53C",
+            "accent5": "231815",
+            "accent6": "595757",
+            "hlink": "898989",
+            "folHlink": "B5B5B5"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Calibri Light",
+              "hans": "等线 Light"
+            },
+            "minor": {
+              "latin": "Calibri",
+              "hans": "等线"
+            }
+          }
+        },
+        "/ppt/theme/theme3.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Calibri Light",
+              "hans": "等线 Light"
+            },
+            "minor": {
+              "latin": "Calibri",
+              "hans": "等线"
+            }
+          }
+        },
+        "/ppt/theme/theme4.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "黑体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "黑体"
+            }
+          }
+        }
+      },
+      "masters": [
+        {
+          "theme_ref": "/ppt/theme/theme1.xml",
+          "layouts": [
+            {
+              "name": "探索",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                }
+              ]
+            },
+            {
+              "name": "智能",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                }
+              ]
+            },
+            {
+              "name": "攀登",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                }
+              ]
+            },
+            {
+              "name": "灯塔",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme2.xml",
+          "layouts": [
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 10,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme3.xml",
+          "layouts": [
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "OBJECT (7)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme4.xml",
+          "layouts": [
+            {
+              "name": "End page",
+              "placeholders": []
+            }
+          ]
+        }
+      ],
+      "demo_slides": [
+        {
+          "slide_index": 0,
+          "layout": "探索",
+          "texts": [
+            "部门：\n作者：\n日期：",
+            "Security Level:"
+          ]
+        },
+        {
+          "slide_index": 1,
+          "layout": "1_Contents page",
+          "texts": []
+        },
+        {
+          "slide_index": 2,
+          "layout": "1_Chinese text page",
+          "texts": []
+        },
+        {
+          "slide_index": 3,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "此页为图表配色示意，正式使用时请删除此页"
+          ],
+          "has_table": true,
+          "chart_series_theme_colors": [
+            "ACCENT_1 (5)"
+          ]
+        },
+        {
+          "slide_index": 4,
+          "layout": "End page",
+          "texts": []
+        }
+      ]
+    },
+    {
+      "source": "Telefonica B2B Insight 20260703.pptx",
+      "slide_dimensions": {
+        "width_in": 13.34,
+        "height_in": 7.5
+      },
+      "themes": {
+        "/ppt/theme/theme3.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "547612",
+            "lt2": "C8C8C8",
+            "accent1": "B3E455",
+            "accent2": "547612",
+            "accent3": "384F0C",
+            "accent4": "93C3EA",
+            "accent5": "2476B9",
+            "accent6": "184E7B",
+            "hlink": "3F3F3F",
+            "folHlink": "990000"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme4.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "1F497D",
+            "lt2": "EEECE1",
+            "accent1": "4F81BD",
+            "accent2": "C0504D",
+            "accent3": "9BBB59",
+            "accent4": "8064A2",
+            "accent5": "4BACC6",
+            "accent6": "F79646",
+            "hlink": "0000FF",
+            "folHlink": "800080"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme12.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "1F497D",
+            "lt2": "EEECE1",
+            "accent1": "4F81BD",
+            "accent2": "C0504D",
+            "accent3": "9BBB59",
+            "accent4": "8064A2",
+            "accent5": "4BACC6",
+            "accent6": "F79646",
+            "hlink": "0000FF",
+            "folHlink": "800080"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme11.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme9.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme6.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme5.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme2.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "1F497D",
+            "lt2": "EEECE1",
+            "accent1": "4F81BD",
+            "accent2": "C0504D",
+            "accent3": "9BBB59",
+            "accent4": "8064A2",
+            "accent5": "4BACC6",
+            "accent6": "F79646",
+            "hlink": "0000FF",
+            "folHlink": "800080"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme1.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme10.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "C8102E",
+            "accent3": "EA594F",
+            "accent4": "F8B53C",
+            "accent5": "231815",
+            "accent6": "595757",
+            "hlink": "898989",
+            "folHlink": "B5B5B5"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme7.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "DDDDDD",
+            "accent1": "E9002F",
+            "accent2": "7F0000",
+            "accent3": "ED6D00",
+            "accent4": "FCC800",
+            "accent5": "61B230",
+            "accent6": "30B5C5",
+            "hlink": "C7000B",
+            "folHlink": "666666"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        }
+      },
+      "masters": [
+        {
+          "theme_ref": "/ppt/theme/theme3.xml",
+          "layouts": [
+            {
+              "name": "Title Only",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.033,
+                    "top": 0.043,
+                    "width": 0.919,
+                    "height": 0.098
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.164,
+                    "width": 0.75,
+                    "height": 0.348
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.525,
+                    "width": 0.75,
+                    "height": 0.241
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.035,
+                    "top": 0.049,
+                    "width": 0.965,
+                    "height": 0.073
+                  }
+                }
+              ]
+            },
+            {
+              "name": "12_标题和表格",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.081,
+                    "top": 0.022,
+                    "width": 0.843,
+                    "height": 0.108
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.948,
+                    "width": 0.086,
+                    "height": 0.031
+                  }
+                }
+              ]
+            },
+            {
+              "name": "OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.031,
+                    "top": 0.053,
+                    "width": 0.863,
+                    "height": 0.106
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.217,
+                    "width": 0.863,
+                    "height": 0.634
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Blank",
+              "placeholders": [
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                }
+              ]
+            },
+            {
+              "name": "自定义版式",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.049,
+                    "width": 0.792,
+                    "height": 0.087
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            },
+            {
+              "name": "探索",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.908,
+                    "width": 0.133,
+                    "height": 0.047
+                  }
+                }
+              ]
+            },
+            {
+              "name": "结束页",
+              "placeholders": []
+            },
+            {
+              "name": "18_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Chapter page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.221,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme4.xml",
+          "layouts": [
+            {
+              "name": "1_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.035,
+                    "top": 0.049,
+                    "width": 0.965,
+                    "height": 0.073
+                  }
+                }
+              ]
+            },
+            {
+              "name": "标题幻灯片",
+              "placeholders": []
+            },
+            {
+              "name": "2_标题幻灯片",
+              "placeholders": []
+            },
+            {
+              "name": "Contents-tilte white - 40px-purple background",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.855,
+                    "top": 0.034,
+                    "width": 0.148,
+                    "height": 0.022
+                  }
+                },
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.031,
+                    "top": 0.035,
+                    "width": 0.432,
+                    "height": 0.225
+                  }
+                }
+              ]
+            },
+            {
+              "name": "End page",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme12.xml",
+          "layouts": [
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            },
+            {
+              "name": "OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.0,
+                    "top": 0.0,
+                    "width": 0.246,
+                    "height": 0.437
+                  }
+                }
+              ]
+            },
+            {
+              "name": "4_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.079
+                  }
+                }
+              ]
+            },
+            {
+              "name": "2_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.06
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.028,
+                    "top": 0.038,
+                    "width": 0.863,
+                    "height": 0.121
+                  }
+                }
+              ]
+            },
+            {
+              "name": "6_标题和内容",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme11.xml",
+          "layouts": [
+            {
+              "name": "Explore",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.91,
+                    "width": 0.122,
+                    "height": 0.041
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.077,
+                    "top": 0.283,
+                    "width": 0.535,
+                    "height": 0.167
+                  }
+                },
+                {
+                  "idx": 3,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.073,
+                    "top": 0.131,
+                    "width": 0.54,
+                    "height": 0.119
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Intelligence",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.077,
+                    "top": 0.283,
+                    "width": 0.343,
+                    "height": 0.167
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.91,
+                    "width": 0.122,
+                    "height": 0.041
+                  }
+                },
+                {
+                  "idx": 3,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.073,
+                    "top": 0.131,
+                    "width": 0.54,
+                    "height": 0.119
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Innovation",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.077,
+                    "top": 0.283,
+                    "width": 0.403,
+                    "height": 0.167
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.91,
+                    "width": 0.122,
+                    "height": 0.041
+                  }
+                },
+                {
+                  "idx": 3,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.073,
+                    "top": 0.131,
+                    "width": 0.54,
+                    "height": 0.119
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Ascend",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.077,
+                    "top": 0.283,
+                    "width": 0.535,
+                    "height": 0.167
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.91,
+                    "width": 0.122,
+                    "height": 0.041
+                  }
+                },
+                {
+                  "idx": 3,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.073,
+                    "top": 0.131,
+                    "width": 0.54,
+                    "height": 0.119
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme9.xml",
+          "layouts": []
+        },
+        {
+          "theme_ref": "/ppt/theme/theme6.xml",
+          "layouts": [
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme5.xml",
+          "layouts": [
+            {
+              "name": "结束页",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme2.xml",
+          "layouts": [
+            {
+              "name": "标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.034,
+                    "top": 0.025,
+                    "width": 0.921,
+                    "height": 0.136
+                  }
+                }
+              ]
+            },
+            {
+              "name": "BLANK",
+              "placeholders": []
+            },
+            {
+              "name": "仅标题",
+              "placeholders": []
+            },
+            {
+              "name": "标题，文本与内容",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.068,
+                    "top": 0.05,
+                    "width": 0.889,
+                    "height": 0.09
+                  }
+                }
+              ]
+            },
+            {
+              "name": "27_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.038,
+                    "top": 0.106,
+                    "width": 0.93,
+                    "height": 0.09
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.035,
+                    "top": 0.386,
+                    "width": 0.93,
+                    "height": 0.228
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_空白",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.017,
+                    "width": 0.9,
+                    "height": 0.194
+                  }
+                }
+              ]
+            },
+            {
+              "name": "7_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.054,
+                    "width": 0.835,
+                    "height": 0.109
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.311,
+                    "width": 0.85,
+                    "height": 0.215
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme1.xml",
+          "layouts": [
+            {
+              "name": "Blank",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.004,
+                    "top": 0.007,
+                    "width": 0.996,
+                    "height": 0.077
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.466,
+                    "top": 0.947,
+                    "width": 0.067,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_章节页",
+              "placeholders": []
+            },
+            {
+              "name": "探索",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.074,
+                    "top": 0.132,
+                    "width": 0.538,
+                    "height": 0.101
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.076,
+                    "top": 0.284,
+                    "width": 0.536,
+                    "height": 0.094
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.908,
+                    "width": 0.133,
+                    "height": 0.047
+                  }
+                }
+              ]
+            },
+            {
+              "name": "13_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme10.xml",
+          "layouts": [
+            {
+              "name": "自定义版式",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.037,
+                    "top": 0.042,
+                    "width": 0.863,
+                    "height": 0.074
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_自定义版式",
+              "placeholders": []
+            },
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.048,
+                    "top": 0.047,
+                    "width": 0.881,
+                    "height": 0.069
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme7.xml",
+          "layouts": [
+            {
+              "name": "Chapter page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.221,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_章节页",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.221,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            },
+            {
+              "name": "8_标题幻灯片",
+              "placeholders": []
+            }
+          ]
+        }
+      ],
+      "demo_slides": [
+        {
+          "slide_index": 0,
+          "layout": "Title Only",
+          "texts": [
+            "T&G战略：6Pillar 支持实现 World-class European Telco",
+            "Mission: \nDeliver the best digital experience to our customers",
+            "Vision:\n Become a world-class \nEuropean Telco with profitable scale",
+            "1",
+            "提供一流的客户体验"
+          ]
+        },
+        {
+          "slide_index": 1,
+          "layout": "1_Custom Layout",
+          "texts": [
+            "TDE B2B业务历史经营：平均在4B€ +（24年4.2B） ，占集团的40%，政府公共大项目占收入主体",
+            "从产商品构成来看，分为Service（管理服务）和Supply（供应品投标）",
+            "从客户群构成来看，50%来自政府公共；大企业和SME各占25%",
+            "政府公共是TdE最主要收入来源，50%",
+            "TdE客户群的收入占比"
+          ],
+          "chart_series_theme_colors": [
+            "explicit-or-inherited"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 2,
+          "layout": "Title Only",
+          "texts": [
+            "TDE经营分析：ToB收入构成",
+            "集团整体：收入 / EBIDTA / FCF 均同比负增长，B2B成四类业务中唯一正增长",
+            "toB 占比 22.65%",
+            "TdE toB 现状：收入约40亿欧元，联结份额超60%",
+            "数据来源：25Q4 Telefonica财报"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 3,
+          "layout": "TITLE",
+          "texts": [
+            "Telefonica B2B组织架构"
+          ]
+        },
+        {
+          "slide_index": 4,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "TdE的产商品分为Service和Supply两个大类",
+            "供应品\nSupply",
+            "服务 \nService",
+            "Service: TdE在B2B市场利润的主要来源，Margin要求 > 40%，从WAN联接服务向DICT服务扩展",
+            "固网专线\n无线专线\nInternet"
+          ]
+        },
+        {
+          "slide_index": 5,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "WAN联接： 主营产品，收入占33%，Vendor为西方厂商和西班牙本土厂商",
+            "TdE 1350M€/Y",
+            "WAN Connectivity Service",
+            "33% \nTdE收入",
+            "由3类Catalog组成，Vendor提供的设备空间100M/年，主要Vendor 西方Forti/Cisco, 本土 Teldat/马可波罗"
+          ]
+        },
+        {
+          "slide_index": 6,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "LAN管理服务：TdE通过FlexWAN2.0升级传统LAN托管服务，当前仅C\\H\\T三家入围",
+            "年收入175M€",
+            "LAN 管理服务\nManaged Service",
+            "NOC中心",
+            "远程\n集中管理"
+          ]
+        },
+        {
+          "slide_index": 7,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "云服务：通过伙伴云转售和提供本土DC机房租赁服务，为政府提供主权云服务",
+            "Cloud管理服务\nManaged Cloud Service",
+            "年收入450M€",
+            "12% \nTdE收入",
+            "由三部分组成：1、云服务转售(TTCP+伙伴云）2、云迁移/管理服务；\n3、DC Hosting（for Google云、Oracle云）"
+          ]
+        },
+        {
+          "slide_index": 8,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "安全托管服务和终端管理：TTech提供产商品，TdE负责销售",
+            "安全管理服务\nManaged Security Service",
+            "TdE销售250M€/年",
+            "TTech在2020年从TdE继承了TdE约200M€的安全托管服务和SOC中心",
+            "SOC中心"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 9,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "Supply产商品： 90%收入围绕通用office办公标品转售，10%收入来自垂直行业的系统集成",
+            "Supply类产商品，由最终用户发起硬件和软件的采购，TdE提供渠道转售",
+            "Supply产商品",
+            "Vendor的份额",
+            "园区交换机、AP\n无线局域专网MPN\n企业专网（微波）"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 10,
+          "layout": "OBJECT",
+          "texts": [
+            "华为参与视角的portfolio分类及现网格局，除安全外的可参与空间60M+"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 11,
+          "layout": "OBJECT",
+          "texts": [
+            "华为参与准入的可参与空间不到30M，对准肥肉市场深耕"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 12,
+          "layout": "Title Only",
+          "texts": [
+            "TDE B2B产商品",
+            "产商品分为两大类，Service和Supply。Service即传统流水业务，从连接向DICT扩展，华为重点聚焦连接，做大已完成准入产品（WAN/LAN）的份额。"
+          ],
+          "has_table": true
+        }
+      ]
+    },
+    {
+      "source": "华为BLM模型管理：从战略到执行落地-Template.pptx",
+      "slide_dimensions": {
+        "width_in": 13.33,
+        "height_in": 7.5
+      },
+      "themes": {
+        "/ppt/theme/theme1.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "000000",
+            "lt2": "808080",
+            "accent1": "BBE0E3",
+            "accent2": "333399",
+            "accent3": "FFFFFF",
+            "accent4": "000000",
+            "accent5": "DAEDEF",
+            "accent6": "2D2D8A",
+            "hlink": "009999",
+            "folHlink": "99CC00"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        }
+      },
+      "masters": [
+        {
+          "theme_ref": "/ppt/theme/theme1.xml",
+          "layouts": [
+            {
+              "name": "OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.239,
+                    "width": 0.847,
+                    "height": 0.594
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "BLANK",
+              "placeholders": [
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_自定义版式",
+              "placeholders": []
+            },
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.203,
+                    "width": 0.58,
+                    "height": 0.243
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.464,
+                    "width": 0.58,
+                    "height": 0.126
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.041,
+                    "width": 0.142,
+                    "height": 0.044
+                  }
+                }
+              ]
+            },
+            {
+              "name": "SECTION_HEADER",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.079,
+                    "top": 0.643,
+                    "width": 0.85,
+                    "height": 0.199
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.079,
+                    "top": 0.424,
+                    "width": 0.85,
+                    "height": 0.219
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TWO_OBJECTS",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.239,
+                    "width": 0.416,
+                    "height": 0.594
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.502,
+                    "top": 0.239,
+                    "width": 0.416,
+                    "height": 0.594
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TWO_OBJECTS_WITH_TEXT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.04,
+                    "width": 0.9,
+                    "height": 0.167
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.224,
+                    "width": 0.442,
+                    "height": 0.093
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.317,
+                    "width": 0.442,
+                    "height": 0.576
+                  }
+                },
+                {
+                  "idx": 3,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.508,
+                    "top": 0.224,
+                    "width": 0.442,
+                    "height": 0.093
+                  }
+                },
+                {
+                  "idx": 4,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.508,
+                    "top": 0.317,
+                    "width": 0.442,
+                    "height": 0.576
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE_ONLY",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "OBJECT_WITH_CAPTION_TEXT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.04,
+                    "width": 0.329,
+                    "height": 0.169
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.391,
+                    "top": 0.04,
+                    "width": 0.559,
+                    "height": 0.853
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.209,
+                    "width": 0.329,
+                    "height": 0.684
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "PICTURE_WITH_CAPTION_TEXT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.196,
+                    "top": 0.7,
+                    "width": 0.6,
+                    "height": 0.083
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "PICTURE (18)",
+                  "position": {
+                    "left": 0.196,
+                    "top": 0.089,
+                    "width": 0.6,
+                    "height": 0.6
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.196,
+                    "top": 0.783,
+                    "width": 0.6,
+                    "height": 0.117
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "VERTICAL_TEXT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.328,
+                    "top": -0.217,
+                    "width": 0.334,
+                    "height": 1.506
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "VERTICAL_TITLE_AND_VERTICAL_TEXT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.604,
+                    "top": 0.275,
+                    "width": 0.416,
+                    "height": 0.376
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.174,
+                    "top": -0.089,
+                    "width": 0.416,
+                    "height": 1.104
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TABLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TEXT_AND_OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.071,
+                    "top": 0.093,
+                    "width": 0.847,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.266,
+                    "width": 0.425,
+                    "height": 0.634
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.506,
+                    "top": 0.266,
+                    "width": 0.425,
+                    "height": 0.634
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.696,
+                    "top": 0.946,
+                    "width": 0.229,
+                    "height": 0.067
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "demo_slides": [
+        {
+          "slide_index": 0,
+          "layout": "BLANK",
+          "texts": [
+            "华为愿景变迁：最内核的战略控制点变化不大\n——站在10-30年后看今天的战略！",
+            "不管产业如何变化，只在核心能力圈内做事；能力圈可以扩展，但不会太快"
+          ]
+        },
+        {
+          "slide_index": 1,
+          "layout": "BLANK",
+          "texts": [
+            "‹#›",
+            "价值观：组织的粘合剂，共同的信仰是战斗力的保障！",
+            "至诚守信",
+            "团队合作",
+            "成就客户"
+          ]
+        },
+        {
+          "slide_index": 2,
+          "layout": "BLANK",
+          "texts": [
+            "产品：单一程控交换机—>通信全领域解决方案 —> ICT领域“端管云”所有产品—> 5G标准制定者\n区域：农村—>城市，中国—>全球，城郊—> 核心区\n客户群：运营商—>三大BG（运营商，企业，消费者） —> 合作伙伴生态\n能力：生存边缘—>世界级100强",
+            "战略聚焦：聚焦主航道，力出一孔，不在非战略上消耗资源\n战略耐性：战略定力与执行力，乌龟精神追赶龙飞船\n战略执行：战略解码到个人，平衡计分考核，结果导向的考核机制",
+            "组织：\n发展早期：老板及高管定战略\n2005年：战略与MKT主导规划，聚焦产品规划\n2011年：成立战略与发展委员会，区域销售，产品线，职能线全域的日历机制的SP —》BP规划并解码到个人\n流程：DSTE\n方法论：BLM+BEM\n交付件：SP+BP",
+            "战规演进：老板→战规→SDC，靠老板→组织+流程+全体员工",
+            "战略组织、流程、方法+管理者战略领导力，有持续打好移动靶的能力，企业才能做大"
+          ]
+        },
+        {
+          "slide_index": 3,
+          "layout": "BLANK",
+          "texts": [
+            "【总参】战略部+蓝军部+研究院+商业模式部+智库+…\n董事长-CEO-COO/CTO/CDO/CFO/CHO/CIO/CKO +…",
+            "中小公司不一定有那么多组织和角色，但这些事情都是存在的，都应该有人做"
+          ]
+        },
+        {
+          "slide_index": 4,
+          "layout": "BLANK",
+          "texts": [
+            "战略部：发现价值转移，通过规划牵引促成抓住机会",
+            "人0.2%即可，但必须是行业高手：____镜+ ____镜，接地气+高瞻远瞩"
+          ]
+        },
+        {
+          "slide_index": 5,
+          "layout": "BLANK",
+          "texts": [
+            "服务战略",
+            "企业安全战略",
+            "营销战略",
+            "研发战略",
+            "供应链战略"
+          ]
+        },
+        {
+          "slide_index": 6,
+          "layout": "BLANK",
+          "texts": [
+            "方向大致正确、队伍充满活力，掌握拧麻花的艺术",
+            "洞察力与生存危机意识\n业务决断力与风险意识\n持续变革的领导力与均衡发展意识\n敢于舍的战略定力与不言弃的自我激励意识",
+            "各一把手战略素养：战略____力+战略____力+战略____力",
+            "能力提升方式：\n角色认知：理解并认同自身在战略规划中的角色和职责，转身\n掌握方法论：熟悉战略规划的思维方式、流程、方法论\n干中学：参与DSTE流程相关活动，岗位轮换",
+            "战略不能都等老板指令，授权范围内：先见+先决+先行。 案例：美军决策机制"
+          ]
+        },
+        {
+          "slide_index": 7,
+          "layout": "BLANK",
+          "texts": [
+            "看30年做10年：战略规划SP+业务计划BP，长短结合",
+            "想不清楚10-30年后的产业和目标，就无法判断自己是否走在正确的道路上"
+          ]
+        },
+        {
+          "slide_index": 8,
+          "layout": "BLANK",
+          "texts": [
+            "战略：包括市场洞察、战略意图、创新焦点、业务设计"
+          ]
+        },
+        {
+          "slide_index": 9,
+          "layout": "BLANK",
+          "texts": [
+            "战略五看：多年积累+随时刷新，一年一版的500页厚书",
+            "doc→ppt：汇报关键点和变化点，其中一定留有较多空白区"
+          ]
+        },
+        {
+          "slide_index": 10,
+          "layout": "BLANK",
+          "texts": [
+            "市场洞察：大数据+专家，AI推荐，专家校正，主管决策",
+            "信息",
+            "洞察",
+            "决策的灵活性",
+            "商业价值"
+          ]
+        },
+        {
+          "slide_index": 11,
+          "layout": "BLANK",
+          "texts": [
+            "看行业：6个方面，核心是价值转移的风险和机会，看10年！",
+            "看得见的都不怕，看不见的跨界对手越来越多，案例：美团vs康师傅；手机vs相机+…"
+          ]
+        },
+        {
+          "slide_index": 12,
+          "layout": "BLANK",
+          "texts": [
+            "看行业： 外部环境的PEST工具",
+            "政治和法律因素（political factors）：例如知识产权\n97年开始中国政府转变职能，一切工作以经济建设为中心。搞经济外交，促进经济贸易发展和国际合作。华为很早就意识到，一个企业拥有专利的多少是市场竞争的准入门槛和游戏筹码\n经济因素（economic factors）：例如移动互联网的普及\n欧洲、美洲和非洲有广阔的电信市场可以拓展，尤其是非洲和拉美市场，电信领域正处于高速发展期。华为成熟的产品和解决方案，恰恰是这些地区运营商所需要的，华为正是看准这个时机来开拓市场。给与我们以整网解决方案去封闭市场的可能\n社会和文化因素（social factors）：国家战略协同\n随着中国经济飞速发展，国际市场对中国高科技公司所知甚少，中国需要在世界树立有影响力的品牌。华为的战略与国家战略协同起来\n技术因素（technological factors）：要特别关注新技术带来的风险和机会\n华为在全球建设了12个研发中心，在通讯领域占有30%的核心专利，产品研发、生产和售后不会受制于人",
+            "贸易战、退群、一带一路等所有关键事件要有风险、机会和应对措施分析"
+          ]
+        },
+        {
+          "slide_index": 13,
+          "layout": "BLANK",
+          "texts": [
+            "看技术的工具： 甘特炒作曲线，洞察走向，适时切入\n问题：如果跨界电商当前是3.0，4.0是什么？智能商业？",
+            "商业价值",
+            "与时俱进，积极试错：先______→再______ → 最后______；阿里：拆分组织试错"
+          ]
+        },
+        {
+          "slide_index": 14,
+          "layout": "BLANK",
+          "texts": [
+            "看客户：对标客户SP（2B）；客户行为变化、爆款研究（2C）\n案例：华为手机，1摄像头→2摄像头→3摄像头→保时捷→AI…"
+          ]
+        },
+        {
+          "slide_index": 15,
+          "layout": "BLANK",
+          "texts": [
+            "看竞争：全方位分析对手现状和SP，工具：18要素+雷达图",
+            "雷达图，关键领域对比一目了然，依据对手现状和SP确定竞争策略（保密）"
+          ]
+        },
+        {
+          "slide_index": 16,
+          "layout": "BLANK",
+          "texts": [
+            "SPAN图看机会：吃着碗里的+看着锅里的+望着田里的",
+            "可以按产品、区域等多种维度画SPAN图；差异大的进一步细分到可管理"
+          ]
+        },
+        {
+          "slide_index": 17,
+          "layout": "BLANK",
+          "texts": [
+            "一定要建立起差异化的管理模式（研发、市场）：投入、考核、激励",
+            "碗里的",
+            "锅里的",
+            "田里的",
+            "业务组合策略：碗里的，锅里的，田里的都要创新，重点不同\n分别是商业模式、产品竞争力、标准专利。案例：UMTS"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 18,
+          "layout": "BLANK",
+          "texts": [
+            "创新方向：1、对准客户需求；2、依托现有优势：鲜花长在牛粪上",
+            "关注成长               关注成本",
+            "产品、服务和市场创新\t\n应用于聚焦客户和进入\t\n市场领域",
+            "发展和发行创新产品和服务\n进入新市场，寻找新客户\n推行新的渠道和交付路径",
+            "业务模式创新\n\n\t\n创新用于重建和企业扩张"
+          ]
+        },
+        {
+          "slide_index": 19,
+          "layout": "BLANK",
+          "texts": [
+            "创新领域：技术+产品+服务+商业模式+管理变革+生态",
+            "最能构筑长期竞争力和门槛的是核心技术创新，其它都容易被模仿",
+            "特斯拉            苹果        华为          凯迪拉克       大疆",
+            "摩拜单车            百度             阿里巴巴             谷歌",
+            "星巴克            淘宝          最多跑1次         携程      亚马逊"
+          ],
+          "has_table": true
+        },
+        {
+          "slide_index": 20,
+          "layout": "BLANK",
+          "texts": [
+            "10",
+            "9",
+            "8",
+            "7",
+            "6"
+          ]
+        },
+        {
+          "slide_index": 21,
+          "layout": "BLANK",
+          "texts": [
+            "业务设计是SP落脚点：战略意图+展开控制点+重点工作"
+          ]
+        },
+        {
+          "slide_index": 22,
+          "layout": "BLANK",
+          "texts": [
+            "业务设计to关键任务（KSF，主要矛盾、需要大力投资的）",
+            "支持业务设计、尤其是价值主张的实现，是执行的其它部分的基础\n主要是指持续性的战略举措(ongoing activity)，包括业务增长举措和能力建设举措\n可以从以下几个方而思考：客户管理；产品营销；产品开发；交付；服务；风险管理和能力建设（含重要运营流程的变革与优化）\n年度性的、可按季度跟踪衡量并识别出这些关键任务之间的相互依赖关系，譬如资源、设施等",
+            "进攻是最好的防御，战略要优先考虑的新业务；也包括金融危机时反向操作"
+          ]
+        },
+        {
+          "slide_index": 23,
+          "layout": "BLANK",
+          "texts": [
+            "讨论4：战略执行，组织、人才、激励匹配到位"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "华为SD-WAN高层主打胶片-Template.pptx",
+      "slide_dimensions": {
+        "width_in": 13.34,
+        "height_in": 7.5
+      },
+      "themes": {
+        "/ppt/theme/theme6.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "C8102E",
+            "accent3": "EA594F",
+            "accent4": "F8B53C",
+            "accent5": "231815",
+            "accent6": "595757",
+            "hlink": "898989",
+            "folHlink": "B5B5B5"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme14.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme12.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme7.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme10.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "C8102E",
+            "accent3": "EA594F",
+            "accent4": "F8B53C",
+            "accent5": "231815",
+            "accent6": "595757",
+            "hlink": "898989",
+            "folHlink": "B5B5B5"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme3.xml": {
+          "colors": {
+            "dk1": "000000",
+            "lt1": "FFFFFF",
+            "dk2": "1F497D",
+            "lt2": "EEECE1",
+            "accent1": "4F81BD",
+            "accent2": "C0504D",
+            "accent3": "9BBB59",
+            "accent4": "8064A2",
+            "accent5": "4BACC6",
+            "accent6": "F79646",
+            "hlink": "0000FF",
+            "folHlink": "800080"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme11.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme13.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme1.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme2.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme4.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme5.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "1D1D1A",
+            "dk2": "FFFFFF",
+            "lt2": "FFFFFF",
+            "accent1": "C7000A",
+            "accent2": "C8102E",
+            "accent3": "EA594F",
+            "accent4": "F8B53C",
+            "accent5": "231815",
+            "accent6": "595757",
+            "hlink": "898989",
+            "folHlink": "B5B5B5"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        },
+        "/ppt/theme/theme8.xml": {
+          "colors": {
+            "dk1": "1D1D1A",
+            "lt1": "666666",
+            "dk2": "FFFFFF",
+            "lt2": "EBEBEB",
+            "accent1": "C7000A",
+            "accent2": "E9002F",
+            "accent3": "F4A100",
+            "accent4": "FFFF00",
+            "accent5": "232323",
+            "accent6": "666666",
+            "hlink": "919191",
+            "folHlink": "C4C4C4"
+          },
+          "fonts": {
+            "major": {
+              "latin": "Arial",
+              "hans": "宋体"
+            },
+            "minor": {
+              "latin": "Arial",
+              "hans": "宋体"
+            }
+          }
+        }
+      },
+      "masters": [
+        {
+          "theme_ref": "/ppt/theme/theme6.xml",
+          "layouts": [
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.164,
+                    "width": 0.75,
+                    "height": 0.348
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.525,
+                    "width": 0.75,
+                    "height": 0.241
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.331,
+                    "top": 0.927,
+                    "width": 0.338,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.706,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Explore",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": -0.0,
+                    "top": 0.071,
+                    "width": 1.0,
+                    "height": 0.209
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE_ONLY",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.053,
+                    "width": 0.863,
+                    "height": 0.193
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.331,
+                    "top": 0.927,
+                    "width": 0.338,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.706,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme14.xml",
+          "layouts": [
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            },
+            {
+              "name": "BLANK",
+              "placeholders": []
+            },
+            {
+              "name": "3_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme12.xml",
+          "layouts": [
+            {
+              "name": "7_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.066,
+                    "width": 0.835,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.237,
+                    "width": 0.833,
+                    "height": 0.669
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme7.xml",
+          "layouts": [
+            {
+              "name": "7_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.066,
+                    "width": 0.835,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.237,
+                    "width": 0.833,
+                    "height": 0.669
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme10.xml",
+          "layouts": [
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Contents page",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme3.xml",
+          "layouts": [
+            {
+              "name": "2_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "7_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.066,
+                    "width": 0.835,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.061,
+                    "top": 0.237,
+                    "width": 0.833,
+                    "height": 0.669
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Title and Content",
+              "placeholders": [
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.014,
+                    "top": 0.932,
+                    "width": 0.036,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.04,
+                    "width": 0.9,
+                    "height": 0.108
+                  }
+                }
+              ]
+            },
+            {
+              "name": "4_标题和内容",
+              "placeholders": []
+            },
+            {
+              "name": "OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.034,
+                    "top": 0.059,
+                    "width": 0.933,
+                    "height": 0.127
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.233,
+                    "width": 0.9,
+                    "height": 0.66
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.042,
+                    "top": 0.024,
+                    "width": 0.915,
+                    "height": 0.13
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.042,
+                    "top": 0.185,
+                    "width": 0.915,
+                    "height": 0.734
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE_ONLY",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.087,
+                    "width": 0.9,
+                    "height": 0.072
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.927,
+                    "width": 0.233,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.342,
+                    "top": 0.927,
+                    "width": 0.317,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.717,
+                    "top": 0.927,
+                    "width": 0.233,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "5_标题和内容",
+              "placeholders": [
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.916,
+                    "top": 0.92,
+                    "width": 0.053,
+                    "height": 0.054
+                  }
+                }
+              ]
+            },
+            {
+              "name": "6_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.042,
+                    "top": 0.024,
+                    "width": 0.915,
+                    "height": 0.13
+                  }
+                }
+              ]
+            },
+            {
+              "name": "2_标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.016,
+                    "top": 0.018,
+                    "width": 0.968,
+                    "height": 0.093
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE_AND_BODY",
+              "placeholders": [
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.485,
+                    "top": 0.953,
+                    "width": 0.029,
+                    "height": 0.046
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.039,
+                    "top": 0.056,
+                    "width": 0.906,
+                    "height": 0.07
+                  }
+                }
+              ]
+            },
+            {
+              "name": "3_标题和内容",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.263,
+                    "width": 0.614,
+                    "height": 0.193
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.447,
+                    "width": 0.341,
+                    "height": 0.067
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme11.xml",
+          "layouts": [
+            {
+              "name": "BLANK",
+              "placeholders": []
+            },
+            {
+              "name": "文档正文_空白",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.02,
+                    "top": 0.04,
+                    "width": 0.959,
+                    "height": 0.081
+                  }
+                }
+              ]
+            },
+            {
+              "name": "4_标题和内容",
+              "placeholders": []
+            },
+            {
+              "name": "1_标题幻灯片",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme13.xml",
+          "layouts": [
+            {
+              "name": "BLANK",
+              "placeholders": []
+            },
+            {
+              "name": "2_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.054,
+                    "top": 0.038,
+                    "width": 0.863,
+                    "height": 0.1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme1.xml",
+          "layouts": [
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                },
+                {
+                  "idx": 2,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.219,
+                    "width": 0.88,
+                    "height": 0.684
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme2.xml",
+          "layouts": [
+            {
+              "name": "BLANK",
+              "placeholders": []
+            },
+            {
+              "name": "1_Contents page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.085,
+                    "top": 0.269,
+                    "width": 0.83,
+                    "height": 0.439
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Title Slide",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme4.xml",
+          "layouts": [
+            {
+              "name": "1_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.06,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.145
+                  }
+                }
+              ]
+            },
+            {
+              "name": "BLANK",
+              "placeholders": []
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme5.xml",
+          "layouts": [
+            {
+              "name": "4_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.054,
+                    "width": 0.835,
+                    "height": 0.109
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.189,
+                    "width": 0.831,
+                    "height": 0.7
+                  }
+                }
+              ]
+            },
+            {
+              "name": "1_Chinese text page",
+              "placeholders": []
+            },
+            {
+              "name": "Title and Content",
+              "placeholders": [
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.014,
+                    "top": 0.932,
+                    "width": 0.036,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.04,
+                    "width": 0.9,
+                    "height": 0.108
+                  }
+                }
+              ]
+            },
+            {
+              "name": "5_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "6_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "7_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "8_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "9_Chinese text page",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.043,
+                    "top": 0.067,
+                    "width": 0.881,
+                    "height": 0.061
+                  }
+                }
+              ]
+            },
+            {
+              "name": "OBJECT",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.053,
+                    "width": 0.863,
+                    "height": 0.193
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.266,
+                    "width": 0.863,
+                    "height": 0.634
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.331,
+                    "top": 0.927,
+                    "width": 0.338,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.706,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.054,
+                    "width": 0.835,
+                    "height": 0.109
+                  }
+                }
+              ]
+            },
+            {
+              "name": "仅标题",
+              "placeholders": [
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.331,
+                    "top": 0.927,
+                    "width": 0.338,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.706,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.053,
+                    "width": 0.863,
+                    "height": 0.193
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.075,
+                    "top": 0.311,
+                    "width": 0.85,
+                    "height": 0.214
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.15,
+                    "top": 0.567,
+                    "width": 0.7,
+                    "height": 0.256
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.05,
+                    "top": 0.927,
+                    "width": 0.233,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.342,
+                    "top": 0.927,
+                    "width": 0.317,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.717,
+                    "top": 0.927,
+                    "width": 0.233,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "2_Custom Layout",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.054,
+                    "width": 0.835,
+                    "height": 0.109
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.083,
+                    "top": 0.183,
+                    "width": 0.834,
+                    "height": 0.716
+                  }
+                }
+              ]
+            },
+            {
+              "name": "BLANK",
+              "placeholders": [
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.648,
+                    "top": 0.914,
+                    "width": 0.116,
+                    "height": 0.067
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme_ref": "/ppt/theme/theme8.xml",
+          "layouts": [
+            {
+              "name": "TITLE",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.164,
+                    "width": 0.75,
+                    "height": 0.348
+                  }
+                },
+                {
+                  "idx": 1,
+                  "type": "SUBTITLE (4)",
+                  "position": {
+                    "left": 0.125,
+                    "top": 0.525,
+                    "width": 0.75,
+                    "height": 0.241
+                  }
+                },
+                {
+                  "idx": 10,
+                  "type": "DATE (16)",
+                  "position": {
+                    "left": 0.069,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 11,
+                  "type": "FOOTER (15)",
+                  "position": {
+                    "left": 0.331,
+                    "top": 0.927,
+                    "width": 0.338,
+                    "height": 0.053
+                  }
+                },
+                {
+                  "idx": 12,
+                  "type": "SLIDE_NUMBER (13)",
+                  "position": {
+                    "left": 0.706,
+                    "top": 0.927,
+                    "width": 0.225,
+                    "height": 0.053
+                  }
+                }
+              ]
+            },
+            {
+              "name": "标题幻灯片",
+              "placeholders": [
+                {
+                  "idx": 0,
+                  "type": "CENTER_TITLE (3)",
+                  "position": {
+                    "left": 0.034,
+                    "top": 0.025,
+                    "width": 0.921,
+                    "height": 0.136
+                  }
+                }
+              ]
+            },
+            {
+              "name": "标题和内容",
+              "placeholders": [
+                {
+                  "idx": 1,
+                  "type": "BODY (2)",
+                  "position": {
+                    "left": 0.063,
+                    "top": 0.248,
+                    "width": 0.774,
+                    "height": 0.472
+                  }
+                },
+                {
+                  "idx": 0,
+                  "type": "TITLE (1)",
+                  "position": {
+                    "left": 0.063,
+                    "top": 0.038,
+                    "width": 0.773,
+                    "height": 0.127
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "demo_slides": [
+        {
+          "slide_index": 0,
+          "layout": "TITLE",
+          "texts": [
+            "华为SD-WAN高层主打胶片",
+            "广域网络营销运作部",
+            "引领智能IP网络"
+          ]
+        },
+        {
+          "slide_index": 1,
+          "layout": "1_Contents page",
+          "texts": [
+            "企业互联迈入5G+SD-WAN时代\n华为SD-WAN解决方案，打造企业上云宽管道\n成功案例"
+          ]
+        },
+        {
+          "slide_index": 2,
+          "layout": "7_Custom Layout",
+          "texts": [
+            "商业驱动：更多的企业在转型过程中对网络提出更高诉求",
+            "数字化\nAI，AR/VR成常态，联网终端数爆增",
+            "云化\n2020年，85%企业业务上云",
+            "全球化\n分支机构快速扩张",
+            "更大带宽\n10~100M 专线 🡪 100M~10G 混合链路"
+          ]
+        },
+        {
+          "slide_index": 3,
+          "layout": "7_Custom Layout",
+          "texts": [
+            "技术驱动：5G和SD-WAN为代表的新技术正在赋能分支互联",
+            "+ 路由，交换",
+            "+Wi-Fi，LTE ,安全，VPN，语音…\n+路由，交换",
+            "+5G, SD-WAN\n+应用识别和优化\n+Wi-Fi，LTE ,安全，VPN，语音…\n+路由，交换",
+            "分支互联将原生支持5G+SD-WAN技术，从L2~L4路由转发向L3~L7应用体验保障升级"
+          ]
+        },
+        {
+          "slide_index": 4,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "带宽需求：>100M",
+            "5G SD-WAN",
+            "数字化变革",
+            "5G已来",
+            "双轮驱动"
+          ]
+        },
+        {
+          "slide_index": 5,
+          "layout": "1_Contents page",
+          "texts": [
+            "企业互联迈入5G+SD-WAN时代\n华为SD-WAN解决方案，打造企业上云宽管道\n成功案例"
+          ]
+        },
+        {
+          "slide_index": 6,
+          "layout": "2_Chinese text page",
+          "texts": [
+            "华为在分支互联领域的持续探索，“厚积薄发”",
+            "AR G3发布\n多核架构，多接口",
+            "2010",
+            "2014",
+            "2016"
+          ]
+        },
+        {
+          "slide_index": 7,
+          "layout": "7_Custom Layout",
+          "texts": [
+            "技术积累带来好的市场表现，良好市场表现反哺技术创新",
+            "单位：M$",
+            "主流厂商增长最快",
+            "持续的技术创新反哺",
+            "20% 研发投资-销售收入比      11% 研发投资增长"
+          ]
+        },
+        {
+          "slide_index": 8,
+          "layout": "BLANK",
+          "texts": [
+            "5G SD-WAN三大亮点",
+            "①5G上行\n首个企业级5G上行接入路由器",
+            "900Mbps(下行)/230Mbps(上行)*\n双卡单待\nNSA/SA，5G/4G/3G",
+            "NetEngine AR6000全系列支持5G",
+            "②3倍业界性能\n经Tolly和泰尔测试认证"
+          ]
+        },
+        {
+          "slide_index": 9,
+          "layout": "BLANK",
+          "texts": [
+            "全系列NetEngine AR6000支持5G，为企业构建5G高速园区出口",
+            "可插拔式5G 板卡",
+            "全系列NetEngine AR6000支持5G，为不同规模企业分支构建5G高速网络出口",
+            "5G上行"
+          ]
+        },
+        {
+          "slide_index": 10,
+          "layout": "Title and Content",
+          "texts": [
+            "3倍业界性能：创新CPU+NP+硬件加速器异构转发架构",
+            "全业务智能时代需要高性能转发",
+            "企业带宽需求指数级增长，性能需求 > 100Mbps",
+            "传统路由器开启 SD-WAN性能下降80%",
+            "路由"
+          ]
+        },
+        {
+          "slide_index": 11,
+          "layout": "4_标题和内容",
+          "texts": [
+            "Tolly实测： NetEngine AR转发性能全面领先友商",
+            "Tolly实测：全系列NetEngine AR，3大性能指标全面领先友商",
+            "实测数据超过华为彩页宣称值\n无需购买License，实测数据领先友商三档License性能值",
+            "中立第三方\n国际权威测评机构 · 美国",
+            "AR6121：在友商同档次设备叠加最高性能License前提下，3 大性能指标仍为友商同档次性能2~5倍"
+          ]
+        },
+        {
+          "slide_index": 12,
+          "layout": "OBJECT",
+          "texts": [
+            "品质体验：SD-WAN提供最优的管理和应用体验",
+            "品质体验",
+            "客户价值",
+            "极简运维体验：ZTP部署，可视管理，导航式配置",
+            "品质应用体验：应用级智能选路&A-FEC"
+          ]
+        },
+        {
+          "slide_index": 13,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "全流程自动化，即插即用",
+            "可视化运维",
+            "基于GIS地图的网络监控，应用/链路/站点/整网状态可视\n网络自动巡检，精准告警信息邮件通知",
+            "全流程自动化",
+            "模板化，流程化的站点和网络拓扑配置\n应用为中心的选路，QoS和安全策略"
+          ]
+        },
+        {
+          "slide_index": 14,
+          "layout": "BLANK",
+          "texts": [
+            "A-FEC",
+            "传统：> 2%丢包，视频即花屏",
+            "自适应前向纠错A-FEC\n实时感知应用丢包，自适应冗余补偿",
+            "③自适应冗余补偿",
+            "④报文前向纠错"
+          ]
+        },
+        {
+          "slide_index": 15,
+          "layout": "1_Chinese text page",
+          "texts": [
+            "关键应用\n如视频，ERP等",
+            "MPLS",
+            "丢包/延时/抖动",
+            "Internet",
+            "①3大识别技术\n快速识别关键应用"
+          ]
+        },
+        {
+          "slide_index": 16,
+          "layout": "4_Chinese text page",
+          "texts": [
+            "NetEngine AR全家福，满足不同场景分支互联",
+            "NetEngine AR6300",
+            "SRU-400H/SRU-600H",
+            "小企业",
+            "AR651C"
+          ]
+        },
+        {
+          "slide_index": 17,
+          "layout": "1_Contents page",
+          "texts": [
+            "企业互联迈入5G+SD-WAN时代\n华为SD-WAN解决方案，打造企业上云宽管道\n成功案例"
+          ]
+        },
+        {
+          "slide_index": 18,
+          "layout": "BLANK",
+          "texts": [
+            "案例：中国建设银行积极推动5G+智慧银行转型",
+            "班克互动",
+            "人工柜台",
+            "2~10M",
+            "20M"
+          ]
+        },
+        {
+          "slide_index": 19,
+          "layout": "TITLE",
+          "texts": [
+            "以澎湃动力\n引领智能IP网络"
+          ]
+        }
+      ]
+    }
+  ]
+}

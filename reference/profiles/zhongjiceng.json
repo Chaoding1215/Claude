@@ -1,0 +1,31 @@
+{
+  "source": "中基层交流风格.pdf",
+  "layout_pattern": "27 pages: 26 content pages + 1 closing page (the only sample besides this one with a detected closing page). No TOC detected.",
+  "color_role_mapping": {
+    "1D1D1A": "primary text color, overwhelmingly dominant (11811 occurrences) — matches the near-black convention seen in the Telefonica and SD-WAN pptx samples",
+    "C00000": "accent/emphasis red (1239) — consistent with 4 of the other 5 samples in this corpus",
+    "FF6600": "secondary orange accent",
+    "6F4FDF": "purple accent, not seen elsewhere in the corpus",
+    "FF0000": "pure red, distinct from the C00000 accent — possibly used for warnings/negative figures",
+    "003B5C": "dark teal/navy, likely a secondary heading color"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 24.0, "usage": "page headline (1331 occurrences)" },
+    { "level": "body-emphasis", "size_pt": 16.0, "usage": "emphasized subheading" },
+    { "level": "body-emphasis-2", "size_pt": 14.0, "usage": "secondary subheading" },
+    { "level": "body", "size_pt": 12.0, "usage": "standard body (3404, second most frequent)" },
+    { "level": "body-dominant", "size_pt": 10.0, "usage": "most frequent size overall (3768)" },
+    { "level": "caption", "size_pt": 9.0, "usage": "captions/fine print" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": [],
+    "tables": "15 of 27 pages (56%) — high, though subject to the same pdfplumber false-positive caveat as the other PDF samples",
+    "note": "no native charts; near-universal picture use (26/27) — same image-driven pattern as the pptx-based Huawei decks in this corpus."
+  },
+  "text_density_rule": "10-1584 characters per page (mean ~790), with the closing page as the short outlier (10 chars). Dense middle section (pages 13-16 run 1179-1584 chars) suggests density increases toward argument climax rather than staying flat.",
+  "logic_flow": "Cannot be reconstructed from title text (same PDF extraction gap as 高层交流风格.pdf). Layout sequence (26 content pages -> 1 closing) suggests a single continuous argument without section breaks, unlike the two pptx decks which had explicit section dividers.",
+  "image_treatment": "378 embedded raster objects across 27 pages (~14/page) — same caveat as the other PDF samples applies (icon/texture fragments, not literal photo count). Zone distribution weights middle-left (83) and bottom-left (61) most heavily, a left-anchored pattern not seen in the other PDF samples. 178 of 378 (47%) fall within the caption margin (e.g. 'Best Team', 'Media', 'Education 155K USD/M') — again data-label annotations within infographics, not editorial captions.",
+  "citation_style": "1 citation found: 'Current resource: Cpu:2790 Cores, Memroy:9480GB, Production...' — a technical resource-spec disclosure rather than an external market-data citation. No 'Source: X' style attribution anywhere in this sample, unlike 高层交流风格.pdf — suggests citation discipline is audience-tier dependent (senior-leadership deck cites external research; mid/junior deck states internal specs directly without attribution).",
+  "branding_footer": "No footer, page-number, or confidentiality marker found anywhere in this sample.",
+  "data_quality_caveats": "Same PDF title-text gap as 高层交流风格.pdf. Color and font palette here (1D1D1A + C00000, ArialMT/Calibri/DengXian) closely matches the pptx samples' palette — this is the strongest cross-format consistency signal in the corpus so far, worth weighting heavily in aggregation despite the small sample count."
+}

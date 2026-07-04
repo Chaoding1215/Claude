@@ -1,0 +1,36 @@
+{
+  "source": "Telefonica B2B Insight 20260703.pptx",
+  "layout_pattern": "Deck opens with 1 title slide (deck name only, minimal text), followed by a run of dense content/analysis slides (11 of 13) each carrying a short section-label title (e.g. 'WAN', 'LAN', '云服务', '安全托管服务和终端管理', 'Supply'), and a single chart slide with a full sentence-length headline stating the key data takeaway. No dedicated TOC or closing slide was detected in this sample — both are absent, which is itself notable given they're common in this genre.",
+  "color_role_mapping": {
+    "000000": "primary body text (dominant, 433 occurrences)",
+    "1D1D1A": "secondary/near-black text or line art (281 occurrences, close to but distinct from pure black)",
+    "C00000": "accent/emphasis color — dark red used for highlighted labels, callouts, or key figures (152 occurrences, third most frequent)",
+    "FFFFFF": "background or reversed text on dark fills",
+    "333333": "secondary body text on lighter panels",
+    "666666": "tertiary/caption text",
+    "0266FD": "accent blue, used sparingly — likely a secondary highlight or link/data color",
+    "707063": "muted olive-gray, likely a UI chrome or divider color"
+  },
+  "typography_hierarchy": [
+    { "level": "title", "size_pt": 20.0, "usage": "slide/section titles — second most frequent size, appears on every slide" },
+    { "level": "emphasis", "size_pt": 13.99, "usage": "sub-headers or emphasized body lines" },
+    { "level": "body", "size_pt": 11.0, "usage": "dominant body text size (332 occurrences — the most common size in the deck)" },
+    { "level": "body-secondary", "size_pt": 12.0, "usage": "secondary body text, close second to 11pt" },
+    { "level": "supporting", "size_pt": 10.0, "usage": "supporting text, table cells" },
+    { "level": "caption", "size_pt": "9.0-10.5", "usage": "captions, footnotes, table labels" },
+    { "level": "micro", "size_pt": 7.0, "usage": "rare fine print (only 3 occurrences — likely source citations)" }
+  ],
+  "data_viz_preference": {
+    "chart_types_observed": ["pie"],
+    "tables": "used on 7 of 13 slides (54%) — the dominant data presentation format in this deck, more common than charts",
+    "note": "single-sample data — only one chart appears in this deck (a pie chart on the headline data-takeaway slide), so 'preference' can't be established with confidence yet; tables clearly outweigh charts here, which may or may not generalize"
+  },
+  "text_density_rule": "Content slides run very dense: character counts of 220-794 per slide (mean ~550) on 11 of 13 slides, driven by shape counts up to 66 per slide. Only the title slide (19 characters) and two closing/portfolio-summary slides (26, 39 characters) break the pattern. No apparent per-slide character cap is being enforced — this deck favors information density over minimalism.",
+  "logic_flow": "Title → headline data takeaway (chart-backed) → sequential capability/portfolio walkthrough by domain (WAN → LAN → cloud → security/endpoint management → supply) → competitive-positioning summary (Huawei's addressable participation space) → closing product/commodity recap. Reads as a market/competitive insight briefing organized by product domain rather than a problem→data→conclusion→action-item narrative.",
+  "image_treatment": "14 images across 13 slides, mostly middle/bottom zone (2 middle-left, 5 middle-center, 2 bottom-right, 2 bottom-center, 1 bottom-left, 2 middle-right) — no full-bleed images at all, consistent with a data-dense deck that keeps images as supporting evidence rather than hero visuals. 8 of 14 (57%) have an adjacent text label directly beneath them (e.g. '自2015年开始自研的系列产品，xHGU III代Wi-Fi7正在研发中', '50M$') — these read as data callouts/annotations rather than traditional photo captions.",
+  "citation_style": "One explicit citation found: '数据来源：25Q4 Telefonica财报' (slide 2, small font near the supporting image) — attributes a specific external financial figure to its source. Only 1 of 13 slides carries a citation marker; the rest of the deck's figures appear uncited, suggesting citation is reserved for headline external numbers rather than applied consistently.",
+  "argument_structure": "Content-point counts vary widely (2-66 per substantive slide, median 32), the highest of the 3 pptx samples — but the top end (54, 66) is likely inflated by dashboard-style slides built from many small text-box data labels rather than true bulleted argument points, since this deck relies heavily on tables/data grids assembled from individual text boxes rather than native bullet lists.",
+  "diagram_convention": "9 of 13 slides (69%) have ≥3 non-text diagram shapes forming a 2D grid arrangement (e.g. slide 1, 'TDE B2B业务历史经营...', 7 shapes in a 4x5 arrangement — likely a data-label grid supporting the chart). No single-row or single-column sequence diagrams found. Geometry alone can't confirm whether these are true matrices or data-callout scatter — needs visual confirmation.",
+  "branding_footer": "No footer, page-number, or confidentiality marker found anywhere in this sample.",
+  "sample_size_caveat": "This profile is built from a single deck. Per distill-slide-style step 3, do not treat any of the above as a mandatory or even preferential rule yet — wait for more samples before aggregating. Flag color_role_mapping and data_viz_preference in particular as low-confidence: one data point can't distinguish 'this deck's choice' from 'this org's convention'."
+}
