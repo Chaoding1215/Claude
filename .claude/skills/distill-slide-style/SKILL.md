@@ -25,12 +25,16 @@ Mine a sample corpus into a versioned, evidence-cited style specification. Incre
 - `color_role_mapping` — hex → role (`primary`/`accent`/`background`/`text`/...)
 - `typography_hierarchy` — level → size_pt → usage
 - `data_viz_preference` — chart/table type per scenario
-- `text_density_rule` — words/bullets cap per slide
+- `text_density_rule` — characters/bullets cap per slide
 - `logic_flow` — narrative arc across the deck
 
 **Aggregation batch limit**: 20–30 profiles per call. Above that, aggregate in sub-batches first, then aggregate the sub-batch summaries — never skip the second pass.
 
 **Spec document sections** (step 3 output): Mandatory rules (>80% consistency), Preferential rules (majority + noted exceptions), Prohibitions (never observed), Reference examples (one citation per rule — no exceptions).
+
+**Settled conventions** (decided once, do not re-litigate in future reconcile passes):
+- Title-pattern rules (`logic_flow`, headline-as-title) are pptx-only evidence, permanently. PDF sources have no title-placeholder equivalent to extract, so PDF samples simply don't vote on these rules — this is a scope limit, not an open gap to close.
+- Font-family findings are scenario-conditioned, not directly comparable across source formats: pptx sources (internal-use/working files) report actual CJK font names (e.g. Microsoft Yahei); PDF sources (external-use/distributed exports) report Latin-substitute font names even on CJK-text pages, because PDF export commonly re-encodes/subsets fonts for portability. Write font rules as a pair — one for the internal/pptx scenario, one for the external/PDF scenario — rather than merging them into a single cross-format rule or discarding the PDF signal as noise.
 
 ## External reference
 
