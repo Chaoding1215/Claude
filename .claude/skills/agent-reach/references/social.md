@@ -108,6 +108,23 @@ twitter likes
 > **认证**: 推荐用 Cookie-Editor 导出后设置环境变量 `TWITTER_AUTH_TOKEN` + `TWITTER_CT0`。自动提取在 SSH/Docker/无头环境不可用。
 >
 > **IP 风控**: 不要在 VPS/数据中心 IP 上频繁调用，尤其是 followers/following，有封号风险。使用住宅代理或本地环境。
+
+#### 从 Chrome 导出 `TWITTER_AUTH_TOKEN` / `TWITTER_CT0`
+
+1. 在 Chrome 中登录 `https://x.com`（或 `twitter.com`），确保处于已登录状态。
+2. 从 Chrome 网上应用店安装 "Cookie-Editor"（作者 cgagnier）扩展。
+3. 停留在 x.com 页面，点击工具栏的 Cookie-Editor 图标，扩展会列出当前站点的所有 Cookie。
+4. 找到并复制以下两个字段的 "Value"（不是名称）：
+   - `auth_token` → 对应环境变量 `TWITTER_AUTH_TOKEN`
+   - `ct0` → 对应环境变量 `TWITTER_CT0`
+5. （可选）用 Cookie-Editor 的一键 "Export" 导出为 JSON，在 JSON 中搜索 `"name": "auth_token"` 和 `"name": "ct0"`，取各自的 `value` 字段。
+6. 在运行 twitter-cli 的终端/环境中设置环境变量，例如：
+   ```bash
+   export TWITTER_AUTH_TOKEN="<auth_token 的值>"
+   export TWITTER_CT0="<ct0 的值>"
+   ```
+
+> ⚠️ Cookie 属于敏感登录凭证，请勿提交到代码仓库或分享给第三方；如怀疑泄露应立即在 Twitter/X 上退出登录使其失效。
 >
 > **OpenCLI 备选**: 桌面装了 OpenCLI 的话，`opencli twitter search/article/user-posts -f yaml` 全套可用（浏览器登录态，无需 cookie 环境变量）。
 >
