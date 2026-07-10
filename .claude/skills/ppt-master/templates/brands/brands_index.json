@@ -1,4 +1,8 @@
 {
+  "Huawei": {
+    "summary": "Huawei corporate identity — enterprise/telecom/ICT briefings, internal reports, product and strategy decks",
+    "primary_color": "#C7000A"
+  },
   "anthropic": {
     "summary": "Anthropic brand identity — AI/LLM tech talks, developer conferences, technical training, product launches",
     "primary_color": "#D97757"

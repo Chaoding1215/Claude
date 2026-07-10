@@ -1,0 +1,28 @@
+{
+  "schema": "ppt-master.source_to_md.profile.v1",
+  "converter": "ppt_to_md.py",
+  "conversion_type": "pptx",
+  "source": {
+    "path": "华为SD-WAN高层主打胶片v2.pptx",
+    "name": "华为SD-WAN高层主打胶片v2.pptx",
+    "suffix": ".pptx",
+    "kind": "file",
+    "exists": true,
+    "size_bytes": 22444419
+  },
+  "outputs": {
+    "markdown": "华为SD-WAN高层主打胶片v2.md",
+    "asset_dir": "华为SD-WAN高层主打胶片v2_files",
+    "image_manifest": "华为SD-WAN高层主打胶片v2_files/image_manifest.json",
+    "image_count": 58
+  },
+  "markdown": {
+    "line_count": 1202,
+    "char_count": 15207,
+    "heading_count": 31,
+    "table_count": 0,
+    "image_ref_count": 104,
+    "link_count": 1
+  },
+  "warnings": []
+}

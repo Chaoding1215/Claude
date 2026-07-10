@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0D1B2A"/>
+
+  <g id="background-image">
+    <rect x="0" y="0" width="1280" height="720" fill="#16324A" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="2" stroke-dasharray="10,6"/>
+    <text x="640" y="230" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#FFFFFF" fill-opacity="0.35">{{COVER_BG_IMAGE}}</text>
+  </g>
+
+  <defs>
+    <linearGradient id="coverOverlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0F1E" stop-opacity="0.10"/>
+      <stop offset="45%" stop-color="#0A0F1E" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0A0F1E" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+  <g id="background-overlay">
+    <rect x="0" y="0" width="1280" height="720" fill="url(#coverOverlay)"/>
+  </g>
+
+  <g id="cover-title">
+    <text x="640" y="410" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="52" font-weight="bold" fill="#FFFFFF">{{TITLE}}</text>
+    <text x="640" y="466" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="24" font-weight="bold" fill="#FF4B4B">{{SUBTITLE}}</text>
+  </g>
+
+  <g id="footer">
+    <line x1="120" y1="620" x2="1160" y2="620" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="640" y="655" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#FFFFFF" fill-opacity="0.75">{{AUTHOR}}　{{DATE}}</text>
+  </g>
+</svg>

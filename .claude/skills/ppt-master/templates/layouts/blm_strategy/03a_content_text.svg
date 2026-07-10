@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+  </g>
+
+  <g id="header">
+    <text x="64" y="70" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="30" font-weight="bold" fill="#0070C0">{{PAGE_TITLE}}</text>
+  </g>
+
+  <g id="content-text-block">
+    <rect x="64" y="110" width="1152" height="520" fill="none" stroke="#D4EAF5" stroke-width="1.5" rx="4"/>
+    <text x="96" y="164" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#000000"><tspan fill="#C00000" font-weight="bold">1. </tspan>{{CONTENT_AREA}}</text>
+    <text x="96" y="228" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#000000"><tspan fill="#C00000" font-weight="bold">2. </tspan>{{CONTENT_AREA}}</text>
+    <text x="96" y="292" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#000000"><tspan fill="#C00000" font-weight="bold">3. </tspan>{{CONTENT_AREA}}</text>
+    <text x="96" y="356" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#000000"><tspan fill="#C00000" font-weight="bold">4. </tspan>{{CONTENT_AREA}}</text>
+    <line x1="96" y1="500" x2="1184" y2="500" stroke="#E5E5E5" stroke-width="1"/>
+    <text x="96" y="560" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#000000">{{CONTENT_AREA}}</text>
+  </g>
+
+  <g id="footer">
+    <rect x="0" y="660" width="1280" height="48" fill="#0070C0"/>
+    <text x="640" y="690" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">{{KEY_MESSAGE}}</text>
+  </g>
+</svg>
