@@ -70,3 +70,31 @@ if [ ! -f "$PPT_ENGINE" ]; then
 else
   echo "ppt-master engine already present."
 fi
+
+# Install the agent-reach CLI into a dedicated venv if missing. A venv is
+# required because system pip fails building the sgmllib3k wheel on this
+# image's Debian setuptools (AttributeError: install_layout). Installing via
+# a plain git clone + local pip install, since pip installing directly from
+# a github.com archive/*.zip URL is blocked by egress policy (same
+# restriction that blocks codeload.github.com tarballs above); a git clone
+# over github.com goes through the proxy fine.
+AGENT_REACH_VENV="$HOME/.agent-reach-venv"
+AGENT_REACH_BIN="$AGENT_REACH_VENV/bin/agent-reach"
+if [ ! -x "$AGENT_REACH_BIN" ]; then
+  echo "agent-reach CLI not found — installing..."
+  TMP_DIR=$(mktemp -d)
+  if git clone --depth 1 --quiet https://github.com/Panniantong/Agent-Reach.git "$TMP_DIR/agent-reach" 2>/dev/null \
+      && python3 -m venv "$AGENT_REACH_VENV" 2>/dev/null \
+      && "$AGENT_REACH_VENV/bin/pip" install --upgrade pip setuptools wheel -q \
+      && "$AGENT_REACH_VENV/bin/pip" install -q "$TMP_DIR/agent-reach"; then
+    echo "agent-reach CLI installed successfully."
+  else
+    echo "WARNING: failed to install agent-reach CLI."
+  fi
+  rm -rf "$TMP_DIR"
+else
+  echo "agent-reach CLI already present."
+fi
+if [ -x "$AGENT_REACH_BIN" ]; then
+  echo "export PATH=\"$AGENT_REACH_VENV/bin:\$PATH\"" >> "$CLAUDE_ENV_FILE"
+fi
