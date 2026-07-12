@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>财富课程 #08：退休提款与序列回报风险</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* ── Layout ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Trinity Study Table ── */
+  .trinity-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .trinity-table th { background: var(--accent); color: #fff; padding: 0.5rem 0.7rem; text-align: center; font-weight: 600; }
+  .trinity-table td { padding: 0.45rem 0.7rem; text-align: center; border: 1px solid var(--border); }
+  .trinity-table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .pct-high  { background: #d4edda !important; color: #155724; font-weight: 600; }
+  .pct-mid   { background: #fff3cd !important; color: #856404; font-weight: 600; }
+  .pct-low   { background: #f8d7da !important; color: #721c24; font-weight: 600; }
+  .pct-cell  { border-radius: 3px; }
+
+  /* ── Sequence simulator ── */
+  #seq-canvas { width: 100%; height: 220px; border-radius: 8px; background: var(--bg-secondary); }
+  .seq-controls { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; align-items: flex-end; }
+  .seq-controls label { font-size: 0.82rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.3rem; }
+  .seq-controls input[type=range] { width: 130px; }
+  .seq-controls input[type=number] { width: 100px; padding: 0.3rem 0.5rem; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-secondary); color: var(--text); font-size: 0.85rem; }
+  .seq-btn { padding: 0.5rem 1.2rem; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+  .seq-btn:hover { opacity: 0.85; }
+  .seq-legend { display: flex; gap: 1.5rem; font-size: 0.8rem; margin-top: 0.4rem; }
+  .seq-legend span { display: flex; align-items: center; gap: 0.4rem; }
+  .dot { width: 12px; height: 4px; border-radius: 2px; display: inline-block; }
+
+  /* ── Monte Carlo histogram ── */
+  #mc-canvas { width: 100%; height: 200px; border-radius: 8px; background: var(--bg-secondary); }
+  .mc-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin: 0.8rem 0; }
+  .mc-stat { background: var(--bg-secondary); border-radius: 8px; padding: 0.7rem; text-align: center; border: 1px solid var(--border); }
+  .mc-stat .val { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+  .mc-stat .lbl { font-size: 0.72rem; color: var(--text-secondary); margin-top: 0.2rem; }
+
+  /* ── Guardrails viz ── */
+  .guardrail-band { position: relative; height: 60px; border-radius: 8px; overflow: hidden; margin: 0.8rem 0; background: var(--bg-secondary); }
+  .gb-red   { position: absolute; left: 0;   width: 15%; height: 100%; background: #f8d7da; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #721c24; }
+  .gb-yellow{ position: absolute; left: 15%; width: 15%; height: 100%; background: #fff3cd; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #856404; }
+  .gb-green { position: absolute; left: 30%; width: 40%; height: 100%; background: #d4edda; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #155724; }
+  .gb-light { position: absolute; left: 70%; width: 15%; height: 100%; background: #cce5ff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #004085; }
+  .gb-blue  { position: absolute; left: 85%; width: 15%; height: 100%; background: #b8daff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #004085; }
+  .gk-arrow { text-align: center; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem; }
+
+  /* ── CAPE-based rule ── */
+  .cape-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .cape-table th { background: var(--accent); color: #fff; padding: 0.45rem 0.8rem; }
+  .cape-table td { padding: 0.4rem 0.8rem; border: 1px solid var(--border); }
+  .cape-table tr:nth-child(even) td { background: var(--bg-secondary); }
+
+  /* ── China section ── */
+  .china-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media (max-width: 700px) { .china-grid { grid-template-columns: 1fr; } }
+  .china-card { background: var(--bg-secondary); border-radius: 10px; padding: 1rem; border: 1px solid var(--border); }
+  .china-card h4 { margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--accent); }
+
+  /* ── Withdrawal comparison ── */
+  .strategy-compare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 700px) { .strategy-compare { grid-template-columns: 1fr; } }
+  .sc-card { border-radius: 10px; padding: 1rem; border: 2px solid var(--border); }
+  .sc-card h4 { margin: 0 0 0.5rem; font-size: 0.88rem; }
+  .sc-card .sc-pros { color: #155724; font-size: 0.78rem; }
+  .sc-card .sc-cons { color: #721c24; font-size: 0.78rem; }
+  .sc-card .sc-best { background: var(--bg-secondary); border-radius: 6px; padding: 0.3rem 0.5rem; font-size: 0.75rem; margin-top: 0.5rem; color: var(--text-secondary); }
+
+  /* ── Key number highlight ── */
+  .kn { display: inline-block; background: var(--accent); color: #fff; border-radius: 4px; padding: 0 5px; font-weight: 700; }
+  .formula-box { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; font-family: monospace; font-size: 0.9rem; margin: 0.8rem 0; }
+
+  /* ── Progress & ruin ── */
+  .ruin-meter { display: flex; align-items: center; gap: 1rem; margin: 0.4rem 0; }
+  .ruin-bar-bg { flex: 1; height: 18px; border-radius: 9px; background: #e9ecef; overflow: hidden; }
+  .ruin-bar-fill { height: 100%; border-radius: 9px; }
+  .ruin-label { font-size: 0.8rem; min-width: 110px; }
+  .ruin-pct { font-size: 0.8rem; font-weight: 700; min-width: 40px; text-align: right; }
+
+  /* ── Misc ── */
+  .citation { font-size: 0.75rem; color: var(--text-secondary); font-style: italic; }
+  .warning-box { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.85rem; color: #856404; }
+  .insight-row { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0.5rem 0; font-size: 0.85rem; }
+  .insight-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+</style>
+</head>
+<body>
+
+<div class="lesson-header">
+  <div class="lesson-number">财富课程 #08</div>
+  <h1>退休提款与序列回报风险</h1>
+  <p class="lesson-subtitle">从积累期到提款期——为什么"平均回报"会骗你，以及如何构建真正可持续的退休计划</p>
+</div>
+
+<!-- ══════════════ SECTION 1: The 4% Rule ══════════════ -->
+<section class="lesson-section">
+  <h2>1. 4% 法则的起源与含义</h2>
+
+  <div class="two-col">
+    <div>
+      <p>1994年，财务顾问 William Bengen 发布了改变退休规划的研究。他问了一个简单的问题：</p>
+      <div class="callout">
+        <strong>如果你在最糟糕的历史时点退休，每年最多能取出多少钱，才能让资产维持30年？</strong>
+      </div>
+      <p>他用1926-1992年的真实市场数据（含通胀调整）测试了所有历史退休时点。结论：</p>
+      <div class="formula-box">
+        安全提款率 = 初始资产 × 4%<br>
+        此后每年随通胀调整金额（非比例）
+      </div>
+      <p class="citation">Bengen (1994), "Determining Withdrawal Rates Using Historical Data," JFPAA</p>
+    </div>
+    <div>
+      <div class="concept-card">
+        <div class="concept-title">三个关键假设</div>
+        <div class="concept-body">
+          <p>① 股票/债券混合：50-75% 股票<br>② 30年退休期<br>③ 每年根据CPI调整提款额（非保持固定比例）</p>
+          <hr style="margin:0.6rem 0; border-color: var(--border)">
+          <p>1998年，三一大学四位教授扩展了Bengen的研究——</p>
+          <p><strong>Trinity Study (1998)</strong>：测试1925-1995年所有滚动30年窗口，所有股债比例，得出成功率矩阵。</p>
+          <p class="citation">Cooley, Hubbard, Walz (1998), "Retirement Savings: Choosing a Withdrawal Rate That Is Sustainable," AAII Journal</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trinity Study Table -->
+  <h3 style="margin-top:1.5rem">Trinity Study 成功率矩阵（30年期，通胀调整后）</h3>
+  <p style="font-size:0.83rem;color:var(--text-secondary)">成功率 = 资金存活至30年末的历史概率。颜色：绿色 ≥90%，黄色 75-89%，红色 &lt;75%</p>
+  <div style="overflow-x:auto">
+  <table class="trinity-table">
+    <thead>
+      <tr>
+        <th>股票比例</th>
+        <th>3.0% 提款率</th>
+        <th>3.5% 提款率</th>
+        <th>4.0% 提款率</th>
+        <th>4.5% 提款率</th>
+        <th>5.0% 提款率</th>
+        <th>6.0% 提款率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>100% 股票</strong></td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">98%</td>
+        <td class="pct-high pct-cell">96%</td>
+        <td class="pct-mid pct-cell">87%</td>
+        <td class="pct-mid pct-cell">79%</td>
+        <td class="pct-low pct-cell">60%</td>
+      </tr>
+      <tr>
+        <td><strong>75% 股票</strong></td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">98%</td>
+        <td class="pct-high pct-cell">91%</td>
+        <td class="pct-mid pct-cell">82%</td>
+        <td class="pct-low pct-cell">62%</td>
+      </tr>
+      <tr>
+        <td><strong>50% 股票</strong></td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">95%</td>
+        <td class="pct-mid pct-cell">85%</td>
+        <td class="pct-mid pct-cell">76%</td>
+        <td class="pct-low pct-cell">46%</td>
+      </tr>
+      <tr>
+        <td><strong>25% 股票</strong></td>
+        <td class="pct-high pct-cell">100%</td>
+        <td class="pct-high pct-cell">97%</td>
+        <td class="pct-mid pct-cell">80%</td>
+        <td class="pct-low pct-cell">65%</td>
+        <td class="pct-low pct-cell">47%</td>
+        <td class="pct-low pct-cell">21%</td>
+      </tr>
+      <tr>
+        <td><strong>0% 股票（纯债）</strong></td>
+        <td class="pct-mid pct-cell">80%</td>
+        <td class="pct-low pct-cell">55%</td>
+        <td class="pct-low pct-cell">25%</td>
+        <td class="pct-low pct-cell">8%</td>
+        <td class="pct-low pct-cell">0%</td>
+        <td class="pct-low pct-cell">0%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.5rem">
+    核心读法：持有 50-75% 股票 + 4% 提款率 → 历史成功率约95-98%。纯债组合在任何提款率下都高度危险。
+  </p>
+</section>
+
+<!-- ══════════════ SECTION 2: Sequence Risk ══════════════ -->
+<section class="lesson-section">
+  <h2>2. 序列回报风险：平均回报为何会骗你</h2>
+
+  <div class="two-col">
+    <div>
+      <p>假设30年平均年化回报 <strong>7%</strong>，听起来相同——但回报出现的<em>顺序</em>决定了你的命运：</p>
+      <div class="callout">
+        场景A：前5年强劲（+20%, +15%, +12%, +10%, +8%），后25年平淡<br><br>
+        场景B：前5年崩溃（-20%, -15%, -12%, -10%, -8%），后25年强劲<br><br>
+        <strong>两个场景的算术平均回报几乎相同，但最终资产可相差2-4倍。</strong>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">为什么积累期和提款期完全不同？</div>
+      <div class="concept-body">
+        <p><strong>积累期</strong>：序列顺序基本无关。30年的复利终值只取决于几何平均回报，与顺序无关。每月定投甚至受益于早期低点（定投均摊）。</p>
+        <hr style="margin:0.5rem 0; border-color: var(--border)">
+        <p><strong>提款期</strong>：序列顺序至关重要。早期熊市 + 固定取款 = 双重打击：资产在低点被强制卖出，后续牛市的基数永久缩小。这是"序列回报风险"的本质。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Simulator -->
+  <h3 style="margin-top:1.5rem">交互模拟：好序列 vs 坏序列（相同平均回报）</h3>
+  <div class="seq-controls">
+    <label>初始资产（万元）
+      <input type="number" id="seq-initial" value="500" min="100" max="5000" step="50">
+    </label>
+    <label>年提款（万元）
+      <input type="number" id="seq-withdraw" value="20" min="1" max="200" step="1">
+    </label>
+    <label>模拟年数
+      <input type="range" id="seq-years" min="10" max="40" value="30" oninput="this.nextElementSibling.textContent=this.value+'年'">
+      <span style="font-size:0.85rem;font-weight:600">30年</span>
+    </label>
+    <button class="seq-btn" onclick="runSeqSim()">重新模拟</button>
+  </div>
+  <canvas id="seq-canvas" width="800" height="220"></canvas>
+  <div class="seq-legend">
+    <span><span class="dot" style="background:#2196f3"></span>好序列（前5年牛市）</span>
+    <span><span class="dot" style="background:#f44336"></span>坏序列（前5年熊市）</span>
+    <span><span class="dot" style="background:#4caf50"></span>平均序列（7%匀速）</span>
+  </div>
+  <div id="seq-summary" style="font-size:0.82rem;margin-top:0.5rem;color:var(--text-secondary)"></div>
+
+  <div class="warning-box" style="margin-top:1rem">
+    <strong>核心教训：</strong>退休日期不可选择——如果你在1999年12月31日退休，接下来是科技股崩盘+9/11+次贷危机；如果在2009年3月退休，你遇到的是历史性牛市起点。同样的积蓄，截然不同的命运。
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 3: Monte Carlo ══════════════ -->
+<section class="lesson-section">
+  <h2>3. 蒙特卡洛模拟：用10,000个未来替代一个预测</h2>
+
+  <div class="two-col">
+    <div>
+      <p>历史回测的根本局限：历史只发生一次，我们只有有限个30年窗口（1926年以来约70个）。</p>
+      <p>蒙特卡洛法：用统计参数（均值、标准差、相关性）<em>随机生成</em>10,000条可能的未来路径，每条路径都是一个"平行宇宙"中的你。</p>
+      <div class="formula-box">
+        年回报 ~ N(μ=7%, σ=15%)<br>
+        通胀 ~ N(μ=3%, σ=1.5%)<br>
+        运行10,000次 → 分布图
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">蒙特卡洛 vs 历史回测</div>
+      <div class="concept-body">
+        <table style="width:100%;font-size:0.78rem;border-collapse:collapse">
+          <tr><th style="text-align:left;padding:0.3rem">维度</th><th style="padding:0.3rem">历史回测</th><th style="padding:0.3rem">蒙特卡洛</th></tr>
+          <tr><td style="padding:0.3rem">数据量</td><td style="padding:0.3rem;text-align:center">~70个窗口</td><td style="padding:0.3rem;text-align:center">10,000路径</td></tr>
+          <tr><td style="padding:0.3rem">极端情景</td><td style="padding:0.3rem;text-align:center">受历史限制</td><td style="padding:0.3rem;text-align:center">可生成未见过的尾部</td></tr>
+          <tr><td style="padding:0.3rem">参数假设</td><td style="padding:0.3rem;text-align:center">隐含</td><td style="padding:0.3rem;text-align:center">显式，可调整</td></tr>
+          <tr><td style="padding:0.3rem">序列捕捉</td><td style="padding:0.3rem;text-align:center">真实路径</td><td style="padding:0.3rem;text-align:center">随机，忽略自相关</td></tr>
+        </table>
+        <p style="margin-top:0.5rem;font-size:0.78rem">最佳实践：两者结合使用，以最保守的结果为规划基准。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MC Histogram -->
+  <h3 style="margin-top:1.5rem">蒙特卡洛：30年后资产分布（500万元初始，每年取20万元）</h3>
+  <div class="mc-stats">
+    <div class="mc-stat"><div class="val" id="mc-p10">—</div><div class="lbl">P10（悲观）30年终值</div></div>
+    <div class="mc-stat"><div class="val" id="mc-p50">—</div><div class="lbl">P50（中位）30年终值</div></div>
+    <div class="mc-stat"><div class="val" id="mc-p90">—</div><div class="lbl">P90（乐观）30年终值</div></div>
+    <div class="mc-stat"><div class="val" id="mc-ruin">—</div><div class="lbl">破产概率（资产归零）</div></div>
+  </div>
+  <canvas id="mc-canvas" width="800" height="200"></canvas>
+  <p style="font-size:0.78rem;color:var(--text-secondary)">直方图：10,000次模拟的30年终值分布。红色竖线=资产归零边界（0）。</p>
+
+  <h3 style="margin-top:1.5rem">不同提款率的破产概率对比（30年，50%股票）</h3>
+  <div id="ruin-bars"></div>
+</section>
+
+<!-- ══════════════ SECTION 4: Dynamic Withdrawal ══════════════ -->
+<section class="lesson-section">
+  <h2>4. 动态提款策略：比固定4%更聪明的方法</h2>
+
+  <p>固定提款率的问题：好年份不多取，坏年份不少取，最终要么留下过多遗产，要么过早耗尽。</p>
+
+  <div class="strategy-compare">
+    <div class="sc-card">
+      <h4>① 固定金额法（4% Rule）</h4>
+      <p style="font-size:0.8rem">第一年取初始资产4%，此后金额随通胀调整，与市值无关。</p>
+      <div class="sc-pros">✓ 可预测，易执行<br>✓ 历史回测有据</div>
+      <div class="sc-cons">✗ 市场崩溃时继续取款<br>✗ 牛市时过于保守</div>
+      <div class="sc-best">适合：不愿频繁调整者</div>
+    </div>
+    <div class="sc-card">
+      <h4>② Guyton-Klinger 护栏法</h4>
+      <p style="font-size:0.8rem">设定上下护栏。提款率超过6%→削减10%；低于4%→增加10%。</p>
+      <div class="sc-pros">✓ 自动平滑市值波动<br>✓ 蒙特卡洛成功率提升至97%</div>
+      <div class="sc-cons">✗ 收入不稳定，需心理准备<br>✗ 护栏触发频率难预测</div>
+      <div class="sc-best">适合：能接受年收入±10%波动者</div>
+    </div>
+    <div class="sc-card">
+      <h4>③ CAPE 周期调整法</h4>
+      <p style="font-size:0.8rem">提款率 = 1/CAPE × 0.5。CAPE高（市场贵）→少取，CAPE低→多取。</p>
+      <div class="sc-pros">✓ 与市场估值同步<br>✓ Pfau (2012) 研究支持</div>
+      <div class="sc-cons">✗ CAPE难实时获取<br>✗ CAPE预测个股/时机效果有限</div>
+      <div class="sc-best">适合：了解市场估值的进阶用户</div>
+    </div>
+  </div>
+
+  <!-- Guardrails Visualization -->
+  <h3 style="margin-top:1.5rem">Guyton-Klinger 护栏：你的提款率在哪个区间？</h3>
+  <div class="gk-arrow">← 提款率从低到高 →</div>
+  <div class="guardrail-band">
+    <div class="gb-red">极低<br>&lt;3%<br>增加20%</div>
+    <div class="gb-yellow">偏低<br>3-4%<br>增加10%</div>
+    <div class="gb-green">安全区<br>4%-6%<br>维持不变</div>
+    <div class="gb-light">偏高<br>6-7%<br>削减10%</div>
+    <div class="gb-blue">危险<br>&gt;7%<br>削减20%</div>
+  </div>
+
+  <!-- CAPE Table -->
+  <h3 style="margin-top:1.5rem">CAPE 周期调整法：对照表</h3>
+  <div style="overflow-x:auto">
+  <table class="cape-table">
+    <thead>
+      <tr><th>市场 CAPE 水平</th><th>历史参照</th><th>建议提款率</th><th>含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CAPE &lt; 10</td><td>1930年代大萧条</td><td><strong>5.0-6.0%</strong></td><td>极度低估，可多取</td></tr>
+      <tr><td>CAPE 10-15</td><td>1980年代初</td><td><strong>4.0-5.0%</strong></td><td>低估，偏宽松</td></tr>
+      <tr><td>CAPE 15-20</td><td>历史平均区间</td><td><strong>3.5-4.0%</strong></td><td>合理估值，标准4%</td></tr>
+      <tr><td>CAPE 20-30</td><td>2000年代初、2010年代中</td><td><strong>3.0-3.5%</strong></td><td>偏贵，保守为宜</td></tr>
+      <tr><td>CAPE &gt; 30</td><td>1999年科技泡沫，2021年</td><td><strong>2.5-3.0%</strong></td><td>高度高估，谨慎</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="citation">Pfau, Wade (2012), "Capital Market Expectations, Asset Allocation, and Safe Withdrawal Rates," Journal of Financial Planning</p>
+</section>
+
+<!-- ══════════════ SECTION 5: China Application ══════════════ -->
+<section class="lesson-section">
+  <h2>5. 中国投资者的退休规划特殊性</h2>
+
+  <div class="china-grid">
+    <div class="china-card">
+      <h4>养老金体系差异</h4>
+      <p style="font-size:0.82rem">美国有社会安全金（Social Security）作为退休收入保底，可对冲序列风险——市场崩溃时减少提款，靠SS维生。</p>
+      <p style="font-size:0.82rem"><strong>中国现实</strong>：基本养老保险替代率约40-45%（城镇职工），但高收入群体替代率更低；个人养老金账户（IRA类似）2022年试点，上限12,000元/年，远低于美国401k的$22,500。</p>
+    </div>
+    <div class="china-card">
+      <h4>通胀基准不同</h4>
+      <p style="font-size:0.82rem">4% 法则基于美国历史通胀（CPI~3%）。中国CPI官方约2-3%，但实际生活成本——教育、医疗、房租——长期通胀更高。</p>
+      <p style="font-size:0.82rem"><strong>建议调整</strong>：以<strong>5% 法则</strong>作为额外安全缓冲，或以医疗费用（历史增速约10%/年）单独建立准备金。</p>
+    </div>
+    <div class="china-card">
+      <h4>A 股历史回报特征</h4>
+      <p style="font-size:0.82rem">上证指数2007-2020年13年间几乎零回报，且高波动（年化σ≈30% vs 美股σ≈15%）。纯A股蒙特卡洛结果比4% 法则更悲观。</p>
+      <p style="font-size:0.82rem"><strong>建议</strong>：退休组合全球分散（A股+美股ETF+债券+黄金），不依赖单一A股市场。QDII或海外账户在退休阶段更重要。</p>
+    </div>
+  </div>
+
+  <div class="concept-card" style="margin-top:1rem">
+    <div class="concept-title">中国投资者退休规划建议提款率调整</div>
+    <div class="concept-body">
+      <div class="insight-row"><span class="icon">①</span><span>基准：3.5%（保守于美国4%，因A股波动更高）</span></div>
+      <div class="insight-row"><span class="icon">②</span><span>若有额外稳定收入（养老金、租金）：可调高至4%</span></div>
+      <div class="insight-row"><span class="icon">③</span><span>若配置全球分散组合（A股+海外）：使用标准4%</span></div>
+      <div class="insight-row"><span class="icon">④</span><span>预计退休期超过35年（55岁提前退休）：降至3%</span></div>
+      <div class="insight-row"><span class="icon">⑤</span><span>医疗储备金：单独列支，不并入4%提款计算</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SECTION 6: Quizzes ══════════════ -->
+<section class="lesson-section">
+  <h2>6. 检验理解</h2>
+
+  <div class="quiz" id="q1">
+    <div class="quiz-question">4% 法则中，"4%"指的是什么？</div>
+    <div class="quiz-options">
+      <button onclick="checkQ('q1','a','c')">A. 每年取出当年资产市值的4%</button>
+      <button onclick="checkQ('q1','b','c')">B. 第一年取出初始资产的4%，此后金额随通胀调整</button>
+      <button onclick="checkQ('q1','c','c')">C. 每年固定取出4万元（无论初始资产多少）</button>
+    </div>
+    <div class="quiz-feedback" id="q1-feedback"></div>
+  </div>
+
+  <div class="quiz" id="q2">
+    <div class="quiz-question">为什么相同的平均回报率，提款期的结果可能相差悬殊？</div>
+    <div class="quiz-options">
+      <button onclick="checkQ('q2','a','a')">A. 回报出现的顺序影响提款期：早期熊市导致低点强制卖出，永久压缩后续基数</button>
+      <button onclick="checkQ('q2','b','a')">B. 提款期总回报率计算方式不同，与积累期不同</button>
+      <button onclick="checkQ('q2','c','a')">C. 通胀率在提款期自动更高，导致实际购买力差异</button>
+    </div>
+    <div class="quiz-feedback" id="q2-feedback"></div>
+  </div>
+
+  <div class="quiz" id="q3">
+    <div class="quiz-question">一位55岁中国投资者，全部资产在A股，计划4%提款率退休35年。最主要的风险是什么？</div>
+    <div class="quiz-options">
+      <button onclick="checkQ('q3','a','b')">A. 人民币汇率贬值导致海外资产缩水</button>
+      <button onclick="checkQ('q3','b','b')">B. A股高波动（σ≈30%）+35年超长期+纯A股集中，序列风险极高；历史有13年零回报先例</button>
+      <button onclick="checkQ('q3','c','b')">C. 国内CPI低于美国，通胀调整后提款会越来越少</button>
+    </div>
+    <div class="quiz-feedback" id="q3-feedback"></div>
+  </div>
+</section>
+
+<!-- ══════════════ KEY INSIGHTS ══════════════ -->
+<section class="lesson-section">
+  <h2>核心洞见</h2>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-title">积累 vs 提款：截然不同的逻辑</div>
+      <div class="concept-body">积累期：时间是朋友，定投摊平，早期熊市是礼物。提款期：时间是敌人，强制卖出，早期熊市是噩梦。同一个人，退休前后面对市场的心态和策略应完全不同。</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">4%法则≠永恒真理</div>
+      <div class="concept-body">4%来自美国1926-1992年数据，当前全球低利率/高估值环境下，许多学者（Pfau等）认为3%更安全。4%只是历史参考，不是精确的科学定律。</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">灵活 &gt; 固定</div>
+      <div class="concept-body">Guyton-Klinger护栏法历史上比固定4%更安全——允许在好年份多取、坏年份少取，是对序列风险的主动管理。固定提款的问题是它假装市场不存在。</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">破产风险是不对称的</div>
+      <div class="concept-body">90岁时破产（在中国平均预期寿命是78岁）vs 90岁时留下大笔遗产，前者是灾难，后者只是"规划保守"。因此，为小概率破产买保险（降低提款率）的代价值得付。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<div class="lesson-footer">
+  <div class="lesson-nav">
+    <a href="finance-0007-factor-investing.html">← #07 因子投资</a>
+    <span>财富课程 #08</span>
+    <a href="finance-0009-tax-optimization.html">#09 税务优化 →</a>
+  </div>
+  <p><strong>下节预告 #09：税务优化与税损收割</strong> — 税损收割操作步骤、资产位置策略（哪些放税优账户）、中国个税规则下的优化空间，以及再平衡的税务效率排序。</p>
+</div>
+
+<script>
+/* ══ Sequence of Returns Simulator ══ */
+function runSeqSim() {
+  const canvas = document.getElementById('seq-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = 220 * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const W = canvas.offsetWidth, H = 220;
+
+  const initial = parseFloat(document.getElementById('seq-initial').value) || 500;
+  const withdraw = parseFloat(document.getElementById('seq-withdraw').value) || 20;
+  const years = parseInt(document.getElementById('seq-years').value) || 30;
+
+  // Generate three scenarios
+  // Good: first 5 years above average, rest at 5%
+  // Bad: first 5 years below average, rest at 9%
+  // Average: steady 7%
+  function simulate(returnsByYear) {
+    let bal = initial;
+    const vals = [bal];
+    for (let y = 0; y < years; y++) {
+      bal = bal * (1 + returnsByYear[y]) - withdraw;
+      vals.push(Math.max(0, bal));
+    }
+    return vals;
+  }
+
+  const avgR = 0.07;
+  const goodFirstFive = [0.25, 0.20, 0.15, 0.12, 0.10];
+  const badFirstFive  = [-0.25, -0.18, -0.12, -0.08, -0.05];
+  // fill rest to average out to 7%
+  function fill(first5, total, target) {
+    const r = [];
+    for (let i = 0; i < first5.length; i++) r.push(first5[i]);
+    const remaining = total - 5;
+    // simple fill: all at adjusted rate
+    const sumFirst = first5.reduce((a,b)=>a+b,0)/5;
+    // approximate remainder to reach compound target
+    const adjRate = (target * total - sumFirst * 5) / remaining;
+    for (let i = 0; i < remaining; i++) r.push(Math.min(0.25, Math.max(-0.05, adjRate + (Math.random()-0.5)*0.04)));
+    return r;
+  }
+  const goodReturns = fill(goodFirstFive, years, avgR);
+  const badReturns  = fill(badFirstFive,  years, avgR);
+  const avgReturns  = new Array(years).fill(avgR);
+
+  const goodVals = simulate(goodReturns);
+  const badVals  = simulate(badReturns);
+  const avgVals  = simulate(avgReturns);
+
+  const allVals = [...goodVals, ...badVals, ...avgVals].filter(v=>isFinite(v));
+  const maxVal  = Math.max(...allVals) * 1.05;
+  const padL = 55, padR = 15, padT = 15, padB = 30;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+
+  // Dark/light theme
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches && !document.documentElement.getAttribute('data-theme'));
+  const gridColor = isDark ? '#444' : '#e0e0e0';
+  const textColor = isDark ? '#aaa' : '#666';
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = gridColor;
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + plotH - (i / 4) * plotH;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + plotW, y); ctx.stroke();
+    ctx.fillStyle = textColor; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(((maxVal * i / 4) / 100).toFixed(0) + '百万', padL - 4, y + 4);
+  }
+
+  function drawLine(vals, color) {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    for (let i = 0; i <= years; i++) {
+      const x = padL + (i / years) * plotW;
+      const y = padT + plotH - (vals[i] / maxVal) * plotH;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  drawLine(avgVals,  '#4caf50');
+  drawLine(goodVals, '#2196f3');
+  drawLine(badVals,  '#f44336');
+
+  // Zero line
+  const zeroY = padT + plotH;
+  ctx.strokeStyle = '#f44336'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(padL, zeroY); ctx.lineTo(padL+plotW, zeroY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // X axis labels
+  ctx.fillStyle = textColor; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+  [0, Math.floor(years/4), Math.floor(years/2), Math.floor(3*years/4), years].forEach(y => {
+    const x = padL + (y / years) * plotW;
+    ctx.fillText('第'+y+'年', x, H - 5);
+  });
+
+  const lastGood = goodVals[years]; const lastBad = badVals[years]; const lastAvg = avgVals[years];
+  const ruined = lastBad <= 0;
+  document.getElementById('seq-summary').textContent =
+    `好序列30年终值：${lastGood.toFixed(0)}万元 | 平均序列：${lastAvg.toFixed(0)}万元 | 坏序列：${ruined ? '⚠️ 已破产（第' + badVals.findIndex(v=>v<=0) + '年资金耗尽）' : lastBad.toFixed(0)+'万元'}`;
+}
+
+/* ══ Monte Carlo Simulation ══ */
+function runMC() {
+  const N = 3000; // lighter for browser
+  const YEARS = 30;
+  const INITIAL = 500;
+  const WITHDRAW = 20;
+  const MU = 0.07, SIGMA = 0.15;
+
+  function randn() {
+    let u=0,v=0;
+    while(u===0) u=Math.random();
+    while(v===0) v=Math.random();
+    return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v);
+  }
+
+  const terminals = [];
+  let ruinCount = 0;
+  for (let n = 0; n < N; n++) {
+    let bal = INITIAL;
+    let ruined = false;
+    for (let y = 0; y < YEARS; y++) {
+      const r = MU + SIGMA * randn();
+      bal = bal * (1 + r) - WITHDRAW;
+      if (bal <= 0) { ruined = true; bal = 0; break; }
+    }
+    terminals.push(bal);
+    if (ruined) ruinCount++;
+  }
+
+  terminals.sort((a,b) => a - b);
+  const p10 = terminals[Math.floor(N * 0.10)];
+  const p50 = terminals[Math.floor(N * 0.50)];
+  const p90 = terminals[Math.floor(N * 0.90)];
+  const ruinPct = (ruinCount / N * 100).toFixed(1);
+
+  document.getElementById('mc-p10').textContent = p10.toFixed(0) + '万';
+  document.getElementById('mc-p50').textContent = p50.toFixed(0) + '万';
+  document.getElementById('mc-p90').textContent = p90.toFixed(0) + '万';
+  document.getElementById('mc-ruin').textContent = ruinPct + '%';
+
+  // Draw histogram
+  const canvas = document.getElementById('mc-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = 200 * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const W = canvas.offsetWidth, H = 200;
+
+  const MAX_VAL = terminals[Math.floor(N * 0.97)];
+  const BINS = 50;
+  const binW = MAX_VAL / BINS;
+  const counts = new Array(BINS + 1).fill(0);
+  terminals.forEach(v => {
+    const bin = Math.min(BINS, Math.floor(v / binW));
+    counts[bin]++;
+  });
+  const maxCount = Math.max(...counts);
+
+  const padL = 50, padR = 15, padT = 15, padB = 30;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches && !document.documentElement.getAttribute('data-theme'));
+  const gridColor = isDark ? '#444' : '#e0e0e0';
+  const textColor = isDark ? '#aaa' : '#666';
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Bars
+  const bw = plotW / (BINS + 1);
+  counts.forEach((c, i) => {
+    const x = padL + i * bw;
+    const barH = (c / maxCount) * plotH;
+    const y = padT + plotH - barH;
+    const pct = i * binW;
+    ctx.fillStyle = pct < 0 ? '#f44336' : (pct < p10 ? '#ff9800' : '#2196f3');
+    ctx.fillRect(x + 0.5, y, bw - 1, barH);
+  });
+
+  // Zero line (ruin boundary)
+  ctx.strokeStyle = '#f44336'; ctx.lineWidth = 2; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // X axis
+  ctx.fillStyle = textColor; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+  [0, 0.25, 0.5, 0.75, 1].forEach(f => {
+    const x = padL + f * plotW;
+    ctx.fillText((MAX_VAL * f / 100).toFixed(0) + '百万', x, H - 5);
+  });
+  ctx.textAlign = 'right';
+  ctx.fillText('频次', padL - 4, padT + 8);
+}
+
+/* ══ Ruin Rate Bars ══ */
+function buildRuinBars() {
+  // Pre-computed approximate ruin rates for 30yr, 50% stocks, N(7%,15%)
+  const rates = [
+    { label: '2.5% 提款率', pct: 1,  color: '#4caf50' },
+    { label: '3.0% 提款率', pct: 3,  color: '#8bc34a' },
+    { label: '3.5% 提款率', pct: 6,  color: '#ffc107' },
+    { label: '4.0% 提款率', pct: 10, color: '#ff9800' },
+    { label: '4.5% 提款率', pct: 17, color: '#f44336' },
+    { label: '5.0% 提款率', pct: 26, color: '#b71c1c' },
+    { label: '6.0% 提款率', pct: 44, color: '#880000' },
+  ];
+  const container = document.getElementById('ruin-bars');
+  container.innerHTML = rates.map(r => `
+    <div class="ruin-meter">
+      <div class="ruin-label">${r.label}</div>
+      <div class="ruin-bar-bg">
+        <div class="ruin-bar-fill" style="width:${r.pct*2}%;background:${r.color}"></div>
+      </div>
+      <div class="ruin-pct" style="color:${r.color}">${r.pct}%</div>
+    </div>
+  `).join('');
+}
+
+/* ══ Quiz ══ */
+const feedback = {
+  q1: { correct: 'b', msgs: {
+    a: '❌ 错误。每年取出当年市值4%，当市场下跌时收入也下降，这是"固定比例法"，不是4%法则。',
+    b: '✅ 正确！第一年取初始资产4%，此后金额不变（仅随CPI调整），与市值波动脱钩。这是Bengen原版定义的关键细节。',
+    c: '❌ 错误。4万元或多或少取决于初始资产规模，不是固定金额。'
+  }},
+  q2: { correct: 'a', msgs: {
+    a: '✅ 正确！序列回报风险的本质：提款期固定取款 + 早期亏损 = 低点强制卖出。熊市过后基数已经缩小，即使同样的牛市也无法弥补。积累期相反——早期熊市反而是定投的礼物。',
+    b: '❌ 错误。总回报率计算方式相同，问题不在计算方法，而在强制卖出的时机。',
+    c: '❌ 错误。通胀对积累期和提款期影响相同，不是两者差异的原因。'
+  }},
+  q3: { correct: 'b', msgs: {
+    a: '❌ 不是主要风险。海外资产敞口在本题中根本不存在（全部在A股），人民币汇率不是问题。',
+    b: '✅ 正确！三重叠加风险：(1) A股σ≈30%远高于美股，单次波动更极端；(2) 35年退休期要求更高成功率；(3) A股曾有13年几乎零回报——这对提款期是灾难。建议：全球分散+降低提款率至3%。',
+    c: '❌ 错误。低通胀对提款者是有利的（购买力更稳定），不是主要风险。'
+  }}
+};
+
+function checkQ(qid, chosen, _correct) {
+  const f = feedback[qid];
+  const el = document.getElementById(qid + '-feedback');
+  el.textContent = f.msgs[chosen];
+  el.style.display = 'block';
+  el.style.color = chosen === f.correct ? '#155724' : '#721c24';
+  el.style.background = chosen === f.correct ? '#d4edda' : '#f8d7da';
+  el.style.padding = '0.6rem 0.8rem';
+  el.style.borderRadius = '6px';
+  el.style.marginTop = '0.5rem';
+  el.style.fontSize = '0.85rem';
+}
+
+/* ══ Init ══ */
+window.addEventListener('load', () => {
+  runSeqSim();
+  runMC();
+  buildRuinBars();
+});
+window.addEventListener('resize', () => { runSeqSim(); runMC(); });
+</script>
+</body>
+</html>
