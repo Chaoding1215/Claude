@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>因子投资 — 财富课程 #07</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* ── Dense Layout Additions ── */
+    body { font-size: 17px; }
+
+    /* Factor Header Cards */
+    .factor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin: 1.5rem 0;
+    }
+    @media(max-width:520px){.factor-grid{grid-template-columns:1fr;}}
+    .f-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      border-top: 4px solid var(--border);
+    }
+    .f-card.market    { border-top-color: #6b7280; }
+    .f-card.size      { border-top-color: #1e88e5; }
+    .f-card.value     { border-top-color: #059669; }
+    .f-card.momentum  { border-top-color: #e94560; }
+    .f-card.quality   { border-top-color: #f59e0b; }
+    .f-card h4 { margin: 0 0 0.25rem; font-size: 0.95rem; color: var(--accent); }
+    .f-card .meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .f-card p { margin: 0 0 0.5rem; font-size: 0.84rem; line-height: 1.5; }
+    .f-stat-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .f-stat {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.76rem;
+    }
+    .f-stat .val { font-weight: bold; color: var(--accent); font-size: 0.9rem; }
+    .f-stat .lbl { color: var(--muted); display: block; }
+
+    /* Heatmap — Decade × Factor */
+    .heatmap-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .heatmap {
+      border-collapse: collapse;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      min-width: 480px;
+      width: 100%;
+    }
+    .heatmap th {
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 0.65rem;
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .heatmap th:first-child { text-align: left; }
+    .heatmap td {
+      padding: 0.5rem 0.65rem;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .heatmap td:first-child {
+      text-align: left;
+      font-weight: normal;
+      color: #374151;
+      background: #f9fafb;
+    }
+    .hm-strong-pos { background: #065f46; color: white; }
+    .hm-pos        { background: #d1fae5; color: #065f46; }
+    .hm-neutral    { background: #f3f4f6; color: #6b7280; }
+    .hm-neg        { background: #fee2e2; color: #991b1b; }
+    .hm-strong-neg { background: #7f1d1d; color: white; }
+
+    /* Factor Correlation Matrix */
+    .corr-matrix {
+      border-collapse: collapse;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      margin: 1.5rem auto;
+      width: 100%;
+    }
+    .corr-matrix th {
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.75rem;
+    }
+    .corr-matrix td {
+      padding: 0.4rem 0.5rem;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      font-size: 0.82rem;
+      font-weight: bold;
+    }
+    .corr-diag   { background: #1a1a2e; color: white; }
+    .corr-p-hi   { background: #d1fae5; color: #065f46; }
+    .corr-p-lo   { background: #ecfdf5; color: #047857; }
+    .corr-zero   { background: #f9fafb; color: #6b7280; }
+    .corr-n-lo   { background: #fff7ed; color: #92400e; }
+    .corr-n-hi   { background: #fee2e2; color: #991b1b; }
+
+    /* Interactive Tilt Builder */
+    .tilt-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .tilt-row {
+      display: grid;
+      grid-template-columns: 90px 1fr 50px 90px;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.83rem;
+    }
+    .tilt-name { color: #374151; font-weight: bold; }
+    .tilt-row input[type=range] { accent-color: var(--accent); cursor: pointer; }
+    .tilt-pct { color: var(--accent); font-weight: bold; text-align: right; }
+    .tilt-premium { color: var(--success); font-size: 0.78rem; text-align: right; }
+    .tilt-output {
+      margin-top: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .tilt-stat {
+      text-align: center;
+      background: #f8f8f5;
+      border-radius: 8px;
+      padding: 0.75rem 0.5rem;
+      border: 1px solid var(--border);
+    }
+    .tilt-stat .num { font-size: 1.6rem; font-weight: bold; color: var(--accent); line-height: 1; }
+    .tilt-stat .lbl { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+    .tilt-caveat {
+      margin-top: 1rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Dark side boxes */
+    .risk-list { list-style: none; margin: 0; padding: 0; }
+    .risk-list li {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .risk-list li:last-child { border-bottom: none; }
+    .risk-list .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* ETF Table */
+    .etf-table { width:100%; border-collapse:collapse; font-size:0.83rem; margin:1.25rem 0; }
+    .etf-table th {
+      background: var(--accent); color: white;
+      font-family:'Helvetica Neue',Arial,sans-serif;
+      font-size:0.73rem; text-transform:uppercase; letter-spacing:0.04em;
+      padding:0.45rem 0.65rem; text-align:left;
+    }
+    .etf-table td { padding:0.5rem 0.65rem; border-bottom:1px solid var(--border); vertical-align:top; }
+    .etf-table tr:nth-child(even) td { background: white; }
+    .t-code {
+      font-family:'Helvetica Neue',Arial,sans-serif;
+      font-size:0.75rem; font-weight:bold;
+      background:#f3f4f6; padding:0.1rem 0.35rem;
+      border-radius:4px; color:var(--accent);
+    }
+    .t-fee-lo { color:var(--success); font-weight:bold; }
+    .t-fee-hi { color:var(--warning); font-weight:bold; }
+    .loading-bar { height:6px; border-radius:99px; background:#f3f4f6; margin-top:3px; overflow:hidden; }
+    .loading-fill { height:100%; border-radius:99px; background:var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="lesson-meta">
+  <span class="lesson-number">财富课程 #07</span>
+  &nbsp;·&nbsp; 因子投资 &nbsp;·&nbsp; 进阶理论
+  &nbsp;·&nbsp; <a href="finance-0006-implementation-china.html">← 上一课</a>
+</div>
+
+<h1>因子投资：超越市场平均回报的科学</h1>
+<p style="font-size:1.05rem;color:var(--muted);margin-bottom:2rem;font-family:'Helvetica Neue',Arial,sans-serif;">
+  Fama-French 五因子模型 · 动量 · 历史溢价 · 周期风险 · 实战配置
+</p>
+
+<p>前六课建立的组合框架——以宽基指数为核心，分散配置各资产类别——已经跑赢了大多数主动基金。但学术研究在过去 50 年里发现了一件更精确的事：<strong>市场中存在若干系统性、可解释、跨市场成立的"因子"，它们长期提供超越市场的额外回报</strong>——前提是你有足够长的时间视野和足够强的纪律。</p>
+
+<h2>什么是"因子"？四个必要条件</h2>
+
+<p>并非任何历史统计规律都是因子。Cliff Asness（AQR 创始人）提出了因子的四个准入标准：</p>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h4>① 持续性（Persistent）</h4>
+    <p>在数十年的样本内始终存在，不依赖特定时间窗口。</p>
+  </div>
+  <div class="concept-card">
+    <h4>② 普遍性（Pervasive）</h4>
+    <p>在多个国家、市场、资产类别中均有体现，不是一国特例。</p>
+  </div>
+  <div class="concept-card">
+    <h4>③ 稳健性（Robust）</h4>
+    <p>对指标定义的小变化不敏感；不同研究者用不同方法均能发现。</p>
+  </div>
+  <div class="concept-card">
+    <h4>④ 可投资（Investable）</h4>
+    <p>扣除交易成本、税费后溢价仍然存在；有实际可买的产品。</p>
+  </div>
+</div>
+
+<h2>五大已验证因子</h2>
+
+<div class="factor-grid">
+
+  <div class="f-card market">
+    <h4>市场因子（Market β）</h4>
+    <div class="meta">CAPM, Sharpe 1964 · Fama-French 1993</div>
+    <p>持有股票本身相对无风险资产的超额回报。所有其他因子均在此基础上叠加。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+5–7%</span><span class="lbl">年化溢价（1927–2023）</span></div>
+      <div class="f-stat"><span class="val">极高</span><span class="lbl">t 统计量</span></div>
+    </div>
+  </div>
+
+  <div class="f-card size">
+    <h4>规模因子（Size / SMB）</h4>
+    <div class="meta">Fama &amp; French, <em>Journal of Finance</em> 1993</div>
+    <p>小市值股票长期跑赢大市值股票。SMB = Small Minus Big。溢价在小型价值股中最为显著。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+1–3%</span><span class="lbl">年化溢价</span></div>
+      <div class="f-stat"><span class="val">~2.2</span><span class="lbl">t 统计量</span></div>
+      <div class="f-stat"><span class="val">1981–90</span><span class="lbl">最佳十年</span></div>
+    </div>
+  </div>
+
+  <div class="f-card value">
+    <h4>价值因子（Value / HML）</h4>
+    <div class="meta">Fama &amp; French 1993；Book-to-Market 比率</div>
+    <p>低估值股票（高账面市值比）长期跑赢高估值（成长）股票。HML = High Minus Low。2010s 失效后，2022 年强势回归。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+3–5%</span><span class="lbl">年化溢价</span></div>
+      <div class="f-stat"><span class="val">~3.1</span><span class="lbl">t 统计量</span></div>
+      <div class="f-stat"><span class="val">2000–09</span><span class="lbl">最佳十年</span></div>
+    </div>
+  </div>
+
+  <div class="f-card momentum">
+    <h4>动量因子（Momentum / UMD）</h4>
+    <div class="meta">Jegadeesh &amp; Titman, <em>JF</em> 1993；Carhart 1997</div>
+    <p>过去 12 个月涨幅最大的股票，未来 3–12 个月仍倾向于继续上涨。UMD = Up Minus Down。溢价最高，但会有罕见的"动量崩溃"（2009年3月崩溃 -58%）。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+5–8%</span><span class="lbl">年化溢价</span></div>
+      <div class="f-stat"><span class="val">~4.0</span><span class="lbl">t 统计量</span></div>
+      <div class="f-stat"><span class="val">高换手率</span><span class="lbl">成本风险</span></div>
+    </div>
+  </div>
+
+  <div class="f-card quality">
+    <h4>盈利因子（Profitability / RMW）</h4>
+    <div class="meta">Fama &amp; French 五因子, <em>JFE</em> 2015；Novy-Marx 2012</div>
+    <p>高营业利润率的公司股票长期跑赢低利润率公司。RMW = Robust Minus Weak。与价值因子低相关，天然互补。在中国 A 股中表现尤为显著。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+2–4%</span><span class="lbl">年化溢价</span></div>
+      <div class="f-stat"><span class="val">~3.5</span><span class="lbl">t 统计量</span></div>
+      <div class="f-stat"><span class="val">低换手率</span><span class="lbl">实现成本低</span></div>
+    </div>
+  </div>
+
+  <div class="f-card" style="border-top-color:#8b5cf6">
+    <h4>投资因子（Investment / CMA）</h4>
+    <div class="meta">Fama &amp; French 2015；保守投资策略</div>
+    <p>资本投入保守的公司（低资产增长率）长期跑赢扩张激进的公司。CMA = Conservative Minus Aggressive。与价值因子高度相关，独立性有争议。</p>
+    <div class="f-stat-row">
+      <div class="f-stat"><span class="val">+1–3%</span><span class="lbl">年化溢价</span></div>
+      <div class="f-stat"><span class="val">~2.5</span><span class="lbl">t 统计量</span></div>
+    </div>
+  </div>
+
+</div>
+
+<h2>因子周期热力图（十年表现）</h2>
+
+<p>因子溢价极少平稳实现——它以十年为单位波动。这是持有因子组合的最大考验：</p>
+
+<div class="heatmap-wrap">
+  <table class="heatmap">
+    <thead>
+      <tr>
+        <th>十年</th>
+        <th>市场（Beta）</th>
+        <th>价值（HML）</th>
+        <th>规模（SMB）</th>
+        <th>动量（UMD）</th>
+        <th>盈利（RMW）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1970s</td>
+        <td class="hm-neg">−1%</td>
+        <td class="hm-strong-pos">+13%</td>
+        <td class="hm-pos">+5%</td>
+        <td class="hm-pos">+6%</td>
+        <td class="hm-neutral">— </td>
+      </tr>
+      <tr>
+        <td>1980s</td>
+        <td class="hm-strong-pos">+18%</td>
+        <td class="hm-pos">+4%</td>
+        <td class="hm-strong-pos">+9%</td>
+        <td class="hm-strong-pos">+10%</td>
+        <td class="hm-neutral">— </td>
+      </tr>
+      <tr>
+        <td>1990s</td>
+        <td class="hm-strong-pos">+19%</td>
+        <td class="hm-neg">−2%</td>
+        <td class="hm-neg">−3%</td>
+        <td class="hm-strong-pos">+11%</td>
+        <td class="hm-pos">+3%</td>
+      </tr>
+      <tr>
+        <td>2000s</td>
+        <td class="hm-strong-neg">−3%</td>
+        <td class="hm-strong-pos">+9%</td>
+        <td class="hm-strong-pos">+7%</td>
+        <td class="hm-pos">+5%</td>
+        <td class="hm-pos">+4%</td>
+      </tr>
+      <tr>
+        <td>2010s</td>
+        <td class="hm-strong-pos">+14%</td>
+        <td class="hm-strong-neg">−5%</td>
+        <td class="hm-neg">−2%</td>
+        <td class="hm-neg">−1%</td>
+        <td class="hm-pos">+3%</td>
+      </tr>
+      <tr>
+        <td>2020–23</td>
+        <td class="hm-pos">+10%</td>
+        <td class="hm-strong-pos">+12%</td>
+        <td class="hm-neutral">+1%</td>
+        <td class="hm-strong-neg">−8%</td>
+        <td class="hm-pos">+4%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p style="font-size:0.76rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;margin-top:0.25rem;">数值为该十年相对市场的年化超额回报（近似值）。来源：Fama-French Data Library, Kenneth French's website。</p>
+
+<div class="callout">
+  <div class="callout-title">关键洞见：因子需要时间</div>
+  价值因子在 2007–2020 年长达 <strong>13年</strong>跑输市场，被许多人宣布"死亡"——随后 2022 年大幅反弹。
+  动量因子在 2009 年 3 月单月崩溃 <strong>−58%</strong>（而同期市场在反弹）。
+  持有因子组合，需要应对至少一个十年的相对落后期——这是溢价的代价，也是大多数人无法坚持的原因。
+</div>
+
+<h2>因子之间的相关系数矩阵</h2>
+
+<p>因子间的相关系数揭示了最重要的组合机会：<strong>价值与动量高度负相关</strong>——这对天然互补：</p>
+
+<div style="overflow-x:auto;">
+<table class="corr-matrix">
+  <thead>
+    <tr><th></th><th>市场</th><th>价值</th><th>规模</th><th>动量</th><th>盈利</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="font-weight:bold;background:#f9fafb;">市场</td><td class="corr-diag">1.00</td><td class="corr-zero">−0.08</td><td class="corr-p-lo">+0.28</td><td class="corr-zero">−0.15</td><td class="corr-zero">−0.11</td></tr>
+    <tr><td style="font-weight:bold;background:#f9fafb;">价值</td><td class="corr-zero">−0.08</td><td class="corr-diag">1.00</td><td class="corr-p-lo">+0.18</td><td class="corr-n-hi">−0.51</td><td class="corr-p-lo">+0.12</td></tr>
+    <tr><td style="font-weight:bold;background:#f9fafb;">规模</td><td class="corr-p-lo">+0.28</td><td class="corr-p-lo">+0.18</td><td class="corr-diag">1.00</td><td class="corr-zero">+0.04</td><td class="corr-n-lo">−0.22</td></tr>
+    <tr><td style="font-weight:bold;background:#f9fafb;">动量</td><td class="corr-zero">−0.15</td><td class="corr-n-hi">−0.51</td><td class="corr-zero">+0.04</td><td class="corr-diag">1.00</td><td class="corr-p-lo">+0.31</td></tr>
+    <tr><td style="font-weight:bold;background:#f9fafb;">盈利</td><td class="corr-zero">−0.11</td><td class="corr-p-lo">+0.12</td><td class="corr-n-lo">−0.22</td><td class="corr-p-lo">+0.31</td><td class="corr-diag">1.00</td></tr>
+  </tbody>
+</table>
+</div>
+<p style="font-size:0.76rem;color:var(--muted);font-family:'Helvetica Neue',Arial,sans-serif;">来源：Fama-French Data Library，1963–2023 月度数据。</p>
+
+<div class="callout">
+  <div class="callout-title">组合启示</div>
+  价值（HML）和动量（UMD）的相关系数约 <strong>−0.51</strong>——它们是天然的多样化对。同时持有价值倾斜和动量倾斜，可以在不显著提高总波动的情况下叠加两个因子溢价。这正是多因子基金的核心设计逻辑。
+</div>
+
+<h2>互动：构建你的因子倾斜组合</h2>
+
+<p>在市场基准之上叠加因子倾斜，观察预期年化超额回报的变化（历史数据估算，不保证未来）：</p>
+
+<div class="tilt-wrap">
+  <div class="tilt-row">
+    <span class="tilt-name">价值倾斜</span>
+    <input type="range" id="t-value" min="0" max="100" value="30" oninput="updateTilt()">
+    <span class="tilt-pct" id="v-pct">30%</span>
+    <span class="tilt-premium">溢价 ≈+3.5%</span>
+  </div>
+  <div class="tilt-row">
+    <span class="tilt-name">规模倾斜</span>
+    <input type="range" id="t-size" min="0" max="100" value="20" oninput="updateTilt()">
+    <span class="tilt-pct" id="s-pct">20%</span>
+    <span class="tilt-premium">溢价 ≈+2.0%</span>
+  </div>
+  <div class="tilt-row">
+    <span class="tilt-name">动量倾斜</span>
+    <input type="range" id="t-mom" min="0" max="100" value="20" oninput="updateTilt()">
+    <span class="tilt-pct" id="m-pct">20%</span>
+    <span class="tilt-premium">溢价 ≈+5.5%</span>
+  </div>
+  <div class="tilt-row">
+    <span class="tilt-name">盈利倾斜</span>
+    <input type="range" id="t-qual" min="0" max="100" value="30" oninput="updateTilt()">
+    <span class="tilt-pct" id="q-pct">30%</span>
+    <span class="tilt-premium">溢价 ≈+3.0%</span>
+  </div>
+
+  <div class="tilt-output">
+    <div class="tilt-stat">
+      <div class="num" id="t-alpha">+1.8%</div>
+      <div class="lbl">预期年化超额回报<br>（相对市场）</div>
+    </div>
+    <div class="tilt-stat">
+      <div class="num" id="t-vol">+2.1%</div>
+      <div class="lbl">额外年化追踪误差<br>（主动风险）</div>
+    </div>
+    <div class="tilt-stat">
+      <div class="num" id="t-drawdown">~4年</div>
+      <div class="lbl">历史最长相对落后期<br>（需忍受的考验）</div>
+    </div>
+  </div>
+  <p class="tilt-caveat">溢价为历史均值，实际因子溢价存在周期性波动。追踪误差和落后期为概略估算。</p>
+</div>
+
+<h2>因子投资的阴暗面</h2>
+
+<ul class="risk-list">
+  <li>
+    <span class="icon">⏱</span>
+    <div><strong>极长的耐心测试</strong>：价值因子在 1990s 和 2010s 各有一个十年跑输市场。大多数投资者在 5 年落后后选择放弃——恰恰在接近转折点时离场。</div>
+  </li>
+  <li>
+    <span class="icon">📢</span>
+    <div><strong>因子拥挤与溢价侵蚀</strong>：被广泛发现和追逐的因子，溢价可能被套利压缩。价值因子在学术界发现后（1992年后）溢价较之前有所下降，但仍未消失。</div>
+  </li>
+  <li>
+    <span class="icon">🔬</span>
+    <div><strong>复制危机</strong>：Harvey, Liu &amp; Zhu (2016) 指出，大量已发表的"因子"在严格统计标准下不能通过检验（p-hacking 问题）。Fama-French 五因子是少数经得起严格审查的核心因子。</div>
+  </li>
+  <li>
+    <span class="icon">💸</span>
+    <div><strong>实现成本</strong>：动量因子年换手率可达 100–200%，交易成本和税务负担会大幅侵蚀理论溢价。价值和盈利因子换手率较低，实现成本更合理。</div>
+  </li>
+  <li>
+    <span class="icon">🧠</span>
+    <div><strong>为什么溢价存在？</strong> 风险补偿说（因子风险是真实的，溢价是补偿）vs 行为错误说（市场定价错误，迟早会被套利消除）。两派争议至今未定——但实践派认为，无论机制为何，溢价存在就值得配置。</div>
+  </li>
+</ul>
+
+<h2>可投资的因子 ETF</h2>
+
+<table class="etf-table">
+  <thead>
+    <tr><th>因子</th><th>ETF 名称</th><th>代码</th><th>管理费</th><th>因子载荷</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2"><strong>小型价值</strong><br><span style="font-size:0.75rem;color:var(--muted);">最佳单一因子敞口</span></td>
+      <td>Avantis US Small Cap Value ETF</td>
+      <td><span class="t-code">AVUV</span></td>
+      <td class="t-fee-lo">0.25%</td>
+      <td>
+        <div>价值 ★★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:85%"></div></div>
+        <div>规模 ★★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:80%;background:#059669"></div></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Vanguard Small-Cap Value ETF</td>
+      <td><span class="t-code">VBR</span></td>
+      <td class="t-fee-lo">0.07%</td>
+      <td>
+        <div>价值 ★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:55%"></div></div>
+        <div>规模 ★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:60%;background:#059669"></div></div>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>动量</strong></td>
+      <td>iShares MSCI USA Momentum Factor ETF</td>
+      <td><span class="t-code">MTUM</span></td>
+      <td class="t-fee-lo">0.15%</td>
+      <td>
+        <div>动量 ★★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:80%;background:#e94560"></div></div>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>盈利/质量</strong></td>
+      <td>iShares MSCI USA Quality Factor ETF</td>
+      <td><span class="t-code">QUAL</span></td>
+      <td class="t-fee-lo">0.15%</td>
+      <td>
+        <div>盈利 ★★★★</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:75%;background:#f59e0b"></div></div>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>多因子</strong></td>
+      <td>Avantis International Small Cap Value</td>
+      <td><span class="t-code">AVDV</span></td>
+      <td class="t-fee-lo">0.36%</td>
+      <td>
+        <div>价值+规模+盈利 组合</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:70%"></div></div>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>A股盈利</strong></td>
+      <td>华夏中证红利低波动 ETF</td>
+      <td><span class="t-code">512890</span></td>
+      <td class="t-fee-hi">0.50%</td>
+      <td>
+        <div>价值+盈利 倾斜</div>
+        <div class="loading-bar"><div class="loading-fill" style="width:60%;background:#059669"></div></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>练习</h2>
+
+<div class="quiz" id="q1">
+  <div class="quiz-question">1. 价值因子（HML）与动量因子（UMD）的历史相关系数约为 −0.51。对多因子投资者而言，这意味着？</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer(this,'q1',false)">同时持有两者是错误的，它们会相互抵消回报</button></li>
+    <li><button onclick="answer(this,'q1',true)">同时持有两者可以分散因子周期风险，在不显著增加总波动的前提下叠加两个溢价</button></li>
+    <li><button onclick="answer(this,'q1',false)">相关系数为负说明其中一个因子是虚假的</button></li>
+    <li><button onclick="answer(this,'q1',false)">应该完全放弃价值，因为动量溢价更高</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q1-fb"></div>
+</div>
+
+<div class="quiz" id="q2">
+  <div class="quiz-question">2. 价值因子在 2007–2020 年长达 13 年跑输市场。一位坚定的因子投资者应该如何看待这段时期？</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer(this,'q2',false)">立即切换到其他表现更好的策略</button></li>
+    <li><button onclick="answer(this,'q2',false)">价值因子已经失效，应永久放弃</button></li>
+    <li><button onclick="answer(this,'q2',true)">这正是持有因子所需承受的代价；没有痛苦就没有溢价</button></li>
+    <li><button onclick="answer(this,'q2',false)">将仓位翻倍，用更多资金摊低成本</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q2-fb"></div>
+</div>
+
+<div class="quiz" id="q3">
+  <div class="quiz-question">3. 动量因子的年化溢价历史上约为 5–8%，高于其他因子。为什么它并非最适合所有投资者的选择？</div>
+  <ul class="quiz-options">
+    <li><button onclick="answer(this,'q3',false)">因为动量因子只在美国市场成立</button></li>
+    <li><button onclick="answer(this,'q3',false)">因为它的换手率低，难以实现</button></li>
+    <li><button onclick="answer(this,'q3',true)">高换手率带来高交易成本和税务负担，同时存在罕见但极端的"动量崩溃"风险（单月-58%）</button></li>
+    <li><button onclick="answer(this,'q3',false)">它只对机构投资者开放，个人无法投资</button></li>
+  </ul>
+  <div class="quiz-feedback" id="q3-fb"></div>
+</div>
+
+<h2>核心文献</h2>
+<ul style="list-style:disc;padding-left:1.5rem;font-size:0.9rem;">
+  <li style="margin-bottom:0.6rem;"><a href="https://doi.org/10.1111/j.1540-6261.1993.tb04702.x" target="_blank">Fama &amp; French (1993)</a> — "Common Risk Factors in Stock and Bond Returns" — 三因子模型原始论文</li>
+  <li style="margin-bottom:0.6rem;"><a href="https://doi.org/10.1016/j.jfineco.2014.10.010" target="_blank">Fama &amp; French (2015)</a> — "A Five-Factor Asset Pricing Model" — 五因子模型</li>
+  <li style="margin-bottom:0.6rem;"><a href="https://doi.org/10.1111/j.1540-6261.1993.tb04951.x" target="_blank">Jegadeesh &amp; Titman (1993)</a> — "Returns to Buying Winners and Selling Losers" — 动量因子奠基论文</li>
+  <li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html" target="_blank">Kenneth French Data Library</a>（免费）— 所有因子历史数据的权威来源，可下载 CSV 自行分析</li>
+</ul>
+
+<div class="callout success">
+  <div class="callout-title">下一课预告</div>
+  <strong>财富课程 #08：退休提款与序列回报风险</strong> — "4% 法则"为何成立、为何可能失败，以及序列回报风险如何在退休头10年决定你的财务命运。
+  将包含：Trinity Study 原始数据、成功率矩阵、动态提款策略、以及蒙特卡洛模拟的直觉理解。<br><br>
+  有疑问随时提问。
+</div>
+
+<div class="lesson-footer">
+  <div class="lesson-nav">
+    <a href="finance-0006-implementation-china.html">← 上一课</a>
+    <a href="finance-0008-retirement-withdrawal.html">下一课 →</a>
+  </div>
+  <p style="margin-top:1rem;">财富课程 #07 &nbsp;·&nbsp; 资产配置系列 &nbsp;·&nbsp; 进阶理论</p>
+</div>
+
+<script>
+/* ── Tilt Builder ── */
+const PREMIUMS = { value: 3.5, size: 2.0, mom: 5.5, qual: 3.0 };
+const VOL_PER  = { value: 2.5, size: 2.0, mom: 4.0, qual: 1.8 };
+const DD_PER   = { value: 3,   size: 2,   mom: 1.5, qual: 2 };
+
+function updateTilt() {
+  const v = +document.getElementById('t-value').value / 100;
+  const s = +document.getElementById('t-size').value  / 100;
+  const m = +document.getElementById('t-mom').value   / 100;
+  const q = +document.getElementById('t-qual').value  / 100;
+
+  document.getElementById('v-pct').textContent = Math.round(v*100) + '%';
+  document.getElementById('s-pct').textContent = Math.round(s*100) + '%';
+  document.getElementById('m-pct').textContent = Math.round(m*100) + '%';
+  document.getElementById('q-pct').textContent = Math.round(q*100) + '%';
+
+  // Factor correlation adjustment: value-momentum offset (rho=-0.51)
+  const raw = v*PREMIUMS.value + s*PREMIUMS.size + m*PREMIUMS.mom + q*PREMIUMS.qual;
+  const momValOffset = 0.51 * Math.min(v, m) * (PREMIUMS.value + PREMIUMS.mom) * 0.25;
+  const alpha = Math.max(0, raw - momValOffset);
+
+  // Tracking error (simplified)
+  const te = Math.sqrt(
+    Math.pow(v * VOL_PER.value, 2) +
+    Math.pow(s * VOL_PER.size, 2) +
+    Math.pow(m * VOL_PER.mom, 2) +
+    Math.pow(q * VOL_PER.qual, 2)
+  );
+
+  // Max relative drawdown years
+  const dd = Math.round(Math.max(DD_PER.value*v, DD_PER.size*s, DD_PER.mom*m, DD_PER.qual*q) * 4 + 1);
+
+  document.getElementById('t-alpha').textContent = '+' + alpha.toFixed(1) + '%';
+  document.getElementById('t-vol').textContent   = '+' + te.toFixed(1) + '%';
+  document.getElementById('t-drawdown').textContent = '~' + dd + '年';
+}
+updateTilt();
+
+/* ── Quiz ── */
+const FB = {
+  q1: {
+    correct: '✓ 正确！负相关不等于相互抵消——它意味着两个因子在不同环境下轮流表现优异。价值在低增长、低估值环境中领先；动量在趋势持续环境中领先。将两者以适当比例组合，分散化降低了任一单因子长期落后的影响，同时两个溢价的叠加期望值仍为正。',
+    wrong: '✗ 再想想。相关系数−0.51的含义是：价值因子表现差的时候，动量因子往往表现好——反之亦然。这对组合意味着什么？是抵消，还是互补？'
+  },
+  q2: {
+    correct: '✓ 正确。这是因子投资最难的部分——不是理解它，而是坚持它。因子溢价的存在，正是因为大多数人在长期落后期放弃了。如果每个人都能轻松坚持，溢价就会被套利消除。忍受漫长落后期，是领取因子溢价的必要条件。',
+    wrong: '✗ 再想想。如果因子溢价唾手可得、周期稳定，市场竞争会迅速消灭它。正因为坚持如此痛苦，溢价才能长期留存。放弃或追加都是情绪驱动的行为，而非理性决策。'
+  },
+  q3: {
+    correct: '✓ 正确。动量因子的"成本税"是其他因子的3–5倍，因为频繁换仓产生大量交易成本和资本利得税。此外，动量策略在市场急速反转时会经历"动量崩溃"——2009年3月市场反弹时动量策略单月下跌58%，是罕见但真实存在的尾部风险。',
+    wrong: '✗ 再看因子特征表。动量因子的独特风险不在于普遍性或可及性，而在于实现它的具体代价——换手率高意味着什么？极端崩溃意味着什么？'
+  }
+};
+
+function answer(btn, qid, correct) {
+  document.getElementById(qid).querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  const fb = document.getElementById(qid + '-fb');
+  fb.textContent = FB[qid][correct ? 'correct' : 'wrong'];
+  fb.style.color = correct ? '#065f46' : '#991b1b';
+}
+</script>
+
+</body>
+</html>
