@@ -19,6 +19,8 @@ Read this only when one of these is true — otherwise ignore it and follow `str
 
 - A page in the §IX outline has **less substance than its `page_rhythm` / `delivery_purpose`
   implies** (e.g. a `dense` page with two thin bullets).
+- A page's **realized density is drifting from its locked `page_rhythm`** during generation —
+  thinner than a `dense` page promised, or padded past a `breathing` / `anchor` page's one idea (§3).
 - The source contains the **same metric with two different values** (different period, scope,
   denominator, rounding, or forecast-vs-actual).
 - The user explicitly asks to **trace every figure to its source**, or to **audit** where a
@@ -48,7 +50,32 @@ If none of 1–4 is available, the page shrinks or merges — it does not get fi
 
 ---
 
-## 3. Data-conflict protocol
+## 3. Density lock — lower it honestly, never silently
+
+Once §2 has settled a page's density from the evidence, that decision is locked as its
+`page_rhythm` in `spec_lock.md`. From then on the lock is a contract: the Executor realizes the
+page at the planned density and **may not quietly thin it**.
+
+Concretely, a page locked `dense` must not be generated as a loose two-card layout, a generic
+placeholder chart, or a sparse大字报; a page locked `anchor` / `breathing` was *chosen* to land one
+idea and must not be padded back up either. Silent drift in either direction defeats the plan.
+
+The asymmetry with §2 is the whole point:
+
+- **Lowering density is legitimate — but only as an explicit §2 planning move** that re-scopes or
+  merges the page and updates `page_rhythm` in **both** `design_spec.md` §IX and `spec_lock.md`.
+- **Silently realizing a locked-`dense` page as sparse during generation is a defect**, not a
+  remedy. If a page cannot hold its planned density, stop and run §2 — never thin it unannounced.
+
+This is a discipline, not a machine gate: no checker measures "dense enough" (the adjacent
+measured check is the fidelity gate, and it is scoped to template decks, not density). The nearest
+enforcement is [`blueprint-preview`](../../.claude/skills/ppt-master/workflows/blueprint-preview.md),
+the opt-in gate that lets the user confirm a page's realized density against its intent before the
+rest of the deck is committed. `strategist.md` remains authoritative for `page_rhythm`.
+
+---
+
+## 4. Data-conflict protocol
 
 When the source gives the same metric two values, **keep both** — do not silently normalize to
 one. Silent normalization destroys a fact the audience may need. Procedure:
@@ -67,7 +94,7 @@ source disagrees with itself.
 
 ---
 
-## 4. Optional evidence traceability
+## 5. Optional evidence traceability
 
 Only when the user asks to audit sourcing. ppt-master has no formal citation-ID mechanism, and
 one is not being added to the engine. As a **session-local** discipline, the Strategist may keep
