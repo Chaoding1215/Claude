@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1280" height="720" viewBox="0 0 1280 720">
+<rect x="0" y="0" width="1280" height="720" fill="#1D1D1A"/>
+<g id="shape-title-bar">
+<text x="36" y="66" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="bold"><tspan fill="#FFC000">{{PAGE_TITLE}}</tspan></text>
+</g>
+<g id="shape-segment-nav">
+<rect x="790" y="10" width="68" height="23" fill="#C00000"/>
+<text x="824" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">F&amp;B/Retail</text>
+<rect x="858" y="10" width="68" height="23" fill="#333F50"/>
+<text x="892" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">Office</text>
+<rect x="927" y="10" width="85" height="23" fill="#333F50"/>
+<text x="970" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">Hospitality</text>
+<rect x="1013" y="10" width="85" height="23" fill="#333F50"/>
+<text x="1056" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">Education</text>
+<rect x="1099" y="10" width="85" height="23" fill="#333F50"/>
+<text x="1141" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">Industry MPN</text>
+<rect x="1184" y="10" width="97" height="23" fill="#333F50"/>
+<text x="1232" y="26" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#FFFFFF">Industry SD-WAN</text>
+</g>
+<g id="shape-kpi-block-1">
+<rect x="36" y="120" width="380" height="140" fill="none" stroke="#A6A6A6" stroke-width="1"/>
+<text x="56" y="150" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#FFC000" font-weight="bold">{{KEY_MESSAGE}}</text>
+</g>
+<g id="shape-map-callout">
+<rect x="440" y="120" width="380" height="140" fill="none" stroke="#A6A6A6" stroke-width="1" stroke-dasharray="4 4"/>
+</g>
+<g id="shape-content-area">
+<rect x="36" y="290" width="1208" height="390" fill="none" stroke="#A6A6A6" stroke-width="0.667" stroke-dasharray="4 4"/>
+<text x="640" y="490" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#666666">{{CONTENT_AREA}}</text>
+</g>
+</svg>

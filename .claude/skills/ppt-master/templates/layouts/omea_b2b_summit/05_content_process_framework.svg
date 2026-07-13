@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1280" height="720" viewBox="0 0 1280 720">
+<rect x="0" y="0" width="1280" height="720" fill="#1D1D1A"/>
+<g id="shape-title-bar">
+<text x="36" y="66" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" fill="#FFC000" font-weight="bold">{{PAGE_TITLE}}</text>
+</g>
+<g id="shape-arrow-banner">
+<polygon points="48,300 1140,300 1140,282 1232,320 1140,358 1140,340 48,340" fill="#2F5597"/>
+</g>
+<g id="shape-stop-1">
+<ellipse cx="156" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="156" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="156" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+<g id="shape-stop-2">
+<ellipse cx="351" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="351" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="351" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+<g id="shape-stop-3">
+<ellipse cx="543" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="543" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="543" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+<g id="shape-stop-4">
+<ellipse cx="738" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="738" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="738" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+<g id="shape-stop-5">
+<ellipse cx="954" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="954" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="954" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+<g id="shape-stop-6">
+<ellipse cx="1140" cy="320" rx="7" ry="8" fill="#FFC000"/>
+<text x="1140" y="240" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#FFC000" font-weight="bold">{{PHASE_N_LABEL}}</text>
+<text x="1140" y="264" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#FFFFFF" font-weight="bold">{{PHASE_N_DESC}}</text>
+</g>
+</svg>

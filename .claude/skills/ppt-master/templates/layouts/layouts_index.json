@@ -80,6 +80,19 @@
       "ending"
     ]
   },
+  "omea_b2b_summit": {
+    "summary": "Dense B2B account-strategy summit deck structure — dark-ground, gold-accent consulting register with a recurring industry-segment nav chrome; distilled from a 26-page cross-regional partner review deck",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "page_types": [
+      "chapter_speaker",
+      "content_case_shell",
+      "content_agenda_pills",
+      "content_divider",
+      "content_process_framework",
+      "ending"
+    ]
+  },
   "pixel_retro": {
     "summary": "Tech talks, programming tutorials, game introductions, geek-style showcases.",
     "canvas_format": "ppt169",
