@@ -821,8 +821,11 @@ Read the relevant `_index.md` at confirmation `d` (Layer 1 / Layer 2) for its ca
 | Full-bleed + floating text | `breathing` / feature pages | Image fills 1280x720, text floats over opacity overlay |
 | Figure-text overlap | Hero moments — headline over/against image edge | Text partially overlaps image, not beside it |
 | Negative-space-driven | Single element in 40-60% whitespace | One idea, weight through emptiness |
+| Grouped-tier drill-down | A phased/staged process where 2-4 steps nest under each phase, and only selected steps warrant expanded detail | Phase labels bracket their steps above a step ribbon (dashed connector groups 2-3 markers per phase); a lower row holds 2-4 expanded panels, one per selected step, each free to hold its own sub-diagram — do not expand every step, only the ones with enough substance to fill a panel |
 
 **PPT 16:9 (1280x720) key dimensions**: Safe area 1200x640 (40px margins); Title area 1200x100; Content area 1200x500; Footer area 1200x40.
+
+> **Grouped-tier drill-down — why this is its own pattern, not a plain step ribbon.** A flat ribbon (numbered steps only) loses the phase→step ownership relationship the moment it has more than one grouping tier — the viewer can no longer tell which steps belong to which phase, and there's nowhere for the deck to go deeper on the steps that matter most. The two tiers (phase-grouping above, selective drill-down below) are what make this different from `chevron_chain_with_tail` / `process_flow` in the chart catalog, which are single-tier. Rescued via the [Pattern Promotion Gate](pattern-promotion-gate.md) from a real source deck's process page that a fidelity-mode roster extraction had flattened down to the bare ribbon, losing both tiers — confirmed reusable beyond that one project.
 
 ---
 
