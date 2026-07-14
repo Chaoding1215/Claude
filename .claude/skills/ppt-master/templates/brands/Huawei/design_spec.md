@@ -41,6 +41,20 @@ Red carries the primary brand weight; use it deliberately (titles, key accents, 
 
 > Western fonts (`Arial Black` / `Arial`) are `[fact]` from the theme XML. CJK companions (`Microsoft YaHei` / `黑体` / `宋体`) are `[fact]` from observed run-level usage in the source deck's actual slide content.
 
+### Script-split font rule (locked)
+
+Mixed Chinese/English runs must not resolve to a single fallback-stack guess — each script renders in its own explicit font, for both `title` and `body` roles:
+
+| Script | Font |
+|---|---|
+| Latin (English/numerals/punctuation) | `Arial` |
+| CJK (Chinese) | `Microsoft YaHei`（微软雅黑） |
+
+- **SVG authoring**: split mixed-language runs into separate `<tspan>` elements per script and set `font-family` explicitly per `tspan` (`font-family="Arial"` for Latin runs, `font-family="Microsoft YaHei"` for CJK runs) — do not rely on a single `font-family` fallback list and hope the renderer's per-glyph fallback lands on the right CJK font.
+- **PPTX (OOXML) production**: set both typeface slots on every run — `<a:latin typeface="Arial"/>` and `<a:ea typeface="Microsoft YaHei"/>` — so PowerPoint natively renders Latin glyphs in Arial and CJK glyphs in Microsoft YaHei within the same run, without manual run-splitting. `svg_to_pptx.py` / any PptxGenJS production step must populate both fields; a single `fontFace` assignment that only sets `latin` (leaving `ea` to inherit the theme default) is a spec violation.
+- This rule applies deck-wide (title, body, KPI numbers, chart labels, table cells, footnotes) — no page or component is exempt.
+- `"Arial Black"` / `"黑体"` remain declared as a fallback only for tools that cannot do script-splitting (e.g. a plain-text environment with no per-run font control); wherever script-splitting is possible, the explicit Arial/Microsoft YaHei rule above wins.
+
 ## IV. Logo
 
 - File: `./logo.png` (529×116, red flower emblem + "HUAWEI" wordmark, transparent background)
