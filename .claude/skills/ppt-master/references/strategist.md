@@ -710,6 +710,51 @@ The most common Strategist failure mode is missing the structural half — treat
 > 2. If still no fit: data-driven content → table layout; conceptual/illustrative → "AI-generated image" (Image_Generator handles); structural → "custom layout".
 > 3. Mark the page `no-template-match` in section VII with the fallback chosen and why. Do NOT silently substitute a close-but-wrong chart.
 
+### Layout Reference (optional, opt-in — one page, one user-supplied reference)
+
+Design status: **new mechanism, opt-in.** Full rationale: [`docs/agents/ppt-master-layout-reference.md`](../../../../docs/agents/ppt-master-layout-reference.md).
+
+Separate from the Template Match catalog above (which is a fixed, generic library), a user
+may supply their own reference image or PDF page to ground **one specific page's**
+composition. This is use-once by default — it does not become a template asset unless the
+Pattern Promotion Gate (below) says otherwise.
+
+**Input** — a new optional `spec_lock.md` key:
+
+```yaml
+layout_references:
+  P07: { source: "refs/annual_report_2023.pdf", pdf_page: 12 }
+  P09: { source: "refs/board_report.pdf", pdf_page: 4, region: [58, 12, 40, 50] }
+  P11: { source: "refs/competitor_deck_screenshot.png" }
+```
+
+`source` is an image path or a PDF (PDF requires `pdf_page`, 1-based, or an inline
+`#page=N` suffix — not both). `region` is optional: normalized `[x, y, w, h]` percent of the
+full canvas, for pointing at one area of a larger reference page without pre-cropping it.
+
+**Authoring rule (not new — a restatement for a new input).** Consult the reference for
+composition and structure only: region proportions, visual hierarchy, decorative treatment.
+Any text, numbers, or labels visible in the reference are not trustworthy content — real
+content still comes only from the source material / `spec_lock.md`, exactly as the existing
+evidence discipline already requires for every other input.
+
+**Verification.** After Executor produces the page, run:
+
+```
+python3 scripts/verify_template_fidelity.py --pair \
+  --generated svg_output/07_*.svg --reference refs/annual_report_2023.pdf --pdf-page 12 \
+  [--region 58,12,40,50] --json-out .fidelity_render/P07_layout_ref.json
+```
+
+This reuses the same skin-invariant occupancy-grid comparison the project-level fidelity
+gate uses — no new algorithm, just a project-independent pairwise entry point.
+
+**Promotion.** If the reference's composition, hierarchy logic, annotation convention, color
+rule, or pacing turns out valuable beyond this one page, run the
+[Pattern Promotion Gate](pattern-promotion-gate.md) before discarding it — do not let a
+genuinely reusable idea disappear with the project just because Layout Reference defaults to
+use-once.
+
 ### Speaker Notes Requirements (Default — no discussion needed)
 
 - File naming: Recommended to match SVG names (`01_cover.svg` → `notes/01_cover.md`), also compatible with `notes/slide01.md`

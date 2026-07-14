@@ -25,6 +25,16 @@ free), so this gate does not apply to them. Pages with no ``page_layouts``
 entry are free design and are skipped. If no SVG→PNG renderer is available the
 gate refuses to run (exit 2) rather than reporting a hollow pass.
 
+Ad-hoc pairwise mode (``--pair``)
+---------------------------------
+Everything above assumes a whole project with ``spec_lock.md`` / ``page_layouts``.
+``--pair`` is a lighter, project-independent mode for the Layout Reference
+mechanism (see ``docs/agents/ppt-master-layout-reference.md``): compare one
+generated SVG page directly against one user-supplied reference (an image, or
+one page of a PDF), optionally restricted to a cropped region of both. It
+reuses the same ``compare_page()`` occupancy comparison — no new metric, just
+a different way to supply the two sides.
+
 Exit codes: 0 = all compared pages pass · 1 = at least one page fails ·
 2 = cannot run (no renderer, or nothing to compare).
 """
@@ -52,6 +62,15 @@ except (ImportError, OSError):
         _PNG_RENDERER = "svglib"
     except (ImportError, OSError):
         pass
+
+# PDF page rasterization for --pair mode, same library ppt-master's own
+# source_to_md/pdf_to_md.py already depends on — kept optional here too so a
+# missing fitz only blocks --pair with a PDF reference, not the whole script.
+try:
+    import fitz  # type: ignore  # PyMuPDF
+    _HAVE_FITZ = True
+except ImportError:
+    _HAVE_FITZ = False
 
 
 def _render_svg_to_png(svg_path: Path, png_path: Path, width: int, height: int) -> bool:
@@ -207,6 +226,168 @@ def compare_page(
     return result
 
 
+def _parse_pdf_page_suffix(source: str) -> Tuple[str, Optional[int]]:
+    """Split ``path.pdf#page=12`` into (``path.pdf``, 12); else (source, None)."""
+    m = re.match(r"^(.*)#page=(\d+)$", source)
+    if m:
+        return m.group(1), int(m.group(2))
+    return source, None
+
+
+def _load_reference_to_png(
+    source: str, pdf_page: Optional[int], out_png: Path, width: int, height: int,
+) -> Tuple[bool, Optional[str]]:
+    """Rasterize a --reference input (image or one PDF page) to a WxH PNG.
+
+    Returns (ok, error_message). A PDF reference must resolve a 1-based page
+    number from either --pdf-page or an inline ``#page=N`` suffix on the path
+    (not both) — this mirrors the layout_references schema in
+    docs/agents/ppt-master-layout-reference.md.
+    """
+    clean_source, inline_page = _parse_pdf_page_suffix(source)
+    src_path = Path(clean_source)
+    if not src_path.is_file():
+        return False, f"reference not found: {src_path}"
+
+    is_pdf = src_path.suffix.lower() == ".pdf"
+    if is_pdf:
+        if pdf_page is not None and inline_page is not None:
+            return False, "supply --pdf-page OR an inline #page=N suffix, not both"
+        page_num = pdf_page if pdf_page is not None else inline_page
+        if page_num is None:
+            return False, "PDF reference requires --pdf-page N or '#page=N' on the path"
+        if not _HAVE_FITZ:
+            return False, ("PDF reference needs PyMuPDF (`pip install pymupdf`) — "
+                           "the same dependency ppt-master's source_to_md/pdf_to_md.py uses")
+        try:
+            doc = fitz.open(str(src_path))
+            if not (1 <= page_num <= doc.page_count):
+                return False, f"page {page_num} out of range (PDF has {doc.page_count} pages)"
+            page = doc[page_num - 1]
+            zoom_x = width / page.rect.width
+            zoom_y = height / page.rect.height
+            pix = page.get_pixmap(matrix=fitz.Matrix(zoom_x, zoom_y))
+            pix.save(str(out_png))
+            doc.close()
+            return True, None
+        except Exception as exc:  # noqa: BLE001
+            return False, f"PyMuPDF failed to rasterize page {page_num}: {exc}"
+
+    # Plain raster image: load and letterbox-resize onto the WxH canvas so the
+    # occupancy grid compares like-for-like against the rendered generated SVG.
+    try:
+        from PIL import Image
+        with Image.open(src_path) as im:
+            im = im.convert("RGB")
+            canvas = Image.new("RGB", (width, height), (255, 255, 255))
+            scale = min(width / im.width, height / im.height)
+            new_w, new_h = max(1, round(im.width * scale)), max(1, round(im.height * scale))
+            resized = im.resize((new_w, new_h))
+            canvas.paste(resized, ((width - new_w) // 2, (height - new_h) // 2))
+            canvas.save(out_png)
+        return True, None
+    except Exception as exc:  # noqa: BLE001
+        return False, f"failed to load reference image: {exc}"
+
+
+def _crop_region_png(src_png: Path, region_pct: Tuple[float, float, float, float],
+                      out_png: Path) -> None:
+    """Crop src_png to a percent-of-canvas box (x, y, w, h), each 0-100."""
+    from PIL import Image
+    x_pct, y_pct, w_pct, h_pct = region_pct
+    with Image.open(src_png) as im:
+        w, h = im.size
+        box = (
+            round(w * x_pct / 100), round(h * y_pct / 100),
+            round(w * (x_pct + w_pct) / 100), round(h * (y_pct + h_pct) / 100),
+        )
+        im.crop(box).save(out_png)
+
+
+def _parse_region(spec: Optional[str]) -> Optional[Tuple[float, float, float, float]]:
+    if not spec:
+        return None
+    parts = [float(p) for p in spec.split(",")]
+    if len(parts) != 4:
+        raise ValueError("--region expects 4 comma-separated numbers: x,y,w,h (percent)")
+    return tuple(parts)  # type: ignore[return-value]
+
+
+def _run_pair(args: argparse.Namespace) -> int:
+    """--pair mode: one generated SVG vs one user-supplied reference image/PDF page."""
+    generated_svg = Path(args.generated)
+    if not generated_svg.is_file():
+        print(f"[ERROR] --generated not found: {generated_svg}")
+        return 2
+    if _PNG_RENDERER is None:
+        print("[ERROR] No SVG→PNG renderer available (need cairosvg, or svglib+reportlab).")
+        return 2
+
+    try:
+        region = _parse_region(args.region)
+    except ValueError as exc:
+        print(f"[ERROR] {exc}")
+        return 2
+
+    width, height = (int(x) for x in args.size.lower().split("x"))
+    cols, rows = (int(x) for x in args.grid.lower().split("x"))
+    work_dir = Path(args.work_dir) if args.work_dir else generated_svg.parent / ".layout_reference_check"
+    work_dir.mkdir(parents=True, exist_ok=True)
+
+    g_png = work_dir / f"{generated_svg.stem}.render.png"
+    if not _render_svg_to_png(generated_svg, g_png, width, height):
+        print(f"[ERROR] failed to render {generated_svg}")
+        return 2
+
+    ref_png = work_dir / "reference.render.png"
+    ok, err = _load_reference_to_png(args.reference, args.pdf_page, ref_png, width, height)
+    if not ok:
+        print(f"[ERROR] {err}")
+        return 2
+
+    compare_g_png, compare_ref_png = g_png, ref_png
+    if region is not None:
+        cropped_g = work_dir / f"{generated_svg.stem}.render.cropped.png"
+        cropped_ref = work_dir / "reference.render.cropped.png"
+        _crop_region_png(g_png, region, cropped_g)
+        _crop_region_png(ref_png, region, cropped_ref)
+        compare_g_png, compare_ref_png = cropped_g, cropped_ref
+
+    res = compare_page(
+        compare_ref_png, compare_g_png,
+        cols=cols, rows=rows, ink_threshold=args.ink_threshold,
+        tolerance=args.tolerance, min_cell_ink=args.min_cell_ink,
+        mirror=False, mirror_tolerance=args.mirror_tolerance,
+    )
+    n_under = len(res["underfilled_cells"])
+    page_failed = n_under > args.max_underfill
+    res["status"] = "fail" if page_failed else "pass"
+    res["generated"] = str(generated_svg)
+    res["reference"] = args.reference
+    res["region"] = list(region) if region else None
+
+    print("=" * 74)
+    print(f"[LAYOUT REFERENCE] grid={cols}x{rows}  region={res['region'] or 'full page'}")
+    print("=" * 74)
+    tag = "OK  " if res["status"] == "pass" else "FAIL"
+    print(f"  [{tag}] {generated_svg.name}  sim={res['structural_similarity']}  "
+          f"underfilled={n_under}")
+    if page_failed:
+        for cell in res["underfilled_cells"][:5]:
+            print(f"        collapsed cell (c{cell['col']},r{cell['row']}): "
+                  f"reference {cell['template_occ']} → render {cell['render_occ']} "
+                  f"(−{cell['delta']})")
+
+    if args.json_out:
+        Path(args.json_out).write_text(json.dumps(res, indent=2, ensure_ascii=False),
+                                       encoding="utf-8")
+        print(f"\n[report] {args.json_out}")
+
+    print(f"\n[RESULT] {'passed' if not page_failed else 'FAILED'} structural fidelity "
+          f"against layout reference.")
+    return 1 if page_failed else 0
+
+
 def _find_generated(svg_output: Path, page_key: str) -> Optional[Path]:
     m = re.match(r"P?0*(\d+)", page_key)
     if not m:
@@ -222,7 +403,24 @@ def _find_generated(svg_output: Path, page_key: str) -> Optional[Path]:
 def main() -> int:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("project", help="project directory (has spec_lock.md, templates/, svg_output/)")
+    ap.add_argument("project", nargs="?", default=None,
+                    help="project directory (has spec_lock.md, templates/, svg_output/); "
+                         "omit when using --pair")
+    ap.add_argument("--pair", action="store_true",
+                    help="ad-hoc mode: compare one --generated SVG against one --reference "
+                         "image/PDF page, independent of any project/spec_lock.md")
+    ap.add_argument("--generated", default=None, help="--pair: path to the generated SVG page")
+    ap.add_argument("--reference", default=None,
+                    help="--pair: path to a reference image, or a PDF (use --pdf-page or "
+                         "'file.pdf#page=N')")
+    ap.add_argument("--pdf-page", type=int, default=None,
+                    help="--pair: 1-based PDF page number (alternative to '#page=N' on --reference)")
+    ap.add_argument("--region", default=None,
+                    help="--pair: crop both sides to this box before comparing, as "
+                         "'x,y,w,h' percent of the full canvas (e.g. 58,12,40,50)")
+    ap.add_argument("--work-dir", default=None,
+                    help="--pair: directory for intermediate renders (default: "
+                         "<generated's dir>/.layout_reference_check)")
     ap.add_argument("--mode", choices=["auto", "fidelity", "mirror"], default="auto",
                     help="template replication mode; auto reads templates/design_spec.md")
     ap.add_argument("--grid", default="12x8", help="occupancy grid, COLSxROWS (default 12x8)")
@@ -241,6 +439,15 @@ def main() -> int:
                     help="comma-separated page keys to limit to (e.g. P01,P07)")
     ap.add_argument("--json-out", default=None, help="write full report JSON here")
     args = ap.parse_args()
+
+    if args.pair:
+        if not args.generated or not args.reference:
+            print("[ERROR] --pair requires both --generated and --reference")
+            return 2
+        return _run_pair(args)
+
+    if args.project is None:
+        ap.error("project is required unless --pair is given")
 
     if _PNG_RENDERER is None:
         print("[ERROR] No SVG→PNG renderer available (need cairosvg, or svglib+reportlab).")
