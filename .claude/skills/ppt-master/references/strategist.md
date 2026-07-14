@@ -108,6 +108,8 @@ Write the locked value to `spec_lock.md` `- visual_style:` and the rationale to 
 
 > Step 3 already collapses brand and layout inputs into one fused `design_spec.md`; this layer reads from that single source and does not need to re-resolve brand vs layout precedence.
 
+**Stronger hard rule when a brand package is active**: background color and the full coordinated palette (primary / secondary / accent / every neutral tier) are locked **verbatim** from the brand's Color Scheme — not "recommended," not blended with a layout template's own advisory colors, not supplemented from the industry quick-reference below even if the fused spec looks incomplete for some role. Go back to the brand's own `design_spec.md` and lock every role from it directly rather than filling a gap from anywhere else. The single exception is the user explicitly asking for a different color on this project — never Strategist's own judgment, an industry convention, or a layout template's suggested default.
+
 Proactively provide a color scheme (HEX values) based on content characteristics and industry.
 
 **Industry color quick reference** (full 14-industry list in `scripts/config.py` under `INDUSTRY_COLORS`):

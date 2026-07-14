@@ -281,6 +281,8 @@ Override priority by segment:
 
 Field-level micro-adjustment (e.g. "use anthropic brand but primary changed to #FF0000") is **not** part of Step 3 fusion — it flows into Strategist Eight Confirmations e–g as a normal user request.
 
+**Hard rule — background color and the coordinated palette are Identity, full stop.** In `brand + layout` and `brand + layout + deck`, "Structure from layout" never includes color — background color and the full coordinated set (primary / secondary / accent / neutral tiers) come only from brand's Identity segment. If the layout template's own `design_spec.md` happens to carry a Color Scheme section (a `fidelity`-mode layout distilled from a real deck may keep one as a "default, override freely" courtesy — see e.g. `templates/layouts/omea_b2b_summit/design_spec.md` §II), that section is discarded entirely once a brand is present, not partially merged or used as a fallback for missing brand roles. This only relaxes when the user explicitly asks for a different color for this project — never as a Strategist judgment call.
+
 #### Same-kind multiple paths — conflict resolution
 
 When the user gives two paths of the **same kind** (e.g. `brands/anthropic` + `brands/google`), Step 3 surfaces a conflict prompt before fusing — like resolving a git merge conflict:
