@@ -16,8 +16,9 @@ for the curation procedure.
 - **Source**: OMEA B2B Summit source deck, slide 22 ("GTM Practice Reference: 3 Phases 6 Steps
   for Rapid SME Growth")
 - **Category**: 构图/版式 (composition also carries a 层次逻辑 aspect — see the separate
-  prose-rule promotion in `strategist.md` §4 Layout Pattern Library, since the hierarchy
-  principle was confirmed to generalize beyond this one source)
+  prose-rule promotion at [`distilled-principles/gtm_phased_drilldown_hierarchy.md`](../../../references/distilled-principles/gtm_phased_drilldown_hierarchy.md)
+  (`scope: global`), since the hierarchy principle was confirmed to generalize beyond this
+  one source)
 - **Proposed summary**: "Pick for a phased process (2-4 phases, each grouping 2-4 steps) that
   also needs per-step or per-phase drill-down detail below the main flow. Skip if the process
   has no phase grouping (use `chevron_chain_with_tail` / `process_flow`) or no drill-down

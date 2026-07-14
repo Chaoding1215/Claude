@@ -11,8 +11,9 @@ rule in [`strategist.md`](../../.claude/skills/ppt-master/references/strategist.
 or [`create-template.md`](../../.claude/skills/ppt-master/workflows/create-template.md);
 on any conflict, those files win.
 
-Status: **design only — not implemented.** This file is the plan; nothing below has been
-built yet.
+Status: **implemented.** Originally designed and shipped 2026-07-14; §4–6 below were revised
+the same day after a scaling problem surfaced (see the note at the top of §4) — this file
+reflects the current, corrected design, not the original one.
 
 ---
 
@@ -92,54 +93,70 @@ was decided and why — never a silent, unrecorded choice.
 
 ## 4. Where each category's promotion actually lands
 
-Not all five categories have the same shape of "asset," so they don't all promote to the
-same place. Two of them are deliberately **not** given a new script or index — see the note
-at the end of this section for why.
+**Revision note (2026-07-14): this section replaces the original design.** The first version
+routed 层次逻辑 / 用色规则 / 章节节奏 straight into `design_spec.md` / `strategist.md` /
+`template-designer.md` / a brand's `design_spec.md` — tolerable for one rescue, but the user
+identified the real use case up front: distilling **many** historical PPT/PDF decks. At that
+volume, "edit a shared, always-loaded file per promotion" means high-churn writes to the exact
+files every Strategist invocation reads, rising merge-conflict risk across concurrent
+distillation runs, and no independent unit to audit or remove a specific rule later. One
+rescue (`gtm_phased_drilldown_hierarchy`, §category 层次逻辑) had already been written directly
+into `strategist.md`'s Layout Pattern Library table under the old design — it was rolled back
+and re-landed under the corrected design below as the first real entry.
+
+Not all five categories have the same shape of "asset," so they don't all promote to the same
+place — but none of them promote by editing an existing shared file's body anymore:
 
 | Category | Promotion target | Mechanism |
 |---|---|---|
 | 构图/版式 | `templates/charts/_candidates/<source>_candidates.md` (staging) → human-curated into `templates/charts/charts_index.json` + a new `<key>.svg` | New staging file + existing index, unchanged schema |
 | 证据/注释呈现方式 | Same as above — `charts_index.json` already has a structural-type branch; add keys like `evidence_tag_chip`, `so_what_ribbon` | Reuses existing mechanism, no new branch needed |
-| 层次逻辑 | A prose rule appended to **this project's** `design_spec.md`, and — only if the user confirms it should generalize beyond this one project — to [`template-designer.md`](../../.claude/skills/ppt-master/references/template-designer.md) or [`strategist.md`](../../.claude/skills/ppt-master/references/strategist.md) as a named principle | **Text edit only — no script, no index** |
-| 用色规则 | A one-line rule appended to `design_spec.md` §II Color Scheme (project-level) or the relevant brand's `design_spec.md` (if it should generalize to every deck using that brand) | **Text edit only — no script, no index** |
-| 章节节奏 | A sentence appended to `design_spec.md` §V Page Roster's overall description (e.g. "sections alternate dense-analysis / breathing pages") | **Text edit only — no script, no index** |
+| 层次逻辑 | New file in [`references/distilled-principles/`](../../.claude/skills/ppt-master/references/distilled-principles/_index.md) + one new row in its `_index.md` | **New file + index row — never an edit to `strategist.md` prose** |
+| 用色规则 | Same library, tagged `scope: brand:<name>` if brand-specific or `scope: global` if not | **New file + index row — never an edit to a brand's `design_spec.md`** |
+| 章节节奏 | Same library, tagged `scope: scenario:<tag>` if scenario-specific or `scope: global` if not | **New file + index row — never an edit to a project's `design_spec.md` on the "generalize" path** |
 
-**Why 层次逻辑 / 用色规则 / 章节节奏 get no new script or directory:** these three are prose
-principles, not geometric assets — there is nothing to render, diff, or index. Building a
-schema/script for them would force a rule like "lead with the conclusion, not the evidence"
-into a rigid structured field it doesn't need, and no downstream tool would ever query it
-programmatically (Strategist just reads prose, same as it reads every other `design_spec.md`
-section today). A file edit is the entire mechanism, by design — not a placeholder for
-future tooling.
+**Why all three text categories now share one library instead of three destinations:** the
+only real difference between them is *what the rule is about* (hierarchy / color / pacing),
+not *where it should physically live* — a `scope` tag on the entry (§ below) does the
+generalization/brand/scenario targeting that used to require picking between a project file,
+a brand file, or a canonical reference file. One library, one consistent append-only shape.
 
----
-
-## 5. Consequence: promotion for these three categories is always a manual MD edit
-
-Because §4 gives 层次逻辑 / 用色规则 / 章节节奏 no persisted script or index, **every time
-one of them is promoted, the only thing that happens is someone (Strategist, in the current
-session) edits the relevant `design_spec.md` (or, for a generalize-beyond-this-project
-decision, `template-designer.md` / `strategist.md` / a brand's `design_spec.md`) by hand.**
-There is no batch job, no registrar script, no JSON index entry for these three — unlike
-构图/版式 and 证据/注释呈现方式, which do get a durable file (`_candidates/*.md`, eventually
-`charts_index.json` + an `.svg`) plus a registrar step.
-
-This is intentional, not a stopgap: the promotion *is* the edit. If a later session finds
-these three categories are being promoted often enough that hand-editing is a real burden,
-that would be the signal to reconsider — not evidence the current design is incomplete.
+This mirrors a pattern the codebase already uses successfully for a different axis of
+variation — [`references/visual-styles/`](../../.claude/skills/ppt-master/references/visual-styles/_index.md)
+and [`references/image-renderings/`](../../.claude/skills/ppt-master/references/image-renderings/_index.md)
+both use "one index table + one file per named entry, read only what's relevant, never glob
+the directory." `distilled-principles/` is the same shape applied to rescued prose principles
+instead of visual styles or AI-image renderings.
 
 ---
 
-## 6. Files to change (implementation plan, not yet executed)
+## 5. Consequence: promotion is a pure addition, not an edit to shared files
+
+Every promotion of 层次逻辑 / 用色规则 / 章节节奏 now means exactly two writes: **one new
+`distilled-principles/<key>.md` file, and one new row in `distilled-principles/_index.md`.**
+Neither touches `strategist.md`, `template-designer.md`, `create-template.md`, or any brand's
+`design_spec.md` — those four get exactly **one** stable pointer sentence each (already
+written, see §6), and never need editing again as new principles accumulate. 构图/版式 and
+证据/注释呈现方式 keep their existing `_candidates/*.md` staging → `charts_index.json`
+curation path, which was already append-only and did not need correcting.
+
+This is still intentionally light — no registrar script, no schema validation, no JSON for
+the prose entries (a markdown table row is enough, same as `visual-styles/_index.md`). What
+changed is *only* where the row and file land, not how much process surrounds adding them.
+
+---
+
+## 6. Files changed (implementation log)
 
 | File | Change |
 |---|---|
-| `scripts/verify_template_fidelity.py` | Add `--pair --generated <svg> --reference <image\|pdf> [--pdf-page N] [--region x,y,w,h] [--json-out]`. Reuses `compare_page()` unchanged; adds `_load_reference_to_png()` (rasterize PDF page or load+resize a raster image) and `_crop_region()` (percent-box crop on both sides before comparing). Existing project-level path is untouched. |
-| `references/strategist.md` | Document the `layout_references` schema (§2 of this file) near §4 Layout Pattern Library; document the authoring rule (reference informs composition only, never trusted for content). |
-| New `references/pattern-promotion-gate.md` | The shared gate itself (§3 of this file) — both Mechanism A (strategist.md) and Mechanism B (create-template.md) point to this one definition instead of duplicating the question/schema. |
-| `workflows/create-template.md` | After fidelity clustering, for a collapsed page with a distinctive sub-pattern, invoke the shared gate instead of silently absorbing the page into its cluster (today's behavior when no promotion is chosen). |
-| `templates/charts/_candidates/` (new dir) | Staging ground for 构图/版式 and 证据/注释呈现方式 promotions awaiting human curation into `charts_index.json`. |
+| `scripts/verify_template_fidelity.py` | Added `--pair --generated <svg> --reference <image\|pdf> [--pdf-page N] [--region x,y,w,h] [--json-out]`. Reuses `compare_page()` unchanged; adds `_load_reference_to_png()` (rasterize PDF page or load+resize a raster image) and `_crop_region()` (percent-box crop on both sides before comparing). Existing project-level path untouched — tested full-page, region-crop, and 5 error paths with zero regression. |
+| `references/strategist.md` | Documented the `layout_references` schema near §4 Layout Pattern Library; documented the authoring rule (reference informs composition only, never trusted for content). One stable pointer line to `distilled-principles/_index.md` — this is the only Layout-Pattern-Library edit this file needs going forward. |
+| `references/pattern-promotion-gate.md` | The shared gate itself. Routing table's three text-rule rows point at `distilled-principles/`, not at `design_spec.md` / brand files. |
+| `workflows/create-template.md` | After fidelity clustering, for a collapsed page with a distinctive sub-pattern, invokes the shared gate instead of silently absorbing the page into its cluster. |
+| `templates/charts/_candidates/` | Staging ground for 构图/版式 and 证据/注释呈现方式 promotions awaiting human curation into `charts_index.json`. Contains `omea_b2b_summit_source_candidates.md` (3 real rescued candidates as of this writing). |
 | `templates/charts/charts_index.json` | Gains new keys only after a human curates a staged candidate — never written to directly by the gate. |
+| `references/distilled-principles/_index.md` + `references/distilled-principles/<key>.md` | New library for 层次逻辑 / 用色规则 / 章节节奏. Contains `gtm_phased_drilldown_hierarchy` (`scope: global`) as of this writing — the rolled-back-and-relanded entry described in §4. |
 
 ---
 
