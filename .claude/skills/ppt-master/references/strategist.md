@@ -131,6 +131,8 @@ Proactively provide a color scheme (HEX values) based on content characteristics
 | Text over imagery / dark field (e.g. `photo-editorial`, `glassmorphism`, `dark-tech`) | `scrim` / `overlay` for legibility |
 | Print / hand-drawn fills (e.g. `chalkboard`, `zine`) | `block-shade`, one step off the field |
 
+**When a brand package is active and doesn't define one of these extra tiers** (brand packages carry only primary / secondary / accent / neutral(dark) / neutral(gray) / text / bg — never `surface` / `grid` / `scrim` / `block-shade` themselves): derive it mathematically from that brand's own anchors — lighten or darken `bg` / the nearest `neutral` tier for a tint/shade tier (`surface`, `block-shade`), or take an existing dark anchor (`neutral(dark)` / `bg` on a dark-ground brand) at reduced opacity for an overlay tier (`scrim`, `overlay`). Never introduce a hue absent from the brand's own palette, and never borrow from the industry quick-reference above to fill the gap — the derived value's only inputs are that brand's own anchors. This rule is brand-agnostic by design: it reads whichever anchors the active brand defines, so it never needs updating when a new brand package is added, and no existing brand package needs to pre-declare these tiers itself.
+
 ### f. Icon Usage Confirmation
 
 | Option | Approach | Suitable Scenarios |
