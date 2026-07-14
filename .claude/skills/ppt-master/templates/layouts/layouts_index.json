@@ -44,6 +44,19 @@
       "ending"
     ]
   },
+  "financial_briefing_dense": {
+    "summary": "Dense financial/account-strategy briefing deck structure — dark-ground register with a full-width three-panel KPI band and an asymmetric narrow-chart/wide-initiatives content split; derived from a live Orange Group FY2025 financial-briefing project",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "page_types": [
+      "chapter_speaker",
+      "content_case_shell",
+      "content_agenda_pills",
+      "content_divider",
+      "content_process_framework",
+      "ending"
+    ]
+  },
   "government_blue": {
     "summary": "Key project briefings, Five-Year Plan presentations, work summaries, investment promotion, policy interpretation.",
     "canvas_format": "ppt169",
