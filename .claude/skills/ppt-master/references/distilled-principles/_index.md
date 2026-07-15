@@ -27,6 +27,7 @@ glob the whole directory (same discipline as `visual-styles/` and `image-renderi
 | Key | One-line rule | Category | Scope | Source |
 |---|---|---|---|---|
 | [`gtm_phased_drilldown_hierarchy`](./gtm_phased_drilldown_hierarchy.md) | A phase-grouped process must keep the phase→step ownership visible, and drill down only on the steps with enough substance to fill a panel | 层次逻辑 | `global` | OMEA B2B Summit source deck, slide 22 |
+| [`repeated_agenda_recolor_divider`](./repeated_agenda_recolor_divider.md) | Reuse the full agenda slide as a section divider, recoloring only the current item, instead of a persistent per-page nav strip | 章节节奏 | `global` | Huawei SD-WAN executive briefing source deck, slides 2/6/18 |
 
 ---
 

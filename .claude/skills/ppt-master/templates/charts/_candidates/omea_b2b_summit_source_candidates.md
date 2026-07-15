@@ -49,6 +49,11 @@ for the curation procedure.
   than filling the whole page. No existing roster variant or `charts_index.json` entry covers
   this pattern — it is a net-new addition, not a captured-but-thinned one.
 - **Promotion decision**: promoted (pending curation)
+- **Corroborating occurrence**: the Huawei SD-WAN executive briefing source
+  (distilled 2026-07-15) independently wanted the same pattern class — see
+  [`huawei_sdwan_exec_candidates.md`](huawei_sdwan_exec_candidates.md)'s
+  corroborating note. Two independent sources now want this pattern; treat as
+  a stronger curation priority, not a second candidate.
 
 ### screenshot_showcase_grid
 
