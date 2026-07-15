@@ -81,6 +81,23 @@
       "ending"
     ]
   },
+  "huawei_sdwan_exec": {
+    "summary": "Huawei executive-briefing tech-sales deck structure — dense architecture diagrams, benchmark charts, and customer case studies behind a recurring 3-part agenda; distilled from a 21-page SD-WAN executive pitch deck",
+    "canvas_format": "ppt169",
+    "page_count": 10,
+    "page_types": [
+      "cover",
+      "chapter_agenda",
+      "content_highlight3",
+      "content_product_grid",
+      "content_dense_architecture",
+      "content_benchmark_chart",
+      "content_case_study",
+      "content_timeline",
+      "content_bullets_generic",
+      "ending"
+    ]
+  },
   "medical_university": {
     "summary": "Medical academic reports, case discussions, research presentations, hospital work reports, medical education and training.",
     "canvas_format": "ppt169",
