@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    GTM Phased Drilldown Template
+    Usage: a phased process where 2-4 steps nest under each phase, and only selected steps need expanded detail below
+    Scenarios: go-to-market plans, rollout phases, multi-stage execution plans
+    Distinct from chevron_process.svg / process_flow.svg: those are single-tier;
+    this keeps phase-grouping visible above the ribbon AND drills into selected steps below.
+    Supports: 3 phases grouping 6 steps, 3 drill-down panels
+    -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <g id="header">
+        <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+              font-size="34" font-weight="bold" fill="#0F172A"><tspan>Go-to-Market Plan: 3 Phases, 6 Steps</tspan></text>
+    </g>
+
+    <g id="phase-groups">
+        <line x1="60" y1="118" x2="440" y2="118" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="250" y="108" text-anchor="middle" font-size="15" font-weight="600" fill="#3B82F6"><tspan>Phase 1: Align</tspan></text>
+        <line x1="460" y1="118" x2="840" y2="118" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="650" y="108" text-anchor="middle" font-size="15" font-weight="600" fill="#10B981"><tspan>Phase 2: Enable</tspan></text>
+        <line x1="860" y1="118" x2="1220" y2="118" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="1040" y="108" text-anchor="middle" font-size="15" font-weight="600" fill="#F59E0B"><tspan>Phase 3: Scale</tspan></text>
+    </g>
+
+    <g id="chartArea">
+        <!-- chart-plot-area: 60,140,1220,180 -->
+        <rect x="60" y="150" width="1160" height="16" rx="8" fill="#E2E8F0"/>
+
+        <g id="step-1">
+            <circle cx="180" cy="158" r="9" fill="#3B82F6"/>
+            <text x="180" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Build Team</tspan></text>
+        </g>
+        <g id="step-2">
+            <circle cx="330" cy="158" r="9" fill="#3B82F6"/>
+            <text x="330" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Launch Package</tspan></text>
+        </g>
+        <g id="step-3">
+            <circle cx="490" cy="158" r="9" fill="#10B981"/>
+            <text x="490" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Set Targets</tspan></text>
+        </g>
+        <g id="step-4">
+            <circle cx="650" cy="158" r="9" fill="#10B981"/>
+            <text x="650" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Best Practice</tspan></text>
+        </g>
+        <g id="step-5">
+            <circle cx="960" cy="158" r="9" fill="#F59E0B"/>
+            <text x="960" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Promote</tspan></text>
+        </g>
+        <g id="step-6">
+            <circle cx="1140" cy="158" r="9" fill="#F59E0B"/>
+            <text x="1140" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F172A"><tspan>Replicate</tspan></text>
+        </g>
+    </g>
+
+    <g id="drilldown-panel-1">
+        <rect x="60" y="240" width="360" height="420" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+        <rect x="60" y="240" width="360" height="44" rx="8" fill="#3B82F6"/>
+        <rect x="60" y="270" width="360" height="14" fill="#3B82F6"/>
+        <text x="80" y="268" font-size="16" font-weight="600" fill="#FFFFFF"><tspan>&#9312; Build Team</tspan></text>
+        <text x="80" y="320" font-size="14" fill="#334155"><tspan>Assign account manager,</tspan></text>
+        <text x="80" y="342" font-size="14" fill="#334155"><tspan>solution owner, delivery lead</tspan></text>
+        <line x1="140" y1="380" x2="200" y2="420" stroke="#94A3B8" stroke-width="1.5"/>
+        <line x1="260" y1="380" x2="200" y2="420" stroke="#94A3B8" stroke-width="1.5"/>
+        <text x="140" y="375" text-anchor="middle" font-size="12" fill="#475569"><tspan>Account Mgr</tspan></text>
+        <text x="260" y="375" text-anchor="middle" font-size="12" fill="#475569"><tspan>Delivery Lead</tspan></text>
+        <text x="200" y="435" text-anchor="middle" font-size="12" fill="#475569"><tspan>Solution Owner</tspan></text>
+    </g>
+
+    <g id="drilldown-panel-2">
+        <rect x="460" y="240" width="360" height="420" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+        <rect x="460" y="240" width="360" height="44" rx="8" fill="#10B981"/>
+        <rect x="460" y="270" width="360" height="14" fill="#10B981"/>
+        <text x="480" y="268" font-size="16" font-weight="600" fill="#FFFFFF"><tspan>&#9314; Best Practice</tspan></text>
+        <text x="480" y="320" font-size="14" fill="#334155"><tspan>Standardized training and</tspan></text>
+        <text x="480" y="342" font-size="14" fill="#334155"><tspan>practice methods to scale delivery</tspan></text>
+        <rect x="480" y="480" width="150" height="60" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1"/>
+        <text x="555" y="515" text-anchor="middle" font-size="13" font-weight="600" fill="#059669"><tspan>Product Training</tspan></text>
+        <rect x="650" y="480" width="150" height="60" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1"/>
+        <text x="725" y="515" text-anchor="middle" font-size="13" font-weight="600" fill="#059669"><tspan>Install Drills</tspan></text>
+    </g>
+
+    <g id="drilldown-panel-3">
+        <rect x="860" y="240" width="360" height="420" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+        <rect x="860" y="240" width="360" height="44" rx="8" fill="#F59E0B"/>
+        <rect x="860" y="270" width="360" height="14" fill="#F59E0B"/>
+        <text x="880" y="268" font-size="16" font-weight="600" fill="#FFFFFF"><tspan>&#9315; Promote</tspan></text>
+        <text x="880" y="320" font-size="14" fill="#334155"><tspan>Market promotion for expanding</tspan></text>
+        <text x="880" y="342" font-size="14" fill="#334155"><tspan>brand influence and replication</tspan></text>
+        <rect x="880" y="480" width="150" height="60" rx="6" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1"/>
+        <text x="955" y="515" text-anchor="middle" font-size="13" font-weight="600" fill="#D97706"><tspan>Advertising</tspan></text>
+        <rect x="1050" y="480" width="150" height="60" rx="6" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1"/>
+        <text x="1125" y="515" text-anchor="middle" font-size="13" font-weight="600" fill="#D97706"><tspan>Co-Hosted Events</tspan></text>
+    </g>
+
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#94A3B8">
+        <tspan>Data source: GTM playbook, internal rollout plan</tspan>
+    </text>
+</svg>

@@ -154,9 +154,9 @@ changed is *only* where the row and file land, not how much process surrounds ad
 | `references/strategist.md` | Documented the `layout_references` schema near §4 Layout Pattern Library; documented the authoring rule (reference informs composition only, never trusted for content). One stable pointer line to `distilled-principles/_index.md` — this is the only Layout-Pattern-Library edit this file needs going forward. |
 | `references/pattern-promotion-gate.md` | The shared gate itself. Routing table's three text-rule rows point at `distilled-principles/`, not at `design_spec.md` / brand files. |
 | `workflows/create-template.md` | After fidelity clustering, for a collapsed page with a distinctive sub-pattern, invokes the shared gate instead of silently absorbing the page into its cluster. |
-| `templates/charts/_candidates/` | Staging ground for 构图/版式 and 证据/注释呈现方式 promotions awaiting human curation into `charts_index.json`. Contains `omea_b2b_summit_source_candidates.md` (3 real rescued candidates as of this writing). |
-| `templates/charts/charts_index.json` | Gains new keys only after a human curates a staged candidate — never written to directly by the gate. |
-| `references/distilled-principles/_index.md` + `references/distilled-principles/<key>.md` | New library for 层次逻辑 / 用色规则 / 章节节奏. Contains `gtm_phased_drilldown_hierarchy` (`scope: global`) as of this writing — the rolled-back-and-relanded entry described in §4. |
+| `templates/charts/_candidates/` | Staging ground for 构图/版式 and 证据/注释呈现方式 promotions awaiting human curation into `charts_index.json`. Currently holds only `README.md` — the OMEA and Huawei SD-WAN source candidates that once staged here have all been curated into `charts_index.json` and their staging files deleted. |
+| `templates/charts/charts_index.json` | Gains new keys only after a human curates a staged candidate — never written to directly by the gate. 81 entries as of this writing. |
+| `references/distilled-principles/_index.md` + `references/distilled-principles/<key>.md` | New library for 层次逻辑 / 用色规则 / 章节节奏. Contains `gtm_phased_drilldown_hierarchy` and `repeated_agenda_recolor_divider` (both `scope: global`) as of this writing. |
 
 ---
 

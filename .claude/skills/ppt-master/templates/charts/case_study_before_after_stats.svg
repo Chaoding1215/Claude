@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    Case Study Before/After Stats Template
+    Usage: named customer case study with a before/after contrast plus quantified outcomes
+    Scenarios: customer proof points, reference stories, named-account wins
+    Supports: 1 before panel + 1 after panel + up to 3 stat callouts
+    -->
+    <defs>
+        <filter id="afterPanelShadow" x="-15%" y="-15%" width="130%" height="130%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="3" result="offsetBlur"/>
+            <feFlood flood-color="#0F172A" flood-opacity="0.10" result="shadowColor"/>
+            <feComposite in="shadowColor" in2="offsetBlur" operator="in" result="shadow"/>
+            <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+    </defs>
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <g id="header">
+        <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+              font-size="34" font-weight="bold" fill="#0F172A"><tspan>Customer Name: Outcome Headline</tspan></text>
+        <text x="60" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+              font-size="14" fill="#64748B"><tspan>Industry &#183; Deployment scale &#183; Go-live date</tspan></text>
+    </g>
+
+    <g id="before-panel">
+        <rect x="60" y="140" width="500" height="240" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="80" y="175" font-size="18" font-weight="600" fill="#64748B"><tspan>Before</tspan></text>
+        <text x="80" y="215" font-size="15" fill="#334155"><tspan>Legacy provisioning cycle</tspan></text>
+        <text x="80" y="245" font-size="15" fill="#334155"><tspan>Manual, ticket-driven rollout</tspan></text>
+        <text x="80" y="275" font-size="15" fill="#334155"><tspan>Limited visibility into site health</tspan></text>
+    </g>
+
+    <g id="vs-marker">
+        <circle cx="640" cy="260" r="30" fill="#0F172A"/>
+        <text x="640" y="267" text-anchor="middle" font-size="18" font-weight="bold" fill="#FFFFFF"><tspan>VS</tspan></text>
+    </g>
+
+    <g id="after-panel">
+        <rect x="720" y="140" width="500" height="240" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1" filter="url(#afterPanelShadow)"/>
+        <text x="740" y="175" font-size="18" font-weight="600" fill="#2563EB"><tspan>After</tspan></text>
+        <text x="740" y="215" font-size="15" fill="#1D4ED8"><tspan>Same-day site provisioning</tspan></text>
+        <text x="740" y="245" font-size="15" fill="#1D4ED8"><tspan>Zero-touch, plug-and-play rollout</tspan></text>
+        <text x="740" y="275" font-size="15" fill="#1D4ED8"><tspan>Full-network visual monitoring</tspan></text>
+    </g>
+
+    <g id="case-stat-1">
+        <text x="230" y="500" text-anchor="middle" font-size="40" font-weight="bold" fill="#2563EB"><tspan>90%&#8595;</tspan></text>
+        <text x="230" y="535" text-anchor="middle" font-size="15" fill="#334155"><tspan>Rollout time reduction</tspan></text>
+    </g>
+    <g id="case-stat-2">
+        <text x="640" y="500" text-anchor="middle" font-size="40" font-weight="bold" fill="#2563EB"><tspan>3x</tspan></text>
+        <text x="640" y="535" text-anchor="middle" font-size="15" fill="#334155"><tspan>Bandwidth capacity gain</tspan></text>
+    </g>
+    <g id="case-stat-3">
+        <text x="1050" y="500" text-anchor="middle" font-size="40" font-weight="bold" fill="#2563EB"><tspan>99.9%</tspan></text>
+        <text x="1050" y="535" text-anchor="middle" font-size="15" fill="#334155"><tspan>Network uptime SLA</tspan></text>
+    </g>
+
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#94A3B8">
+        <tspan>Data source: Customer-reported results, deployment case review</tspan>
+    </text>
+</svg>
