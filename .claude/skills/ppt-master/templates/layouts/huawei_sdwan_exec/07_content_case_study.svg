@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+<g id="background">
+<rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+</g>
+<g id="header">
+<text x="88" y="90" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="30" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="1158" y="0" width="122" height="29" fill="#A3A3A3"/>
+<text x="1219" y="21" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="19" fill="#FFFFFF" font-weight="bold">{{SECTION_NAME}}</text>
+</g>
+<g id="case-before-panel">
+<rect x="88" y="140" width="500" height="240" rx="6" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+<text x="338" y="175" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#666666" font-weight="bold">{{SECTION_NAME}}</text>
+<text x="338" y="270" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="case-vs-marker">
+<text x="640" y="270" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="22" fill="#C00000" font-weight="bold">VS</text>
+</g>
+<g id="case-after-panel">
+<rect x="692" y="140" width="500" height="240" rx="6" fill="#FFF5F5" stroke="#C00000" stroke-width="1"/>
+<text x="942" y="175" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#C00000" font-weight="bold">{{SECTION_NAME}}</text>
+<text x="942" y="270" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="case-stat-1">
+<text x="220" y="470" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#C00000" font-weight="bold">{{KEY_MESSAGE}}</text>
+<text x="220" y="505" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="case-stat-2">
+<text x="640" y="470" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#C00000" font-weight="bold">{{KEY_MESSAGE}}</text>
+<text x="640" y="505" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="case-stat-3">
+<text x="1060" y="470" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="40" fill="#C00000" font-weight="bold">{{KEY_MESSAGE}}</text>
+<text x="1060" y="505" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="case-source">
+<text x="88" y="650" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#9A9A9A">{{SOURCE}}</text>
+</g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1280" height="720" viewBox="0 0 1280 720">
+<rect x="0" y="0" width="1280" height="720" fill="#1D1D1A"/>
+<g id="shape-closing-message">
+<text x="640" y="70" text-anchor="middle" xml:space="preserve" font-family="Arial, sans-serif" font-size="28" fill="#FFC000" font-weight="bold">{{CLOSING_MESSAGE}}</text>
+</g>
+<g id="shape-quadrant-1">
+<rect x="80" y="140" width="520" height="240" fill="none" stroke="#A6A6A6" stroke-width="1"/>
+<text x="340" y="400" text-anchor="middle" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">{{QUADRANT_N_LABEL}}</text>
+</g>
+<g id="shape-quadrant-2">
+<rect x="680" y="140" width="520" height="240" fill="none" stroke="#A6A6A6" stroke-width="1"/>
+<text x="940" y="400" text-anchor="middle" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">{{QUADRANT_N_LABEL}}</text>
+</g>
+<g id="shape-quadrant-3">
+<rect x="80" y="420" width="520" height="240" fill="none" stroke="#A6A6A6" stroke-width="1"/>
+<text x="340" y="680" text-anchor="middle" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">{{QUADRANT_N_LABEL}}</text>
+</g>
+<g id="shape-quadrant-4">
+<rect x="680" y="420" width="520" height="240" fill="none" stroke="#A6A6A6" stroke-width="1"/>
+<text x="940" y="680" text-anchor="middle" xml:space="preserve" font-family="Arial, sans-serif" font-size="16" fill="#FFFFFF">{{QUADRANT_N_LABEL}}</text>
+</g>
+</svg>

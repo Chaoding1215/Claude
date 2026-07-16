@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1280" height="720" viewBox="0 0 1280 720">
+<rect x="0" y="0" width="1280" height="720" fill="#1D1D1A"/>
+<g id="shape-chapter-title">
+<text x="640" y="300" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="60" fill="#FFFFFF" font-weight="bold">{{CHAPTER_TITLE}}</text>
+</g>
+<g id="shape-speaker-credit">
+<text x="640" y="420" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="24" fill="#FFFFFF">{{SPEAKER_NAME}}</text>
+<text x="640" y="456" text-anchor="middle" xml:space="preserve" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="24" fill="#FFFFFF">{{SPEAKER_ROLE}}</text>
+</g>
+</svg>

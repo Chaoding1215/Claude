@@ -44,6 +44,19 @@
       "ending"
     ]
   },
+  "financial_briefing_dense": {
+    "summary": "Dense financial/account-strategy briefing deck structure — dark-ground register with a full-width three-panel KPI band and an asymmetric narrow-chart/wide-initiatives content split; derived from a live Orange Group FY2025 financial-briefing project",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "page_types": [
+      "chapter_speaker",
+      "content_case_shell",
+      "content_agenda_pills",
+      "content_divider",
+      "content_process_framework",
+      "ending"
+    ]
+  },
   "government_blue": {
     "summary": "Key project briefings, Five-Year Plan presentations, work summaries, investment promotion, policy interpretation.",
     "canvas_format": "ppt169",
@@ -68,6 +81,23 @@
       "ending"
     ]
   },
+  "huawei_sdwan_exec": {
+    "summary": "Huawei executive-briefing tech-sales deck structure — dense architecture diagrams, benchmark charts, and customer case studies behind a recurring 3-part agenda; distilled from a 21-page SD-WAN executive pitch deck",
+    "canvas_format": "ppt169",
+    "page_count": 10,
+    "page_types": [
+      "cover",
+      "chapter_agenda",
+      "content_highlight3",
+      "content_product_grid",
+      "content_dense_architecture",
+      "content_benchmark_chart",
+      "content_case_study",
+      "content_timeline",
+      "content_bullets_generic",
+      "ending"
+    ]
+  },
   "medical_university": {
     "summary": "Medical academic reports, case discussions, research presentations, hospital work reports, medical education and training.",
     "canvas_format": "ppt169",
@@ -77,6 +107,19 @@
       "toc",
       "chapter",
       "content",
+      "ending"
+    ]
+  },
+  "omea_b2b_summit": {
+    "summary": "Dense B2B account-strategy summit deck structure — dark-ground, gold-accent consulting register with a recurring industry-segment nav chrome; distilled from a 26-page cross-regional partner review deck",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "page_types": [
+      "chapter_speaker",
+      "content_case_shell",
+      "content_agenda_pills",
+      "content_divider",
+      "content_process_framework",
       "ending"
     ]
   },

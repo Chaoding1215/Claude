@@ -310,6 +310,8 @@ class SVGQualityChecker:
         self._template_issues: List[Tuple[str, str, str]] = []
         self._animation_issues: List[Tuple[str, str]] = []
         self._illustration_issues: List[Tuple[str, str, str]] = []
+        # page_layouts basename-resolution issues (severity, kind, message).
+        self._page_layout_issues: List[Tuple[str, str, str]] = []
         self._aggregate_counts_applied = False
 
     def check_file(self, svg_file: str, expected_format: str = None) -> Dict:
@@ -1353,8 +1355,54 @@ class SVGQualityChecker:
         elif dir_path.is_dir():
             self._check_animation_config_contract(dir_path)
             self._check_illustration_resource_contract(dir_path)
+            self._check_page_layouts_resolve(dir_path)
 
         return self.results
+
+    def _check_page_layouts_resolve(self, dir_path: Path) -> None:
+        """Deck-level: every spec_lock.md ``page_layouts`` basename must resolve
+        to a real ``templates/<basename>.svg`` in the project.
+
+        A typo'd or missing basename makes the Executor silently fall back to
+        free design (spec_lock_reference.md: "typos cause silent fallback to
+        free design"), so a fidelity/mirror deck can generate WITHOUT the
+        template it was supposed to inherit, and nothing else flags it. This
+        turns that silent binding failure into a blocking error. Decks with no
+        ``page_layouts`` section (pure free design) are unaffected.
+        """
+        project_path = self._resolve_project_path(dir_path)
+        lock_path = project_path / 'spec_lock.md'
+        if _parse_spec_lock is None or not lock_path.exists():
+            return
+        try:
+            lock = _parse_spec_lock(lock_path)
+        except Exception:
+            return
+        layouts = lock.get('page_layouts') or {}
+        if not layouts:
+            return
+        templates_dir = project_path / 'templates'
+        for page, raw in layouts.items():
+            basename = (raw or '').strip()
+            if not basename:
+                self._page_layout_issues.append((
+                    'error', 'empty_basename',
+                    f"{page} page_layouts entry is empty; give a template "
+                    f"basename or remove the row (an empty value silently "
+                    f"becomes free design).",
+                ))
+                continue
+            # Tolerate an accidental .svg suffix in the lock value.
+            if basename.lower().endswith('.svg'):
+                basename = basename[:-4]
+            if not (templates_dir / f"{basename}.svg").is_file():
+                self._page_layout_issues.append((
+                    'error', 'unresolved_basename',
+                    f"{page} -> templates/{basename}.svg does not exist; the "
+                    f"Executor would silently fall back to free design. Fix the "
+                    f"basename in spec_lock.md page_layouts, or copy the template "
+                    f"SVG into the project templates/ folder.",
+                ))
 
     def _check_illustration_resource_contract(self, dir_path: Path) -> None:
         """Project-level illustration resource checks."""
@@ -2034,6 +2082,9 @@ class SVGQualityChecker:
         # Illustration strategy aggregation.
         self._print_illustration_summary()
 
+        # page_layouts binding-resolution aggregation.
+        self._print_page_layout_summary()
+
         # Fix suggestions
         if self.summary['errors'] > 0 or self.summary['warnings'] > 0:
             print(f"\n[TIP] Common fixes:")
@@ -2072,6 +2123,24 @@ class SVGQualityChecker:
         if warnings:
             print(f"  Warnings ({len(warnings)}):")
             for _severity, kind, msg in warnings:
+                print(f"    [{kind}] {msg}")
+
+    def _print_page_layout_summary(self):
+        """Print page_layouts basename-resolution issues if present."""
+        if not self._page_layout_issues:
+            return
+
+        errors = [item for item in self._page_layout_issues if item[0] == 'error']
+        warnings = [item for item in self._page_layout_issues if item[0] == 'warning']
+
+        print("\n[PAGE_LAYOUTS] Template binding resolution checks")
+        if errors:
+            print(f"  Errors ({len(errors)}):")
+            for _sev, kind, msg in errors:
+                print(f"    [{kind}] {msg}")
+        if warnings:
+            print(f"  Warnings ({len(warnings)}):")
+            for _sev, kind, msg in warnings:
                 print(f"    [{kind}] {msg}")
 
     def _print_template_summary(self):
@@ -2126,6 +2195,13 @@ class SVGQualityChecker:
         self.summary['warnings'] += len(illustration_warnings)
         for severity, kind, _msg in self._illustration_issues:
             self.issue_types[f'illustration_{kind}_{severity}'] += 1
+
+        page_layout_errors = [item for item in self._page_layout_issues if item[0] == 'error']
+        page_layout_warnings = [item for item in self._page_layout_issues if item[0] == 'warning']
+        self.summary['errors'] += len(page_layout_errors)
+        self.summary['warnings'] += len(page_layout_warnings)
+        for severity, kind, _msg in self._page_layout_issues:
+            self.issue_types[f'page_layouts_{kind}_{severity}'] += 1
 
     def _print_drift_summary(self):
         """Print spec_lock drift aggregation if any was observed.

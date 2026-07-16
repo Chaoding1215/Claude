@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+<g id="background">
+<image href="cover_hero.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+<rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" fill-opacity="0.32"/>
+</g>
+<g id="ending-closing-message">
+<text x="49" y="405" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="43" fill="#1D1D1A" font-weight="bold">{{CLOSING_MESSAGE}}</text>
+<text x="49" y="456" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="43" fill="#1D1D1A" font-weight="bold">{{THANK_YOU}}</text>
+</g>
+</svg>

@@ -108,6 +108,8 @@ Write the locked value to `spec_lock.md` `- visual_style:` and the rationale to 
 
 > Step 3 already collapses brand and layout inputs into one fused `design_spec.md`; this layer reads from that single source and does not need to re-resolve brand vs layout precedence.
 
+**Stronger hard rule when a brand package is active**: background color and the full coordinated palette (primary / secondary / accent / every neutral tier) are locked **verbatim** from the brand's Color Scheme — not "recommended," not blended with a layout template's own advisory colors, not supplemented from the industry quick-reference below even if the fused spec looks incomplete for some role. Go back to the brand's own `design_spec.md` and lock every role from it directly rather than filling a gap from anywhere else. The single exception is the user explicitly asking for a different color on this project — never Strategist's own judgment, an industry convention, or a layout template's suggested default.
+
 Proactively provide a color scheme (HEX values) based on content characteristics and industry.
 
 **Industry color quick reference** (full 14-industry list in `scripts/config.py` under `INDUSTRY_COLORS`):
@@ -128,6 +130,8 @@ Proactively provide a color scheme (HEX values) based on content characteristics
 | Layers panels / charts (e.g. `data-journalism`, `swiss-minimal`) | `surface` (panel lift), `grid` (hairline, lighter than dividers) |
 | Text over imagery / dark field (e.g. `photo-editorial`, `glassmorphism`, `dark-tech`) | `scrim` / `overlay` for legibility |
 | Print / hand-drawn fills (e.g. `chalkboard`, `zine`) | `block-shade`, one step off the field |
+
+**When a brand package is active and doesn't define one of these extra tiers** (brand packages carry only primary / secondary / accent / neutral(dark) / neutral(gray) / text / bg — never `surface` / `grid` / `scrim` / `block-shade` themselves): derive it mathematically from that brand's own anchors — lighten or darken `bg` / the nearest `neutral` tier for a tint/shade tier (`surface`, `block-shade`), or take an existing dark anchor (`neutral(dark)` / `bg` on a dark-ground brand) at reduced opacity for an overlay tier (`scrim`, `overlay`). Never introduce a hue absent from the brand's own palette, and never borrow from the industry quick-reference above to fill the gap — the derived value's only inputs are that brand's own anchors. This rule is brand-agnostic by design: it reads whichever anchors the active brand defines, so it never needs updating when a new brand package is added, and no existing brand package needs to pre-declare these tiers itself.
 
 ### f. Icon Usage Confirmation
 
@@ -710,6 +714,51 @@ The most common Strategist failure mode is missing the structural half — treat
 > 2. If still no fit: data-driven content → table layout; conceptual/illustrative → "AI-generated image" (Image_Generator handles); structural → "custom layout".
 > 3. Mark the page `no-template-match` in section VII with the fallback chosen and why. Do NOT silently substitute a close-but-wrong chart.
 
+### Layout Reference (optional, opt-in — one page, one user-supplied reference)
+
+Design status: **new mechanism, opt-in.** Full rationale: [`docs/agents/ppt-master-layout-reference.md`](../../../../docs/agents/ppt-master-layout-reference.md).
+
+Separate from the Template Match catalog above (which is a fixed, generic library), a user
+may supply their own reference image or PDF page to ground **one specific page's**
+composition. This is use-once by default — it does not become a template asset unless the
+Pattern Promotion Gate (below) says otherwise.
+
+**Input** — a new optional `spec_lock.md` key:
+
+```yaml
+layout_references:
+  P07: { source: "refs/annual_report_2023.pdf", pdf_page: 12 }
+  P09: { source: "refs/board_report.pdf", pdf_page: 4, region: [58, 12, 40, 50] }
+  P11: { source: "refs/competitor_deck_screenshot.png" }
+```
+
+`source` is an image path or a PDF (PDF requires `pdf_page`, 1-based, or an inline
+`#page=N` suffix — not both). `region` is optional: normalized `[x, y, w, h]` percent of the
+full canvas, for pointing at one area of a larger reference page without pre-cropping it.
+
+**Authoring rule (not new — a restatement for a new input).** Consult the reference for
+composition and structure only: region proportions, visual hierarchy, decorative treatment.
+Any text, numbers, or labels visible in the reference are not trustworthy content — real
+content still comes only from the source material / `spec_lock.md`, exactly as the existing
+evidence discipline already requires for every other input.
+
+**Verification.** After Executor produces the page, run:
+
+```
+python3 scripts/verify_template_fidelity.py --pair \
+  --generated svg_output/07_*.svg --reference refs/annual_report_2023.pdf --pdf-page 12 \
+  [--region 58,12,40,50] --json-out .fidelity_render/P07_layout_ref.json
+```
+
+This reuses the same skin-invariant occupancy-grid comparison the project-level fidelity
+gate uses — no new algorithm, just a project-independent pairwise entry point.
+
+**Promotion.** If the reference's composition, hierarchy logic, annotation convention, color
+rule, or pacing turns out valuable beyond this one page, run the
+[Pattern Promotion Gate](pattern-promotion-gate.md) before discarding it — do not let a
+genuinely reusable idea disappear with the project just because Layout Reference defaults to
+use-once.
+
 ### Speaker Notes Requirements (Default — no discussion needed)
 
 - File naming: Recommended to match SVG names (`01_cover.svg` → `notes/01_cover.md`), also compatible with `notes/slide01.md`
@@ -778,6 +827,8 @@ Read the relevant `_index.md` at confirmation `d` (Layer 1 / Layer 2) for its ca
 | Negative-space-driven | Single element in 40-60% whitespace | One idea, weight through emptiness |
 
 **PPT 16:9 (1280x720) key dimensions**: Safe area 1200x640 (40px margins); Title area 1200x100; Content area 1200x500; Footer area 1200x40.
+
+> **Rescued patterns beyond this built-in table**: [`distilled-principles/_index.md`](distilled-principles/_index.md) accumulates 层次逻辑 (hierarchy-logic) principles rescued from historical material via the [Pattern Promotion Gate](pattern-promotion-gate.md) — read its table for any `global` entry plus any entry matching this deck's brand/scenario. This pointer is the only edit this section needs going forward; new rescues append to that index, never to this table.
 
 ---
 

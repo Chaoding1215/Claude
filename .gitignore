@@ -6,3 +6,7 @@ __pycache__/
 # ppt-master scratch project workspaces (source svgs, backups, caches) —
 # final decks are committed to reference/ instead
 projects/
+
+# dashi-ppt engine source is vendored; installed deps are reproduced by its
+# own render script (npm install) on first use — see .claude/skills/dashi-ppt/
+node_modules/

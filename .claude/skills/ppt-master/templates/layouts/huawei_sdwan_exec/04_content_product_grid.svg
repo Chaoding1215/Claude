@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+<g id="background">
+<rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+</g>
+<g id="header">
+<text x="88" y="90" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="1158" y="0" width="122" height="29" fill="#A3A3A3"/>
+<text x="1219" y="21" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="19" fill="#FFFFFF" font-weight="bold">{{SECTION_NAME}}</text>
+</g>
+<g id="subtitle">
+<text x="88" y="135" text-anchor="start" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#666666">{{KEY_MESSAGE}}</text>
+</g>
+<g id="product-card-1">
+<rect x="88" y="180" width="260" height="300" rx="6" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+<text x="218" y="215" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="118" y="235" width="200" height="140" fill="#F0F0F0"/>
+<text x="218" y="410" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+<text x="218" y="435" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="product-card-2">
+<rect x="368" y="180" width="260" height="300" rx="6" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+<text x="498" y="215" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="398" y="235" width="200" height="140" fill="#F0F0F0"/>
+<text x="498" y="410" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+<text x="498" y="435" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="product-card-3">
+<rect x="648" y="180" width="260" height="300" rx="6" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+<text x="778" y="215" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="678" y="235" width="200" height="140" fill="#F0F0F0"/>
+<text x="778" y="410" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+<text x="778" y="435" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+<g id="product-card-4">
+<rect x="928" y="180" width="260" height="300" rx="6" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+<text x="1058" y="215" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="18" fill="#1D1D1A" font-weight="bold">{{PAGE_TITLE}}</text>
+<rect x="958" y="235" width="200" height="140" fill="#F0F0F0"/>
+<text x="1058" y="410" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+<text x="1058" y="435" text-anchor="middle" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#333333">{{CONTENT_AREA}}</text>
+</g>
+</svg>

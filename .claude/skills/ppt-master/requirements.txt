@@ -80,6 +80,11 @@ openpyxl>=3.1.0
 # fix_image_aspect.py - 修复图片宽高比（防止 PPT 转形状时拉伸）
 # gemini_watermark_remover.py - Remove watermarks from Gemini-generated images
 # gemini_watermark_remover.py - 去除 Gemini 生成图片的水印
+# verify_template_fidelity.py - Structural-fidelity gate for fidelity/mirror decks;
+#   reuses Pillow + numpy here plus one SVG→PNG renderer from the Office-compat
+#   block above (cairosvg preferred, or svglib+reportlab). No extra dependency.
+# verify_template_fidelity.py - fidelity/mirror 结构保真门；复用此处的 Pillow + numpy
+#   以及上方 Office 兼容块里的 SVG→PNG 渲染器（优先 cairosvg，或 svglib+reportlab），无额外依赖。
 Pillow>=9.0.0
 numpy>=1.20.0
 

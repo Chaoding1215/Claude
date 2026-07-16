@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    Screenshot Showcase Grid Template
+    Usage: presenting 3-4 product screenshots or demo captures side by side, each under its own label
+    Scenarios: product demo pages, feature tour, "see it in the booth" pages
+    Supports: 2x2 grid of image slots (adapts to 1x3 / 1x4 by adjusting column count)
+    -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <g id="header">
+        <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+              font-size="34" font-weight="bold" fill="#0F172A"><tspan>See It In Action</tspan></text>
+        <text x="60" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+              font-size="14" fill="#64748B"><tspan>Live demo available on request</tspan></text>
+    </g>
+
+    <g id="showcase-panel-1">
+        <rect x="60" y="140" width="560" height="30" fill="#0F172A"/>
+        <text x="340" y="161" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF"><tspan>Screen 1: Standard Portfolio</tspan></text>
+        <rect x="60" y="170" width="560" height="230" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="340" y="290" text-anchor="middle" font-size="14" fill="#94A3B8"><tspan>[ Screenshot placeholder ]</tspan></text>
+    </g>
+
+    <g id="showcase-panel-2">
+        <rect x="660" y="140" width="560" height="30" fill="#0F172A"/>
+        <text x="940" y="161" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF"><tspan>Screen 2: Integration &amp; Setup</tspan></text>
+        <rect x="660" y="170" width="560" height="230" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="940" y="290" text-anchor="middle" font-size="14" fill="#94A3B8"><tspan>[ Screenshot placeholder ]</tspan></text>
+    </g>
+
+    <g id="showcase-panel-3">
+        <rect x="60" y="430" width="560" height="30" fill="#0F172A"/>
+        <text x="340" y="451" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF"><tspan>Screen 3: Infrastructure &amp; Cloud</tspan></text>
+        <rect x="60" y="460" width="560" height="200" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="340" y="565" text-anchor="middle" font-size="14" fill="#94A3B8"><tspan>[ Screenshot placeholder ]</tspan></text>
+    </g>
+
+    <g id="showcase-panel-4">
+        <rect x="660" y="430" width="560" height="30" fill="#0F172A"/>
+        <text x="940" y="451" text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF"><tspan>Screen 4: Marketplace &amp; Tools</tspan></text>
+        <rect x="660" y="460" width="560" height="200" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="940" y="565" text-anchor="middle" font-size="14" fill="#94A3B8"><tspan>[ Screenshot placeholder ]</tspan></text>
+    </g>
+
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#94A3B8">
+        <tspan>Data source: Product demo environment, live screen captures</tspan>
+    </text>
+</svg>
